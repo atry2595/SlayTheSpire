@@ -9,6 +9,8 @@ typedef enum CardType{attack, skill, power, status, curse}CardType;
 
 class abstractCard : public QGraphicsItemGroup
 {
+    Q_OBJECT
+
 private:
 
     QString base_name;
@@ -39,8 +41,9 @@ private:
 public:
     abstractCard(QString name_init, QString description_init, CardType type_init, int energy_init,
                  bool upgrated_init, bool exhaust_init, bool retain_init, bool  ethereal_init, bool initial_init);
+    virtual ~abstractCard();
     void init();
-    void reset();
+    virtual void reset();
 
     void set_name(const QString& name_init) { name = name_init; }
     void set_description(const QString& desc_init) { description = desc_init; }
