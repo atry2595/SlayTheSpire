@@ -15,29 +15,32 @@ private:
     QString base_description;
     CardType base_type;
     int base_energy;
-    bool base_upgrated = false;
-    bool base_exhaust = false;
-    bool base_retain = false;
-    bool base_ethereal = false;
-    bool base_initial = false;
+    bool base_upgrated;
+    bool base_exhaust;
+    bool base_retain;
+    bool base_ethereal;
+    bool base_initial;
 
     QString name;
     QString description;
     CardType type;
     int energy;
-    bool lock = false;
-    bool upgrated = false;
-    bool exhaust = false;
-    bool retain = false;
-    bool ethereal = false;
-    bool initial = false;
+    bool lock;
+    bool upgrated;
+    bool exhaust;
+    bool retain;
+    bool ethereal;
+    bool initial;
 
-    //card image + anim + music
+    //card image + generate + anim + music
 
-    //card image + anim + music
+    //card image + generate + anim + music
 
 public:
-    abstractCard(QString name_init, QString description_init, CardType type_init, int energy_init);
+    abstractCard(QString name_init, QString description_init, CardType type_init, int energy_init,
+                 bool upgrated_init, bool exhaust_init, bool retain_init, bool  ethereal_init, bool initial_init);
+    void init();
+    void reset();
 
     void set_name(const QString& name_init) { name = name_init; }
     void set_description(const QString& desc_init) { description = desc_init; }
@@ -59,8 +62,8 @@ public:
     bool get_ethereal() { return ethereal; }
     bool get_initial() { return initial; }
 
-    void base_upgrade();
-    void upgrade();
+    virtual void base_upgrade() = 0;
+    virtual void upgrade() = 0;
     virtual void play() = 0;
 
 signals:
