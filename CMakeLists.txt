@@ -36,6 +36,7 @@ add_executable(SlayTheSpire
     src/combat/game_action.h src/combat/game_action.cpp
     src/cards/abstractcard.h src/cards/abstractcard.cpp
     src/cards/attack/abstractattackcard.h src/cards/attack/abstractattackcard.cpp
+    src/cards/attack/strike.h src/cards/attack/strike.cpp
 
     # Core
     # src/core/...
