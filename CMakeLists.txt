@@ -28,6 +28,8 @@ add_executable(SlayTheSpire
     src/ui/mainwindow.cpp
     src/ui/mainwindow.ui
     src/ui/mainwindow.cpp src/ui/mainwindow.h src/ui/mainwindow.ui src/main.cpp
+    src/combat/.gitkeep src/core/.gitkeep src/events/.gitkeep src/items/buffs/.gitkeep src/items/potions/.gitkeep src/items/relics/.gitkeep src/network/.gitkeep src/ui/mainwindow.cpp src/ui/mainwindow.h src/ui/mainwindow.ui src/utils/.gitkeep src/main.cpp
+    resources.qrc
 
     # Core
     # src/core/...
