@@ -1,7 +1,7 @@
 #include "abstractcard.h"
 
 abstractCard::abstractCard(QString name_init, QString description_init, CardType type_init, int energy_init,
-                           bool upgraded_init, bool exhaust_init, bool retain_init, bool  ethereal_init, bool initial_init)
+                           bool upgraded_init, bool exhaust_init, bool retain_init, bool  ethereal_init, bool initial_init, bool rare_init)
     :base_name(name_init),
     base_description(description_init),
     base_type(type_init),
@@ -10,7 +10,8 @@ abstractCard::abstractCard(QString name_init, QString description_init, CardType
     base_is_exhaust(exhaust_init),
     base_is_retain(retain_init),
     base_is_ethereal(ethereal_init),
-    base_is_initial(initial_init)
+    base_is_initial(initial_init),
+    is_rare(rare_init)
 {
     init();
 }

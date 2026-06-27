@@ -16,6 +16,7 @@ protected:
     QString base_name;
     QString base_description;
     CardType base_type;
+    bool is_rare;
     int base_energy;
     bool base_is_upgraded;
     bool base_is_exhaust;
@@ -34,13 +35,14 @@ protected:
     bool is_ethereal;
     bool is_initial;
 
+
     //card image + generate + anim + music
 
     //card image + generate + anim + music
 
 public:
     abstractCard(QString name_init, QString description_init, CardType type_init, int energy_init,
-                 bool upgraded_init, bool exhaust_init, bool retain_init, bool  ethereal_init, bool initial_init);
+                 bool upgraded_init, bool exhaust_init, bool retain_init, bool  ethereal_init, bool initial_init, bool rare_init);
     virtual ~abstractCard();
     void init();
     virtual void reset();
