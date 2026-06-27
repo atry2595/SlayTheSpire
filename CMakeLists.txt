@@ -32,6 +32,7 @@ add_executable(SlayTheSpire
     resources.qrc
     src/cards/abstractcard.h src/cards/abstractcard.cpp
     src/cards/attack/abstractattackcard.h src/cards/attack/abstractattackcard.cpp
+    src/cards/attack/strike.h src/cards/attack/strike.cpp
 
     # Core
     # src/core/...
