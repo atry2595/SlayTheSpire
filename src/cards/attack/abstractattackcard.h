@@ -19,7 +19,7 @@ protected:
 
 public:
     abstractAttackCard(QString name_init, QString description_init, int energy_init, int damage_init,
-                       bool upgraded_init, bool exhaust_init, bool retain_init, bool  ethereal_init, bool initial_init);
+                       bool upgraded_init, bool exhaust_init, bool retain_init, bool  ethereal_init, bool initial_init, bool is_rare = false);
     ~abstractAttackCard() = default;
     void init();
     void reset() override;

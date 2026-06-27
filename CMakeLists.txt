@@ -22,8 +22,6 @@ qt_add_translations(SlayTheSpire
 
 add_executable(SlayTheSpire
     src/main.cpp
-
-    # UI
     src/ui/mainwindow.h
     src/ui/mainwindow.cpp
     src/ui/mainwindow.ui
@@ -37,6 +35,7 @@ add_executable(SlayTheSpire
     src/cards/abstractcard.h src/cards/abstractcard.cpp
     src/cards/attack/abstractattackcard.h src/cards/attack/abstractattackcard.cpp
     src/cards/attack/strike.h src/cards/attack/strike.cpp
+    src/cards/attack/abstractattackcard.cpp src/cards/attack/abstractattackcard.h src/cards/attack/bludgeon.cpp src/cards/attack/bludgeon.h src/cards/attack/carnage.cpp src/cards/attack/carnage.h src/cards/attack/strike.cpp src/cards/attack/strike.h src/cards/attack/twin_strike.cpp src/cards/attack/twin_strike.h src/cards/abstractcard.cpp src/cards/abstractcard.h
 
     # Core
     # src/core/...
