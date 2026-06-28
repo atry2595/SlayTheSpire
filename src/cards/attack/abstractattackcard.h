@@ -19,6 +19,8 @@ protected:
 
     // sound effect + damage effect
 
+    void initial_set();
+
 public:
     static constexpr CardType type = CardType::attack;
 
@@ -26,7 +28,6 @@ public:
                        bool upgraded_init, bool exhaust_init, bool retain_init, bool  ethereal_init, bool initial_init);
 
     ~abstractAttackCard() = default;
-    void initial_set() override;
     void reset() override;
 
     void set_damage(int damage_init) { damage = damage_init; }

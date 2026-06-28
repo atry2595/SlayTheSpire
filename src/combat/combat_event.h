@@ -8,7 +8,7 @@ class abstractCard;
 struct attackInfo;
 struct damageInfo;
 
-class combatEvet : public QObject{
+class combatEvent : public QObject{
     Q_OBJECT
 
 signals:

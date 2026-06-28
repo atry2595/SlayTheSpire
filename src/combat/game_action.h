@@ -6,10 +6,10 @@
 
 class game_action
 {
-    combatEvet* event;
+    combatEvent* event;
     //combat manager
 public:
-    game_action(combatEvet* eve);
+    game_action(combatEvent* eve);
     void attack(attackInfo& info);
 };
 

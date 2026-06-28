@@ -41,6 +41,8 @@ protected:
 
     //card image + generate + anim + music
 
+    void initial_set();
+
 public:
     abstractCard() {};
     abstractCard(QString name_init, QString description_init, int energy_init,
@@ -48,7 +50,6 @@ public:
                  bool  ethereal_init, bool initial_init);
 
     virtual ~abstractCard() = default;
-    virtual void initial_set();
     virtual void reset();
 
     void set_name(const QString& name_init) { name = name_init; }

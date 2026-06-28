@@ -1,6 +1,6 @@
 #include "game_action.h"
 
-game_action::game_action(combatEvet* eve):event(eve) {}
+game_action::game_action(combatEvent* eve):event(eve) {}
 
 void game_action::attack(attackInfo& info) {
 
