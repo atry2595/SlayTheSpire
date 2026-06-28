@@ -32,6 +32,7 @@ add_executable(SlayTheSpire
     resources.qrc
     src/combat/attack_info.h
     src/combat/damage_info.h
+    src/combat/combat_event.h
 
     # Core
     # src/core/...
