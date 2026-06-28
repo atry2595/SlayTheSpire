@@ -41,6 +41,7 @@ add_executable(SlayTheSpire
     src/entity/abstractentity.h src/entity/abstractentity.cpp
     src/entity/abstractenemy.h src/entity/abstractenemy.cpp
     src/entity/ironclad.h src/entity/ironclad.cpp
+    src/combat/play_info.h
 
 
     # Core
