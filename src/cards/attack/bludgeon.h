@@ -8,9 +8,13 @@ class bludgeon : public abstractAttackCard
     Q_OBJECT
 
 public:
+    static constexpr bool is_rare = true;
+
     bludgeon(bool upgraded_init = false);
+    ~bludgeon() = default;
+
     QString generate_description() override;
-    void play() override;
+    void play(playInfo& play_info) override;
     void upgrade() override;
     void base_upgrade() override;
 };

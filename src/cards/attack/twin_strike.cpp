@@ -12,24 +12,21 @@ QString twin_strike::generate_description(){
     return tr("Deal %1 damage twice.").arg(damage);
 }
 
-void twin_strike::play(){
-    for (int i = 0; i<2; i++){
-        emit deal_damage(damage);
-    }
+void twin_strike::play(playInfo& play_info){
+    for (int i = 0; i<2; i++)
+    perform_attack(play_info.attacker, play_info.target_list, play_info.actions);
 }
 
 void twin_strike::upgrade(){
     damage = 7;
     is_upgraded = true;
-    emit upgraded();
+    description = generate_description();
 }
 
 void twin_strike::base_upgrade(){
     base_damage = 7;
     is_upgraded = true;
     base_description = generate_description();
-
-    emit base_upgraded();
 
     reset();
 }

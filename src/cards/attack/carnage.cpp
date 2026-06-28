@@ -5,10 +5,7 @@ carnage::carnage(bool upgraded_init)
 {
     QString s;
     s += tr("Deal %1 damage.").arg(damage);
-    if (is_exhaust) s += tr("\nExhaust");
-    if (is_retain) s += tr("\nRetain");
     if (is_ethereal) s += tr("\nEthereal");
-    if (is_initial) s += tr("\nInitial");
 
     base_description = description = s;
 }
@@ -16,30 +13,25 @@ carnage::carnage(bool upgraded_init)
 QString carnage::generate_description(){
     QString s;
     s += tr("Deal %1 damage.").arg(damage);
-    if (is_exhaust) s += tr("\nExhaust");
-    if (is_retain) s += tr("\nRetain");
     if (is_ethereal) s += tr("\nEthereal");
-    if (is_initial) s += tr("\nInitial");
 
     return s;
 }
 
-void carnage::play(){
-    emit deal_damage(damage);
+void carnage::play(playInfo& play_info){
+    perform_attack(play_info.attacker, play_info.target_list, play_info.actions);
 }
 
 void carnage::upgrade(){
     damage = 28;
     is_upgraded = true;
-    emit upgraded();
+    description = generate_description();
 }
 
 void carnage::base_upgrade(){
     base_damage = 28;
     is_upgraded = true;
     base_description = generate_description();
-
-    emit base_upgraded();
 
     reset();
 }

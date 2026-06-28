@@ -4,6 +4,10 @@
 #include <QObject>
 #include <QGraphicsItemGroup>
 
+#include "combat/play_info.h"
+
+class Entity;
+
 typedef enum CardType{attack, skill, power, status, curse}CardType;
 
 class abstractCard : public QGraphicsItemGroup
@@ -11,8 +15,7 @@ class abstractCard : public QGraphicsItemGroup
     Q_OBJECT
 
 protected:
-    static bool is_rare;
-    static CardType type;
+
     QString base_name;
     QString base_description;
     int base_energy;
@@ -45,7 +48,7 @@ public:
                  bool  ethereal_init, bool initial_init);
 
     virtual ~abstractCard() = default;
-    void initial_set();
+    virtual void initial_set();
     virtual void reset();
 
     void set_name(const QString& name_init) { name = name_init; }
@@ -60,7 +63,6 @@ public:
 
     QString get_name() { return name; }
     QString get_description() { return description; }
-    CardType get_type() { return type; }
     int get_energy() { return energy; }
     bool get_lock() { return lock; }
     bool get_playbale() { return playable; }
@@ -72,7 +74,7 @@ public:
 
     virtual void base_upgrade() = 0;
     virtual void upgrade() = 0;
-    virtual void play() = 0;
+    virtual void play(playInfo& play_info) = 0;
 };
 
 #endif // ABSTRACTCARD_H

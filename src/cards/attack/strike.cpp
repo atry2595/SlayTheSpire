@@ -12,22 +12,20 @@ QString strike::generate_description(){
     return tr("Deal %1 damage.").arg(damage);
 }
 
-void strike::play(){
-    emit deal_damage(damage);
+void strike::play(playInfo& play_info){
+    perform_attack(play_info.attacker, play_info.target_list, play_info.actions);
 }
 
 void strike::upgrade(){
     damage = 9;
     is_upgraded = true;
-    emit upgraded();
+    description = generate_description();
 }
 
 void strike::base_upgrade(){
     base_damage = 9;
-    is_upgraded = true;
+    base_is_upgraded = true;
     base_description = generate_description();
-
-    emit base_upgraded();
 
     reset();
 }
