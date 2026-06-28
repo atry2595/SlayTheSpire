@@ -11,8 +11,15 @@ void abstractEntity::initial_set(){
     block = 0;
 }
 
-void abstractEntity::reset(){
+void abstractEntity::act_reset(){
     hp = max_hp;
     block = 0;
 }
+
+void abstractEntity::combat_reset(){
+    powers_list.clear();
+    block = 0;
+}
+
+
 

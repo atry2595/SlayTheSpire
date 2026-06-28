@@ -32,7 +32,8 @@ protected:
 public:
     abstractEntity(QString name_init, int base_max_hp_init);
     virtual ~abstractEntity() = default;
-    virtual void reset();
+    virtual void act_reset();
+    virtual void combat_reset();
 
     void set_max_hp(int i_init) { max_hp = i_init; }
     void set_hp(int i_init) { hp = i_init; }
