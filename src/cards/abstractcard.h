@@ -2,7 +2,6 @@
 #define ABSTRACTCARD_H
 
 #include <QObject>
-#include <QWidget>
 #include <QGraphicsItemGroup>
 
 typedef enum CardType{attack, skill, power, status, curse}CardType;
@@ -12,11 +11,10 @@ class abstractCard : public QGraphicsItemGroup
     Q_OBJECT
 
 protected:
-
+    static bool is_rare;
+    static CardType type;
     QString base_name;
     QString base_description;
-    CardType base_type;
-    bool is_rare;
     int base_energy;
     bool base_is_upgraded;
     bool base_is_exhaust;
@@ -26,9 +24,9 @@ protected:
 
     QString name;
     QString description;
-    CardType type;
     int energy;
     bool lock;
+    bool playable;
     bool is_upgraded;
     bool is_exhaust;
     bool is_retain;
@@ -41,16 +39,20 @@ protected:
     //card image + generate + anim + music
 
 public:
-    abstractCard(QString name_init, QString description_init, CardType type_init, int energy_init,
-                 bool upgraded_init, bool exhaust_init, bool retain_init, bool  ethereal_init, bool initial_init, bool rare_init);
-    virtual ~abstractCard();
-    void init();
+    abstractCard() {};
+    abstractCard(QString name_init, QString description_init, int energy_init,
+                 bool upgraded_init, bool exhaust_init, bool retain_init,
+                 bool  ethereal_init, bool initial_init);
+
+    virtual ~abstractCard() = default;
+    void initial_set();
     virtual void reset();
 
     void set_name(const QString& name_init) { name = name_init; }
     void set_description(const QString& desc_init) { description = desc_init; }
     void set_energy(int energy_init) { energy = energy_init; }
     void set_lock(bool lock_init) { lock = lock_init; }
+    void set_playable(bool play_init) { playable = play_init; }
     void set_exhaust(bool bool_init) { is_exhaust = bool_init; }
     void set_retain(bool bool_init) { is_retain = bool_init; }
     void set_ethereal(bool bool_init) { is_ethereal = bool_init; }
@@ -61,6 +63,7 @@ public:
     CardType get_type() { return type; }
     int get_energy() { return energy; }
     bool get_lock() { return lock; }
+    bool get_playbale() { return playable; }
     bool get_upgraded() { return is_upgraded; }
     bool get_exhaust() { return is_exhaust; }
     bool get_retain() { return is_retain; }
@@ -70,11 +73,6 @@ public:
     virtual void base_upgrade() = 0;
     virtual void upgrade() = 0;
     virtual void play() = 0;
-
-signals:
-    void played(abstractCard*);
-    void upgraded();
-    void base_upgraded();
 };
 
 #endif // ABSTRACTCARD_H
