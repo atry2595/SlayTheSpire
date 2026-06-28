@@ -1,11 +1,11 @@
 #ifndef DAMAGE_INFO_H
 #define DAMAGE_INFO_H
 
-class Entity;
+class abstractEntity;
 
 struct damageInfo{
-    Entity* attacker = nullptr;
-    Entity* target = nullptr;
+    abstractEntity* attacker = nullptr;
+    abstractEntity* target = nullptr;
     int damage = 0;
 };
 
