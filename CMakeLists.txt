@@ -31,6 +31,7 @@ add_executable(SlayTheSpire
     src/combat/.gitkeep src/core/.gitkeep src/events/.gitkeep src/items/buffs/.gitkeep src/items/potions/.gitkeep src/items/relics/.gitkeep src/network/.gitkeep src/ui/mainwindow.cpp src/ui/mainwindow.h src/ui/mainwindow.ui src/utils/.gitkeep src/main.cpp
     resources.qrc
     src/combat/attack_info.h
+    src/combat/damage_info.h
 
     # Core
     # src/core/...
