@@ -3,6 +3,7 @@
 #include "attack_info.h"
 #include "combat_event.h"
 #include "damage_info.h"
+#include "entity/abstractentity.h"
 
 class game_action
 {

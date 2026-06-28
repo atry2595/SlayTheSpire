@@ -1,11 +1,11 @@
 #ifndef ATTACK_INFO_H
 #define ATTACK_INFO_H
 #include <vector>
-class Entity;
+class abstractEntity;
 
 struct attackInfo{
-    Entity* attacker = nullptr;
-    std::vector<Entity*> target_list;
+    abstractEntity* attacker = nullptr;
+    std::vector<abstractEntity*> target_list;
     int damage = 0;
 };
 
