@@ -21,9 +21,9 @@ signals:
     void card_played(abstractCard*);
 
     void attack_started(attackInfo&);
-    void before_loseHP(damageInfo&);
+    void before_damage_taken(damageInfo&);
 
-    void enemy_killed(abstractEntity*);
+    void entity_killed(abstractEntity*);
 
     void hp_changed(abstractEntity*, int);
     void block_changed(abstractEntity*, int);

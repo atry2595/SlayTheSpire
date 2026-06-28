@@ -36,8 +36,6 @@ public:
     int get_hp() { return hp;}
     int get_block() { return block;}
 
-    virtual void take_damage(damageInfo&);
-
     virtual void modify_attack(attackInfo&);
     virtual void modify_incoming_damage(damageInfo&);
 
