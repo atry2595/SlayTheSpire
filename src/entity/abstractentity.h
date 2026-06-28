@@ -5,6 +5,9 @@
 #include "combat/attack_info.h"
 #include "combat/damage_info.h"
 #include "combat/combat_event.h"
+#include <vector>
+
+class abstractPower;
 
 class abstractEntity
 {
@@ -18,14 +21,17 @@ protected:
     int hp;
     int block;
 
+    std::vector<abstractPower*> powers_list;
+
     // image + anim
 
     // image + anim
+
+    void initial_set();
 
 public:
     abstractEntity(QString name_init, int base_max_hp_init);
     virtual ~abstractEntity() = default;
-    virtual void initial_set();
     virtual void reset();
 
     void set_max_hp(int i_init) { max_hp = i_init; }
