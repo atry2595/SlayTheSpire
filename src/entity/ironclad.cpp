@@ -1,8 +1,8 @@
 #include "ironclad.h"
 
-ironclad::starting_deck =
-    {cards_name::strike, cards_name::strike, cards_name::strike, cards_name::strike, cards_name::strike,
-     cards_name::defend, cards_name::defend, cards_name::defend, cards_name::defend, cards_name::bash};
+const std::vector<cardID> ironclad::starting_deck =
+    {cardID::strike, cardID::strike, cardID::strike, cardID::strike, cardID::strike,
+     cardID::defend, cardID::defend, cardID::defend, cardID::defend, cardID::bash};
 
 ironclad::ironclad()
     :abstractEntity("Ironclad", 80)

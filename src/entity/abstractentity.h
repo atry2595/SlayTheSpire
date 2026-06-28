@@ -9,7 +9,7 @@
 
 class abstractPower;
 
-class abstractEntity
+class abstractEntity : public QObject
 {
     Q_OBJECT
 
@@ -42,8 +42,8 @@ public:
     int get_hp() { return hp;}
     int get_block() { return block;}
 
-    virtual void modify_attack(attackInfo&);
-    virtual void modify_incoming_damage(damageInfo&);
+    virtual void modify_attack(attackInfo&) {};
+    virtual void modify_incoming_damage(damageInfo&) {};
 
 };
 
