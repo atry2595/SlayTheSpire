@@ -11,6 +11,7 @@ class game_action
 public:
     game_action(combatEvent* eve);
     void attack(attackInfo& info);
+    // void damage(damageInfo& info);
 };
 
 #endif // GAME_ACTION_H

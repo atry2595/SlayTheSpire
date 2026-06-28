@@ -11,6 +11,6 @@ void game_action::attack(attackInfo& info) {
         dmg.attacker = info.attacker;
         dmg.target = target;
         dmg.damage = info.damage;
-        //target->take_damage(dmg);
+        // this->damage(dmg);
     }
 }
