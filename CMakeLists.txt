@@ -33,6 +33,7 @@ add_executable(SlayTheSpire
     src/combat/attack_info.h
     src/combat/damage_info.h
     src/combat/combat_event.h
+    src/combat/game_action.h src/combat/game_action.cpp
 
     # Core
     # src/core/...

@@ -20,14 +20,15 @@ signals:
 
     void card_played(abstractCard*);
 
-    void attack_started(attackInfo*);
-    void before_loseHP(damageInfo*);
+    void attack_started(attackInfo&);
+    void before_loseHP(damageInfo&);
 
     void enemy_killed(Entity*);
 
-    void hp_Changed(Entity*, int);
-    void block_Changed(Entity*, int);
+    void hp_changed(Entity*, int);
+    void block_changed(Entity*, int);
     void block_break(Entity*);
+    void damage_applied(damageInfo&);
 };
 
 #endif // COMBAT_EVENT_H

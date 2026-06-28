@@ -4,7 +4,7 @@
 class Entity;
 
 struct attackInfo{
-    Entity* attacker;
+    Entity* attacker = nullptr;
     std::vector<Entity*> target_list;
     int damage = 0;
 };

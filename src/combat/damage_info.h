@@ -4,8 +4,8 @@
 class Entity;
 
 struct damageInfo{
-    Entity* attacker;
-    Entity* target;
+    Entity* attacker = nullptr;
+    Entity* target = nullptr;
     int damage = 0;
 };
 
