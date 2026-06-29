@@ -5,6 +5,7 @@
 #include "entity/abstractentity.h"
 #include "combat/attack_info.h"
 #include "combat/damage_info.h"
+#include "combat/game_action.h"
 
 class abstractPower : public QObject
 {
@@ -38,10 +39,10 @@ public:
     virtual void modify_attack(attackInfo&) {};
     virtual void modify_incoming_damage(damageInfo&) {}
     virtual void modify_blocking(blockingInfo&) {}
-    virtual void at_turn_start() {};
-    virtual void at_turn_end() {};
-    virtual void at_combat_start() {};
-    virtual void at_combat_end() {};
+    virtual void at_turn_start(game_action&) {};
+    virtual void at_turn_end(game_action&) {};
+    virtual void at_combat_start(game_action&) {};
+    virtual void at_combat_end(game_action&) {};
 
 };
 
