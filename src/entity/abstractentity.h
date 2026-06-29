@@ -5,6 +5,7 @@
 #include "combat/attack_info.h"
 #include "combat/damage_info.h"
 #include "combat/combat_event.h"
+#include "combat/blocking_info.h"
 #include <vector>
 
 class abstractPower;
@@ -45,6 +46,7 @@ public:
 
     virtual void modify_attack(attackInfo&) {};
     virtual void modify_incoming_damage(damageInfo&) {};
+    virtual void modify_blocking(blockingInfo&) {};
 
 };
 

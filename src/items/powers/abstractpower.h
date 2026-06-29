@@ -37,7 +37,7 @@ public:
 
     virtual void modify_attack(attackInfo&) {};
     virtual void modify_incoming_damage(damageInfo&) {}
-    // virtual void modify_blocking(int value) { return value; }
+    virtual void modify_blocking(blockingInfo&) {}
     virtual void at_turn_start() {};
     virtual void at_turn_end() {};
     virtual void at_combat_start() {};

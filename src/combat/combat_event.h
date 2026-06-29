@@ -7,6 +7,7 @@ class abstractEntity;
 class abstractCard;
 struct attackInfo;
 struct damageInfo;
+struct blockingInfo;
 
 class combatEvent : public QObject{
     Q_OBJECT
@@ -22,6 +23,7 @@ signals:
 
     void attack_started(attackInfo&);
     void before_damage_taken(damageInfo&);
+    void before_block_set(blockingInfo&);
 
     void entity_killed(abstractEntity*);
 

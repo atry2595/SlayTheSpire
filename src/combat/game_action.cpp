@@ -52,3 +52,14 @@ void game_action::apply_damage(damageInfo& info) {
         emit event->entity_killed(target);
     }
 }
+
+void game_action::apply_block(blockingInfo& info){
+
+    info.owner->modify_blocking(info);
+    emit event->before_block_set(info);
+
+    int new_block = info.owner->get_block() + info.block;
+    info.owner->set_block(new_block);
+
+    emit event->block_changed(info.owner, info.owner->get_block());
+}
