@@ -51,6 +51,7 @@ add_executable(SlayTheSpire
     src/items/powers/dexteritypower.h src/items/powers/dexteritypower.cpp
     src/items/powers/abstractpower.cpp src/items/powers/abstractpower.h src/items/powers/dexteritypower.cpp src/items/powers/dexteritypower.h src/items/powers/metallicizePower.cpp src/items/powers/metallicizePower.h src/items/powers/strengthpower.cpp src/items/powers/strengthpower.h
     src/items/powers/abstractpower.cpp src/items/powers/abstractpower.h src/items/powers/dexteritypower.cpp src/items/powers/dexteritypower.h src/items/powers/metallicizePower.cpp src/items/powers/metallicizePower.h src/items/powers/strengthpower.cpp src/items/powers/strengthpower.h src/items/powers/vulnerablePower.cpp src/items/powers/vulnerablePower.h
+    src/items/powers/abstractpower.cpp src/items/powers/abstractpower.h src/items/powers/dexteritypower.cpp src/items/powers/dexteritypower.h src/items/powers/metallicizePower.cpp src/items/powers/metallicizePower.h src/items/powers/strengthpower.cpp src/items/powers/strengthpower.h src/items/powers/vulnerablePower.cpp src/items/powers/vulnerablePower.h src/items/powers/weakPower.cpp src/items/powers/weakPower.h
 
 
     # Core
