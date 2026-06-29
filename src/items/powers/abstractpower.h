@@ -6,10 +6,6 @@
 #include "combat/attack_info.h"
 #include "combat/damage_info.h"
 
-enum class power_type { buff, debuff };
-enum class stack_type { intensity, counter, none };
-enum class duration_type { eternal, start_turn_base, end_turn_base, use_base };
-
 class abstractPower : public QObject
 {
     Q_OBJECT
@@ -23,10 +19,13 @@ protected:
     int max_amount;
     int min_amount;
 
+    bool is_buff;
+
+    virtual QString generate_description() = 0;
 
 public:
 
-    abstractPower(QString name_init, abstractEntity* owner_init, int x, int max_x, int min_x);
+    abstractPower(QString name_init, abstractEntity* owner_init, int x, int max_x, int min_x, bool buff_init);
 
     QString get_name() { return name; }
     abstractEntity* get_owner() { return owner; }
@@ -36,8 +35,8 @@ public:
     void increase(int x_init = 1);
     void decrease(int x_init = 1);
 
-    virtual void modify_attack(attackInfo&) { };
-    virtual void modify_incoming_damage(damageInfo&) { }
+    virtual void modify_attack(attackInfo&) {};
+    virtual void modify_incoming_damage(damageInfo&) {}
     // virtual void modify_blocking(int value) { return value; }
     virtual void at_turn_start() {};
     virtual void at_turn_end() {};
