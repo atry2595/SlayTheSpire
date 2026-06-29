@@ -2,7 +2,6 @@
 #define ABSTRACTCARD_H
 
 #include <QObject>
-#include <QGraphicsItemGroup>
 
 #include "combat/play_info.h"
 
@@ -10,7 +9,7 @@ class Entity;
 
 typedef enum CardType{attack, skill, power, status, curse}CardType;
 
-class abstractCard : public QGraphicsItemGroup
+class abstractCard : public QObject
 {
     Q_OBJECT
 
