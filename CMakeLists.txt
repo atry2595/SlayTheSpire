@@ -48,6 +48,7 @@ add_executable(SlayTheSpire
     src/items/powers/abstractpower.cpp
     src/items/powers/strengthpower.h src/items/powers/strengthpower.cpp
     src/combat/blocking_info.h
+    src/items/powers/dexteritypower.h src/items/powers/dexteritypower.cpp
 
 
     # Core
