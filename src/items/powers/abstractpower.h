@@ -14,6 +14,7 @@ class abstractPower : public QObject
 protected:
     QString name;
     abstractEntity* owner;
+    int priority_order;
 
     QString description;
     int amount;
@@ -26,7 +27,7 @@ protected:
 
 public:
 
-    abstractPower(QString name_init, abstractEntity* owner_init, int x, int max_x, int min_x, bool buff_init);
+    abstractPower(QString name_init, abstractEntity* owner_init, int x, int max_x, int min_x, bool buff_init, int priority_init);
 
     QString get_name() { return name; }
     abstractEntity* get_owner() { return owner; }

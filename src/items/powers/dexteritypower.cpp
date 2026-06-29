@@ -1,7 +1,7 @@
 #include "dexteritypower.h"
 
 dexterityPower::dexterityPower(abstractEntity* owner_init, int x)
-    : abstractPower(tr("Dexterity"), owner_init, x, 999, -999, true)
+    : abstractPower(tr("Dexterity"), owner_init, x, 999, -999, true, 1)
 {
     description = tr("Increases block gained by %1").arg(amount);
 }

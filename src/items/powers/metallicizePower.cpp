@@ -1,7 +1,7 @@
 #include "metallicizepower.h"
 
 metallicizePower::metallicizePower(abstractEntity* owner_init, int x)
-    : abstractPower(tr("Metallicize"), owner_init, x, 999, 0, true)
+    : abstractPower(tr("Metallicize"), owner_init, x, 999, 0, true, 1)
 {
     description = tr("At the end of your/its turn, gain %1 block.").arg(amount);
 }

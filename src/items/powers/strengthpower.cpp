@@ -1,7 +1,7 @@
 #include "strengthpower.h"
 
 strengthPower::strengthPower(abstractEntity* owner_init, int x)
-    : abstractPower(tr("Strength"), owner_init, x, 999, -999, true)
+    : abstractPower(tr("Strength"), owner_init, x, 999, -999, true, 0)
 {
     description = tr("Increases attack damage by %1").arg(amount);
 }
