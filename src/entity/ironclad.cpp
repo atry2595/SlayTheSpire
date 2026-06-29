@@ -5,5 +5,5 @@ const std::vector<cardID> ironclad::starting_deck =
      cardID::defend, cardID::defend, cardID::defend, cardID::defend, cardID::bash};
 
 ironclad::ironclad()
-    :abstractEntity("Ironclad", 80)
+    :abstractEntity(tr("Ironclad"), 80)
 {}
