@@ -1,4 +1,5 @@
 #include "game_action.h"
+#include "play_info.h"
 
 game_action::game_action(combatEvent* eve):event(eve) {}
 
@@ -55,6 +56,7 @@ void game_action::apply_damage(damageInfo& info) {
     }
 }
 
+
 void game_action::apply_block(blockingInfo& info){
 
     if (info.affected_by_other){
@@ -66,4 +68,8 @@ void game_action::apply_block(blockingInfo& info){
     info.owner->set_block(new_block);
 
     emit event->block_changed(info.owner, info.owner->get_block());
+}
+
+void game_action::play_card(playInfo& info){
+
 }
