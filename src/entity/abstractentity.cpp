@@ -48,3 +48,13 @@ void abstractEntity::remove_power(abstractPower* power) {
         }
     }
 }
+
+void abstractEntity::remove_power_by_id(powerID power) {
+    for (int i = 0; i<powers_list.size(); i++){
+
+        if (powers_list[i]->get_id() == power) {
+            delete powers_list[i];
+            powers_list.erase(powers_list.begin() + i);
+        }
+    }
+}

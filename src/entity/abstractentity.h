@@ -6,6 +6,7 @@
 #include "combat/damage_info.h"
 #include "combat/combat_event.h"
 #include "combat/blocking_info.h"
+#include "categories/powers.h"
 #include <vector>
 
 class abstractPower;
@@ -46,6 +47,7 @@ public:
 
     void add_power(abstractPower*);
     void remove_power(abstractPower*);
+    void remove_power_by_id(powerID);
 
     virtual void modify_attack(attackInfo&) {};
     virtual void modify_incoming_damage(damageInfo&) {};
