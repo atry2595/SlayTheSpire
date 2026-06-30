@@ -6,9 +6,12 @@ frailPower::frailPower(abstractEntity* owner_init, int x)
     description = tr("Gain 25% less Block from cards for %1 turns.").arg(amount);
 }
 
+void frailPower::modify_blocking(blockingInfo& info) {
+    info.block = int(info.block * 0.75);
+}
 
-void frailPower::modify_incoming_damage(damageInfo& info) {
-    info.damage = int(1.5 * info.damage);
+void frailPower::at_turn_end(game_action&){
+    decrease();
 }
 
 QString frailPower::generate_description(){
