@@ -31,6 +31,7 @@ public:
     void base_upgrade() override;
 
     cardID get_card_id() override { return cardID::uppercut; }
+    bool is_rare() override { return false; }
 };
 
 #endif // UPPERCUT_H

@@ -27,6 +27,7 @@ public:
     void base_upgrade() override;
 
     cardID get_card_id() override { return cardID::bash; }
+    bool is_rare() override { return false; }
 };
 
 #endif // BASH_H

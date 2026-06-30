@@ -18,6 +18,7 @@ public:
     void base_upgrade() override;
 
     cardID get_card_id() override { return cardID::carnage; }
+    bool is_rare() override { return false; }
 };
 
 #endif // CARNAGE_H

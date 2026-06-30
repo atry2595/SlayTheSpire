@@ -18,6 +18,7 @@ public:
     void base_upgrade() override;
 
     cardID get_card_id() override { return cardID::twin_strike; }
+    bool is_rare() override { return false; }
 };
 
 #endif // TWIN_STRIKE_H

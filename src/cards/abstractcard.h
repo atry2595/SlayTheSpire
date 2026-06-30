@@ -55,6 +55,7 @@ public:
 
     virtual CardType get_card_type() = 0;
     virtual cardID get_card_id() = 0;
+    virtual bool is_rare() = 0;
 
 
     void set_name(const QString& name_init) { name = name_init; }
