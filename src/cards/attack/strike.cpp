@@ -1,7 +1,7 @@
 #include "strike.h"
 
-strike::strike(bool upgraded_init)
-    :abstractAttackCard(tr("strike"), "", 1, 6, upgraded_init, false, false, false, false)
+strike::strike()
+    :abstractAttackCard(tr("strike"), "", 1, 6, false, false, false, false)
 {
     QString s;
     s += tr("Deal %1 damage.").arg(damage);

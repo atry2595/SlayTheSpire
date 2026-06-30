@@ -18,7 +18,6 @@ void abstractCard::initial_set(){
     name = base_name;
     description = base_description;
     energy = base_energy;
-    turn_lock = false;
     is_upgraded = base_is_upgraded;
     is_exhaust = base_is_exhaust;
     is_retain = base_is_retain;
