@@ -7,7 +7,7 @@
 
 #include "categories/powers.h"
 
-class PowerFactory
+class PowerFactory : public QObject
 {
     Q_OBJECT
 public:
