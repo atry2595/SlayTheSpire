@@ -51,6 +51,7 @@ public:
     void add_power(abstractPower*);
     void remove_power(abstractPower*);
     void remove_power_by_id(powerID);
+    abstractPower* get_spec_power(powerID);
 
     virtual void modify_attack(attackInfo&) {};
     virtual void modify_incoming_damage(damageInfo&) {};
