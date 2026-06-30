@@ -1,6 +1,15 @@
 #ifndef CARDS_H
 #define CARDS_H
 
+
+enum class CardType{
+    attack,
+    skill,
+    power,
+    status,
+    curse
+};
+
 enum class cardID{
     strike,
     reaper,
