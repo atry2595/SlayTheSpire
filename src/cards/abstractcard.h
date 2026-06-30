@@ -50,6 +50,9 @@ public:
 
     virtual ~abstractCard() = default;
     virtual void reset();
+    virtual CardType get_card_type();
+    virtual
+
 
     void set_name(const QString& name_init) { name = name_init; }
     void set_description(const QString& desc_init) { description = desc_init; }

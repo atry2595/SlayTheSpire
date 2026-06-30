@@ -59,6 +59,10 @@ add_executable(SlayTheSpire
     src/items/powers/abstractpower.cpp src/items/powers/abstractpower.h src/items/powers/barricadepower.cpp src/items/powers/barricadepower.h src/items/powers/dexteritypower.cpp src/items/powers/dexteritypower.h src/items/powers/frailPower.cpp src/items/powers/frailPower.h src/items/powers/metallicizePower.cpp src/items/powers/metallicizePower.h src/items/powers/powerfactory.cpp src/items/powers/powerfactory.h src/items/powers/ritualpower.cpp src/items/powers/ritualpower.h src/items/powers/strengthpower.cpp src/items/powers/strengthpower.h src/items/powers/vulnerablePower.cpp src/items/powers/vulnerablePower.h src/items/powers/weakpower.cpp src/items/powers/weakpower.h
     src/items/powers/abstractpower.cpp src/items/powers/abstractpower.h src/items/powers/barricadepower.cpp src/items/powers/barricadepower.h src/items/powers/dexteritypower.cpp src/items/powers/dexteritypower.h src/items/powers/frailPower.cpp src/items/powers/frailPower.h src/items/powers/metallicizePower.cpp src/items/powers/metallicizePower.h src/items/powers/powerfactory.cpp src/items/powers/powerfactory.h src/items/powers/ritualpower.cpp src/items/powers/ritualpower.h src/items/powers/strengthpower.cpp src/items/powers/strengthpower.h src/items/powers/vulnerablePower.cpp src/items/powers/vulnerablePower.h src/items/powers/weakpower.cpp src/items/powers/weakpower.h
     src/items/powers/frailpower.h src/items/powers/frailpower.cpp
+    src/categories/cards.h
+    src/categories/enemies.h
+    src/categories/relics.h
+    src/categories/potions.h
 
 
     # Core
