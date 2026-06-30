@@ -8,7 +8,6 @@ class strike : public abstractAttackCard
     Q_OBJECT
 
 public:
-    static constexpr bool is_rare = false;
 
     strike();
     ~strike() = default;

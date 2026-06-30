@@ -8,15 +8,16 @@ class twin_strike : public abstractAttackCard
     Q_OBJECT
 
 public:
-    static constexpr bool is_rare = false;
 
-    twin_strike(bool upgraded_init = false);
+    twin_strike();
     ~twin_strike() = default;
 
     QString generate_description() override;
     void play(playInfo& play_info) override;
     void upgrade() override;
     void base_upgrade() override;
+
+    cardID get_card_id() override { return cardID::twin_strike; }
 };
 
 #endif // TWIN_STRIKE_H
