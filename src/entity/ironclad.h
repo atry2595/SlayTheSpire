@@ -4,8 +4,8 @@
 #include <QWidget>
 #include <vector>
 #include "abstractentity.h"
+#include "categories/cards.h"
 
-enum class cardID{strike, defend, bash};
 enum class relicID{burning_blood};
 
 class ironclad : public abstractEntity
