@@ -4,11 +4,11 @@
 #include <vector>
 #include "game_action.h"
 
-class Entity;
+class abstractEntity;
 
 struct playInfo{
-    Entity* attacker;
-    std::vector<Entity*> target_list;
+    abstractEntity* attacker;
+    std::vector<abstractEntity*> target_list;
     game_action& actions;
 };
 
