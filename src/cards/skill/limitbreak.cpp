@@ -1,6 +1,6 @@
 #include "limitbreak.h"
 #include "categories/powers.h"
-#include "items/powers/powerfactory.h"
+#include "items/powers/abstractpower.h"
 
 limit_break::limit_break()
     :abstractSkillCard(tr("Limit break"), "", 1, true, false, false, false)
@@ -21,7 +21,7 @@ QString limit_break::generate_description(){
 
 void limit_break::play(playInfo& play_info){
     abstractPower* power = play_info.attacker->get_spec_power(powerID::strength);
-    if (power) play_info.attacker->add_power(power);
+    if (power) power->increase(power->get_amount());
 }
 
 void limit_break::upgrade(){
