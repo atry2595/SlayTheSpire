@@ -64,6 +64,8 @@ add_executable(SlayTheSpire
     src/categories/relics.h
     src/categories/potions.h
     src/items/potions/abstractpotion.h src/items/potions/abstractpotion.cpp
+    src/items/potions/blockpotion.h src/items/potions/blockpotion.cpp
+    src/items/potions/abstractpotion.cpp src/items/potions/abstractpotion.h src/items/potions/blockpotion.cpp src/items/potions/blockpotion.h src/items/potions/firepotion.cpp src/items/potions/firepotion.h
 
 
 
