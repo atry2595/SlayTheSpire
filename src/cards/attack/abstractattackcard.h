@@ -25,10 +25,10 @@ public:
     static constexpr CardType type = CardType::attack;
 
     abstractAttackCard(QString name_init, QString description_init, int energy_init, int damage_init,
-                       bool upgraded_init, bool exhaust_init, bool retain_init, bool  ethereal_init, bool initial_init);
+                       bool exhaust_init, bool retain_init, bool  ethereal_init, bool initial_init);
 
     ~abstractAttackCard() = default;
-    void reset() override;
+    void combat_reset() override;
 
     void set_damage(int damage_init) { damage = damage_init; }
     int get_damage() { return damage; }
