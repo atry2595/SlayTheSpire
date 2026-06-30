@@ -18,9 +18,19 @@ void abstractEntity::act_reset(){
     block = 0;
 }
 
-void abstractEntity::combat_reset(){
-    powers_list.clear();
+void abstractEntity::combat_reset(){    
     block = 0;
+    block_reset_in_combat = true;
+
+    for (auto p : powers_list)
+        delete p;
+
+    powers_list.clear();
+
+}
+
+void abstractEntity::turn_reset(){
+    if (block_reset_in_combat) block = 0;
 }
 
 void abstractEntity::add_power(abstractPower* power){

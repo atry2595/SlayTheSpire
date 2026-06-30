@@ -24,6 +24,7 @@ protected:
     int block;
 
     std::vector<abstractPower*> powers_list;
+    bool block_reset_in_combat = true;
 
     // image + anim
 
@@ -36,10 +37,12 @@ public:
     virtual ~abstractEntity() = default;
     virtual void act_reset();
     virtual void combat_reset();
+    virtual void turn_reset();
 
     void set_max_hp(int i_init) { max_hp = i_init; }
     void set_hp(int i_init) { hp = i_init; }
     void set_block(int i_init) { block = i_init; }
+    void set_reset_block(bool b_init) { block_reset_in_combat = b_init; }
 
     int get_max_hp() { return max_hp;}
     int get_hp() { return hp;}

@@ -1,6 +1,15 @@
 #include "powerfactory.h"
 
-abstractPower* powerFactory::createPower(powerID id, abstractEntity* owner, int amount){
+#include "dexteritypower.h"
+#include "frailpower.h"
+#include "metallicizePower.h"
+#include "ritualpower.h"
+#include "strengthpower.h"
+#include "vulnerablePower.h"
+#include "weakpower.h"
+#include "barricadepower.h"
+
+abstractPower* PowerFactory::createPower(powerID id, abstractEntity* owner, int amount){
     switch(id){
     case(powerID::dexterity): return (new dexterityPower(owner, amount));
     case(powerID::frail): return (new frailPower(owner, amount));
@@ -9,6 +18,7 @@ abstractPower* powerFactory::createPower(powerID id, abstractEntity* owner, int 
     case(powerID::strength): return (new strengthPower(owner, amount));
     case(powerID::vulnerable): return (new vulnerablePower(owner, amount));
     case(powerID::weak): return (new weakPower(owner, amount));
+    case(powerID::barricade): return (new barricadePower(owner, amount));
 
     default: return nullptr;
     }

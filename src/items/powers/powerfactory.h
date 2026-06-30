@@ -3,13 +3,7 @@
 
 #include <QWidget>
 #include "abstractpower.h"
-#include "dexteritypower.h"
-#include "frailPower.h"
-#include "metallicizePower.h"
-#include "ritualpower.h"
-#include "strengthpower.h"
-#include "vulnerablePower.h"
-#include "weakpower.h"
+
 
 #include "categories/powers.h"
 
