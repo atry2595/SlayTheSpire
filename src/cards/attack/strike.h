@@ -10,13 +10,15 @@ class strike : public abstractAttackCard
 public:
     static constexpr bool is_rare = false;
 
-    strike(bool upgraded_init = false);
+    strike();
     ~strike() = default;
 
     QString generate_description() override;
     void play(playInfo& play_info) override;
     void upgrade() override;
     void base_upgrade() override;
+
+    cardID get_card_id() override { return cardID::strike; }
 };
 
 #endif // STRIKE_H
