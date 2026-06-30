@@ -63,6 +63,8 @@ add_executable(SlayTheSpire
     src/categories/enemies.h
     src/categories/relics.h
     src/categories/potions.h
+    src/items/potions/abstractpotion.h src/items/potions/abstractpotion.cpp
+
 
 
     # Core
