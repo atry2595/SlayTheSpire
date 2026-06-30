@@ -69,6 +69,7 @@ add_executable(SlayTheSpire
     src/cards/attack/abstractattackcard.cpp src/cards/attack/abstractattackcard.h src/cards/attack/bash.cpp src/cards/attack/bash.h src/cards/attack/bludgeon.cpp src/cards/attack/bludgeon.h src/cards/attack/carnage.cpp src/cards/attack/carnage.h src/cards/attack/hemokinesis.cpp src/cards/attack/hemokinesis.h src/cards/attack/strike.cpp src/cards/attack/strike.h src/cards/attack/twin_strike.cpp src/cards/attack/twin_strike.h src/cards/attack/uppercut.cpp src/cards/attack/uppercut.h
     src/cards/skill/abstractskillcard.cpp src/cards/skill/abstractskillcard.h
     src/cards/skill/abstractskillcard.cpp src/cards/skill/abstractskillcard.h src/cards/skill/defend.cpp src/cards/skill/defend.h
+    src/cards/skill/abstractskillcard.cpp src/cards/skill/abstractskillcard.h src/cards/skill/defend.cpp src/cards/skill/defend.h src/cards/skill/limitbreak.cpp src/cards/skill/limitbreak.h
 
 
 

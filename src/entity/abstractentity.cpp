@@ -68,3 +68,14 @@ void abstractEntity::remove_power_by_id(powerID power) {
         }
     }
 }
+
+abstractPower* abstractEntity::get_spec_power(powerID power){
+    for (int i = 0; i<powers_list.size(); i++){
+
+        if (powers_list[i]->get_id() == power) {
+            return powers_list[i];
+        }
+    }
+
+    return nullptr;
+}
