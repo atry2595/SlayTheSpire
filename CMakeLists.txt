@@ -297,6 +297,7 @@ add_executable(SlayTheSpire
 
     src/core/menu/menu.h src/core/menu/menu.cpp src/core/menu/menu.ui
     src/core/menu/playmenu.h src/core/menu/playmenu.cpp src/core/menu/playmenu.ui
+    src/core/menu/menu.h src/core/menu/menu.cpp
 
     # Core
     # src/core/...
