@@ -20,6 +20,7 @@ public:
     void base_upgrade() override;
 
     cardID get_card_id() override { return cardID::hemokinesis; }
+    bool is_rare() override { return false; }
 };
 
 #endif // HEMOKINESIS_H

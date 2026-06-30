@@ -18,6 +18,7 @@ public:
     void base_upgrade() override;
 
     cardID get_card_id() override { return cardID::bludgeon; }
+    bool is_rare() override { return true; }
 };
 
 #endif // bludgeon_H
