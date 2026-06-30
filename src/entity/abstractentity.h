@@ -44,6 +44,9 @@ public:
     int get_hp() { return hp;}
     int get_block() { return block;}
 
+    void add_power(abstractPower*);
+    void remove_power(abstractPower*);
+
     virtual void modify_attack(attackInfo&) {};
     virtual void modify_incoming_damage(damageInfo&) {};
     virtual void modify_blocking(blockingInfo&) {};

@@ -11,6 +11,7 @@ public:
     void modify_attack(attackInfo&) override;
     void at_turn_end(game_action&) override;
     QString generate_description() override;
+    powerID get_id() override { return powerID::weak; }
 };
 
 #endif // WEAKPOWER_H

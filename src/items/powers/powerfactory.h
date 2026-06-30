@@ -13,7 +13,7 @@
 
 #include "categories/powers.h"
 
-class powerFactory
+class PowerFactory
 {
     Q_OBJECT
 public:

@@ -10,6 +10,7 @@ public:
     vulnerablePower(abstractEntity* owner_init, int x);
     void modify_incoming_damage(damageInfo&) override;
     QString generate_description() override;
+    powerID get_id() override { return powerID::vulnerable; }
 };
 
 #endif // VULNERABLEPOWER_H

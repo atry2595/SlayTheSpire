@@ -6,6 +6,7 @@
 #include "combat/attack_info.h"
 #include "combat/damage_info.h"
 #include "combat/game_action.h"
+#include "categories/powers.h"
 
 class abstractPower : public QObject
 {
@@ -33,6 +34,8 @@ public:
     abstractEntity* get_owner() { return owner; }
     QString get_description() { return description; }
     int get_amount() { return amount; }
+    int get_order() { return priority_order;}
+    virtual powerID get_id() = 0;
 
     void increase(int x_init = 1);
     void decrease(int x_init = 1);

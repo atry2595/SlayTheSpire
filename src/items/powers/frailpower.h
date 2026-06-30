@@ -11,6 +11,8 @@ public:
     void modify_blocking(blockingInfo&) override;
     void at_turn_end(game_action&) override;
     QString generate_description() override;
+
+    powerID get_id() override { return powerID::frail; }
 };
 
 #endif // FRAILPOWER_H
