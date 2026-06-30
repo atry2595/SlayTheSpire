@@ -23,11 +23,11 @@ void strike::upgrade(){
 }
 
 void strike::base_upgrade(){
-    base_damage = 9;
+    base_damage = damage = 9;
     base_is_upgraded = true;
     base_description = generate_description();
 
-    reset();
+    combat_reset();
 }
 
 

@@ -22,7 +22,6 @@ protected:
     void initial_set();
 
 public:
-    static constexpr CardType type = CardType::attack;
 
     abstractAttackCard(QString name_init, QString description_init, int energy_init, int damage_init,
                        bool exhaust_init, bool retain_init, bool  ethereal_init, bool initial_init);
@@ -32,6 +31,8 @@ public:
 
     void set_damage(int damage_init) { damage = damage_init; }
     int get_damage() { return damage; }
+
+    CardType get_card_type() override final { return CardType::attack; }
 
     virtual QString generate_description() = 0;
 

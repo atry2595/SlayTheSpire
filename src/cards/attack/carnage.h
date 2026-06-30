@@ -8,15 +8,16 @@ class carnage : public abstractAttackCard
     Q_OBJECT
 
 public:
-    static constexpr bool is_rare = false;
 
-    carnage(bool upgraded_init = false);
+    carnage();
     ~carnage() = default;
 
     QString generate_description() override;
     void play(playInfo& play_info) override;
     void upgrade() override;
     void base_upgrade() override;
+
+    cardID get_card_id() override { return cardID::carnage; }
 };
 
 #endif // CARNAGE_H

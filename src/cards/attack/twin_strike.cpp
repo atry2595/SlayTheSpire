@@ -1,7 +1,7 @@
 #include "twin_strike.h"
 
-twin_strike::twin_strike(bool upgraded_init)
-    :abstractAttackCard(tr("twin_strike"), "", 1, 5, upgraded_init, false, false, false, false)
+twin_strike::twin_strike()
+    :abstractAttackCard(tr("twin_strike"), "", 1, 5, false, false, false, false)
 {
     QString s;
     s += tr("Deal %1 damage twice.").arg(damage);
@@ -24,11 +24,11 @@ void twin_strike::upgrade(){
 }
 
 void twin_strike::base_upgrade(){
-    base_damage = 7;
+    base_damage = damage = 7;
     is_upgraded = true;
     base_description = generate_description();
 
-    reset();
+    combat_reset();
 }
 
 
