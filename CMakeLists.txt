@@ -83,6 +83,8 @@ add_executable(SlayTheSpire
     src/cards/curse/abstractcursecard.cpp src/cards/curse/abstractcursecard.h
     src/cards/curse/curse_of_the_bell.cpp src/cards/curse/curse_of_the_bell.h
     src/cards/skill/jax.cpp src/cards/skill/jax.h
+    src/items/powers/demonformpower.cpp src/items/powers/demonformpower.h
+    src/cards/power/demon_form.cpp src/cards/power/demon_form.h
 
 
 
