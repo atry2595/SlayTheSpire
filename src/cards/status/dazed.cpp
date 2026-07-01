@@ -1,7 +1,7 @@
 #include "dazed.h"
 
 dazed::dazed()
-    :abstractStatusCard(tr("dazed"), "", 0, false, false, true, false)
+    :abstractStatusCard(tr("Dazed"), "", 0, false, false, true, false)
 {
     base_is_playable = playable = false;
     QString s;
