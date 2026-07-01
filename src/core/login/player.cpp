@@ -4,6 +4,7 @@
 
 Player::Player(QString username, QString email, QString password): username(username), email(email)
 {
+    passwordHash = "";
     if (!password.isEmpty()) {
         this->passwordHash = hashPassword(password);
     }
@@ -33,7 +34,8 @@ QString Player::toFileRecord() const {
 Player Player::fromFileRecord(const QString &record) {
     QStringList fields = record.split(";");
 
-    if (fields.size() < 3) return Player();
+    if (fields.size() < 4){
+        return Player();}
 
     Player p;
     p.username = fields[0];
