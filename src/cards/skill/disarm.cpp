@@ -3,7 +3,7 @@
 #include "items/powers/powerfactory.h"
 
 disarm::disarm()
-    :abstractSkillCard(tr("Disarm"), "", 2, true, false, false, false)
+    :abstractSkillCard(tr("Disarm"), "", 1, true, false, false, false)
 {
     QString s;
     s += tr("Enemy loses %1 Strength.").arg(effect);

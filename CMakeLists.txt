@@ -73,6 +73,8 @@ add_executable(SlayTheSpire
     src/cards/skill/abstractskillcard.cpp src/cards/skill/abstractskillcard.h src/cards/skill/defend.cpp src/cards/skill/defend.h src/cards/skill/impervious.cpp src/cards/skill/impervious.h src/cards/skill/limitbreak.cpp src/cards/skill/limitbreak.h
     src/cards/skill/abstractskillcard.cpp src/cards/skill/abstractskillcard.h src/cards/skill/defend.cpp src/cards/skill/defend.h src/cards/skill/entrench.cpp src/cards/skill/entrench.h src/cards/skill/impervious.cpp src/cards/skill/impervious.h src/cards/skill/limitbreak.cpp src/cards/skill/limitbreak.h
     src/cards/skill/abstractskillcard.cpp src/cards/skill/abstractskillcard.h src/cards/skill/defend.cpp src/cards/skill/defend.h src/cards/skill/disarm.cpp src/cards/skill/disarm.h src/cards/skill/entrench.cpp src/cards/skill/entrench.h src/cards/skill/impervious.cpp src/cards/skill/impervious.h src/cards/skill/limitbreak.cpp src/cards/skill/limitbreak.h
+    src/cards/power/abstractpowercard.cpp src/cards/power/abstractpowercard.h
+    src/cards/power/inflame.cpp src/cards/power/inflame.h
 
 
 
