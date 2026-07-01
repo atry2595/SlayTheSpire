@@ -11,7 +11,7 @@ blue_slaver* blue_slaver::create(){
     QString name = tr("Blue Slaver");
 
     RNG& rng = RNG::instance();
-    int hp = rng.randint(40, 44);
+    int hp = rng.randint(46, 50);
 
     blue_slaver* enemy = new blue_slaver(name, hp);
 
