@@ -76,6 +76,7 @@ add_executable(SlayTheSpire
     src/cards/power/abstractpowercard.cpp src/cards/power/abstractpowercard.h
     src/cards/power/inflame.cpp src/cards/power/inflame.h
     src/cards/power/metallicize.cpp src/cards/power/metallicize.h
+    src/cards/power/barricade.cpp src/cards/power/barricade.h
 
 
 
