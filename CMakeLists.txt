@@ -87,6 +87,7 @@ add_executable(SlayTheSpire
     src/cards/power/demon_form.cpp src/cards/power/demon_form.h
     src/categories/intents.h
     src/items/enemyIntent.h
+    src/utils/RNG.h
 
 
 
