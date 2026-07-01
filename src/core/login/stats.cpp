@@ -3,12 +3,14 @@
 Stats::Stats()
 {
     score = 0;
+    highestScore = 0;
     monstersKilled = 0;
     elitesKilled = 0;
     bossesKilled = 0;
 
     skinUnlocked[0] = true;
-    for(int i = 1; i < 5; ++i) skinUnlocked[i] = false;
+    for(int i = 1; i < SKIN_COUNT; ++i)
+        skinUnlocked[i] = false;
 
     highestFloorReached = 0;
     timesPlayed = 0;
@@ -20,18 +22,28 @@ int Stats::getScore() const { return score; }
 int Stats::getMonstersKilled() const { return monstersKilled; }
 int Stats::getElitesKilled() const { return elitesKilled; }
 int Stats::getBossesKilled() const { return bossesKilled; }
-int Stats::getTotalEnemiesKilled() const { return monstersKilled + elitesKilled + bossesKilled; }
+int Stats::getTotalEnemiesKilled() const {
+    return monstersKilled + elitesKilled + bossesKilled; }
 int Stats::getHighestFloorReached() const { return highestFloorReached; }
 int Stats::getTimesPlayed() const { return timesPlayed; }
 int Stats::getTimesWon() const { return timesWon; }
 int Stats::getTimesLost() const { return timesLost; }
+double Stats::getWinRate() const{
+    if(timesPlayed == 0)
+        return 0.0;
 
+    return (100.0 * timesWon) / timesPlayed;
+}
 bool Stats::isSkinUnlocked(int skinIndex) const {
     if(skinIndex >= 0 && skinIndex < 5) return skinUnlocked[skinIndex];
     return false;
 }
 
-void Stats::addScore(int amount) { score += amount; }
+void Stats::addScore(int a) {
+    score += amount;
+    if(score > highestScore)
+        highestScore = score;
+}
 void Stats::addMonsterKill() { monstersKilled++; }
 void Stats::addEliteKill() { elitesKilled++; }
 void Stats::addBossKill() { bossesKilled++; }
@@ -48,14 +60,18 @@ void Stats::unlockSkin(int skinIndex) {
     if(skinIndex >= 0 && skinIndex < 5) skinUnlocked[skinIndex] = true;
 }
 
-QString Stats::toFileRecord() const {
+QString Stats::toFileRecord() const
+{
     QStringList fields;
+
     fields << QString::number(score)
+           << QString::number(highestScore)
            << QString::number(monstersKilled)
            << QString::number(elitesKilled)
            << QString::number(bossesKilled);
 
-    for(int i = 0; i < 5; ++i) {
+    for(int i = 0; i < SKIN_COUNT; ++i)
+    {
         fields << (skinUnlocked[i] ? "1" : "0");
     }
 
@@ -67,24 +83,29 @@ QString Stats::toFileRecord() const {
     return fields.join(";");
 }
 
-Stats Stats::fromFileRecord(const QString &record) {
+Stats Stats::fromFileRecord(const QString &record)
+{
     Stats s;
+
     QStringList fields = record.split(";");
 
-    if (fields.size() >= 13) {
+    if(fields.size() >= 14){
         s.score = fields[0].toInt();
-        s.monstersKilled = fields[1].toInt();
-        s.elitesKilled = fields[2].toInt();
-        s.bossesKilled = fields[3].toInt();
+        s.highestScore = fields[1].toInt();
+        s.monstersKilled = fields[2].toInt();
+        s.elitesKilled = fields[3].toInt();
+        s.bossesKilled = fields[4].toInt();
 
-        for(int i = 0; i < 5; ++i) {
-            s.skinUnlocked[i] = (fields[4 + i] == "1");
+        for(int i = 0; i < SKIN_COUNT; ++i)
+        {
+            s.skinUnlocked[i] = (fields[5 + i] == "1");
         }
 
-        s.highestFloorReached = fields[9].toInt();
-        s.timesPlayed = fields[10].toInt();
-        s.timesWon = fields[11].toInt();
-        s.timesLost = fields[12].toInt();
+        s.highestFloorReached = fields[10].toInt();
+        s.timesPlayed = fields[11].toInt();
+        s.timesWon = fields[12].toInt();
+        s.timesLost = fields[13].toInt();
     }
+
     return s;
 }
