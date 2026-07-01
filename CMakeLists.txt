@@ -85,6 +85,8 @@ add_executable(SlayTheSpire
     src/cards/skill/jax.cpp src/cards/skill/jax.h
     src/items/powers/demonformpower.cpp src/items/powers/demonformpower.h
     src/cards/power/demon_form.cpp src/cards/power/demon_form.h
+    src/categories/intents.h
+    src/items/enemyIntent.h
 
 
 
