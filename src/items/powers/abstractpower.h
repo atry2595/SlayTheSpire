@@ -47,6 +47,8 @@ public:
     virtual void at_turn_end(game_action&) {};
     virtual void at_combat_start(game_action&) {};
     virtual void at_combat_end(game_action&) {};
+    virtual void added_time() {};
+    virtual void damage_applied(game_action&) {};
 
 };
 

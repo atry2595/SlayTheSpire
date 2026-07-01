@@ -47,6 +47,8 @@ void abstractEntity::add_power(abstractPower* power){
         return p1->get_order() < p2->get_order();
     });
 
+    power->added_time();
+
 }
 
 void abstractEntity::remove_power(abstractPower* power) {

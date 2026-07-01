@@ -90,6 +90,7 @@ add_executable(SlayTheSpire
     src/utils/RNG.h
     src/entity/cultist.h src/entity/cultist.cpp
     src/entity/jaw_worm.cpp src/entity/jaw_worm.h
+    src/items/powers/curluppower.cpp src/items/powers/curluppower.h
 
 
 
