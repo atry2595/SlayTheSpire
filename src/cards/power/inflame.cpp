@@ -3,7 +3,7 @@
 #include "items/powers/powerfactory.h"
 
 inflame::inflame()
-    :abstractPowerCard(tr("Inflame"), "", 1, false, false, false, false)
+    :abstractPowerCard(tr("Inflame"), "", 1)
 {
     QString s;
     s += tr("Gain %1 Strength.").arg(effect);
