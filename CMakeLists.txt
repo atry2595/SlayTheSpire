@@ -93,6 +93,7 @@ add_executable(SlayTheSpire
     src/items/powers/curluppower.cpp src/items/powers/curluppower.h
     src/entity/red_louse.cpp src/entity/red_louse.h
     src/entity/green_louse.cpp src/entity/green_louse.h
+    src/entity/blue_slaver.cpp src/entity/blue_slaver.h
 
 
 
