@@ -82,6 +82,7 @@ add_executable(SlayTheSpire
     src/cards/status/slimed.cpp src/cards/status/slimed.h src/cards/status/wound.cpp src/cards/status/wound.h
     src/cards/curse/abstractcursecard.cpp src/cards/curse/abstractcursecard.h
     src/cards/curse/curse_of_the_bell.cpp src/cards/curse/curse_of_the_bell.h
+    src/cards/skill/jax.cpp src/cards/skill/jax.h
 
 
 
