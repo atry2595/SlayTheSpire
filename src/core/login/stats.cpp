@@ -60,6 +60,31 @@ void Stats::unlockSkin(int skinIndex) {
     if(skinIndex >= 0 && skinIndex < 5) skinUnlocked[skinIndex] = true;
 }
 
+void Stats::update(const Stats &other)
+{
+    score += other.score;
+    monstersKilled += other.monstersKilled;
+    elitesKilled += other.elitesKilled;
+    bossesKilled += other.bossesKilled;
+    timesPlayed += other.timesPlayed;
+    timesWon += other.timesWon;
+    timesLost += other.timesLost;
+
+    if (other.highestFloorReached > highestFloorReached)
+    {
+        highestFloorReached = other.highestFloorReached;
+    }
+
+    if (other.highestScore > highestScore)
+    {
+        highestScore = other.highestScore;
+    }
+    for (int i = 0; i < SKIN_COUNT; ++i)
+    {
+        skinUnlocked[i] = skinUnlocked[i] || other.skinUnlocked[i];
+    }
+}
+
 QString Stats::toFileRecord() const
 {
     QStringList fields;

@@ -35,7 +35,7 @@ public:
     void incrementTimesWon();
     void incrementTimesLost();
     void unlockSkin(int skinIndex);
-
+    void update(const Stats &other);
     QString toFileRecord() const;
     static Stats fromFileRecord(const QString &record);
 
