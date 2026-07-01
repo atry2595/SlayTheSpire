@@ -10,7 +10,6 @@ struct enemy_intent{
     intent_type type;
     int damage = 0;
     int repeat = 1;
-    bool hidden = false;
 
 };
 

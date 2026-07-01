@@ -2,9 +2,13 @@
 #define ABSTRACTENEMY_H
 
 #include <QObject>
+#include <unordered_map>
 #include "abstractentity.h"
+#include "utils/RNG.h"
+#include "categories/intents.h"
+#include "items/enemyIntent.h"
+#include "combat/play_info.h"
 
-class enemyIntent;
 
 class abstractEnemy : public abstractEntity
 {
@@ -12,12 +16,16 @@ class abstractEnemy : public abstractEntity
 
 protected:
 
-    std::vector<enemyIntent*> intent_list;
-    enemyIntent* current_intent;
+    std::unordered_map<int, enemy_intent> intent_list;
+    int current_move;
+    int enemy_turn = 0;
 
 public:
-    virtual void choose_intent(int turn) = 0;
-    virtual void play_turn() = 0;
+    virtual void choose_move() = 0;
+    virtual void play_turn(playInfo&) = 0;
+
+    int get_current_move() { return current_move; }
+    int get_enemy_turn() { return enemy_turn; }
 
     abstractEnemy(QString name_init, int base_max_hp_init);
 };

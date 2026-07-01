@@ -88,6 +88,7 @@ add_executable(SlayTheSpire
     src/categories/intents.h
     src/items/enemyIntent.h
     src/utils/RNG.h
+    src/entity/cultist.h src/entity/cultist.cpp
 
 
 

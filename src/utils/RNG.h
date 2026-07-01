@@ -12,10 +12,9 @@
 class RNG
 {
 private:
+
     uint32_t seed;
     QRandomGenerator engine;
-
-public:
 
     RNG()
         : RNG(static_cast<uint32_t>(
@@ -28,6 +27,23 @@ public:
         : seed(seed),
         engine(seed)
     {}
+
+public:
+
+    RNG(const RNG&) = delete;
+    RNG& operator=(const RNG&) = delete;
+
+    static RNG& instance()
+    {
+        static RNG rng;
+        return rng;
+    }
+
+    void set_seed(uint32_t new_seed)
+    {
+        seed = new_seed;
+        engine.seed(seed);
+    }
 
     uint32_t get_seed() const
     {
@@ -49,9 +65,9 @@ public:
         return min + random() * (max - min);
     }
 
-    bool chance(double number)
+    bool chance(double probability)
     {
-        return random() <= number;
+        return random() <= probability;
     }
 
     template<typename T>
