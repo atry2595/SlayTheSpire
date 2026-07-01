@@ -1,13 +1,22 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include <QObject>
+#include <QString>
+#include "Stats.h"
 
-class player
+class Player
 {
-    Q_OBJECT
 public:
-    player();
+    Player(QString username = "", QString email = "", QString password = "");
+    QString getUsername() const;
+    QString getEmail() const;
+    Stats& getStats();
+
+private:
+    QString username;
+    QString email;
+    QString passwordHash;
+    Stats stats;
 };
 
-#endif // PLAYER_H
+#endif
