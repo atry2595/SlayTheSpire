@@ -89,6 +89,7 @@ add_executable(SlayTheSpire
     src/items/enemyIntent.h
     src/utils/RNG.h
     src/entity/cultist.h src/entity/cultist.cpp
+    src/entity/jaw_worm.cpp src/entity/jaw_worm.h
 
 
 

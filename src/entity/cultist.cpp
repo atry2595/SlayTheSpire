@@ -57,16 +57,8 @@ void cultist::play_turn(playInfo& info){
 
     case (cultist_move::dark_strike): {
 
-        enemy_intent& intnt = intent_list.at(current_move);
+        perform_attack(info);
 
-        attackInfo atck_info;
-        atck_info.attacker = info.attacker;
-        atck_info.target_list = info.target_list;
-        atck_info.damage = intnt.damage;
-
-        for (int i = 0 ; i<intnt.repeat; i++) {
-            info.actions.attack(atck_info);
-        }
         break;
     }
 
