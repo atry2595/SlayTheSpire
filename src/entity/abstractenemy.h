@@ -4,18 +4,16 @@
 #include <QObject>
 #include "abstractentity.h"
 
-class abstractIntent;
-typedef enum {monster, elite, boss}enemyType;
+class enemyIntent;
 
 class abstractEnemy : public abstractEntity
 {
     Q_OBJECT
 
 protected:
-    enemyType type;
 
-    std::vector<abstractIntent*> intent_list;
-    abstractIntent* current_intent;
+    std::vector<enemyIntent*> intent_list;
+    enemyIntent* current_intent;
 
 public:
     virtual void choose_intent(int turn) = 0;

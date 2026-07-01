@@ -17,6 +17,9 @@ protected:
 public:
     ironclad();
 
+    entityType get_type() override { return entityType::player; }
+    entityID get_ID() override { return entityID::ironclad; }
+
     static const std::vector<cardID> starting_deck;
 
     static constexpr relicID starting_relic = relicID::burning_blood;

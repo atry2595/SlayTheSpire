@@ -8,6 +8,7 @@
 #include "combat/blocking_info.h"
 #include "categories/powers.h"
 #include <vector>
+#include "categories/enemies.h"
 
 class abstractPower;
 
@@ -38,6 +39,9 @@ public:
     virtual void act_reset();
     virtual void combat_reset();
     virtual void turn_reset();
+
+    virtual entityType get_type() = 0;
+    virtual entityID get_ID() = 0;
 
     void set_max_hp(int i_init) { max_hp = i_init; }
     void set_hp(int i_init) { hp = i_init; }
