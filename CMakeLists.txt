@@ -91,6 +91,8 @@ add_executable(SlayTheSpire
     src/entity/cultist.h src/entity/cultist.cpp
     src/entity/jaw_worm.cpp src/entity/jaw_worm.h
     src/items/powers/curluppower.cpp src/items/powers/curluppower.h
+    src/entity/red_louse.cpp src/entity/red_louse.h
+    src/entity/green_louse.cpp src/entity/green_louse.h
 
 
 
