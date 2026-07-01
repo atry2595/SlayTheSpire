@@ -18,6 +18,7 @@ public:
     int getTimesPlayed() const;
     int getTimesWon() const;
     int getTimesLost() const;
+    // skinIndex: 0-based (0=skin1, 1=skin2, 2=skin3, 3=skin4, 4=skin5)
     bool isSkinUnlocked(int skinIndex) const;
 
     void addScore(int amount);
