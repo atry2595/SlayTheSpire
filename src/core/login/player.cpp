@@ -26,3 +26,25 @@ void Player::setPassword(const QString &newPass) {
     this->passwordHash = hashPassword(newPass);
 }
 
+QString Player::toFileRecord() const {
+    return username + ";" + email + ";" + passwordHash + ";" + stats.toFileRecord();
+}
+
+Player Player::fromFileRecord(const QString &record) {
+    QStringList fields = record.split(";");
+
+    if (fields.size() < 3) return Player();
+
+    Player p;
+    p.username = fields[0];
+    p.email = fields[1];
+    p.passwordHash = fields[2];
+
+    QStringList statsFields = fields.mid(3);
+    QString statsRecord = statsFields.join(";");
+    p.stats = Stats::fromFileRecord(statsRecord);
+
+    return p;
+}
+
+

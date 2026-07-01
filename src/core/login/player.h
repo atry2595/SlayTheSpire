@@ -20,6 +20,9 @@ public:
     Stats& getStats();
     bool checkPassword(const QString &pass) const;
     void setPassword(const QString &newPass);
+    QString toFileRecord() const;
+    static Player fromFileRecord(const QString &record);
+
 
 };
 
