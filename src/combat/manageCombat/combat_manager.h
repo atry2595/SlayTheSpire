@@ -27,7 +27,6 @@ protected:
     std::vector<bool> enemy_is_alive = {};
 
     int combat_turn = 1;
-    int current_enemy = 0;
     int current_player = 0;
 
     TurnPhase current_phase = TurnPhase::player;
