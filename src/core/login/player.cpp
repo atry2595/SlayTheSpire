@@ -23,8 +23,24 @@ bool Player::checkPassword(const QString &pass) const {
     return (hashPassword(pass) == passwordHash);
 }
 
-void Player::setPassword(const QString &newPass) {
-    this->passwordHash = hashPassword(newPass);
+void Player::setPassword(const QString &newPass)
+{
+    passwordHash = hashPassword(newPass);}
+
+bool Player::changePassword(const QString &oldPassword,const QString &newPassword,const QString &confirmPassword)
+{
+    if (!checkPassword(oldPassword))
+    {
+        return false;
+    }
+
+    if (newPassword != confirmPassword)
+    {
+        return false;
+    }
+
+    passwordHash = hashPassword(newPassword);
+    return true;
 }
 
 bool Player::isUsernameUnique(const QString &username,const QList<Player> &players)
@@ -37,6 +53,7 @@ bool Player::isUsernameUnique(const QString &username,const QList<Player> &playe
 
     return true;
 }
+
 bool Player::isEmailUnique(const QString &email,const QList<Player> &players)
 {
     for(const Player &p : players)
@@ -147,6 +164,23 @@ QString Player::suggestUsername(const QString &username,const QList<Player> &pla
     } while(!isUsernameUnique(suggestion, players));
 
     return suggestion;
+}
+
+bool Player::registerPlayer(const QString &username,const QString &email,const QString &password,const QString &confirmPassword,const QList<Player> &players)
+{
+    if(!isUsernameUnique(username, players))
+        return false;
+
+    if(!isEmailUnique(email, players))
+        return false;
+
+    if(!isValidEmail(email))
+        return false;
+
+    if(password != confirmPassword)
+        return false;
+
+    return true;
 }
 
 QString Player::toFileRecord() const {
