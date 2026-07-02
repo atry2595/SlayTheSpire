@@ -80,6 +80,9 @@ public:
     void at_combat_start();
     void at_combat_end();
 
+    void potion_list_add(abstractPotion*);
+    void potion_list_remove(abstractPotion*);
+
 };
 
 #endif // COMBAT_PLAYER_H

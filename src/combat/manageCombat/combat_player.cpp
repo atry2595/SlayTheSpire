@@ -1,6 +1,7 @@
 #include "combat_player.h"
 #include "cards/cardfactory.h"
 #include "utils/RNG.h"
+#include "items/potions/abstractpotion.h"
 
 combat_player::combat_player()
     :character(new ironclad)
@@ -161,4 +162,19 @@ void combat_player::at_combat_end() {
     exhaust_pile.clear();
     draw_pile.clear();
     discard_pile.clear();
+}
+
+
+void combat_player::potion_list_add(abstractPotion* pot){
+    if (potion_list.size() < max_potion_number) potion_list.push_back(pot);
+}
+
+void combat_player::potion_list_remove(abstractPotion* pot){
+    for (int i = 0; i< potion_list.size(); i++){
+        if (pot == potion_list[i]){
+            potion_list.erase(potion_list.begin() + i);
+            delete pot;
+            return;
+        }
+    }
 }

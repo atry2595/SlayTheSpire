@@ -32,11 +32,17 @@ void game_action::apply_damage(damageInfo& info) {
     if (block){
         if (dmg < block){
             target->set_block(block - dmg);
-            emit event->block_changed(target, block - dmg);
+            blockingInfo bl;
+            bl.block = -dmg;
+            bl.owner = target;
+            emit event->block_changed(bl);
         }
         else {
             target->set_block(0);
-            emit event->block_break(target);
+            blockingInfo bl;
+            bl.block = -block;
+            bl.owner = target;
+            emit event->block_break(bl);
 
             dmg -= block;
         }
@@ -47,6 +53,7 @@ void game_action::apply_damage(damageInfo& info) {
     if (hp > dmg){
         target->set_hp(hp - dmg);
         info.damage = dmg;
+        info.target->damage_applied(*this);
         emit event->damage_applied(info);
     }
     else{
@@ -64,6 +71,7 @@ void game_action::apply_block(blockingInfo& info){
 
     int new_block = info.owner->get_block() + info.block;
     info.owner->set_block(new_block);
+    info.block = new_block;
 
-    emit event->block_changed(info.owner, info.owner->get_block());
+    emit event->block_changed(info);
 }
