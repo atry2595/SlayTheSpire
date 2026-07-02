@@ -131,6 +131,8 @@ void combat_player::at_turn_end() {
 
     for (int i = hand_pile.size() - 1; i >= 0; i++){
 
+        hand_pile[i]->turn_reset();
+
         if (hand_pile[i]->get_ethereal()){
             exhaust_pile_add(hand_pile[i]);
             emit event->card_moved(hand_pile[i], PileType::hand, PileType::exhaust);
@@ -162,7 +164,11 @@ void combat_player::at_combat_start(){
 }
 
 void combat_player::at_combat_end() {
-    deck.clear();
+
+    for (auto card: deck){
+        card->combat_reset();
+    }
+
     hand_pile.clear();
     exhaust_pile.clear();
     draw_pile.clear();

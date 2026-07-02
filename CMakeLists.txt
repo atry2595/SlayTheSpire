@@ -99,6 +99,9 @@ add_executable(SlayTheSpire
     src/entity/the_champ.cpp src/entity/the_champ.h
     src/combat/manageCombat/combat_player.h src/combat/manageCombat/combat_player.cpp
     src/cards/cardfactory.h src/cards/cardfactory.cpp
+    src/combat/manageCombat/combat_manager.h src/combat/manageCombat/combat_manager.cpp
+    src/categories/general.h
+
 
 
 
