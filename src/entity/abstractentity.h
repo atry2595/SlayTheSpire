@@ -9,6 +9,7 @@
 #include "categories/powers.h"
 #include <vector>
 #include "categories/enemies.h"
+#include "combat/game_action.h"
 
 class abstractPower;
 
@@ -57,10 +58,19 @@ public:
     void remove_power(abstractPower*);
     void remove_power_by_id(powerID);
     abstractPower* get_spec_power(powerID);
+    void remove_zero_power();
 
-    virtual void modify_attack(attackInfo&) {};
-    virtual void modify_incoming_damage(damageInfo&) {};
-    virtual void modify_blocking(blockingInfo&) {};
+
+    void modify_attack(attackInfo&);
+    void modify_incoming_damage(damageInfo&);
+    void modify_blocking(blockingInfo&);
+    void at_turn_start(game_action&);
+    void at_turn_end(game_action&);
+    void at_combat_start(game_action&);
+    void at_combat_end(game_action&);
+    void damage_applied(game_action&);
+
+
 
 };
 

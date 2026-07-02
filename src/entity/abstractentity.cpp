@@ -81,3 +81,64 @@ abstractPower* abstractEntity::get_spec_power(powerID power){
 
     return nullptr;
 }
+
+
+void abstractEntity::remove_zero_power(){
+
+    for (int i = powers_list.size() - 1; i >= 0 ;i++){
+        if (powers_list[i]->get_amount() == 0){
+            delete powers_list[i];
+            powers_list.erase(powers_list.begin() + i);
+        }
+    }
+}
+
+
+void abstractEntity::modify_attack(attackInfo& info) {
+    for (auto item : powers_list){
+        item->modify_attack(info);
+    }
+    remove_zero_power();
+}
+void abstractEntity::modify_incoming_damage(damageInfo& info) {
+    for (auto item : powers_list){
+        item->modify_incoming_damage(info);
+    }
+    remove_zero_power();
+}
+void abstractEntity::modify_blocking(blockingInfo& info) {
+    for (auto item : powers_list){
+        item->modify_blocking(info);
+    }
+    remove_zero_power();
+}
+void abstractEntity::at_turn_start(game_action& info) {
+    for (auto item : powers_list){
+        item->at_turn_start(info);
+    }
+    remove_zero_power();
+}
+void abstractEntity::at_turn_end(game_action& info) {
+    for (auto item : powers_list){
+        item->at_turn_end(info);
+    }
+    remove_zero_power();
+}
+void abstractEntity::at_combat_start(game_action& info) {
+    for (auto item : powers_list){
+        item->at_combat_start(info);
+    }
+    remove_zero_power();
+}
+void abstractEntity::at_combat_end(game_action& info) {
+    for (auto item : powers_list){
+        item->at_combat_end(info);
+    }
+    remove_zero_power();
+}
+void abstractEntity::damage_applied(game_action&info) {
+    for (auto item : powers_list){
+        item->damage_applied(info);
+    }
+    remove_zero_power();
+}
