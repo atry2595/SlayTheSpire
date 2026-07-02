@@ -21,19 +21,13 @@ QList<Player> Leaderboard::getTopPlayers(const QList<Player> &players, int count
     return sortedPlayers.mid(0, count);
 }
 
-int Leaderboard::getPlayerRank(
-    const QString &username,
-    const QList<Player> &players)
+int Leaderboard::getPlayerRank(const QString &username,const QList<Player> &players)
 {
     QList<Player> sortedPlayers = players;
 
-    std::sort(
-        sortedPlayers.begin(),
-        sortedPlayers.end(),
-        [](const Player &a, const Player &b)
+    std::sort(sortedPlayers.begin(),sortedPlayers.end(),[](const Player &a, const Player &b)
         {
-            return a.getStats().getHighestScore() >
-                   b.getStats().getHighestScore();
+            return a.getStats().getHighestScore() > b.getStats().getHighestScore();
         });
 
     for(int i = 0; i < sortedPlayers.size(); ++i)
@@ -45,4 +39,23 @@ int Leaderboard::getPlayerRank(
     }
 
     return -1;
+}
+
+QString Leaderboard::getLeaderboardText(const QList<Player> &players,int count)
+{
+    QString result;
+
+    QList<Player> topPlayers = getTopPlayers(players, count);
+
+    result += "========== LEADERBOARD ==========\n\n";
+
+    for(int i = 0; i < topPlayers.size(); ++i)
+    {
+        result +=
+            QString::number(i + 1)
+            + ". "
+            + topPlayers[i].getUsername()
+            + " - "
+            + QString::number(topPlayers[i].getStats().getHighestScore())+ "\n";}
+    return result;
 }
