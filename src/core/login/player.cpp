@@ -264,6 +264,7 @@ QString Player::getProfile() const
 
     result += "========== PLAYER PROFILE ==========\n\n";
 
+    result += QString("Player ID: %1\n").arg(id);
     result += QString("Username: %1\n").arg(username);
     result += QString("Email: %1\n\n").arg(email);
 
@@ -287,7 +288,7 @@ QString Player::getProfile() const
 
     result += QString("Losses: %1\n").arg(stats.getTimesLost());
 
-    result += "\nUnlocked Skins:\n";
+    result += "\n";
 
     return result;
 }
