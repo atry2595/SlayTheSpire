@@ -19,6 +19,7 @@ public:
     QString getUsername() const;
     QString getEmail() const;
     Stats& getStats();
+    const Stats& getStats() const;
     int getId() const;
     static QString validatePassword(const QString &password);
     static QString hashPassword(const QString &pass);

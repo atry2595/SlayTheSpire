@@ -35,11 +35,11 @@ double Stats::getWinRate() const{
     return (100.0 * timesWon) / timesPlayed;
 }
 bool Stats::isSkinUnlocked(int skinIndex) const {
-    if(skinIndex >= 0 && skinIndex < 5) return skinUnlocked[skinIndex];
+    if(skinIndex >= 0 && skinIndex < SKIN_COUNT) return skinUnlocked[skinIndex];
     return false;
 }
 
-void Stats::addScore(int a) {
+void Stats::addScore(int amount) {
     score += amount;
     if(score > highestScore)
         highestScore = score;
@@ -57,7 +57,7 @@ void Stats::incrementTimesWon() { timesWon++; }
 void Stats::incrementTimesLost() { timesLost++; }
 
 void Stats::unlockSkin(int skinIndex) {
-    if(skinIndex >= 0 && skinIndex < 5) skinUnlocked[skinIndex] = true;
+    if(skinIndex >= 0 && skinIndex < SKIN_COUNT) skinUnlocked[skinIndex] = true;
 }
 
 void Stats::update(const Stats &other)

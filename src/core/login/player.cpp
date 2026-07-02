@@ -1,6 +1,7 @@
 #include "Player.h"
 #include <QStringList>
 #include <QCryptographicHash>
+#include <QRandomGenerator>
 
 Player::Player(int id, QString username, QString email, QString password):id(id), username(username), email(email)
 {
@@ -14,6 +15,7 @@ Player::Player(int id, QString username, QString email, QString password):id(id)
 QString Player::getUsername() const { return username; }
 QString Player::getEmail() const { return email; }
 Stats& Player::getStats() { return stats; }
+const Stats& Player::getStats() const { return stats; }
 int Player::getId() const {return id;}
 
 QString Player::validatePassword(
