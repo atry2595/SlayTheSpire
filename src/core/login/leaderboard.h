@@ -7,11 +7,11 @@
 class Leaderboard
 {
 public:
-    static QList<Player> getTopPlayers(QList<Player> players,int count);
+    static QList<Player> getTopPlayers(const QList<Player> &players,int count);
 
-    static int getPlayerRank(const QString &username,QList<Player> players);
+    static int getPlayerRank(const QString &username,const QList<Player> &players);
 
-    static QString getLeaderboardText(QList<Player> players,int count);
+    static QString getLeaderboardText(const QList<Player> &players,int count);
 };
 
 #endif
