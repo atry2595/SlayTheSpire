@@ -89,10 +89,7 @@ bool Player::login(const QString &username,const QString &password,const QList<P
     return false;
 }
 
-bool Player::verifyUser(
-    const QString &username,
-    const QString &email,
-    const QList<Player> &players)
+bool Player::verifyUser(const QString &username,const QString &email,const QList<Player> &players)
 {
     for(const Player &p : players)
     {
@@ -102,8 +99,54 @@ bool Player::verifyUser(
             return true;
         }
     }
-
     return false;
+}
+
+QString Player::suggestUsername(const QString &username,const QList<Player> &players)
+{
+    QStringList suffixes =
+        {
+            "Gaming",
+            "Pro",
+            "X",
+            "A",
+            "King",
+            "Player",
+            "Master"
+        };
+
+    QString suggestion;
+
+    do
+    {
+        int mode = QRandomGenerator::global()->bounded(3);
+
+        if(mode == 0)
+        {
+            QString suffix =suffixes[QRandomGenerator::global()->bounded(suffixes.size())];
+
+            suggestion = username + suffix;
+        }
+        else if(mode == 1)
+        {
+            int number = QRandomGenerator::global()->bounded(1000);
+
+            suggestion =username + "_" +QString::number(number);
+        }
+        else
+        {
+            QString suffix =
+                suffixes[
+                    QRandomGenerator::global()->bounded(suffixes.size())];
+
+            int number =QRandomGenerator::global()->bounded(100);
+
+            suggestion =username + suffix +QString::number(number);
+        }
+
+    } while(!isUsernameUnique(suggestion, players));
+
+    return suggestion;
 }
 
 QString Player::toFileRecord() const {
@@ -127,5 +170,3 @@ Player Player::fromFileRecord(const QString &record) {
 
     return p;
 }
-
-
