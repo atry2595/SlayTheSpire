@@ -11,13 +11,14 @@ private:
     QString email;
     QString passwordHash;
     Stats stats;
-    static QString hashPassword(const QString &pass);
 
 public:
     Player(QString username = "", QString email = "", QString password = "");
     QString getUsername() const;
     QString getEmail() const;
     Stats& getStats();
+    static QString validatePassword(const QString &password);
+    static QString hashPassword(const QString &pass);
     bool checkPassword(const QString &pass) const;
     void setPassword(const QString &newPass);
     bool changePassword(const QString &oldPassword,const QString &newPassword,const QString &confirmPassword);

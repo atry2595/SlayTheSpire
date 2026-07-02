@@ -15,6 +15,71 @@ QString Player::getUsername() const { return username; }
 QString Player::getEmail() const { return email; }
 Stats& Player::getStats() { return stats; }
 
+QString Player::validatePassword(
+    const QString &password)
+{
+    bool hasUpperCase = false;
+    bool hasDigit = false;
+    bool allDigits = true;
+
+    if(password.length() < 6)
+    {
+        return "Password must be at least 6 characters long.";
+    }
+
+    QStringList commonPasswords =
+        {
+            "123456",
+            "12345678",
+            "123456789",
+            "password",
+            "Password",
+            "qwerty",
+            "111111",
+            "000000"
+        };
+
+    if(commonPasswords.contains(password))
+    {
+        return "This password is too common.";
+    }
+
+    for(QChar c : password)
+    {
+        if(c.isUpper())
+        {
+            hasUpperCase = true;
+        }
+
+        if(c.isDigit())
+        {
+            hasDigit = true;
+        }
+
+        if(!c.isDigit())
+        {
+            allDigits = false;
+        }
+    }
+
+    if(allDigits)
+    {
+        return "Password cannot contain only digits.";
+    }
+
+    if(!hasUpperCase)
+    {
+        return "Password must contain at least one uppercase letter.";
+    }
+
+    if(!hasDigit)
+    {
+        return "Password must contain at least one digit.";
+    }
+
+    return "";
+}
+
 QString Player::hashPassword(const QString &pass) {
     return QString(QCryptographicHash::hash(pass.toUtf8(), QCryptographicHash::Sha256).toHex());
 }
@@ -35,6 +100,10 @@ bool Player::changePassword(const QString &oldPassword,const QString &newPasswor
     }
 
     if (newPassword != confirmPassword)
+    {
+        return false;
+    }
+    if(!validatePassword(newPassword).isEmpty())
     {
         return false;
     }
