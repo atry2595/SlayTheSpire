@@ -7,16 +7,19 @@
 class Player
 {
 private:
+    int id;
     QString username;
     QString email;
     QString passwordHash;
     Stats stats;
 
+
 public:
-    Player(QString username = "", QString email = "", QString password = "");
+    Player(int id = 0, QString username = "", QString email = "", QString password = "");
     QString getUsername() const;
     QString getEmail() const;
     Stats& getStats();
+    int getId() const;
     static QString validatePassword(const QString &password);
     static QString hashPassword(const QString &pass);
     bool checkPassword(const QString &pass) const;

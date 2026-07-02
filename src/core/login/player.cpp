@@ -2,7 +2,7 @@
 #include <QStringList>
 #include <QCryptographicHash>
 
-Player::Player(QString username, QString email, QString password): username(username), email(email)
+Player::Player(int id, QString username, QString email, QString password):id(id), username(username), email(email)
 {
     passwordHash = "";
     if (!password.isEmpty()) {
@@ -14,6 +14,7 @@ Player::Player(QString username, QString email, QString password): username(user
 QString Player::getUsername() const { return username; }
 QString Player::getEmail() const { return email; }
 Stats& Player::getStats() { return stats; }
+int Player::getId() const {return id;}
 
 QString Player::validatePassword(
     const QString &password)
@@ -292,7 +293,7 @@ QString Player::getProfile() const
 }
 
 QString Player::toFileRecord() const {
-    return username + ";" + email + ";" + passwordHash + ";" + stats.toFileRecord();
+    return QString::number(id) + ";" + username + ";" + email + ";" + passwordHash + ";" + stats.toFileRecord();
 }
 
 Player Player::fromFileRecord(const QString &record) {
@@ -302,11 +303,12 @@ Player Player::fromFileRecord(const QString &record) {
         return Player();}
 
     Player p;
-    p.username = fields[0];
-    p.email = fields[1];
-    p.passwordHash = fields[2];
+    p.id = fields[0].toInt();
+    p.username = fields[1];
+    p.email = fields[2];
+    p.passwordHash = fields[3];
 
-    QStringList statsFields = fields.mid(3);
+    QStringList statsFields = fields.mid(4);
     QString statsRecord = statsFields.join(";");
     p.stats = Stats::fromFileRecord(statsRecord);
 
