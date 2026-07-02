@@ -206,6 +206,7 @@ add_executable(SlayTheSpire
 
     src/core/login/stats.h src/core/login/stats.cpp
     src/core/login/player.h src/core/login/player.cpp
+    src/core/login/leaderboard.h src/core/login/leaderboard.cpp
 
     # Core
     # src/core/...
