@@ -27,6 +27,85 @@ void Player::setPassword(const QString &newPass) {
     this->passwordHash = hashPassword(newPass);
 }
 
+bool Player::isUsernameUnique(const QString &username,const QList<Player> &players)
+{
+    for(const Player &p : players)
+    {
+        if(p.username == username)
+            return false;
+    }
+
+    return true;
+}
+bool Player::isEmailUnique(const QString &email,const QList<Player> &players)
+{
+    for(const Player &p : players)
+    {
+        if(p.email == email)
+            return false;
+    }
+
+    return true;
+}
+
+bool Player::isValidEmail(const QString &email)
+{
+    int at = email.indexOf('@');
+
+    if(at == -1)
+        return false;
+
+    if(email.indexOf('@', at + 1) != -1)
+        return false;
+
+    int dot = email.lastIndexOf('.');
+
+    if(dot == -1)
+        return false;
+
+    if(dot < at)
+        return false;
+
+    if(dot == email.length() - 1)
+        return false;
+
+    return true;
+}
+
+bool Player::passwordsMatch(const QString &pass1,const QString &pass2)
+{
+    return pass1 == pass2;
+}
+
+bool Player::login(const QString &username,const QString &password,const QList<Player> &players)
+{
+    for(const Player &p : players)
+    {
+        if(p.username == username)
+        {
+            return p.checkPassword(password);
+        }
+    }
+    return false;
+}
+
+bool Player::verifyUser(
+    const QString &username,
+    const QString &email,
+    const QList<Player> &players)
+{
+    for(const Player &p : players)
+    {
+        if(p.username == username
+            && p.email == email)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 QString Player::toFileRecord() const {
     return username + ";" + email + ";" + passwordHash + ";" + stats.toFileRecord();
 }

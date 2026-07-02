@@ -6,6 +6,20 @@
 
 class Stats
 {
+private:
+    int score;
+    int highestScore;
+    int monstersKilled;
+    int elitesKilled;
+    int bossesKilled;
+
+    bool skinUnlocked[SKIN_COUNT];
+
+    int highestFloorReached;
+    int timesPlayed;
+    int timesWon;
+    int timesLost;
+
 public:
     static constexpr int SKIN_COUNT = 5;
 
@@ -39,19 +53,6 @@ public:
     QString toFileRecord() const;
     static Stats fromFileRecord(const QString &record);
 
-private:
-    int score;
-    int highestScore;
-    int monstersKilled;
-    int elitesKilled;
-    int bossesKilled;
-
-    bool skinUnlocked[SKIN_COUNT];
-
-    int highestFloorReached;
-    int timesPlayed;
-    int timesWon;
-    int timesLost;
 };
 
 #endif
