@@ -9,7 +9,8 @@
 #include "categories/powers.h"
 #include <vector>
 #include "categories/enemies.h"
-#include "combat/game_action.h"
+
+struct game_action;
 
 class abstractPower;
 

@@ -1,6 +1,7 @@
 #include "abstractentity.h"
 #include "items/powers/abstractpower.h"
 #include <algorithm>
+#include "combat/game_action.h"
 
 abstractEntity::abstractEntity(QString name_init, int base_max_hp_init)
     :base_max_hp(base_max_hp_init), name(name_init)
