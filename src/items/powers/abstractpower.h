@@ -35,6 +35,7 @@ public:
     QString get_description() { return description; }
     int get_amount() { return amount; }
     int get_order() { return priority_order;}
+    bool get_is_buff() { return is_buff; }
     virtual powerID get_id() = 0;
 
     void increase(int x_init = 1);

@@ -22,6 +22,7 @@ spheric_guardian* spheric_guardian::create(){
     enemy_intent intnt2;
     intnt2.name = tr("Debuff Attack");
     intnt2.type = intent_type::attack_debuff;
+    intnt2.damage = 10;
 
 
     enemy_intent intnt3;

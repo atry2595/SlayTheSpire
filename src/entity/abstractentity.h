@@ -51,6 +51,7 @@ public:
     int get_max_hp() { return max_hp;}
     int get_hp() { return hp;}
     int get_block() { return block;}
+    auto get_power_list() {return powers_list; }
 
     void add_power(abstractPower*);
     void remove_power(abstractPower*);

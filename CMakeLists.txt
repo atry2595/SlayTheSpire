@@ -96,6 +96,7 @@ add_executable(SlayTheSpire
     src/entity/blue_slaver.cpp src/entity/blue_slaver.h
     src/entity/small_slime.cpp src/entity/small_slime.h
     src/entity/spheric_guardian.cpp src/entity/spheric_guardian.h
+    src/entity/the_champ.cpp src/entity/the_champ.h
 
 
 
