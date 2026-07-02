@@ -1,3 +1,7 @@
-#include "filemanager.h"
+#include "FileManager.h"
 
-FileManager::FileManager() {}
+FileManager::FileManager()
+{
+    nextId = 1001;
+    loggedInPlayerIndex = -1;
+}

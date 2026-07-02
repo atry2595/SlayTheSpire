@@ -47,8 +47,6 @@ QString Leaderboard::getLeaderboardText(const QList<Player> &players,int count)
 
     QList<Player> topPlayers = getTopPlayers(players, count);
 
-    result += "========== LEADERBOARD ==========\n\n";
-
     for(int i = 0; i < topPlayers.size(); ++i)
     {
         result +=

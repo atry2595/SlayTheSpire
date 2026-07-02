@@ -1,13 +1,20 @@
 #ifndef FILEMANAGER_H
 #define FILEMANAGER_H
 
-#include <QObject>
+#include <QString>
+#include <QList>
+
+#include "Player.h"
 
 class FileManager
 {
-    Q_OBJECT
 public:
     FileManager();
+
+private:
+    QList<Player> players;
+    int nextId;
+    int loggedInPlayerIndex;
 };
 
-#endif // FILEMANAGER_H
+#endif
