@@ -1,7 +1,7 @@
 #ifndef POWERFACTORY_H
 #define POWERFACTORY_H
 
-#include <QWidget>
+#include <QObject>
 #include "abstractpower.h"
 
 
