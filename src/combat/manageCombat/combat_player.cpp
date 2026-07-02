@@ -71,7 +71,7 @@ void combat_player::base_deck_add(abstractCard* card){
 }
 void combat_player::base_deck_remove(abstractCard* card){
     auto it = std::find(base_deck.begin(), base_deck.end(), card);
-    if (it != base_deck.end()){
+    if (it != base_deck.end() && card->can_remove_from_deck()){
         delete card;
         base_deck.erase(it);
     }

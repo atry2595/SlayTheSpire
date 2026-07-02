@@ -5,9 +5,13 @@
 
 class abstractEntity;
 class abstractCard;
+class abstractPower;
+class abstractPotion;
 struct attackInfo;
 struct damageInfo;
 struct blockingInfo;
+struct enemy_intent;
+enum class pile_type;
 
 class combatEvent : public QObject{
     Q_OBJECT
@@ -19,18 +23,34 @@ signals:
     void turn_started(abstractEntity*);
     void turn_ended(abstractEntity*);
 
-    void card_played(abstractCard*);
-
     void attack_started(attackInfo&);
     void before_damage_taken(damageInfo&);
     void before_block_set(blockingInfo&);
 
     void entity_killed(abstractEntity*);
+    void entity_added(abstractEntity*);
+    void entity_removed(abstractEntity*);
+    void entity_escape(abstractEntity*);
 
-    void hp_changed(abstractEntity*, int);
-    void block_changed(abstractEntity*, int);
-    void block_break(abstractEntity*);
+    void hp_changed(abstractEntity*, int oldHP, int newHP);
+    void block_changed(blockingInfo&);
+    void block_break(blockingInfo&);
     void damage_applied(damageInfo&);
+
+    void card_played(abstractCard*);
+    void card_moved(abstractCard*, pile_type from, pile_type to);
+    void draw_pile_shuffled();
+    void card_locked(abstractCard*);
+    void card_disabled(abstractCard*);
+
+    void intent_changed(abstractEntity*);
+    void power_added(abstractPower*);
+    void power_changed(abstractPower*);
+    void power_removed(abstractPower*);
+    void potion_added(abstractPotion*);
+    void potion_used(abstractPotion*);
+    void potion_removed(abstractPotion*);
+
 };
 
 #endif // COMBAT_EVENT_H
