@@ -119,24 +119,27 @@ bool Player::verifyUser(const QString &username,const QString &email,const QList
     return false;
 }
 
-QString Player::suggestUsername(const QString &username,const QList<Player> &players)
+QStringList Player::suggestUsername(const QString &username,const QList<Player> &players)
 {
+    QStringList suggestions;
+
     QStringList suffixes =
         {
             "Gaming",
             "Pro",
             "X",
             "A",
+            "Nova",
             "King",
             "Player",
             "Master"
         };
 
-    QString suggestion;
-
-    do
+    while(suggestions.size() < 5)
     {
-        int mode = QRandomGenerator::global()->bounded(3);
+        QString suggestion;
+
+        int mode =QRandomGenerator::global()->bounded(3);
 
         if(mode == 0)
         {
@@ -146,24 +149,26 @@ QString Player::suggestUsername(const QString &username,const QList<Player> &pla
         }
         else if(mode == 1)
         {
-            int number = QRandomGenerator::global()->bounded(1000);
+            int number =QRandomGenerator::global()->bounded(1000);
 
             suggestion =username + "_" +QString::number(number);
         }
         else
         {
-            QString suffix =
-                suffixes[
-                    QRandomGenerator::global()->bounded(suffixes.size())];
+            QString suffix =suffixes[QRandomGenerator::global()->bounded(suffixes.size())];
 
             int number =QRandomGenerator::global()->bounded(100);
 
             suggestion =username + suffix +QString::number(number);
         }
 
-    } while(!isUsernameUnique(suggestion, players));
+        if(isUsernameUnique(suggestion, players)&& !suggestions.contains(suggestion))
+        {
+            suggestions.append(suggestion);
+        }
+    }
 
-    return suggestion;
+    return suggestions;
 }
 
 bool Player::registerPlayer(const QString &username,const QString &email,const QString &password,const QString &confirmPassword,const QList<Player> &players)
