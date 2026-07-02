@@ -9,6 +9,7 @@ class Leaderboard
 public:
     static QList<Player> getTopPlayers(QList<Player> players,int count);
 
+    static int getPlayerRank(const QString &username,QList<Player> players);
 };
 
 #endif
