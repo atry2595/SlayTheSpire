@@ -1,13 +1,14 @@
 #ifndef LEADERBOARD_H
 #define LEADERBOARD_H
 
-#include <QObject>
+#include <QList>
+#include "Player.h"
 
 class Leaderboard
 {
-    Q_OBJECT
 public:
-    Leaderboard();
+    static QList<Player> getTopPlayers(QList<Player> players,int count);
+
 };
 
-#endif // LEADERBOARD_H
+#endif
