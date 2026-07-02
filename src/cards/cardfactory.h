@@ -6,7 +6,7 @@
 
 #include "categories/cards.h"
 
-class CardFactory
+class CardFactory : public QObject
 {
     Q_OBJECT
 public:

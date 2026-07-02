@@ -24,6 +24,7 @@ public:
 
     cardID get_card_id() override { return cardID::metallicize; }
     bool is_rare() override { return false; }
+    TargetType get_target_type() override { return TargetType::self; }
 };
 
 #endif // METALLICIZE_H
