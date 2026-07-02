@@ -28,6 +28,7 @@ public:
 
     cardID get_card_id() override { return cardID::bash; }
     bool is_rare() override { return false; }
+    TargetType get_target_type() override { return TargetType::single_target; }
 };
 
 #endif // BASH_H

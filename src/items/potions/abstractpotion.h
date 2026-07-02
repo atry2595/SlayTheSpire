@@ -5,6 +5,7 @@
 #include "categories/potions.h"
 #include "combat/play_info.h"
 #include "combat/game_action.h"
+#include "categories/general.h"
 
 class abstractEntity;
 
@@ -22,7 +23,9 @@ public:
     virtual ~abstractPotion() = default;
 
     virtual void play(playInfo&) = 0;
-    virtual potionID get_type() = 0;
+    virtual potionID get_ID() = 0;
+    virtual TargetType get_target_type() = 0;
+
     QString get_name() { return name; }
     QString get_description() { return description; }
     abstractEntity* get_owner() { return owner; }

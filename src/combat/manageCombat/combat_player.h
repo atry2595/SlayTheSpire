@@ -13,6 +13,9 @@ class combat_player : public QObject
 {
     Q_OBJECT
 
+private:
+    combatEvent* event;
+
 protected:
     ironclad* character;
     int base_energy = 3;
@@ -22,7 +25,6 @@ protected:
     const int max_potion_number = 3;
     const int max_hand_card_number = 10;
 
-    std::vector<abstractCard*> base_deck;
     std::vector<abstractCard*> deck;
     std::vector<abstractPotion*> potion_list;
     std::vector<abstractRelic*> relic_list;
@@ -33,7 +35,7 @@ protected:
     std::vector<abstractCard*> exhaust_pile;
 
 public:
-    combat_player();
+    combat_player(combatEvent* eve);
 
     ironclad* get_character() { return character; }
     int get_base_energy() { return base_energy; }
@@ -62,9 +64,6 @@ public:
 
     void exhaust_pile_add(abstractCard* card);
     void exhaust_pile_remove(abstractCard* card);
-
-    void base_deck_add(abstractCard* card);
-    void base_deck_remove(abstractCard* card);
 
     void deck_add(abstractCard* card);
     void deck_remove(abstractCard* card);

@@ -21,6 +21,7 @@ public:
     cardID get_card_id() override { return cardID::curse_of_the_bell; }
     bool is_rare() override { return false; }
     bool can_remove_from_deck() override { return false; }
+    TargetType get_target_type() override { return TargetType::none; }
 };
 
 #endif // CURSE_OF_THE_BELL_H

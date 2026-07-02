@@ -5,6 +5,7 @@
 
 #include "combat/play_info.h"
 #include "categories/cards.h"
+#include "categories/general.h"
 
 class abstractEntity;
 
@@ -56,6 +57,7 @@ public:
     virtual CardType get_card_type() = 0;
     virtual cardID get_card_id() = 0;
     virtual bool is_rare() = 0;
+    virtual TargetType get_target_type() = 0;
     virtual bool can_remove_from_deck() { return true; }
 
 

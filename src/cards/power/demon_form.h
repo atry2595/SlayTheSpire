@@ -24,6 +24,8 @@ public:
 
     cardID get_card_id() override { return cardID::demon_form; }
     bool is_rare() override { return true; }
+
+    TargetType get_target_type() override { return TargetType::self; }
 };
 
 #endif // demon_form_H

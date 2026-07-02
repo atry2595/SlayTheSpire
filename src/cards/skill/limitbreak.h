@@ -20,6 +20,8 @@ public:
 
     cardID get_card_id() override { return cardID::limit_break; }
     bool is_rare() override { return true; }
+
+    TargetType get_target_type() override { return TargetType::self; }
 };
 
 #endif // LIMITBREAK_H

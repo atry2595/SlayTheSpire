@@ -11,7 +11,7 @@ struct attackInfo;
 struct damageInfo;
 struct blockingInfo;
 struct enemy_intent;
-enum class pile_type;
+enum class PileType;
 
 class combatEvent : public QObject{
     Q_OBJECT
@@ -38,7 +38,7 @@ signals:
     void damage_applied(damageInfo&);
 
     void card_played(abstractCard*);
-    void card_moved(abstractCard*, pile_type from, pile_type to);
+    void card_moved(abstractCard*, PileType from, PileType to);
     void draw_pile_shuffled();
     void card_locked(abstractCard*);
     void card_disabled(abstractCard*);

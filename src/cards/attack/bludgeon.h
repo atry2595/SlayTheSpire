@@ -19,6 +19,7 @@ public:
 
     cardID get_card_id() override { return cardID::bludgeon; }
     bool is_rare() override { return true; }
+    TargetType get_target_type() override { return TargetType::single_target; }
 };
 
 #endif // bludgeon_H
