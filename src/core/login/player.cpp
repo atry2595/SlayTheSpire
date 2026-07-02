@@ -188,6 +188,40 @@ bool Player::registerPlayer(const QString &username,const QString &email,const Q
     return true;
 }
 
+QString Player::getProfile() const
+{
+    QString result;
+
+    result += "========== PLAYER PROFILE ==========\n\n";
+
+    result += QString("Username: %1\n").arg(username);
+    result += QString("Email: %1\n\n").arg(email);
+
+    result += QString("Score: %1\n").arg(stats.getScore());
+
+    result += QString("Highest Score: %1\n").arg(stats.getHighestScore());
+
+    result += QString("Monsters Killed: %1\n").arg(stats.getMonstersKilled());
+
+    result += QString("Elites Killed: %1\n").arg(stats.getElitesKilled());
+
+    result += QString("Bosses Killed: %1\n").arg(stats.getBossesKilled());
+
+    result += QString("Total Enemies Killed: %1\n").arg(stats.getTotalEnemiesKilled());
+
+    result += QString("Highest Floor Reached: %1\n").arg(stats.getHighestFloorReached());
+
+    result += QString("Times Played: %1\n").arg(stats.getTimesPlayed());
+
+    result += QString("Wins: %1\n").arg(stats.getTimesWon());
+
+    result += QString("Losses: %1\n").arg(stats.getTimesLost());
+
+    result += "\nUnlocked Skins:\n";
+
+    return result;
+}
+
 QString Player::toFileRecord() const {
     return username + ";" + email + ";" + passwordHash + ";" + stats.toFileRecord();
 }

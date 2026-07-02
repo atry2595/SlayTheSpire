@@ -29,6 +29,7 @@ public:
     static bool verifyUser(const QString &username,const QString &email,const QList<Player> &players);
     static QString suggestUsername(const QString &username,const QList<Player> &players);
     static bool registerPlayer(const QString &username,const QString &email,const QString &password,const QString &confirmPassword,const QList<Player> &players);
+    QString getProfile() const;
 
     QString toFileRecord() const;
     static Player fromFileRecord(const QString &record);
