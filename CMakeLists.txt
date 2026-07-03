@@ -119,6 +119,7 @@ add_executable(SlayTheSpire
     src/cards/skill/dual_wield.cpp src/cards/skill/dual_wield.h
     src/cards/skill/warcry.cpp src/cards/skill/warcry.h
     src/cards/skill/true_grit.cpp src/cards/skill/true_grit.h
+    src/cards/skill/shrug_it_off.cpp src/cards/skill/shrug_it_off.h
 
 
 
