@@ -23,6 +23,7 @@ public:
     bool registerPlayer(const QString &username,const QString &email,const QString &password,const QString &confirmPassword,QString &errorMessage);
     Player* login(const QString &username,const QString &password);
     Player* getLoggedInPlayer();
+    bool resetPassword(const QString &username,const QString &email,const QString &newPassword,const QString &confirmPassword);
 };
 
 #endif

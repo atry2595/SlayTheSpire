@@ -171,3 +171,32 @@ Player* FileManager::getLoggedInPlayer()
     }
     return nullptr;
 }
+
+bool FileManager::resetPassword(const QString &username,const QString &email,const QString &newPassword,const QString &confirmPassword)
+{
+    if(!Player::passwordsMatch(newPassword,confirmPassword))
+    {
+        return false;
+    }
+
+    QString passwordError = Player::validatePassword(newPassword);
+
+    if(!passwordError.isEmpty())
+    {
+        return false;
+    }
+
+    for(Player &p : players)
+    {
+        if(p.getUsername().toLower() == username.toLower() && p.getEmail().toLower()==email.toLower())
+        {
+            p.setPassword(newPassword);
+
+            saveToFile();
+
+            return true;
+        }
+    }
+
+    return false;
+}
