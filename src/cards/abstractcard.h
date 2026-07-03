@@ -60,6 +60,7 @@ public:
     virtual void damage_applied() {};
     virtual bool can_remove_from_deck() { return true; }
     virtual bool repeat_x_time() { return false; }
+    virtual bool is_strike() { return false; }
 
 
     void set_name(const QString& name_init) { name = name_init; }

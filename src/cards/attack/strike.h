@@ -20,6 +20,8 @@ public:
     cardID get_card_id() override { return cardID::strike; }
     bool is_rare() override { return false; }
     TargetType get_target_type() override { return TargetType::single_target; }
+    bool is_strike() override { return true; }
+
 };
 
 #endif // STRIKE_H

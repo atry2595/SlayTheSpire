@@ -23,11 +23,25 @@ ironclad::ironclad(combatEvent* eve)
 }
 
 
+void ironclad::combat_deck_add(abstractCard* card){
+    combat_deck.push_back(card);
+}
+void ironclad::combat_deck_remove(abstractCard* card){
+    auto it = std::find(combat_deck.begin(), combat_deck.end(), card);
+    if (it != combat_deck.end()){
+        combat_deck.erase(it);
+    }
+}
+
+
 void ironclad::hand_pile_add(abstractCard* card, bool independent){
     if (hand_pile.size() < max_hand_card_number){
         hand_pile.push_back(card);
     }
-    if (independent) emit event->card_moved(card, PileType::none, PileType::hand);
+    if (independent) {
+        combat_deck_add(card);
+        emit event->card_moved(card, PileType::none, PileType::hand);
+    }
 }
 void ironclad::hand_pile_remove(abstractCard* card, bool independent){
     auto it = std::find(hand_pile.begin(), hand_pile.end(), card);
@@ -41,7 +55,10 @@ void ironclad::hand_pile_remove(abstractCard* card, bool independent){
 
 void ironclad::draw_pile_add(abstractCard* card, bool independent){
     draw_pile.push_back(card);
-    if (independent) emit event->card_moved(card, PileType::none, PileType::draw);
+    if (independent) {
+        combat_deck_add(card);
+        emit event->card_moved(card, PileType::none, PileType::draw);
+    }
 }
 void ironclad::draw_pile_remove(abstractCard* card, bool independent){
     auto it = std::find(draw_pile.begin(), draw_pile.end(), card);
@@ -54,7 +71,10 @@ void ironclad::draw_pile_remove(abstractCard* card, bool independent){
 
 void ironclad::discard_pile_add(abstractCard* card, bool independent){
     discard_pile.push_back(card);
-    if (independent) emit event->card_moved(card, PileType::none, PileType::discard);
+    if (independent) {
+        combat_deck_add(card);
+        emit event->card_moved(card, PileType::none, PileType::discard);
+    }
 }
 void ironclad::discard_pile_remove(abstractCard* card, bool independent){
     auto it = std::find(discard_pile.begin(), discard_pile.end(), card);
@@ -67,7 +87,10 @@ void ironclad::discard_pile_remove(abstractCard* card, bool independent){
 
 void ironclad::exhaust_pile_add(abstractCard* card, bool independent){
     exhaust_pile.push_back(card);
-    if (independent) emit event->card_moved(card, PileType::none, PileType::exhaust);
+    if (independent) {
+        combat_deck_add(card);
+        emit event->card_moved(card, PileType::none, PileType::exhaust);
+    }
 }
 void ironclad::exhaust_pile_remove(abstractCard* card, bool independent){
     auto it = std::find(exhaust_pile.begin(), exhaust_pile.end(), card);
@@ -80,6 +103,7 @@ void ironclad::exhaust_pile_remove(abstractCard* card, bool independent){
 
 void ironclad::deck_add(abstractCard* card){
     deck.push_back(card);
+    combat_deck_add(card);
 }
 void ironclad::deck_remove(abstractCard* card){
     if (card->can_remove_from_deck() == false) return;
@@ -194,16 +218,17 @@ void ironclad::at_turn_end(game_action& info) {
 void ironclad::at_combat_start(game_action& info){
     abstractEntity::at_combat_start(info);
 
-    draw_pile = deck;
+    combat_deck = deck;
 
-    for (auto item : draw_pile){
+
+    for (auto item : combat_deck){
         if (item->get_initial()) {
             hand_pile_add(item);
             emit event->card_moved(item, PileType::draw, PileType::hand);
         }
-    }
-    for (auto item : hand_pile){
-        draw_pile_remove(item);
+        else {
+            draw_pile_add(item);
+        }
     }
 }
 
@@ -215,6 +240,7 @@ void ironclad::at_combat_end(game_action& info) {
         card->combat_reset();
     }
 
+    combat_deck.clear();
     hand_pile.clear();
     exhaust_pile.clear();
     draw_pile.clear();
@@ -225,16 +251,7 @@ void ironclad::at_combat_end(game_action& info) {
 void ironclad::damage_applied(game_action& info) {
     abstractEntity::damage_applied(info);
 
-    for (auto item : hand_pile){
-        item->damage_applied();
-    }
-    for (auto item : draw_pile){
-        item->damage_applied();
-    }
-    for (auto item : discard_pile){
-        item->damage_applied();
-    }
-    for (auto item : exhaust_pile){
+    for (auto item : combat_deck){
         item->damage_applied();
     }
 }

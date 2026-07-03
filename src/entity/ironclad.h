@@ -30,6 +30,7 @@ protected:
     const int max_hand_card_number = 10;
 
     std::vector<abstractCard*> deck;
+    std::vector<abstractCard*> combat_deck;
     std::vector<abstractPotion*> potion_list;
     std::vector<abstractRelic*> relic_list;
 
@@ -49,6 +50,7 @@ public:
     int get_energy() { return energy; }
 
     std::vector<abstractCard*>& get_deck() { return deck; }
+    std::vector<abstractCard*>& get_combat_deck() { return combat_deck; }
     std::vector<abstractPotion*>& get_potion_list() { return potion_list; }
     std::vector<abstractRelic*>& get_relic_list() { return relic_list; }
 
@@ -59,6 +61,9 @@ public:
 
     void set_base_energy(int i_init) { base_energy = i_init; }
     void set_energy(int i_init) {energy = i_init; }
+
+    void combat_deck_add(abstractCard* card);
+    void combat_deck_remove(abstractCard* card);
 
     void hand_pile_add(abstractCard* card, bool independent = false);
     void hand_pile_remove(abstractCard* card, bool independent = false);

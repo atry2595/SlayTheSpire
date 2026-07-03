@@ -2,11 +2,11 @@
 #include "entity/ironclad.h"
 
 blood_for_blood::blood_for_blood()
-    :abstractAttackCard(tr("blood_for_blood"), "", 4, 18, false, false, false, false)
+    :abstractAttackCard(tr("Blodd For Blood"), "", 4, 18, false, false, false, false)
 {
     QString s;
     s += tr("Costs 1 less Energy for each time you lose HP this combat.");
-    s += tr("Deal %1 damage.").arg(damage);
+    s += tr("\nDeal %1 damage.").arg(damage);
     base_description = description = s;
 }
 
@@ -14,7 +14,7 @@ QString blood_for_blood::generate_description(){
 
     QString s;
     s += tr("Costs 1 less Energy for each time you lose HP this combat.");
-    s += tr("Deal %1 damage.").arg(damage);
+    s += tr("\nDeal %1 damage.").arg(damage);
     return s;
 }
 
