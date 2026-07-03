@@ -9,7 +9,12 @@ const std::vector<cardID> ironclad::starting_deck =
     {cardID::strike, cardID::strike, cardID::strike, cardID::strike, cardID::strike,
      cardID::defend, cardID::defend, cardID::defend, cardID::defend, cardID::bash};
 
-
+abstractCard* ironclad::select_card(
+    const std::vector<abstractCard*>& cards
+    )
+{
+    return nullptr;
+}
 
 ironclad::ironclad(combatEvent* eve)
     :abstractEntity(tr("Ironclad"), 80),
