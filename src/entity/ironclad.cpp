@@ -1,9 +1,21 @@
 #include "ironclad.h"
+#include "cards/cardfactory.h"
+#include "cards/cardfactory.h"
+#include "utils/RNG.h"
+#include "items/potions/abstractpotion.h"
+#include "categories/general.h"
 
-const std::vector<cardID> ironclad::starting_deck =
-    {cardID::strike, cardID::strike, cardID::strike, cardID::strike, cardID::strike,
-     cardID::defend, cardID::defend, cardID::defend, cardID::defend, cardID::bash};
 
-ironclad::ironclad()
-    :abstractEntity(tr("Ironclad"), 80)
-{}
+ironclad::ironclad(combatEvent* eve)
+    :abstractEntity(tr("Ironclad"), 80),
+    event(eve)
+{
+    energy = base_energy;
+
+    for (auto item : ironclad::starting_deck){
+        abstractCard* nc = CardFactory::createCard(item);
+        deck.push_back(nc);
+    }
+}
+
+

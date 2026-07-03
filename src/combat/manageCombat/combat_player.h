@@ -19,7 +19,6 @@ private:
     combatEvent* event;
 
 protected:
-    ironclad* character;
     int base_energy = 3;
     int hand_card_number = 5;
     int energy;
