@@ -18,8 +18,7 @@ Stats& Player::getStats() { return stats; }
 const Stats& Player::getStats() const { return stats; }
 int Player::getId() const {return id;}
 
-QString Player::validatePassword(
-    const QString &password)
+QString Player::validatePassword(const QString &password)
 {
     bool hasUpperCase = false;
     bool hasDigit = false;

@@ -100,3 +100,48 @@ bool FileManager::isEmailTaken(const QString &email)
     }
     return false;
 }
+
+bool FileManager::registerPlayer(const QString &username,const QString &email,const QString &password,const QString &confirmPassword,QString &errorMessage)
+{
+    if(isUsernameTaken(username))
+    {
+        errorMessage ="Username already exists.";
+        return false;
+    }
+
+    if(isEmailTaken(email))
+    {
+        errorMessage = "Email already exists.";
+        return false;
+    }
+
+    if(!Player::isValidEmail(email))
+    {
+        errorMessage ="Invalid email.";
+        return false;
+    }
+
+    if(!Player::passwordsMatch(password,confirmPassword))
+    {
+        errorMessage ="Passwords do not match.";
+        return false;
+    }
+
+    QString passwordError = Player::validatePassword(password);
+
+    if(!passwordError.isEmpty())
+    {
+        errorMessage =passwordError;
+        return false;
+    }
+
+    Player newPlayer(generateId(),username,email,password);
+
+    players.append(newPlayer);
+
+    saveToFile();
+
+    errorMessage = "";
+
+    return true;
+}

@@ -20,6 +20,7 @@ public:
     bool saveToFile(const QString &filePath ="players_data.txt");
     bool isUsernameTaken(const QString &username);
     bool isEmailTaken(const QString &email);
+    bool registerPlayer(const QString &username,const QString &email,const QString &password,const QString &confirmPassword,QString &errorMessage);
 };
 
 #endif
