@@ -55,17 +55,17 @@ public:
     void set_base_energy(int i_init) { base_energy = i_init; }
     void set_energy(int i_init) {energy = i_init; }
 
-    void hand_pile_add(abstractCard* card);
-    void hand_pile_remove(abstractCard* card);
+    void hand_pile_add(abstractCard* card, bool independent = false);
+    void hand_pile_remove(abstractCard* card, bool independent = false);
 
-    void draw_pile_add(abstractCard* card);
-    void draw_pile_remove(abstractCard* card);
+    void draw_pile_add(abstractCard* card, bool independent = false);
+    void draw_pile_remove(abstractCard* card, bool independent = false);
 
-    void discard_pile_add(abstractCard* card);
-    void discard_pile_remove(abstractCard* card);
+    void discard_pile_add(abstractCard* card, bool independent = false);
+    void discard_pile_remove(abstractCard* card, bool independent = false);
 
-    void exhaust_pile_add(abstractCard* card);
-    void exhaust_pile_remove(abstractCard* card);
+    void exhaust_pile_add(abstractCard* card, bool independent = false);
+    void exhaust_pile_remove(abstractCard* card, bool independent = false);
 
     void deck_add(abstractCard* card);
     void deck_remove(abstractCard* card);

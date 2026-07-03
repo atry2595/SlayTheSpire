@@ -18,64 +18,73 @@ combat_player::combat_player(combatEvent* eve)
 
 
 
-void combat_player::hand_pile_add(abstractCard* card){
+void combat_player::hand_pile_add(abstractCard* card, bool independent){
     if (hand_pile.size() < max_hand_card_number){
         hand_pile.push_back(card);
     }
+    if (independent) emit event->card_moved(card, PileType::none, PileType::hand);
 }
 
 
 
-void combat_player::hand_pile_remove(abstractCard* card){
+void combat_player::hand_pile_remove(abstractCard* card, bool independent){
     auto it = std::find(hand_pile.begin(), hand_pile.end(), card);
     if (it != hand_pile.end()){
         hand_pile.erase(it);
     }
+
+    if (independent) emit event->card_moved(card, PileType::hand, PileType::none);
 }
 
 
 
-void combat_player::draw_pile_add(abstractCard* card){
+void combat_player::draw_pile_add(abstractCard* card, bool independent){
     draw_pile.push_back(card);
+    if (independent) emit event->card_moved(card, PileType::none, PileType::draw);
 }
 
 
 
-void combat_player::draw_pile_remove(abstractCard* card){
+void combat_player::draw_pile_remove(abstractCard* card, bool independent){
     auto it = std::find(draw_pile.begin(), draw_pile.end(), card);
     if (it != draw_pile.end()){
         draw_pile.erase(it);
     }
+    if (independent) emit event->card_moved(card, PileType::draw, PileType::none);
 }
 
 
 
-void combat_player::discard_pile_add(abstractCard* card){
+void combat_player::discard_pile_add(abstractCard* card, bool independent){
     discard_pile.push_back(card);
+    if (independent) emit event->card_moved(card, PileType::none, PileType::discard);
 }
 
 
 
-void combat_player::discard_pile_remove(abstractCard* card){
+void combat_player::discard_pile_remove(abstractCard* card, bool independent){
     auto it = std::find(discard_pile.begin(), discard_pile.end(), card);
     if (it != discard_pile.end()){
         discard_pile.erase(it);
     }
+    if (independent) emit event->card_moved(card, PileType::discard, PileType::none);
 }
 
 
 
-void combat_player::exhaust_pile_add(abstractCard* card){
+void combat_player::exhaust_pile_add(abstractCard* card, bool independent){
     exhaust_pile.push_back(card);
+    if (independent) emit event->card_moved(card, PileType::none, PileType::exhaust);
 }
 
 
 
-void combat_player::exhaust_pile_remove(abstractCard* card){
+void combat_player::exhaust_pile_remove(abstractCard* card, bool independent){
     auto it = std::find(exhaust_pile.begin(), exhaust_pile.end(), card);
     if (it != exhaust_pile.end()){
         exhaust_pile.erase(it);
     }
+    if (independent) emit event->card_moved(card, PileType::exhaust, PileType::none);
 }
 
 
@@ -135,6 +144,7 @@ void combat_player::play_card(playCardInfo& info) {
     if (energy < info.card->get_energy()) return;
 
     game_action actions(event);
+    info.owner = character;
     actions.play_card(info);
 
     energy -= info.card->get_energy();
