@@ -18,11 +18,11 @@ void abstractAttackCard::combat_reset(){
     initial_set();
 }
 
-void abstractAttackCard::perform_attack(abstractEntity* attacker, std::vector<abstractEntity*>& target_list, game_action& actions) const {
+attackResult abstractAttackCard::perform_attack(abstractEntity* attacker, std::vector<abstractEntity*>& target_list, game_action& actions) const {
     attackInfo inf;
     inf.attacker = attacker;
     inf.target_list = target_list;
     inf.damage = damage;
 
-    actions.attack(inf);
+    return actions.attack(inf);
 }

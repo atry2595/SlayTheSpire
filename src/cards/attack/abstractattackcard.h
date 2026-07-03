@@ -3,13 +3,14 @@
 
 
 #include "cards/abstractcard.h"
+#include "combat/attack_info.h"
 
 class abstractAttackCard : public abstractCard
 {
     Q_OBJECT
 
 protected:
-    void perform_attack(abstractEntity* attacker, std::vector<abstractEntity*>& target_list, game_action& actions) const;
+    attackResult perform_attack(abstractEntity* attacker, std::vector<abstractEntity*>& target_list, game_action& actions) const;
 
     int base_damage;
 
