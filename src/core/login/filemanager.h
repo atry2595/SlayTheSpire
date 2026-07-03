@@ -18,6 +18,8 @@ public:
     FileManager();
     bool loadFromFile(const QString &filePath = "players_data.txt");
     bool saveToFile(const QString &filePath ="players_data.txt");
+    bool isUsernameTaken(const QString &username);
+    bool isEmailTaken(const QString &email);
 };
 
 #endif

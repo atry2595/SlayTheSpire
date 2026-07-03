@@ -76,3 +76,27 @@ bool FileManager::saveToFile(const QString &filePath)
 
     return true;
 }
+
+bool FileManager::isUsernameTaken(const QString &username)
+{
+    for(const Player &p: players)
+    {
+        if(p.getUsername().toLower() == username.toLower())
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool FileManager::isEmailTaken(const QString &email)
+{
+    for(const Player &p: players)
+    {
+        if(p.getEmail().toLower() == email.toLower())
+        {
+            return true;
+        }
+    }
+    return false;
+}
