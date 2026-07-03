@@ -3,10 +3,11 @@
 
 #include <QObject>
 
-class Entity;
+class abstractEntity;
 class abstractCard;
 struct attackInfo;
 struct damageInfo;
+struct blockingInfo;
 
 class combatEvent : public QObject{
     Q_OBJECT
@@ -15,19 +16,20 @@ signals:
     void combat_started();
     void combat_ended(bool victory);
 
-    void turn_started(Entity*);
-    void turn_ended(Entity*);
+    void turn_started(abstractEntity*);
+    void turn_ended(abstractEntity*);
 
     void card_played(abstractCard*);
 
     void attack_started(attackInfo&);
-    void before_loseHP(damageInfo&);
+    void before_damage_taken(damageInfo&);
+    void before_block_set(blockingInfo&);
 
-    void enemy_killed(Entity*);
+    void entity_killed(abstractEntity*);
 
-    void hp_changed(Entity*, int);
-    void block_changed(Entity*, int);
-    void block_break(Entity*);
+    void hp_changed(abstractEntity*, int);
+    void block_changed(abstractEntity*, int);
+    void block_break(abstractEntity*);
     void damage_applied(damageInfo&);
 };
 

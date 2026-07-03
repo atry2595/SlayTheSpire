@@ -5,7 +5,7 @@
 
 #include "combat/play_info.h"
 
-class Entity;
+class abstractEntity;
 
 typedef enum CardType{attack, skill, power, status, curse}CardType;
 
@@ -50,6 +50,8 @@ public:
 
     virtual ~abstractCard() = default;
     virtual void reset();
+    // virtual CardType get_card_type() {};
+
 
     void set_name(const QString& name_init) { name = name_init; }
     void set_description(const QString& desc_init) { description = desc_init; }

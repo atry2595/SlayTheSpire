@@ -9,7 +9,7 @@ class abstractAttackCard : public abstractCard
     Q_OBJECT
 
 protected:
-    void perform_attack(Entity* attacker, std::vector<Entity*>& target_list, game_action& actions) const;
+    void perform_attack(abstractEntity* attacker, std::vector<abstractEntity*>& target_list, game_action& actions) const;
 
     int base_damage;
 

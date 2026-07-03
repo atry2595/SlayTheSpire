@@ -3,6 +3,8 @@
 #include "attack_info.h"
 #include "combat_event.h"
 #include "damage_info.h"
+#include "blocking_info.h"
+#include "entity/abstractentity.h"
 
 class game_action
 {
@@ -11,7 +13,8 @@ class game_action
 public:
     game_action(combatEvent* eve);
     void attack(attackInfo& info);
-    // void damage(damageInfo& info);
+    void apply_damage(damageInfo& info);
+    void apply_block(blockingInfo& info);
 };
 
 #endif // GAME_ACTION_H
