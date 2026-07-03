@@ -13,8 +13,8 @@ class game_action
     //combat manager
 public:
     game_action(combatEvent* eve);
-    void attack(attackInfo& info);
-    void apply_damage(damageInfo& info);
+    attackResult attack(attackInfo& info);
+    damageResult apply_damage(damageInfo& info);
     void apply_block(blockingInfo& info);
     void play_card(playCardInfo& info);
     void drink_potion(drinkPotionInfo& info);

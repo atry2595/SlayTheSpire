@@ -6,23 +6,29 @@
 
 game_action::game_action(combatEvent* eve):event(eve) {}
 
-void game_action::attack(attackInfo& info) {
+attackResult game_action::attack(attackInfo& info) {
 
     if (info.attacker) {
         info.attacker->modify_attack(info);
         emit event->attack_started(info);
     }
 
+    attackResult res;
+
     for (abstractEntity* target : info.target_list){
         damageInfo dmg;
         dmg.attacker = info.attacker;
         dmg.target = target;
         dmg.damage = info.damage;
-        this->apply_damage(dmg);
+        res.results.push_back(this->apply_damage(dmg));
     }
+
+    return res;
 }
 
-void game_action::apply_damage(damageInfo& info) {
+damageResult game_action::apply_damage(damageInfo& info) {
+
+    damageResult res;
 
     auto target = info.target;
 
@@ -35,13 +41,17 @@ void game_action::apply_damage(damageInfo& info) {
 
     if (block){
         if (dmg < block){
+            res.blocked = dmg;
             target->set_block(block - dmg);
             blockingInfo bl;
             bl.block = -dmg;
             bl.owner = target;
             emit event->block_changed(bl);
+
+            return res;
         }
         else {
+            res.blocked = block;
             target->set_block(0);
             blockingInfo bl;
             bl.block = -block;
@@ -53,6 +63,7 @@ void game_action::apply_damage(damageInfo& info) {
     }
 
     int hp = target->get_hp();
+    res.final_damage = dmg;
 
     if (hp > dmg){
         target->set_hp(hp - dmg);
@@ -62,8 +73,11 @@ void game_action::apply_damage(damageInfo& info) {
     }
     else{
         target->set_hp(0);
+        res.killed = true;
         emit event->entity_killed(target);
     }
+
+    return res;
 }
 
 void game_action::apply_block(blockingInfo& info){
