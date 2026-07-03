@@ -102,6 +102,9 @@ add_executable(SlayTheSpire
     src/combat/manageCombat/combat_manager.h src/combat/manageCombat/combat_manager.cpp
     src/categories/general.h
 
+    src/combat/play_card_info.h
+    src/combat/drink_potion_info.h
+
 
 
 

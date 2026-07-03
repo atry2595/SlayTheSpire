@@ -4,7 +4,8 @@
 #include "combat_event.h"
 #include "damage_info.h"
 #include "blocking_info.h"
-#include "entity/abstractentity.h"
+#include "drink_potion_info.h"
+#include "play_card_info.h"
 
 class game_action
 {
@@ -15,6 +16,8 @@ public:
     void attack(attackInfo& info);
     void apply_damage(damageInfo& info);
     void apply_block(blockingInfo& info);
+    void play_card(playCardInfo& info);
+    void drink_potion(drinkPotionInfo& info);
 };
 
 #endif // GAME_ACTION_H

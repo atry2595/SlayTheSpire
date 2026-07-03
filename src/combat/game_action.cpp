@@ -1,4 +1,7 @@
 #include "game_action.h"
+#include "entity/abstractentity.h"
+#include "cards/abstractcard.h"
+#include "items/potions/abstractpotion.h"
 
 game_action::game_action(combatEvent* eve):event(eve) {}
 
@@ -75,3 +78,20 @@ void game_action::apply_block(blockingInfo& info){
 
     emit event->block_changed(info);
 }
+
+
+void game_action::play_card(playCardInfo& info) {
+    info.card
+}
+
+
+void game_action::drink_potion(drinkPotionInfo& info){
+
+}
+
+
+
+
+
+
+
