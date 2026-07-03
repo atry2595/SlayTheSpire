@@ -165,7 +165,10 @@ void combat_player::play_card(playCardInfo& info) {
     }
 }
 
-
+void combat_player::consume_all_energy()
+{
+    set_energy(0);
+}
 
 void combat_player::at_turn_start() {
     energy = base_energy;

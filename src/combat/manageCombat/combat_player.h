@@ -74,6 +74,7 @@ public:
     void apply_discard_pile();
     void shuffle_pile(std::vector<abstractCard*>& pile);
     void play_card(playCardInfo& info);
+    void consume_all_energy();
 
     void at_turn_start();
     void at_turn_end();
