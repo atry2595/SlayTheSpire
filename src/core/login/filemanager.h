@@ -22,7 +22,7 @@ public:
     bool isEmailTaken(const QString &email);
     bool registerPlayer(const QString &username,const QString &email,const QString &password,const QString &confirmPassword,QString &errorMessage);
     Player* login(const QString &username,const QString &password);
-
+    Player* getLoggedInPlayer();
 };
 
 #endif

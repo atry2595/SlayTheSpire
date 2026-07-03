@@ -162,3 +162,12 @@ Player* FileManager::login(const QString &username,const QString &password)
     }
     return nullptr;
 }
+
+Player* FileManager::getLoggedInPlayer()
+{
+    if(loggedInPlayerIndex >= 0 && loggedInPlayerIndex < players.size())
+    {
+        return &players[loggedInPlayerIndex];
+    }
+    return nullptr;
+}
