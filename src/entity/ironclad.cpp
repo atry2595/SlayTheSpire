@@ -65,6 +65,17 @@ void ironclad::draw_pile_add(abstractCard* card, bool independent){
         emit event->card_moved(card, PileType::none, PileType::draw);
     }
 }
+
+void ironclad::draw_pile_add_by_index(abstractCard* card, bool independent, int index ){
+    if (index > draw_pile.size()) index = draw_pile.size();
+    if (index < 0) index = 0;
+
+    draw_pile.insert(draw_pile.begin() + index, card);
+    if (independent) {
+        combat_deck_add(card);
+        emit event->card_moved(card, PileType::none, PileType::draw);
+    }
+}
 void ironclad::draw_pile_remove(abstractCard* card, bool independent){
     auto it = std::find(draw_pile.begin(), draw_pile.end(), card);
     if (it != draw_pile.end()){

@@ -71,6 +71,7 @@ public:
     void hand_pile_remove(abstractCard* card, bool independent = false);
 
     void draw_pile_add(abstractCard* card, bool independent = false);
+    void draw_pile_add_by_index(abstractCard* card, bool independent = false, int index = 0);
     void draw_pile_remove(abstractCard* card, bool independent = false);
 
     void discard_pile_add(abstractCard* card, bool independent = false);
