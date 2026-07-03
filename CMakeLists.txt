@@ -105,6 +105,8 @@ add_executable(SlayTheSpire
     src/combat/play_card_info.h
     src/combat/drink_potion_info.h
     src/cards/attack/reaper.cpp src/cards/attack/reaper.h
+    src/cards/attack/feed.cpp src/cards/attack/reaper.cpp
+    src/cards/attack/feed.h
 
 
 
