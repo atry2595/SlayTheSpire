@@ -109,6 +109,7 @@ add_executable(SlayTheSpire
     src/cards/attack/feed.h
     src/cards/attack/immolate.cpp src/cards/attack/immolate.h
     src/cards/attack/whirlwind.cpp src/cards/attack/whirlwind.h
+    src/cards/attack/blood_for_blood.cpp src/cards/attack/blood_for_blood.h
 
 
 

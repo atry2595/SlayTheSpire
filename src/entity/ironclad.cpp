@@ -222,6 +222,23 @@ void ironclad::at_combat_end(game_action& info) {
 }
 
 
+void ironclad::damage_applied(game_action& info) {
+    abstractEntity::damage_applied(info);
+
+    for (auto item : hand_pile){
+        item->damage_applied();
+    }
+    for (auto item : draw_pile){
+        item->damage_applied();
+    }
+    for (auto item : discard_pile){
+        item->damage_applied();
+    }
+    for (auto item : exhaust_pile){
+        item->damage_applied();
+    }
+}
+
 void ironclad::potion_list_add(abstractPotion* pot){
     if (potion_list.size() < max_potion_number) {
         potion_list.push_back(pot);

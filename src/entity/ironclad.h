@@ -85,7 +85,7 @@ public:
     void at_turn_end(game_action&) override;
     void at_combat_start(game_action&) override;
     void at_combat_end(game_action&) override;
-    void damage_applied(game_action&) override {};
+    void damage_applied(game_action&) override;
 
     void potion_list_add(abstractPotion*);
     void potion_list_remove(abstractPotion*);

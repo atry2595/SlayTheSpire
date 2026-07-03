@@ -57,6 +57,7 @@ public:
     virtual cardID get_card_id() = 0;
     virtual bool is_rare() = 0;
     virtual TargetType get_target_type() = 0;
+    virtual void damage_applied() {};
     virtual bool can_remove_from_deck() { return true; }
     virtual bool repeat_x_time() { return false; }
 
