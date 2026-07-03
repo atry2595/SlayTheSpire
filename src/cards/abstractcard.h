@@ -85,6 +85,8 @@ public:
     virtual void base_upgrade() = 0;
     virtual void upgrade() = 0;
     virtual void play(playInfo& play_info) = 0;
+
+    void update_by_energy(int enrgy);
 };
 
 #endif // ABSTRACTCARD_H
