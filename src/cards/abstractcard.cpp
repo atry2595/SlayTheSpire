@@ -1,4 +1,5 @@
 #include "abstractcard.h"
+#include "entity/ironclad.h"
 
 abstractCard::abstractCard(QString name_init, QString description_init, int energy_init,
                            bool exhaust_init, bool retain_init,
@@ -35,6 +36,7 @@ void abstractCard::turn_reset(){
 }
 
 
-void abstractCard::update_by_energy(int energy_init){
-    if (energy > energy_init) playable = false;
+void abstractCard::update(playInfo& info){
+    ironclad* player = dynamic_cast<ironclad*>(info.attacker);
+    if (energy > player->get_energy()) playable = false;
 }

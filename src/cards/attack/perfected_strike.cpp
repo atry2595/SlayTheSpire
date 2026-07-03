@@ -6,7 +6,7 @@ perfected_strike::perfected_strike()
 {
     QString s;
     s += tr("Deal %1 damage.").arg(damage);
-    s += tr("\nDeals 2 additional damage for ALL your cards containing \"Strike\".");
+    s += tr("\nDeals %1 additional damage for ALL your cards containing \"Strike\".").arg(addit_dmg);
     base_description = description = s;
 }
 
@@ -14,7 +14,7 @@ QString perfected_strike::generate_description(){
 
     QString s;
     s += tr("Deal %1 damage.").arg(damage);
-    s += tr("\nDeals 2 additional damage for ALL your cards containing \"Strike\".");
+    s += tr("\nDeals %1 additional damage for ALL your cards containing \"Strike\".").arg(addit_dmg);
     return s;
 }
 
