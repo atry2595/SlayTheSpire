@@ -81,11 +81,11 @@ public:
     void play_card(playCardInfo& info);
     void consume_all_energy();
 
-    void at_turn_start();
-    void at_turn_end();
-
-    void at_combat_start();
-    void at_combat_end();
+    void at_turn_start(game_action&) override;
+    void at_turn_end(game_action&) override;
+    void at_combat_start(game_action&) override;
+    void at_combat_end(game_action&) override;
+    void damage_applied(game_action&) override;
 
     void potion_list_add(abstractPotion*);
     void potion_list_remove(abstractPotion*);

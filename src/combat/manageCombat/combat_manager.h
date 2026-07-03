@@ -3,8 +3,8 @@
 
 #include <QObject>
 #include <vector>
-#include "combat_player.h"
 #include "entity/abstractenemy.h"
+#include "entity/ironclad.h"
 #include "combat/combat_event.h"
 
 enum class TurnPhase{
@@ -21,7 +21,7 @@ private:
     game_action actions;
 
 protected:
-    std::vector<combat_player*> players;
+    std::vector<ironclad*> players;
     std::vector<bool> player_is_alive = {};
     std::vector<abstractEnemy*> enemies;
     std::vector<bool> enemy_is_alive = {};
@@ -33,7 +33,7 @@ protected:
 
 public:
 
-    combat_manager(std::vector<combat_player*> players,
+    combat_manager(std::vector<ironclad*> players,
                    std::vector<abstractEnemy*> enemies,
                    combatEvent* eve);
 
@@ -57,13 +57,6 @@ public:
         for (int i = 0; i < enemies.size(); i++) {
             if (enemies[i] == enmy) enemy_is_alive[i] = false;
         }
-    }
-
-    combat_player* get_player_by_character(ironclad* chr) {
-        for (auto item : players) {
-            if (item->get_character() == chr) return item;
-        }
-        return nullptr;
     }
 
     void add_enemy(abstractEnemy*, int);

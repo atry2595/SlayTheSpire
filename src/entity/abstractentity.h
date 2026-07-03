@@ -65,11 +65,11 @@ public:
     void modify_attack(attackInfo&);
     void modify_incoming_damage(damageInfo&);
     void modify_blocking(blockingInfo&);
-    void at_turn_start(game_action&);
-    void at_turn_end(game_action&);
-    void at_combat_start(game_action&);
-    void at_combat_end(game_action&);
-    void damage_applied(game_action&);
+    virtual void at_turn_start(game_action&);
+    virtual void at_turn_end(game_action&);
+    virtual void at_combat_start(game_action&);
+    virtual void at_combat_end(game_action&);
+    virtual void damage_applied(game_action&);
 
 
 

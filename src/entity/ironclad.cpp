@@ -148,7 +148,8 @@ void ironclad::consume_all_energy() {
 }
 
 
-void ironclad::at_turn_start() {
+void ironclad::at_turn_start(game_action& info) {
+    abstractEntity::at_turn_start(info);
     energy = base_energy;
 
     for (auto item : hand_pile){
@@ -159,7 +160,8 @@ void ironclad::at_turn_start() {
 }
 
 
-void ironclad::at_turn_end() {
+void ironclad::at_turn_end(game_action& info) {
+    abstractEntity::at_turn_end(info);
 
     for (int i = hand_pile.size() - 1; i >= 0; i++){
 
@@ -184,7 +186,8 @@ void ironclad::at_turn_end() {
 }
 
 
-void ironclad::at_combat_start(){
+void ironclad::at_combat_start(game_action& info){
+    abstractEntity::at_combat_start(info);
 
     draw_pile = deck;
 
@@ -200,7 +203,8 @@ void ironclad::at_combat_start(){
 }
 
 
-void ironclad::at_combat_end() {
+void ironclad::at_combat_end(game_action& info) {
+    abstractEntity::at_combat_end(info);
 
     for (auto card: deck){
         card->combat_reset();
@@ -219,9 +223,6 @@ void ironclad::potion_list_add(abstractPotion* pot){
         emit event->potion_added(pot);
     }
 }
-
-
-
 void ironclad::potion_list_remove(abstractPotion* pot){
     for (int i = 0; i< potion_list.size(); i++){
         if (pot == potion_list[i]){

@@ -2,7 +2,7 @@
 #include "combat/game_action.h"
 #include "combat/play_info.h"
 
-combat_manager::combat_manager(std::vector<combat_player*> players_init,
+combat_manager::combat_manager(std::vector<ironclad*> players_init,
                std::vector<abstractEnemy*> enemies_init,
                                combatEvent* eve)
     :players(players_init),
@@ -10,7 +10,7 @@ combat_manager::combat_manager(std::vector<combat_player*> players_init,
     event(eve),
     actions(game_action(eve))
 {
-    for (int i = 0; i < players.size(); i++) player_is_alive.push_back(players[i]->get_character()->get_hp());
+    for (int i = 0; i < players.size(); i++) player_is_alive.push_back(players[i]->get_hp() > 0);
     for (int i = 0; i < enemies.size(); i++) enemy_is_alive.push_back(true);
 
 }
@@ -27,8 +27,7 @@ void combat_manager::combat_start() {
     for (int i = 0; i < players.size(); i++) {
         if (!player_is_alive[i]) continue;
 
-        players[i]->get_character()->at_combat_start(actions);
-        players[i]->at_combat_start();
+        players[i]->at_combat_start(actions);
     }
 
     for (auto item : enemies) item->at_combat_start(actions);
@@ -49,10 +48,9 @@ void combat_manager::turn_start() {
                 return;
             }
 
-            emit event->turn_started(players[current_player]->get_character());
+            emit event->turn_started(players[current_player]);
 
-            players[current_player]->get_character()->at_turn_start(actions);
-            players[current_player]->at_turn_start();
+            players[current_player]->at_turn_start(actions);
             // play + trun end
             // timer
         }
@@ -72,7 +70,7 @@ void combat_manager::turn_start() {
 
 
             std::vector<abstractEntity*> trg;
-            for (auto item : players) trg.push_back(item->get_character());
+            for (auto item : players) trg.push_back(item);
 
             playInfo info(actions);
             info.attacker = enemies[i];
@@ -104,12 +102,11 @@ void combat_manager::turn_end() {
             }
 
 
-            players[current_player]->get_character()->at_turn_end(actions);
-            players[current_player]->at_turn_end();
+            players[current_player]->at_turn_end(actions);
 
-            emit event->turn_ended(players[current_player]->get_character());
+            emit event->turn_ended(players[current_player]);
 
-            players[current_player]->get_character()->turn_reset();
+            players[current_player]->turn_reset();
         }
     }
 
@@ -144,8 +141,7 @@ void combat_manager::combat_end() {
         victory |= player_is_alive[i];
 
         if (player_is_alive[i]) {
-            players[i]->get_character()->at_combat_end(actions);
-            players[i]->at_combat_end();
+            players[i]->at_combat_end(actions);
         }
     }
 
@@ -179,12 +175,12 @@ bool combat_manager::combat_finished() {
     bool all_enemy = false;
 
     for (int i = 0 ; i<players.size(); i++){
-        player_is_alive[i] = players[i]->get_character()->get_hp();
+        player_is_alive[i] = (players[i]->get_hp() > 0);
         all_players |= player_is_alive[i];
     }
 
     for (int i = 0 ; i<enemies.size(); i++){
-        enemy_is_alive[i] = enemies[i]->get_hp();
+        enemy_is_alive[i] = (enemies[i]->get_hp() > 0);
         all_enemy |= enemy_is_alive[i];
     }
 
