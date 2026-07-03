@@ -26,6 +26,9 @@ protected:
     int hand_card_number = 5;
     int energy;
 
+    int max_draw_card = 100;
+    int draw_count = 0;
+
     const int max_potion_number = 3;
     const int max_hand_card_number = 10;
 
@@ -60,6 +63,8 @@ public:
     std::vector<abstractCard*>& get_discard_pile() { return discard_pile; }
     std::vector<abstractCard*>& get_draw_pile() { return draw_pile; }
     std::vector<abstractCard*>& get_exhaust_pile() { return exhaust_pile; }
+
+    void lock_draw_card() { draw_count = max_draw_card;}
 
     void set_base_energy(int i_init) { base_energy = i_init; }
     void set_energy(int i_init) {energy = i_init; }

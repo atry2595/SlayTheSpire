@@ -134,6 +134,8 @@ void ironclad::deck_remove(abstractCard* card){
 
 void ironclad::draw_card(){
 
+    if (draw_count >= max_draw_card) return;
+
     if (draw_pile.empty() && discard_pile.empty()) return;
 
     if (draw_pile.size() == 0) apply_discard_pile();
@@ -144,6 +146,8 @@ void ironclad::draw_card(){
     emit event->card_moved(card, PileType::draw, PileType::hand);
 
     if (draw_pile.size() == 0) apply_discard_pile();
+
+    draw_count++;
 }
 
 
@@ -209,6 +213,8 @@ void ironclad::at_turn_start(game_action& info) {
     }
 
     for (int i = 0; i < hand_card_number; i++) draw_card();
+
+    draw_count = 0;
 }
 
 

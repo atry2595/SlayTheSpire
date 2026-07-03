@@ -122,6 +122,7 @@ add_executable(SlayTheSpire
     src/cards/skill/shrug_it_off.cpp src/cards/skill/shrug_it_off.h
     src/cards/skill/power_through.cpp src/cards/skill/power_through.h
     src/cards/skill/bloodletting.cpp src/cards/skill/bloodletting.h
+    src/cards/skill/battle_trance.cpp src/cards/skill/battle_trance.h
 
 
 
