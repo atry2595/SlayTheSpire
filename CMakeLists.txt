@@ -115,6 +115,7 @@ add_executable(SlayTheSpire
     src/cards/attack/heavy_blade.cpp src/cards/attack/heavy_blade.h
     src/cards/attack/pommel_strike.cpp src/cards/attack/pommel_strike.h
     src/cards/skill/exhume.cpp src/cards/skill/exhume.h
+    src/cards/skill/offering.cpp src/cards/skill/offering.h
 
 
 
