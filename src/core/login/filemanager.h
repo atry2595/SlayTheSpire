@@ -16,6 +16,7 @@ private:
 
 public:
     FileManager();
+    bool loadFromFile(const QString &filePath = "players_data.txt");
 
 };
 
