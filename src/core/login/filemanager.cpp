@@ -213,3 +213,8 @@ Player* FileManager::findPlayer(const QString &username)
 
     return nullptr;
 }
+
+QList<Player>& FileManager::getPlayers()
+{
+    return players;
+}
