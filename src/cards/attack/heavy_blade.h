@@ -22,8 +22,6 @@ public:
     void play(playInfo& play_info) override;
     void upgrade() override;
     void base_upgrade() override;
-    void damage_applied() override;
-    void update(playInfo& info) override;
 
     cardID get_card_id() override { return cardID::heavy_blade; }
     bool is_rare() override { return false; }

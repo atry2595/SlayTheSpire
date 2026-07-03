@@ -22,7 +22,6 @@ public:
     void play(playInfo& play_info) override;
     void upgrade() override;
     void base_upgrade() override;
-    void damage_applied() override;
 
     cardID get_card_id() override { return cardID::perfected_strike; }
     bool is_rare() override { return false; }

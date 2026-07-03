@@ -50,17 +50,5 @@ void heavy_blade::base_upgrade(){
 
 void heavy_blade::combat_reset() {
     abstractAttackCard::combat_reset();
-}
-
-
-void heavy_blade::update(playInfo& info){
-    abstractCard::update(info);
-    ironclad* player = dynamic_cast<ironclad*>(info.attacker);
-    for (auto item : player->get_hand_pile()) {
-        if (item->get_card_type() != CardType::attack){
-            playable = false;
-            return;
-        }
-    }
-    playable = true;
+    effect = base_effect;
 }

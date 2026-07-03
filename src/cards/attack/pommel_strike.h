@@ -1,16 +1,20 @@
-#ifndef CLASH_H
-#define CLASH_H
+#ifndef POMMEL_STRIKE_H
+#define POMMEL_STRIKE_H
 
 #include "abstractattackcard.h"
 
-class clash : public abstractAttackCard
+class pommel_strike : public abstractAttackCard
 {
     Q_OBJECT
 
+protected:
+    int base_count = 1;
+    int count = 1;
+
 public:
 
-    clash();
-    ~clash() = default;
+    pommel_strike();
+    ~pommel_strike() = default;
 
     void combat_reset() override;
 
@@ -18,11 +22,11 @@ public:
     void play(playInfo& play_info) override;
     void upgrade() override;
     void base_upgrade() override;
-    void update(playInfo& info) override;
 
-    cardID get_card_id() override { return cardID::clash; }
+    cardID get_card_id() override { return cardID::pommel_strike; }
     bool is_rare() override { return false; }
     TargetType get_target_type() override { return TargetType::single_target; }
+    bool is_strike() override { return true; }
 };
 
-#endif // CLASH_H
+#endif // POMMEL_STRIKE_H

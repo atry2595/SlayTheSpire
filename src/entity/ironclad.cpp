@@ -166,8 +166,12 @@ void ironclad::play_card(playCardInfo& info) {
         emit event->card_moved(info.card, PileType::hand, PileType::discard);
     }
 
+    playInfo pl(actions);
+    pl.attacker = info.owner;
+    pl.target_list = info.target_list;
+
     for (auto item : hand_pile){
-        item->update_by_energy(energy);
+        item->update(pl);
     }
 }
 
@@ -179,10 +183,13 @@ void ironclad::consume_all_energy() {
 
 void ironclad::at_turn_start(game_action& info) {
     abstractEntity::at_turn_start(info);
+
+    playInfo pl(info);
+    pl.attacker = this;
     energy = base_energy;
 
     for (auto item : hand_pile){
-        item->update_by_energy(energy);
+        item->update(pl);
     }
 
     for (int i = 0; i < hand_card_number; i++) draw_card();

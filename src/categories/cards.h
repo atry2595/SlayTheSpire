@@ -24,7 +24,7 @@ enum class cardID{
     clash,
     uppercut,
     heavy_blade,
-    pummel_strike,
+    pommel_strike,
     carnage,
     hemokinesis,
 
