@@ -145,3 +145,20 @@ bool FileManager::registerPlayer(const QString &username,const QString &email,co
 
     return true;
 }
+
+Player* FileManager::login(const QString &username,const QString &password)
+{
+    for(int i = 0;i < players.size();i++)
+    {
+        if(players[i].getUsername().toLower() == username.toLower())
+        {
+            if(players[i].checkPassword(password))
+            {
+                loggedInPlayerIndex = i;
+                return &players[i];
+            }
+            return nullptr;
+        }
+    }
+    return nullptr;
+}
