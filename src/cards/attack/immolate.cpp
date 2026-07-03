@@ -1,6 +1,6 @@
 #include "immolate.h"
-#include "combat/manageCombat/combat_player.h"
 #include "cards/cardfactory.h"
+#include "entity/ironclad.h"
 
 immolate::immolate()
     :abstractAttackCard(tr("Immolate"), "", 2, 21, false, false, false, false)
@@ -24,7 +24,9 @@ void immolate::play(playInfo& play_info){
     perform_attack(play_info.attacker, play_info.target_list, play_info.actions);
 
     abstractCard* nc = CardFactory::createCard(cardID::burn);
-    play_info.players_data->discard_pile_add(nc, true);
+    ironclad* player = dynamic_cast<ironclad*>(play_info.attacker);
+
+    if (player)player->discard_pile_add(nc, true);
 
 }
 

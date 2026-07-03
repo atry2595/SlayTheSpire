@@ -100,7 +100,6 @@ void game_action::play_card(playCardInfo& info) {
     playInfo ply(*this);
     ply.attacker = info.owner;
     ply.target_list = info.target_list;
-    ply.players_data = info.players_data;
 
     info.card->play(ply);
     emit event->card_played(info.card);

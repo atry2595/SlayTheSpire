@@ -1,6 +1,5 @@
 #include "whirlwind.h"
-#include "combat/manageCombat/combat_player.h"
-#include "cards/cardfactory.h"
+#include "entity/ironclad.h"
 
 whirlwind::whirlwind()
     :abstractAttackCard(tr("Whirlwind"), "", 0, 5, false, false, false, false)
@@ -19,13 +18,17 @@ QString whirlwind::generate_description(){
 
 void whirlwind::play(playInfo& play_info){
 
-    int repeat = play_info.players_data->get_energy();
+    ironclad* player = dynamic_cast<ironclad*>(play_info.attacker);
 
-    for (int i = 0; i<repeat; i++)
-    perform_attack(play_info.attacker, play_info.target_list, play_info.actions);
+    if (player) {
+        int repeat = player->get_energy();
 
-    play_info.players_data->consume_all_energy();
+        for (int i = 0; i<repeat; i++) {
+            perform_attack(play_info.attacker, play_info.target_list, play_info.actions);
+        }
 
+        player->consume_all_energy();
+    }
 }
 
 void whirlwind::upgrade(){

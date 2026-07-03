@@ -5,6 +5,11 @@
 #include "items/potions/abstractpotion.h"
 #include "categories/general.h"
 
+const std::vector<cardID> ironclad::starting_deck =
+    {cardID::strike, cardID::strike, cardID::strike, cardID::strike, cardID::strike,
+     cardID::defend, cardID::defend, cardID::defend, cardID::defend, cardID::bash};
+
+
 
 ironclad::ironclad(combatEvent* eve)
     :abstractEntity(tr("Ironclad"), 80),
