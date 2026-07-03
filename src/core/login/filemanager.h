@@ -8,13 +8,15 @@
 
 class FileManager
 {
-public:
-    FileManager();
-
 private:
     QList<Player> players;
     int nextId;
     int loggedInPlayerIndex;
+    int generateId();
+
+public:
+    FileManager();
+
 };
 
 #endif
