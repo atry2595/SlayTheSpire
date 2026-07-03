@@ -1,4 +1,5 @@
 #include "entrench.h"
+#include "entity/abstractentity.h"
 
 entrench::entrench()
     :abstractSkillCard(tr("Entrench"), "", 2, false, false, false, false)
@@ -18,8 +19,9 @@ QString entrench::generate_description(){
 }
 
 void entrench::play(playInfo& play_info){
-    int new_block = play_info.attacker->get_block() * 2;
-    play_info.attacker->set_block(new_block);
+    int bl = play_info.attacker->get_block() * 2;
+    play_info.attacker->set_block(bl);
+
 }
 
 void entrench::upgrade(){

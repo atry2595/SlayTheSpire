@@ -6,8 +6,8 @@
 #include "combat/play_info.h"
 #include "categories/cards.h"
 #include "categories/general.h"
+#include "entity/abstractentity.h"
 
-class abstractEntity;
 
 class abstractCard : public QObject
 {
