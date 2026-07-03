@@ -1,16 +1,20 @@
-#ifndef CLASH_H
-#define CLASH_H
+#ifndef HEAVY_BLADE_H
+#define HEAVY_BLADE_H
 
 #include "abstractattackcard.h"
 
-class clash : public abstractAttackCard
+class heavy_blade : public abstractAttackCard
 {
     Q_OBJECT
 
+protected:
+    int base_effect = 3;
+    int effect = 3;
+
 public:
 
-    clash();
-    ~clash() = default;
+    heavy_blade();
+    ~heavy_blade() = default;
 
     void combat_reset() override;
 
@@ -21,9 +25,9 @@ public:
     void damage_applied() override;
     void update(playInfo& info) override;
 
-    cardID get_card_id() override { return cardID::clash; }
+    cardID get_card_id() override { return cardID::heavy_blade; }
     bool is_rare() override { return false; }
     TargetType get_target_type() override { return TargetType::single_target; }
 };
 
-#endif // CLASH_H
+#endif // HEAVY_BLADE_H

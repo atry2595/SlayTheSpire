@@ -8,7 +8,7 @@ ritualPower::ritualPower(abstractEntity* owner_init, int x)
 }
 
 void ritualPower::at_turn_start(game_action& actions){
-    abstractPower* np = PowerFactory::createPower(powerID::strength, owner, amount);
+    abstractPower* np = PowerFactory::createPower(powerID::strength, owner, amount * time_affect);
     owner->add_power(np);
 }
 

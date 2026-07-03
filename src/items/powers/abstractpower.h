@@ -19,6 +19,7 @@ protected:
 
     QString description;
     int amount;
+    int time_affect = 1;
     int max_amount;
     int min_amount;
 
@@ -36,6 +37,8 @@ public:
     int get_amount() { return amount; }
     int get_order() { return priority_order;}
     bool get_is_buff() { return is_buff; }
+    int get_time_affect() {return time_affect; }
+    void set_time_affect(int x) {time_affect = x;}
     virtual powerID get_id() = 0;
 
     void increase(int x_init = 1);

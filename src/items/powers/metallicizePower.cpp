@@ -9,7 +9,7 @@ metallicizePower::metallicizePower(abstractEntity* owner_init, int x)
 
 void metallicizePower::at_turn_end(game_action& actions) {
     blockingInfo info;
-    info.block = amount;
+    info.block = amount * time_affect;
     info.owner = owner;
     info.affected_by_other = false;
     actions.apply_block(info);

@@ -23,7 +23,7 @@ enum class cardID{
     perfected_strike,
     clash,
     uppercut,
-    heavy_blood,
+    heavy_blade,
     pummel_strike,
     carnage,
     hemokinesis,

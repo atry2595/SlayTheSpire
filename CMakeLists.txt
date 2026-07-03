@@ -112,6 +112,7 @@ add_executable(SlayTheSpire
     src/cards/attack/blood_for_blood.cpp src/cards/attack/blood_for_blood.h
     src/cards/attack/perfected_strike.cpp src/cards/attack/perfected_strike.h
     src/cards/attack/clash.cpp src/cards/attack/clash.h
+    src/cards/attack/heavy_blade.cpp src/cards/attack/heavy_blade.h
 
 
 
