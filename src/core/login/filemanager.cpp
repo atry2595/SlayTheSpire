@@ -200,3 +200,16 @@ bool FileManager::resetPassword(const QString &username,const QString &email,con
 
     return false;
 }
+
+Player* FileManager::findPlayer(const QString &username)
+{
+    for(Player &p : players)
+    {
+        if(p.getUsername().toLower()==username.toLower())
+        {
+            return &p;
+        }
+    }
+
+    return nullptr;
+}

@@ -24,6 +24,7 @@ public:
     Player* login(const QString &username,const QString &password);
     Player* getLoggedInPlayer();
     bool resetPassword(const QString &username,const QString &email,const QString &newPassword,const QString &confirmPassword);
+    Player* findPlayer(const QString &username);
 };
 
 #endif
