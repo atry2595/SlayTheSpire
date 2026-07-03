@@ -1,4 +1,5 @@
 #include "game_action.h"
+#include "play_info.h"
 #include "entity/abstractentity.h"
 #include "cards/abstractcard.h"
 #include "items/potions/abstractpotion.h"
@@ -81,12 +82,22 @@ void game_action::apply_block(blockingInfo& info){
 
 
 void game_action::play_card(playCardInfo& info) {
-    info.card
+
+    playInfo ply(*this);
+    ply.attacker = info.owner;
+    ply.target_list = info.target_list;
+
+    info.card->play(ply);
 }
 
 
 void game_action::drink_potion(drinkPotionInfo& info){
 
+    playInfo ply(*this);
+    ply.attacker = info.owner;
+    ply.target_list = info.target_list;
+
+    info.potion->play(ply);
 }
 
 

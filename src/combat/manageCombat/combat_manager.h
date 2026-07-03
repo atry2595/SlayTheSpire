@@ -59,6 +59,13 @@ public:
         }
     }
 
+    combat_player* get_player_by_character(ironclad* chr) {
+        for (auto item : players) {
+            if (item->get_character() == chr) return item;
+        }
+        return nullptr;
+    }
+
     void add_enemy(abstractEnemy*, int);
 };
 

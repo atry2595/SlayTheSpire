@@ -31,4 +31,10 @@ void abstractCard::combat_reset(){
 
 void abstractCard::turn_reset(){
     turn_lock = false;
+    playable = true;
+}
+
+
+void abstractCard::update_by_energy(int energy_init){
+    if (energy > energy_init) playable = false;
 }

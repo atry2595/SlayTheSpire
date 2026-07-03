@@ -5,6 +5,8 @@
 #include <vector>
 #include "entity/ironclad.h"
 #include "cards/abstractcard.h"
+#include "combat/play_card_info.h"
+#include "combat/drink_potion_info.h"
 
 class abstractRelic;
 class abstractPotion;
@@ -71,7 +73,7 @@ public:
     void draw_card();
     void apply_discard_pile();
     void shuffle_pile(std::vector<abstractCard*>& pile);
-    void play_card(abstractCard* card);
+    void play_card(playCardInfo& info);
 
     void at_turn_start();
     void at_turn_end();

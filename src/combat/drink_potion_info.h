@@ -8,7 +8,7 @@ class abstractEntity;
 
 struct drinkPotionInfo {
     abstractPotion* potion = nullptr;
-    abstractEntity* player = nullptr;
+    abstractEntity* owner = nullptr;
     std::vector<abstractEntity*> target_list = {};
 };
 
