@@ -102,6 +102,7 @@ void game_action::play_card(playCardInfo& info) {
     ply.target_list = info.target_list;
 
     info.card->play(ply);
+    emit event->card_played(info.card);
 }
 
 
@@ -112,10 +113,16 @@ void game_action::drink_potion(drinkPotionInfo& info){
     ply.target_list = info.target_list;
 
     info.potion->play(ply);
+    emit event->potion_used(info.potion);
 }
 
 
-
+void game_action::heal(healInfo& info){
+    int oldHP = info.owner->get_hp();
+    int newHP = std::min(oldHP + info.value, info.owner->get_max_hp());
+    info.owner->set_hp(newHP);
+    emit event->hp_changed(info.owner, oldHP, newHP);
+}
 
 
 

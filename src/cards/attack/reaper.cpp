@@ -21,9 +21,12 @@ void reaper::play(playInfo& play_info){
 
     attackResult res = perform_attack(play_info.attacker, play_info.target_list, play_info.actions);
 
+    healInfo h;
+    h.owner = play_info.attacker;
     for (auto item : res.results){
-        play_info.attacker->set_hp(play_info.attacker->get_hp() + item.final_damage);
+        h.value += item.final_damage;
     }
+    play_info.actions.heal(h);
 
 }
 

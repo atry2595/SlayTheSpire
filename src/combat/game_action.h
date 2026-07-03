@@ -18,6 +18,7 @@ public:
     void apply_block(blockingInfo& info);
     void play_card(playCardInfo& info);
     void drink_potion(drinkPotionInfo& info);
+    void heal(healInfo& info);
 };
 
 #endif // GAME_ACTION_H
