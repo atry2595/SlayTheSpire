@@ -55,3 +55,24 @@ bool FileManager::loadFromFile(const QString &filePath)
 
     return true;
 }
+
+bool FileManager::saveToFile(const QString &filePath)
+{
+    QFile file(filePath);
+
+    if(!file.open(QIODevice::WriteOnly |QIODevice::Text))
+    {
+        return false;
+    }
+
+    QTextStream out(&file);
+
+    for(const Player &p : players)
+    {
+        out << p.toFileRecord() << "\n";
+    }
+
+    file.close();
+
+    return true;
+}
