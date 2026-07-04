@@ -6,8 +6,6 @@
 class brutalityPower : public abstractPower
 {
     Q_OBJECT
-private:
-    QMetaObject::Connection play_card_connection;
 
 public:
     brutalityPower(abstractEntity* owner_init, int x);

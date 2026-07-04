@@ -128,6 +128,8 @@ add_executable(SlayTheSpire
     src/items/powers/ragepower.cpp src/items/powers/ragepower.h
     src/items/powers/brutalitypower.cpp src/items/powers/brutalitypower.h
     src/cards/power/brutality.cpp src/cards/power/brutality.h
+    src/items/powers/feelnopainpower.cpp src/items/powers/feelnopainpower.h
+    src/cards/power/feel_no_pain.cpp src/cards/power/feel_no_pain.h
 
 
 
