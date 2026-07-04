@@ -39,11 +39,6 @@ bool Stats::isSkinUnlocked(int skinIndex) const {
     return false;
 }
 
-void Stats::addScore(int amount) {
-    score += amount;
-    if(score > highestScore)
-        highestScore = score;
-}
 void Stats::addMonsterKill() { monstersKilled++; }
 void Stats::addEliteKill() { elitesKilled++; }
 void Stats::addBossKill() { bossesKilled++; }
@@ -67,7 +62,6 @@ void Stats::calculateScore()
 
 void Stats::update(const Stats &other)
 {
-    score += other.score;
     monstersKilled += other.monstersKilled;
     elitesKilled += other.elitesKilled;
     bossesKilled += other.bossesKilled;
@@ -87,6 +81,12 @@ void Stats::update(const Stats &other)
     for (int i = 0; i < SKIN_COUNT; ++i)
     {
         skinUnlocked[i] = skinUnlocked[i] || other.skinUnlocked[i];
+    }
+    calculateScore();
+
+    if(score > highestScore)
+    {
+        highestScore = score;
     }
 }
 
