@@ -12,6 +12,6 @@ QString barricadePower::generate_description(){
     return description;
 }
 
-void barricadePower::added_time() {
+void barricadePower::added_time(game_action&) {
     owner->set_reset_block(false);
 }

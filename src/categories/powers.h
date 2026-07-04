@@ -19,7 +19,8 @@ enum class powerID {
     dark_embrace,
     berserk,
     curl_up,
-    thievery
+    thievery,
+    rage
 };
 
 #endif // POWERS_H

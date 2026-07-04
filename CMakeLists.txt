@@ -124,6 +124,8 @@ add_executable(SlayTheSpire
     src/cards/skill/bloodletting.cpp src/cards/skill/bloodletting.h
     src/cards/skill/battle_trance.cpp src/cards/skill/battle_trance.h
     src/cards/skill/spot_weakness.cpp src/cards/skill/spot_weakness.h
+    src/cards/skill/rage.cpp src/cards/skill/rage.h
+    src/items/powers/ragepower.cpp src/items/powers/ragepower.h
 
 
 

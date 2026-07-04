@@ -15,6 +15,7 @@ public:
     game_action(combatEvent* eve);
     attackResult attack(attackInfo& info);
     damageResult apply_damage(damageInfo& info);
+    combatEvent* get_event() {return event;}
     void apply_block(blockingInfo& info);
     void play_card(playCardInfo& info);
     void drink_potion(drinkPotionInfo& info);
