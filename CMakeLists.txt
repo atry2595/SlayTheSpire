@@ -123,6 +123,7 @@ add_executable(SlayTheSpire
     src/cards/skill/power_through.cpp src/cards/skill/power_through.h
     src/cards/skill/bloodletting.cpp src/cards/skill/bloodletting.h
     src/cards/skill/battle_trance.cpp src/cards/skill/battle_trance.h
+    src/cards/skill/spot_weakness.cpp src/cards/skill/spot_weakness.h
 
 
 

@@ -26,6 +26,7 @@ public:
 
     int get_current_move() { return current_move; }
     int get_enemy_turn() { return enemy_turn; }
+    auto get_intent_list() { return intent_list; }
 
     void perform_attack(playInfo&);
     void perform_block(playInfo&, int);
