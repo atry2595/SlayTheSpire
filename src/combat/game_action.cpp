@@ -39,7 +39,7 @@ damageResult game_action::apply_damage(damageInfo& info) {
 
     int block = target->get_block();
 
-    if (block){
+    if (block && info.block_active){
         if (dmg < block){
             res.blocked = dmg;
             target->set_block(block - dmg);

@@ -181,6 +181,9 @@ void ironclad::play_card(playCardInfo& info) {
         exhaust_pile_add(info.card);
         emit event->card_moved(info.card, PileType::hand, PileType::exhaust);
     }
+    else if (info.card->get_card_type() == CardType::power){
+        emit event->card_moved(info.card, PileType::hand, PileType::none);
+    }
     else {
         discard_pile_add(info.card);
         emit event->card_moved(info.card, PileType::hand, PileType::discard);

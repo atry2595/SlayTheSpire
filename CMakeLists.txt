@@ -126,6 +126,8 @@ add_executable(SlayTheSpire
     src/cards/skill/spot_weakness.cpp src/cards/skill/spot_weakness.h
     src/cards/skill/rage.cpp src/cards/skill/rage.h
     src/items/powers/ragepower.cpp src/items/powers/ragepower.h
+    src/items/powers/brutalitypower.cpp src/items/powers/brutalitypower.h
+    src/cards/power/brutality.cpp src/cards/power/brutality.h
 
 
 

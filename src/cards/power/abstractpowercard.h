@@ -16,7 +16,8 @@ protected:
 
 public:
 
-    abstractPowerCard(QString name_init, QString description_init, int energy_init);
+    abstractPowerCard(QString name_init, QString description_init, int energy_init,
+                    bool exhaust_init = false, bool retain_init = false, bool  ethereal_init = false, bool initial_init = false);
 
     ~abstractPowerCard() = default;
 
