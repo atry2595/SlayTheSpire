@@ -26,6 +26,7 @@ void bloodletting::play(playInfo& play_info){
     info.damage = 3;
     info.attacker = nullptr;
     info.target = play_info.attacker;
+    info.block_active = false;
 
     play_info.actions.apply_damage(info);
     player->set_energy(player->get_energy() + count);

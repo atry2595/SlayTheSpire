@@ -30,6 +30,7 @@ void offering::play(playInfo& play_info){
     info.damage = 6;
     info.attacker = nullptr;
     info.target = play_info.attacker;
+    info.block_active = false;
 
     play_info.actions.apply_damage(info);
     player->set_energy(player->get_energy() + 2);
