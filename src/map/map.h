@@ -14,6 +14,17 @@ enum class RoomType{
     BOSS
 };
 
+struct Room
+{
+    RoomType type;
+    int floor;
+    int col;
+    bool visited;
+    QList<int> nextCols;
+
+    Room(): type(RoomType::MONSTER),floor(-1),col(-1),visited(false){}
+};
+
 class Map{
 public:
 
@@ -24,5 +35,8 @@ public:
     static constexpr int BOSS_FLOOR = 16;
 
 };
+
+
+
 
 #endif
