@@ -1,3 +1,6 @@
-#include "map.h"
+#ifndef MAP_H
+#define MAP_H
 
-map::map() {}
+#include <QVector>
+
+#endif // MAP_H
