@@ -60,6 +60,11 @@ void Stats::unlockSkin(int skinIndex) {
     if(skinIndex >= 0 && skinIndex < SKIN_COUNT) skinUnlocked[skinIndex] = true;
 }
 
+void Stats::calculateScore()
+{
+    score = highestFloorReached * 5 + monstersKilled * 2 + elitesKilled * 20 + bossesKilled * 50;
+}
+
 void Stats::update(const Stats &other)
 {
     score += other.score;
