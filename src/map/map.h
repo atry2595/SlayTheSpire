@@ -26,6 +26,11 @@ struct Room
 };
 
 class Map{
+
+private:
+    QVector<QVector<Room>> grid; //grid[floor-1][column-1]
+    QVector<int> colsPerFloor;
+
 public:
 
     static constexpr int TOTAL_FLOORS = 16;
@@ -33,6 +38,7 @@ public:
     static constexpr int TREASURE_FLOOR = 9;
     static constexpr int REST_FLOOR = 15;
     static constexpr int BOSS_FLOOR = 16;
+    Map();
 
 };
 
