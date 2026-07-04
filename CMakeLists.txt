@@ -97,6 +97,8 @@ add_executable(SlayTheSpire
     src/entity/small_slime.cpp src/entity/small_slime.h
     src/entity/spheric_guardian.cpp src/entity/spheric_guardian.h
     src/entity/the_champ.cpp src/entity/the_champ.h
+    src/utils/RNG.h
+    src/map/map.h src/map/map.cpp
 
     src/cards/cardfactory.h src/cards/cardfactory.cpp
     src/combat/manageCombat/combat_manager.h src/combat/manageCombat/combat_manager.cpp
