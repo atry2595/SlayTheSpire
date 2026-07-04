@@ -3,6 +3,7 @@
 
 #include <QVector>
 #include <QList>
+#include "utils/RNG.h"
 
 enum class RoomType{
     MONSTER,
@@ -39,6 +40,7 @@ public:
     static constexpr int REST_FLOOR = 15;
     static constexpr int BOSS_FLOOR = 16;
     Map();
+
 
 };
 

@@ -1,11 +1,10 @@
 #ifndef MAP_H
 #define MAP_H
 
-#include <QVector>
 #include "Map.h"
 
-Map::Map(){}
-
-
-
-#endif // MAP_H
+Map::Map()
+{
+    grid.resize(TOTAL_FLOORS);
+    colsPerFloor.resize(TOTAL_FLOORS);
+}
