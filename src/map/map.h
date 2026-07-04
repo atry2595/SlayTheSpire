@@ -11,7 +11,7 @@ enum class RoomType{
     REST,
     MERCHANT,
     TREASURE,
-    EVENT,
+    UNKNOWN, // ؟
     BOSS
 };
 
@@ -21,7 +21,7 @@ struct Room
     int floor;
     int col;
     bool visited;
-    bool active;
+    bool active; // +
     QList<int> nextCols;
 
     Room(): type(RoomType::MONSTER),floor(-1),col(-1),visited(false){}
@@ -33,6 +33,8 @@ private:
     QVector<QVector<Room>> grid; //grid[floor-1][column-1]
 
     void initGrid();
+    // ؟ ...
+    RoomType randomRoomType();
 
 
 public:
@@ -43,6 +45,7 @@ public:
     static constexpr int REST_FLOOR = 15;
     static constexpr int BOSS_FLOOR = 16;
     Map();
+    void generate(); //کامل شود
 
 
 };

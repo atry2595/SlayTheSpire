@@ -30,3 +30,17 @@ void Map::initGrid()
         }
     }
 }
+
+
+RoomType Map::randomRoomType()
+{
+    std::vector<RoomType> types ={
+        RoomType::MONSTER, RoomType::UNKNOWN, RoomType::REST, RoomType::ELITE, RoomType::MERCHANT
+        };
+
+    std::vector<double> weights ={
+        53.0,22.0,12.0,8.0,5.0
+    };
+
+    return RNG::instance().weighted_choice(types,weights);
+}
