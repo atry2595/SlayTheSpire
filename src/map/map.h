@@ -21,6 +21,7 @@ struct Room
     int floor;
     int col;
     bool visited;
+    bool active;
     QList<int> nextCols;
 
     Room(): type(RoomType::MONSTER),floor(-1),col(-1),visited(false){}
@@ -30,7 +31,9 @@ class Map{
 
 private:
     QVector<QVector<Room>> grid; //grid[floor-1][column-1]
-    QVector<int> colsPerFloor;
+
+    void initGrid();
+
 
 public:
 
