@@ -225,11 +225,14 @@ void ironclad::at_turn_start(game_action& info) {
 void ironclad::at_turn_end(game_action& info) {
     abstractEntity::at_turn_end(info);
 
-    for (int i = hand_pile.size() - 1; i >= 0; i++){
+    for (auto item : hand_pile){
         playInfo ply(info);
         ply.attacker = this;
+        item->at_turn_end(ply);
+    }
 
-        hand_pile[i]->at_turn_end(ply);
+    for (int i = hand_pile.size() - 1; i >= 0; i++){
+
         hand_pile[i]->turn_reset();
 
         if (hand_pile[i]->get_ethereal()){
