@@ -42,8 +42,14 @@ green_louse* green_louse::create(game_action& actions){
 void green_louse::choose_move() {
     RNG& rng = RNG::instance();
 
-    if (rng.chance(0.25)) current_move = (int)green_louse_move::spit_web;
+    int tmp = current_move;
+
+    if (current_move == last_move && current_move == (int)green_louse_move::spit_web) current_move = (int)green_louse_move::bite;
+    else if (current_move == last_move && current_move == (int)green_louse_move::bite) current_move = (int)green_louse_move::spit_web;
+    else if (rng.chance(0.25)) current_move = (int)green_louse_move::spit_web;
     else current_move = (int)green_louse_move::bite;
+
+    last_move = tmp;
 }
 
 

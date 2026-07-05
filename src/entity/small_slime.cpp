@@ -38,9 +38,16 @@ small_slime* small_slime::create(game_action& actions){
 void small_slime::choose_move() {
     RNG& rng = RNG::instance();
 
-    if (current_move == (int)small_slime_move::lick) current_move = (int)small_slime_move::tackle;
-    else if (rng.chance(0.5)) current_move = (int)small_slime_move::lick;
-    else current_move = (int)small_slime_move::tackle;
+    int tmp = current_move;
+
+    if (current_move == (int)small_slime_move::tackle) current_move = (int)small_slime_move::lick;
+    else if (current_move == last_move && current_move == (int)small_slime_move::lick) current_move = (int)small_slime_move::tackle;
+    else {
+        if (rng.chance(0.4)) current_move = (int)small_slime_move::lick;
+        else current_move = (int)small_slime_move::tackle;
+    }
+
+    last_move = tmp;
 }
 
 

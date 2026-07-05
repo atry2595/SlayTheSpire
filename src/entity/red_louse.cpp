@@ -41,9 +41,14 @@ red_louse* red_louse::create(game_action& actions){
 
 void red_louse::choose_move() {
     RNG& rng = RNG::instance();
+    int tmp = current_move;
 
-    if (rng.chance(0.25)) current_move = (int)red_louse_move::grow;
+    if (current_move == last_move && current_move == (int)red_louse_move::grow) current_move = (int)red_louse_move::bite;
+    else if (current_move == last_move && current_move == (int)red_louse_move::bite) current_move = (int)red_louse_move::grow;
+    else if (rng.chance(0.25)) current_move = (int)red_louse_move::grow;
     else current_move = (int)red_louse_move::bite;
+
+    last_move = tmp;
 }
 
 
