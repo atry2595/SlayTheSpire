@@ -33,6 +33,9 @@ private:
     QVector<QVector<Room>> grid; //grid[floor-1][column-1]
 
     void initGrid();
+
+    void generatePaths();
+    void generateSinglePath(int startColumn);
     // ؟ ...
     RoomType randomRoomType();
 

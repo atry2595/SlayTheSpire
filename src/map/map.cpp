@@ -31,6 +31,54 @@ void Map::initGrid()
     }
 }
 
+void Map::generatePaths()
+{
+    for(int floor = 0;floor < TOTAL_FLOORS;++floor)
+    {
+        for(int col = 0;col < MAX_COLS;++col)
+        {
+            grid[floor][col].active = false;
+            grid[floor][col].nextCols.clear();
+        }
+    }
+
+    for(int i = 0; i < 6; ++i)
+    {
+        int startCol =RNG::instance().randint(0, MAX_COLS - 1);
+
+        generateSinglePath(startCol);
+    }
+}
+
+void Map::generateSinglePath(int startColumn)
+{
+    int currentCol = startColumn;
+
+    for(int floor = 0;floor < TOTAL_FLOORS - 1;++floor)
+    {
+        grid[floor][currentCol].active = true;
+
+        int nextCol = currentCol;
+
+        int move =RNG::instance().randint(-1, 1);
+
+        nextCol += move;
+
+        if(nextCol < 0)
+            nextCol = 0;
+
+        if(nextCol >= MAX_COLS)
+            nextCol = MAX_COLS - 1;
+
+        if (!grid[floor][currentCol].nextCols.contains(nextCol)){
+            grid[floor][currentCol].nextCols.append(nextCol);
+        }
+        currentCol = nextCol;
+    }
+
+    //Boss
+    grid[TOTAL_FLOORS - 1][currentCol].active = true;
+}
 
 RoomType Map::randomRoomType()
 {
