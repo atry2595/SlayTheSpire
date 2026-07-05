@@ -16,7 +16,7 @@ class red_louse : public abstractEnemy
     red_louse(QString name_init, int base_max_hp_init);
 
 public:
-    static red_louse* create();
+    static red_louse* create(game_action& actions);
     entityType get_type() override { return entityType::monster; }
     entityID get_ID() override { return entityID::red_louse ;}
 

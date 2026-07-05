@@ -6,7 +6,7 @@ spheric_guardian::spheric_guardian(QString name_init, int base_max_hp_init)
 {}
 
 
-spheric_guardian* spheric_guardian::create(){
+spheric_guardian* spheric_guardian::create(game_action& actions){
 
     QString name = tr("Spheric Guardian");
 
@@ -44,7 +44,7 @@ spheric_guardian* spheric_guardian::create(){
     enemy->current_move = (int)spheric_guardian_move::activate;
     enemy->set_block(40);
     abstractPower* p = PowerFactory::createPower(powerID::barricade, enemy, 1);
-    enemy->add_power(info.actions, p);
+    enemy->add_power(actions, p);
 
     return enemy;
 }

@@ -6,7 +6,7 @@ the_champ::the_champ(QString name_init, int base_max_hp_init)
 {}
 
 
-the_champ* the_champ::create(){
+the_champ* the_champ::create(game_action& actions){
 
     QString name = tr("The Champ");
 

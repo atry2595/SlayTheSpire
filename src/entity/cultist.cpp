@@ -6,7 +6,7 @@ cultist::cultist(QString name_init, int base_max_hp_init)
 {}
 
 
-cultist* cultist::create(){
+cultist* cultist::create(game_action& actions){
 
     QString name = tr("Cultist");
 

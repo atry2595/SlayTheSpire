@@ -6,7 +6,7 @@ jaw_worm::jaw_worm(QString name_init, int base_max_hp_init)
 {}
 
 
-jaw_worm* jaw_worm::create(){
+jaw_worm* jaw_worm::create(game_action& actions){
 
     QString name = tr("Jaw Worm");
 

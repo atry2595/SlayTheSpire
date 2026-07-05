@@ -214,7 +214,7 @@ void ironclad::at_turn_start(game_action& info) {
 
     for (auto item : hand_pile){
         item->update(pl);
-        item->at_turn_start(pl);
+        item->hand_turn_start(pl);
     }
 
     for (int i = 0; i < hand_card_number; i++) draw_card();
@@ -229,7 +229,7 @@ void ironclad::at_turn_end(game_action& info) {
     playInfo ply(info);
     ply.attacker = this;
     for (auto item : hand_pile){
-        item->at_turn_end(ply);
+        item->hand_turn_end(ply);
     }
 
     for (int i = hand_pile.size() - 1; i >= 0; i++){

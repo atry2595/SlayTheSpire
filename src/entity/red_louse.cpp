@@ -6,7 +6,7 @@ red_louse::red_louse(QString name_init, int base_max_hp_init)
 {}
 
 
-red_louse* red_louse::create(){
+red_louse* red_louse::create(game_action& actions){
 
     QString name = tr("Red Louse");
 
@@ -32,7 +32,7 @@ red_louse* red_louse::create(){
     else enemy->current_move = (int)red_louse_move::bite;
 
     abstractPower* p = PowerFactory::createPower(powerID::curl_up, enemy, 1);
-    enemy->add_power(info.actions, p);
+    enemy->add_power(actions, p);
 
     return enemy;
 }

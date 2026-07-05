@@ -24,7 +24,7 @@ class the_champ : public abstractEnemy
     the_champ(QString name_init, int base_max_hp_init);
 
 public:
-    static the_champ* create();
+    static the_champ* create(game_action& actions);
     entityType get_type() override { return entityType::boss; }
     entityID get_ID() override { return entityID::the_champ ;}
 

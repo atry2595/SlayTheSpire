@@ -6,7 +6,7 @@ small_slime::small_slime(QString name_init, int base_max_hp_init)
 {}
 
 
-small_slime* small_slime::create(){
+small_slime* small_slime::create(game_action& actions){
 
     QString name = tr("Small Slime");
 

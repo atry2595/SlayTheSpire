@@ -6,7 +6,7 @@ blue_slaver::blue_slaver(QString name_init, int base_max_hp_init)
 {}
 
 
-blue_slaver* blue_slaver::create(){
+blue_slaver* blue_slaver::create(game_action& actions){
 
     QString name = tr("Blue Slaver");
 

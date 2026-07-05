@@ -16,7 +16,7 @@ class blue_slaver : public abstractEnemy
     blue_slaver(QString name_init, int base_max_hp_init);
 
 public:
-    static blue_slaver* create();
+    static blue_slaver* create(game_action& actions);
     entityType get_type() override { return entityType::monster; }
     entityID get_ID() override { return entityID::blue_slaver ;}
 
