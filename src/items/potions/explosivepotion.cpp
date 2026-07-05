@@ -10,7 +10,7 @@ void explosivePotion::play(playInfo& info){
 
     attackInfo attack_inf;
     attack_inf.attacker = nullptr;
-    attack_inf.damage = 10;
+    attack_inf.damage = amount;
     attack_inf.target_list = info.target_list;
     info.actions.attack(attack_inf);
 

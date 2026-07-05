@@ -9,6 +9,6 @@ energyPotion::energyPotion(abstractEntity* owner_init)
 void energyPotion::play(playInfo& info){
 
     ironclad* player = dynamic_cast<ironclad*>(info.attacker);
-    player->set_energy(player->get_energy() + 2);
+    player->set_energy(player->get_energy() + amount);
 
 }

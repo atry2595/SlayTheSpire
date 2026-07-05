@@ -6,6 +6,9 @@
 class dexterityPotion : public abstractPotion
 {
     Q_OBJECT
+
+protected:
+    const int amount = 2;
 public:
     dexterityPotion(abstractEntity* owner);
     void play(playInfo&) override;

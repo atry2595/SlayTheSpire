@@ -7,7 +7,7 @@ blockPotion::blockPotion(abstractEntity* owner_init)
 
 void blockPotion::play(playInfo& info){
     blockingInfo b;
-    b.block = 12;
+    b.block = amount;
     b.owner = owner;
     b.affected_by_other = false;
 
