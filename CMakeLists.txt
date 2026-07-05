@@ -153,6 +153,7 @@ add_executable(SlayTheSpire
     src/items/potions/cultistpotion.cpp src/items/potions/cultistpotion.h
     src/items/potions/fairyinabottle.cpp src/items/potions/fairyinabottle.h
     src/items/potions/potionfactory.h src/items/potions/potionfactory.cpp
+    src/entity/medium_slime.cpp src/entity/medium_slime.h
 
 
 
