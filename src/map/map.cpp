@@ -13,6 +13,37 @@ Map::Map()
     }
 }
 
+bool Map::causesCrossing(
+    int floor,
+    int fromCol,
+    int toCol) const
+{
+    for(int col = 0;
+         col < MAX_COLS;
+         ++col)
+    {
+        const Room& room =
+            grid[floor][col];
+
+        if(!room.active)
+            continue;
+
+        for(int next : room.nextCols)
+        {
+            if(col < fromCol && next > toCol)
+            {
+                return true;
+            }
+            if(col > fromCol && next < toCol)
+            {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
 void Map::initGrid()
 {
     for(int floor = 0; floor < TOTAL_FLOORS; ++floor)
@@ -60,9 +91,25 @@ void Map::generateSinglePath(int startColumn)
 
         int nextCol = currentCol;
 
-        int move =RNG::instance().randint(-1, 1);
+        int tries = 0;
 
-        nextCol += move;
+        do
+        {
+            int move =RNG::instance().randint(-1,1);
+
+            nextCol =currentCol + move;
+
+            if(nextCol < 0)
+                nextCol = 0;
+
+            if(nextCol >= MAX_COLS)
+                nextCol = MAX_COLS - 1;
+
+            tries++;
+
+        }
+        while(
+            causesCrossing(floor,currentCol,nextCol) && tries < 20);
 
         if(nextCol < 0)
             nextCol = 0;

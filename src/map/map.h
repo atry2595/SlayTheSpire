@@ -36,6 +36,7 @@ private:
 
     void generatePaths();
     void generateSinglePath(int startColumn);
+    bool causesCrossing(int floor,int fromCol,int toCol) const;
     // ؟ ...
     RoomType randomRoomType();
 
