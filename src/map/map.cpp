@@ -183,7 +183,7 @@ RoomType Map::randomRoomType()
 
 void Map::assignRoomTypes()
 {
-    for(int floor = 0;floor < TOTAL_FLOORS;++floor)
+    for(int floor = 0; floor < TOTAL_FLOORS; ++floor)
     {
         for(int col = 0;col < MAX_COLS;++col)
         {
@@ -192,7 +192,15 @@ void Map::assignRoomTypes()
             if(!room.active)
                 continue;
 
-            room.type = randomRoomType();
+            RoomType candidate;
+
+            do
+            {
+                candidate = randomRoomType();
+            }
+            while(!isRoomValid(floor,col,candidate));
+
+            room.type =candidate;
         }
     }
 }
