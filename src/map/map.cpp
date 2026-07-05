@@ -197,6 +197,28 @@ void Map::assignRoomTypes()
     }
 }
 
+bool Map::hasParentOfType(int floor,int col,RoomType type) const
+{
+    if(floor == 0)
+        return false;
+
+    for(int prev = 0;prev < MAX_COLS;++prev)
+    {
+        const Room& parent = grid[floor - 1][prev];
+
+        if(!parent.active)
+            continue;
+
+        if(parent.type != type)
+            continue;
+
+        if(parent.nextCols.contains(col))
+            return true;
+    }
+
+    return false;
+}
+
 void Map::generate()
 {
     initGrid();
