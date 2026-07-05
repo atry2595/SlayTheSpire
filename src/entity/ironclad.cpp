@@ -167,6 +167,7 @@ void ironclad::shuffle_pile(std::vector<abstractCard*>& pile){
 
 
 void ironclad::play_card(playCardInfo& info) {
+    if (info.card->get_turn_playable() == false) return;
     if (energy < info.card->get_energy()) return;
 
     game_action actions(event);
@@ -225,7 +226,10 @@ void ironclad::at_turn_end(game_action& info) {
     abstractEntity::at_turn_end(info);
 
     for (int i = hand_pile.size() - 1; i >= 0; i++){
+        playInfo ply(info);
+        ply.attacker = this;
 
+        hand_pile[i]->at_turn_end(ply);
         hand_pile[i]->turn_reset();
 
         if (hand_pile[i]->get_ethereal()){
