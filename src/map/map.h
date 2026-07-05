@@ -31,6 +31,7 @@ class Map{
 
 private:
     QVector<QVector<Room>> grid; //grid[floor-1][column-1]
+    QVector<int> generateStartingColumns();
 
     void initGrid();
 

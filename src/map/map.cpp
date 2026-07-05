@@ -44,6 +44,23 @@ bool Map::causesCrossing(
     return false;
 }
 
+QVector<int> Map::generateStartingColumns()
+{
+    QVector<int> starts;
+
+    while(starts.size() < 6)
+    {
+        int col =RNG::instance().randint(0,MAX_COLS - 1);
+
+        if(!starts.contains(col))
+        {
+            starts.append(col);
+        }
+    }
+
+    return starts;
+}
+
 void Map::initGrid()
 {
     for(int floor = 0; floor < TOTAL_FLOORS; ++floor)
@@ -73,11 +90,11 @@ void Map::generatePaths()
         }
     }
 
-    for(int i = 0; i < 6; ++i)
-    {
-        int startCol =RNG::instance().randint(0, MAX_COLS - 1);
+    QVector<int> starts = generateStartingColumns();
 
-        generateSinglePath(startCol);
+    for(int start : starts)
+    {
+        generateSinglePath(start);
     }
 }
 
