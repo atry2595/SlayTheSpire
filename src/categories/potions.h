@@ -6,7 +6,8 @@ enum class potionID{
     fire_potion,
     energy_potion,
     swift_potion,
-    fairy_in_a_bottle
+    fairy_in_a_bottle,
+    dexterity_potion
 };
 
 enum class PotionType {
