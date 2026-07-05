@@ -50,7 +50,7 @@ combat_manager::combat_manager(std::vector<ironclad*> players_init,
             int ind = get_enemy_index(before_as_enemy);
             if (ind == -1) return;
 
-            add_enemy(entity_as_enemy, ind+1);
+            add_enemy(entity_as_enemy, ind);
 
     });
 
