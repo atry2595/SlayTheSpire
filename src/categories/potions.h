@@ -9,4 +9,10 @@ enum class potionID{
     fairy_in_a_bottle
 };
 
+enum class PotionType {
+    common,
+    uncommon,
+    rare
+};
+
 #endif // POTIONS_H
