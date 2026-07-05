@@ -225,9 +225,9 @@ void ironclad::at_turn_start(game_action& info) {
 void ironclad::at_turn_end(game_action& info) {
     abstractEntity::at_turn_end(info);
 
+    playInfo ply(info);
+    ply.attacker = this;
     for (auto item : hand_pile){
-        playInfo ply(info);
-        ply.attacker = this;
         item->at_turn_end(ply);
     }
 
