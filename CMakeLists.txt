@@ -143,6 +143,7 @@ add_executable(SlayTheSpire
     src/items/powers/painfulstabpower.cpp src/items/powers/painfulstabpower.h
     src/items/powers/thieverypower.cpp src/items/powers/thieverypower.h
     src/items/potions/dexteritypotion.cpp src/items/potions/dexteritypotion.h
+    src/items/potions/energypotion.cpp src/items/potions/energypotion.h
 
 
 
