@@ -6,6 +6,8 @@
 class energyPotion : public abstractPotion
 {
     Q_OBJECT
+protected:
+    const int amount = 2;
 public:
     energyPotion(abstractEntity* owner);
     void play(playInfo&) override;

@@ -6,6 +6,10 @@
 class blockPotion : public abstractPotion
 {
     Q_OBJECT
+
+protected:
+    const int amount = 12;
+
 public:
     blockPotion(abstractEntity* owner);
     void play(playInfo&) override;

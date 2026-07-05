@@ -8,7 +8,7 @@ dexterityPotion::dexterityPotion(abstractEntity* owner_init)
 
 void dexterityPotion::play(playInfo& info){
 
-    abstractPower* np = PowerFactory::createPower(powerID::dexterity, info.attacker, 2);
+    abstractPower* np = PowerFactory::createPower(powerID::dexterity, info.attacker, amount);
     info.attacker->add_power(info.actions, np);
 
 }
