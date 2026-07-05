@@ -9,7 +9,8 @@ enum class potionID{
     fairy_in_a_bottle,
     dexterity_potion,
     explosive_potion,
-    fear_potion
+    fear_potion,
+    strength_potion
 };
 
 enum class PotionType {
