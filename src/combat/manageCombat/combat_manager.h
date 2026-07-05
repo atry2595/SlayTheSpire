@@ -20,6 +20,8 @@ private:
     combatEvent* event;
     game_action actions;
 
+    QMetaObject::Connection remove_connection;
+
 protected:
     std::vector<ironclad*> players;
     std::vector<bool> player_is_alive = {};

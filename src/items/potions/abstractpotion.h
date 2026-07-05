@@ -23,9 +23,11 @@ public:
     virtual ~abstractPotion() = default;
 
     virtual void play(playInfo&) = 0;
+    virtual void added_time(playInfo&) {};
     virtual potionID get_ID() = 0;
     virtual TargetType get_target_type() = 0;
     virtual PotionType get_type() = 0;
+    virtual bool playable() { return true; }
 
     QString get_name() { return name; }
     QString get_description() { return description; }

@@ -75,6 +75,9 @@ damageResult game_action::apply_damage(damageInfo& info) {
         target->set_hp(0);
         res.killed = true;
         emit event->entity_killed(target);
+        if (target->get_hp() <= 0){
+            emit event->entity_removed(target);
+        }
     }
 
     return res;
