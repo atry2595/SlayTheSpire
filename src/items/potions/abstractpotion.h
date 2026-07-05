@@ -25,6 +25,7 @@ public:
     virtual void play(playInfo&) = 0;
     virtual potionID get_ID() = 0;
     virtual TargetType get_target_type() = 0;
+    virtual PotionType get_type() = 0;
 
     QString get_name() { return name; }
     QString get_description() { return description; }
