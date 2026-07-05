@@ -10,7 +10,8 @@ enum class potionID{
     dexterity_potion,
     explosive_potion,
     fear_potion,
-    strength_potion
+    strength_potion,
+    weak_potion
 };
 
 enum class PotionType {

@@ -148,6 +148,7 @@ add_executable(SlayTheSpire
     src/items/potions/fearpotion.cpp src/items/potions/fearpotion.h
     src/items/potions/strengthpotion.cpp src/items/potions/strengthpotion.h
     src/items/potions/swiftpotion.cpp src/items/potions/swiftpotion.h
+    src/items/potions/weakpotion.cpp src/items/potions/weakpotion.h
 
 
 
