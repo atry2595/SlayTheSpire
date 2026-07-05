@@ -136,6 +136,7 @@ add_executable(SlayTheSpire
     src/cards/power/berserk.cpp src/cards/power/berserk.h
     src/cards/status/burn.cpp src/cards/status/burn.h
     src/cards/curse/regret.cpp src/cards/curse/regret.h
+    src/cards/curse/writhe.cpp src/cards/curse/writhe.h
 
 
 

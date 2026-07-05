@@ -1,28 +1,27 @@
-#ifndef REGRET_H
-#define REGRET_H
+#ifndef WRITHE_H
+#define WRITHE_H
 #include <QObject>
 #include "abstractcursecard.h"
 
-class regret : public abstractCurseCard
+class writhe : public abstractCurseCard
 {
     Q_OBJECT
 
 public:
 
-    regret();
-    ~regret() = default;
+    writhe();
+    ~writhe() = default;
 
 
     QString generate_description() override;
     void play(playInfo& play_info) override;
     void upgrade() override;
     void base_upgrade() override;
-    void at_turn_end(playInfo&) override;
 
-    cardID get_card_id() override { return cardID::regret; }
+    cardID get_card_id() override { return cardID::writhe; }
     bool is_rare() override { return false; }
-    bool can_remove_from_deck() override { return true; }
+    bool can_remove_from_deck() override { return false; }
     TargetType get_target_type() override { return TargetType::none; }
 };
 
-#endif // REGRET_H
+#endif // WRITHE_H
