@@ -30,7 +30,7 @@ void spot_weakness::play(playInfo& play_info){
         case (intent_type::attack_buff):
         case (intent_type::attack_debuff):{
             abstractPower* power = PowerFactory::createPower(powerID::strength, play_info.attacker, effect);
-            if (power) play_info.attacker->add_power(power);
+            if (power) play_info.attacker->add_power(play_info.actions, power);
         }
         default:
             return;

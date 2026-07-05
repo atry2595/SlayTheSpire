@@ -29,7 +29,7 @@ void JAX::play(playInfo& play_info){
 
     abstractPower* p = PowerFactory::createPower(powerID::strength, play_info.attacker, effect);
 
-    play_info.attacker->add_power(p);
+    play_info.attacker->add_power(play_info.actions, p);
 }
 
 void JAX::upgrade(){

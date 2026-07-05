@@ -20,7 +20,7 @@ QString dark_embrace::generate_description(){
 void dark_embrace::play(playInfo& play_info){
     abstractEntity* player = play_info.attacker;
     abstractPower* p = PowerFactory::createPower(powerID::dark_embrace, player, 1);
-    player->add_power(p);
+    player->add_power(play_info.actions, p);
 }
 
 void dark_embrace::upgrade(){

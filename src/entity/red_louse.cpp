@@ -32,7 +32,7 @@ red_louse* red_louse::create(){
     else enemy->current_move = (int)red_louse_move::bite;
 
     abstractPower* p = PowerFactory::createPower(powerID::curl_up, enemy, 1);
-    enemy->add_power(p);
+    enemy->add_power(info.actions, p);
 
     return enemy;
 }
@@ -66,7 +66,7 @@ void red_louse::play_turn(playInfo& info){
         int effect_number = 3;
 
         abstractPower* np = PowerFactory::createPower(powerID::strength, info.attacker, effect_number);
-        info.attacker->add_power(np);
+        info.attacker->add_power(info.actions, np);
 
         break;
     }

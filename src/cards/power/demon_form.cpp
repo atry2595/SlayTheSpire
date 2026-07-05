@@ -20,7 +20,7 @@ QString demon_form::generate_description(){
 void demon_form::play(playInfo& play_info){
     abstractEntity* player = play_info.attacker;
     abstractPower* p = PowerFactory::createPower(powerID::demon_form, player, effect);
-    player->add_power(p);
+    player->add_power(play_info.actions, p);
 }
 
 void demon_form::upgrade(){

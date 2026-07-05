@@ -44,7 +44,7 @@ spheric_guardian* spheric_guardian::create(){
     enemy->current_move = (int)spheric_guardian_move::activate;
     enemy->set_block(40);
     abstractPower* p = PowerFactory::createPower(powerID::barricade, enemy, 1);
-    enemy->add_power(p);
+    enemy->add_power(info.actions, p);
 
     return enemy;
 }
@@ -99,7 +99,7 @@ void spheric_guardian::play_turn(playInfo& info){
 
         for (auto item : info.target_list) {
             abstractPower* np = PowerFactory::createPower(powerID::frail, item, effect_number);
-            item->add_power(np);
+            item->add_power(info.actions, np);
         }
 
         break;

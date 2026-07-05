@@ -20,7 +20,7 @@ QString barricade::generate_description(){
 void barricade::play(playInfo& play_info){
     abstractEntity* player = play_info.attacker;
     abstractPower* p = PowerFactory::createPower(powerID::barricade, player, 1);
-    player->add_power(p);
+    player->add_power(play_info.actions, p);
 }
 
 void barricade::upgrade(){

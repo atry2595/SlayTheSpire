@@ -27,12 +27,12 @@ void uppercut::play(playInfo& play_info){
 
     for (auto item : play_info.target_list){
         abstractPower* p = PowerFactory::createPower(powerID::weak, item, effect_w);
-        item->add_power(p);
+        item->add_power(play_info.actions, p);
     }
 
     for (auto item : play_info.target_list){
         abstractPower* p = PowerFactory::createPower(powerID::vulnerable, item, effect_v);
-        item->add_power(p);
+        item->add_power(play_info.actions, p);
     }
 
 }

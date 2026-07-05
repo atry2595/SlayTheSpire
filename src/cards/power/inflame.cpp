@@ -20,7 +20,7 @@ QString inflame::generate_description(){
 void inflame::play(playInfo& play_info){
     abstractEntity* player = play_info.attacker;
     abstractPower* p = PowerFactory::createPower(powerID::strength, player, effect);
-    player->add_power(p);
+    player->add_power(play_info.actions, p);
 }
 
 void inflame::upgrade(){

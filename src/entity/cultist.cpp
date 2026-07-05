@@ -49,7 +49,7 @@ void cultist::play_turn(playInfo& info){
         int effect_number = 3;
 
         abstractPower* np = PowerFactory::createPower(powerID::ritual, info.attacker, effect_number);
-        info.attacker->add_power(np);
+        info.attacker->add_power(info.actions, np);
         break;
     }
 

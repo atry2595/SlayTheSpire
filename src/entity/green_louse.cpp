@@ -32,7 +32,7 @@ green_louse* green_louse::create(){
     else enemy->current_move = (int)green_louse_move::bite;
 
     abstractPower* p = PowerFactory::createPower(powerID::curl_up, enemy, 1);
-    enemy->add_power(p);
+    enemy->add_power(info.actions, p);
 
     return enemy;
 }
@@ -67,7 +67,7 @@ void green_louse::play_turn(playInfo& info){
 
         for (auto item : info.target_list){
             abstractPower* np = PowerFactory::createPower(powerID::weak, item, effect_number);
-            item->add_power(np);
+            item->add_power(info.actions, np);
         }
 
         break;

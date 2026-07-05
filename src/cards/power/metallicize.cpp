@@ -20,7 +20,7 @@ QString metallicize::generate_description(){
 void metallicize::play(playInfo& play_info){
     abstractEntity* player = play_info.attacker;
     abstractPower* p = PowerFactory::createPower(powerID::metallicize, player, effect);
-    player->add_power(p);
+    player->add_power(play_info.actions, p);
 }
 
 void metallicize::upgrade(){

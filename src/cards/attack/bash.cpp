@@ -24,7 +24,7 @@ void bash::play(playInfo& play_info){
 
     for (auto item : play_info.target_list){
         abstractPower* p = PowerFactory::createPower(powerID::vulnerable, item, effect);
-        item->add_power(p);
+        item->add_power(play_info.actions, p);
     }
 
 }

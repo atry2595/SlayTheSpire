@@ -68,7 +68,7 @@ void blue_slaver::play_turn(playInfo& info){
 
         for (auto item : info.target_list) {
             abstractPower* np = PowerFactory::createPower(powerID::weak, item, effect_number);
-            item->add_power(np);
+            item->add_power(info.actions, np);
         }
 
         break;

@@ -20,7 +20,7 @@ QString feel_no_pain::generate_description(){
 void feel_no_pain::play(playInfo& play_info){
     abstractEntity* player = play_info.attacker;
     abstractPower* p = PowerFactory::createPower(powerID::feel_no_pain, player, effect);
-    player->add_power(p);
+    player->add_power(play_info.actions, p);
 }
 
 void feel_no_pain::upgrade(){

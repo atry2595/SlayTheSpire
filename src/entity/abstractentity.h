@@ -55,7 +55,7 @@ public:
     int get_block() { return block;}
     auto get_power_list() {return powers_list; }
 
-    void add_power(abstractPower*);
+    void add_power(game_action&, abstractPower*);
     void remove_power(abstractPower*);
     void remove_power_by_id(powerID);
     abstractPower* get_spec_power(powerID);

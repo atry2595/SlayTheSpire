@@ -165,9 +165,9 @@ void the_champ::play_turn(playInfo& info){
 
         for (auto item : info.target_list) {
             abstractPower* np1 = PowerFactory::createPower(powerID::frail, item, effect_number);
-            item->add_power(np1);
+            item->add_power(info.actions, np1);
             abstractPower* np2 = PowerFactory::createPower(powerID::vulnerable, item, effect_number);
-            item->add_power(np2);
+            item->add_power(info.actions, np2);
         }
 
         break;
@@ -181,7 +181,7 @@ void the_champ::play_turn(playInfo& info){
         perform_block(info, block_number);
 
         abstractPower* np = PowerFactory::createPower(powerID::metallicize, info.attacker, effect_number);
-        info.attacker->add_power(np);
+        info.attacker->add_power(info.actions, np);
 
         break;
     }
@@ -191,7 +191,7 @@ void the_champ::play_turn(playInfo& info){
         int effect_number = 2;
 
         abstractPower* np = PowerFactory::createPower(powerID::strength, info.attacker, effect_number);
-        info.attacker->add_power(np);
+        info.attacker->add_power(info.actions, np);
 
         break;
     }
@@ -202,9 +202,9 @@ void the_champ::play_turn(playInfo& info){
 
         for (auto item : info.target_list) {
             abstractPower* np1 = PowerFactory::createPower(powerID::weak, item, effect_number);
-            item->add_power(np1);
+            item->add_power(info.actions, np1);
             abstractPower* np2 = PowerFactory::createPower(powerID::vulnerable, item, effect_number);
-            item->add_power(np2);
+            item->add_power(info.actions, np2);
         }
 
         break;
@@ -215,7 +215,7 @@ void the_champ::play_turn(playInfo& info){
         int effect_number = 6;
 
         abstractPower* np = PowerFactory::createPower(powerID::strength, info.attacker, effect_number);
-        info.attacker->add_power(np);
+        info.attacker->add_power(info.actions, np);
 
         auto pow_list = info.attacker->get_power_list();
 

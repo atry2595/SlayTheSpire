@@ -19,7 +19,7 @@ QString rage::generate_description(){
 void rage::play(playInfo& play_info){
 
     abstractPower* np = PowerFactory::createPower(powerID::rage, play_info.attacker, block);
-    play_info.attacker->add_power(np);
+    play_info.attacker->add_power(play_info.actions, np);
 
 }
 

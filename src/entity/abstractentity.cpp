@@ -34,7 +34,7 @@ void abstractEntity::turn_reset(){
     if (block_reset_in_combat) block = 0;
 }
 
-void abstractEntity::add_power(abstractPower* power){
+void abstractEntity::add_power(game_action& actions, abstractPower* power){
     for (auto item : powers_list){
         if (item->get_id() == power->get_id()){
             item->increase(power->get_amount());
@@ -48,7 +48,7 @@ void abstractEntity::add_power(abstractPower* power){
         return p1->get_order() < p2->get_order();
     });
 
-    power->added_time();
+    power->added_time(actions);
 
 }
 

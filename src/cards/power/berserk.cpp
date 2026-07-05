@@ -23,10 +23,10 @@ void berserk::play(playInfo& play_info){
     abstractEntity* player = play_info.attacker;
 
     abstractPower* p1 = PowerFactory::createPower(powerID::vulnerable, player, effect);
-    player->add_power(p1);
+    player->add_power(play_info.actions, p1);
 
     abstractPower* p2 = PowerFactory::createPower(powerID::berserk, player, 1);
-    player->add_power(p2);
+    player->add_power(play_info.actions, p2);
 }
 
 void berserk::upgrade(){

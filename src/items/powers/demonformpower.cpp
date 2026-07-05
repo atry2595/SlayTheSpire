@@ -9,7 +9,7 @@ demonFormPower::demonFormPower(abstractEntity* owner_init, int x)
 
 void demonFormPower::at_turn_start(game_action& actions){
     abstractPower* np = PowerFactory::createPower(powerID::strength, owner, amount * time_affect);
-    owner->add_power(np);
+    owner->add_power(actions, np);
 }
 
 QString demonFormPower::generate_description(){
