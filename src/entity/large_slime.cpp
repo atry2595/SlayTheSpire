@@ -48,7 +48,7 @@ large_slime* large_slime::create(game_action& actions, int hp){
     enemy->half_hp_connection = connect(actions.get_event(), &combatEvent::hp_changed, enemy,
         [enemy](abstractEntity* entity, int oldHP, int newHP){
             if (enemy == entity){
-                if (oldHP < enemy->get_max_hp() / 2){
+                if (newHP < enemy->get_max_hp() / 2){
                     enemy->last_move = -1;
                     enemy->current_move = (int)large_slime_move::split;
                     disconnect(enemy->half_hp_connection);
@@ -64,6 +64,8 @@ large_slime* large_slime::create(game_action& actions, int hp){
 
 void large_slime::choose_move() {
     RNG& rng = RNG::instance();
+
+    if (current_move == (int)large_slime_move::split) return;
 
     int temp = current_move;
 

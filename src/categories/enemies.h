@@ -27,7 +27,7 @@ enum class entityID{
     book_of_stabbing,
     taskmaster,
 
-    king_slime,
+    slime_boss,
     hexaghost,
     the_champ,
 
