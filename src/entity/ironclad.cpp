@@ -25,6 +25,7 @@ ironclad::ironclad(combatEvent* eve)
         abstractCard* nc = CardFactory::createCard(item);
         deck.push_back(nc);
     }
+    gold = starting_gold;
 }
 
 
