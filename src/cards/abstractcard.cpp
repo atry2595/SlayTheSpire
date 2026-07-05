@@ -32,11 +32,11 @@ void abstractCard::combat_reset(){
 
 void abstractCard::turn_reset(){
     turn_lock = false;
-    playable = true;
+    available = true;
 }
 
 
 void abstractCard::update(playInfo& info){
     ironclad* player = dynamic_cast<ironclad*>(info.attacker);
-    if (energy > player->get_energy()) playable = false;
+    if (energy > player->get_energy()) available = false;
 }

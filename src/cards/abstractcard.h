@@ -36,6 +36,8 @@ protected:
     bool is_ethereal;
     bool is_initial;
 
+    bool available;
+
 
     //card image + generate + anim + music
 
@@ -68,6 +70,7 @@ public:
     void set_energy(int energy_init) { energy = energy_init; }
     void set_lock(bool lock_init) { turn_lock = lock_init; }
     void set_playable(bool play_init) { playable = play_init; }
+    void set_available(bool b_init) { available = b_init; }
     void set_exhaust(bool bool_init) { is_exhaust = bool_init; }
     void set_retain(bool bool_init) { is_retain = bool_init; }
     void set_ethereal(bool bool_init) { is_ethereal = bool_init; }
@@ -77,7 +80,8 @@ public:
     QString get_description() { return description; }
     int get_energy() { return energy; }
     bool get_turn_lock() { return turn_lock; }
-    bool get_turn_playbale() { return playable; }
+    bool get_turn_playable() { return playable; }
+    bool get_available() { return available; }
     bool get_upgraded() { return is_upgraded; }
     bool get_exhaust() { return is_exhaust; }
     bool get_retain() { return is_retain; }

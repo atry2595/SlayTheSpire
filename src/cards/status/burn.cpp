@@ -6,7 +6,7 @@ burn::burn()
     base_is_playable = playable = false;
     QString s;
     if (!playable) s += tr("Unplayable.\n");
-    if (!playable) s += tr("At the end of your turn, take %1 damage.\n").arg(dmg);
+    s += tr("At the end of your turn, take %1 damage.\n").arg(dmg);
     base_description = description = s;
 }
 
@@ -14,7 +14,7 @@ QString burn::generate_description(){
 
     QString s;
     if (!playable) s += tr("Unplayable.\n");
-    if (!playable) s += tr("At the end of your turn, take %1 damage.\n").arg(dmg);
+    s += tr("At the end of your turn, take %1 damage.\n").arg(dmg);
     return s;
 }
 

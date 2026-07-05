@@ -20,7 +20,7 @@ QString clash::generate_description(){
 
 void clash::play(playInfo& play_info){
 
-    if (playable)
+    if (available)
         perform_attack(play_info.attacker, play_info.target_list, play_info.actions );
 
 }
@@ -49,9 +49,9 @@ void clash::update(playInfo& info){
     ironclad* player = dynamic_cast<ironclad*>(info.attacker);
     for (auto item : player->get_hand_pile()) {
         if (item->get_card_type() != CardType::attack){
-            playable = false;
+            available = false;
             return;
         }
     }
-    playable = true;
+    available = true;
 }
