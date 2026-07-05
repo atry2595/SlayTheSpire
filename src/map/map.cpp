@@ -219,6 +219,43 @@ bool Map::hasParentOfType(int floor,int col,RoomType type) const
     return false;
 }
 
+bool Map::isRoomValid(int floor,int col,RoomType type) const
+{
+    if(floor == 0)
+        return type == RoomType::MONSTER;
+
+    if(type == RoomType::REST)
+    {
+        if(hasParentOfType(floor,col,RoomType::REST))
+        {
+            return false;
+        }
+    }
+
+    if(type == RoomType::MERCHANT)
+    {
+        if(hasParentOfType(floor,col,RoomType::MERCHANT))
+        {
+            return false;
+        }
+    }
+
+    if(type == RoomType::ELITE)
+    {
+        if(hasParentOfType(floor,col,RoomType::ELITE))
+        {
+            return false;
+        }
+    }
+
+    if(type == RoomType::ELITE &&floor < 5)
+    {
+        return false;
+    }
+
+    return true;
+}
+
 void Map::generate()
 {
     initGrid();
