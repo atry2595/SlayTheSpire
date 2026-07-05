@@ -31,3 +31,9 @@ void entangledPower::added_time(game_action& actions) {
     });
 
 }
+
+
+void entangledPower::at_turn_end(game_action&) {
+    disconnect(add_card_connection);
+    decrease(amount);
+}

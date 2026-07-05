@@ -142,6 +142,7 @@ void combat_manager::combat_end() {
 
         if (player_is_alive[i]) {
             players[i]->at_combat_end(actions);
+            players[i]->combat_reset();
         }
     }
 
