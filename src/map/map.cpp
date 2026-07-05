@@ -143,6 +143,33 @@ void Map::generateSinglePath(int startColumn)
     //Boss
     grid[TOTAL_FLOORS - 1][currentCol].active = true;
 }
+void Map::mergeBossPaths()
+{
+    int bossCol = MAX_COLS / 2;
+
+    for(int col = 0;col < MAX_COLS;++col)
+    {
+        grid[BOSS_FLOOR - 1][col].active =false;
+
+        grid[BOSS_FLOOR - 1][col].nextCols.clear();
+    }
+
+    grid[BOSS_FLOOR - 1][bossCol].active = true;
+
+    int previousFloor =BOSS_FLOOR - 2;
+
+    for(int col = 0;col < MAX_COLS;++col)
+    {
+        Room& room = grid[previousFloor][col];
+
+        if(!room.active)
+            continue;
+
+        room.nextCols.clear();
+
+        room.nextCols.append(bossCol);
+    }
+}
 
 RoomType Map::randomRoomType()
 {
@@ -155,4 +182,16 @@ RoomType Map::randomRoomType()
     };
 
     return RNG::instance().weighted_choice(types,weights);
+}
+
+void Map::generate()
+{
+    initGrid();
+
+    generatePaths();
+
+    mergeBossPaths();
+
+    // assignRoom;
+    // applyFloors();
 }
