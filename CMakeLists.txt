@@ -150,6 +150,7 @@ add_executable(SlayTheSpire
     src/items/potions/swiftpotion.cpp src/items/potions/swiftpotion.h
     src/items/potions/weakpotion.cpp src/items/potions/weakpotion.h
     src/items/potions/whitebloodpotion.cpp src/items/potions/whitebloodpotion.h
+    src/items/potions/cultistpotion.cpp src/items/potions/cultistpotion.h
 
 
 

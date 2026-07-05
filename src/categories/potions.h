@@ -12,7 +12,8 @@ enum class potionID{
     fear_potion,
     strength_potion,
     weak_potion,
-    white_blood_potion
+    white_blood_potion,
+    cultist_potion
 };
 
 enum class PotionType {
