@@ -17,7 +17,7 @@ class medium_slime : public abstractEnemy
     medium_slime(QString name_init, int base_max_hp_init);
 
 public:
-    static medium_slime* create(game_action& actions);
+    static medium_slime* create(game_action& actions, int hp_init = -1);
     entityType get_type() override { return entityType::monster; }
     entityID get_ID() override { return entityID::medium_slime ;}
 

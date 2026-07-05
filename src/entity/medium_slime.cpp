@@ -8,12 +8,12 @@ medium_slime::medium_slime(QString name_init, int base_max_hp_init)
 {}
 
 
-medium_slime* medium_slime::create(game_action& actions){
+medium_slime* medium_slime::create(game_action& actions, int hp){
 
     QString name = tr("Medium Slime");
 
     RNG& rng = RNG::instance();
-    int hp = rng.randint(28, 32);
+    if (hp == -1) hp = rng.randint(28, 32);
 
     medium_slime* enemy = new medium_slime(name, hp);
 
@@ -24,12 +24,12 @@ medium_slime* medium_slime::create(game_action& actions){
     enemy_intent intnt2;
     intnt2.name = tr("Tackle");
     intnt2.type = intent_type::attack;
-    intnt2.damage = 3;
+    intnt2.damage = 10;
 
     enemy_intent intnt3;
     intnt3.name = tr("Corrosive Spit");
     intnt3.type = intent_type::attack_debuff;
-    intnt3.damage = 10;
+    intnt3.damage = 7;
 
     enemy->intent_list[(int)medium_slime_move::lick] = intnt1;
     enemy->intent_list[(int)medium_slime_move::tackle] = intnt2;

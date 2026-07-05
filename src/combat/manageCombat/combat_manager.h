@@ -21,6 +21,8 @@ private:
     game_action actions;
 
     QMetaObject::Connection remove_connection;
+    QMetaObject::Connection add_after_connection;
+    QMetaObject::Connection add_before_connection;
 
 protected:
     std::vector<ironclad*> players;

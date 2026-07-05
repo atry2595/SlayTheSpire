@@ -154,6 +154,7 @@ add_executable(SlayTheSpire
     src/items/potions/fairyinabottle.cpp src/items/potions/fairyinabottle.h
     src/items/potions/potionfactory.h src/items/potions/potionfactory.cpp
     src/entity/medium_slime.cpp src/entity/medium_slime.h
+    src/entity/large_slime.cpp src/entity/large_slime.h
 
 
 

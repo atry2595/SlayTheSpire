@@ -28,6 +28,32 @@ combat_manager::combat_manager(std::vector<ironclad*> players_init,
             }
     });
 
+    add_after_connection = connect(event, &combatEvent::entity_add_after, this,
+        [this](abstractEntity* entity, abstractEntity* after){
+        abstractEnemy* after_as_enemy = dynamic_cast<abstractEnemy*>(after);
+        abstractEnemy* entity_as_enemy = dynamic_cast<abstractEnemy*>(entity);
+        if (after_as_enemy == nullptr || entity_as_enemy == nullptr) return;
+
+        int ind = get_enemy_index(after_as_enemy);
+        if (ind == -1) return;
+
+        add_enemy(entity_as_enemy, ind+1);
+
+    });
+
+    add_before_connection = connect(event, &combatEvent::entity_add_before, this,
+        [this](abstractEntity* entity, abstractEntity* before){
+            abstractEnemy* before_as_enemy = dynamic_cast<abstractEnemy*>(before);
+            abstractEnemy* entity_as_enemy = dynamic_cast<abstractEnemy*>(entity);
+            if (before_as_enemy == nullptr || entity_as_enemy == nullptr) return;
+
+            int ind = get_enemy_index(before_as_enemy);
+            if (ind == -1) return;
+
+            add_enemy(entity_as_enemy, ind+1);
+
+    });
+
 }
 
 void combat_manager::combat_start() {
