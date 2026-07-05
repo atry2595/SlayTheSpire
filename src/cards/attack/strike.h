@@ -8,15 +8,20 @@ class strike : public abstractAttackCard
     Q_OBJECT
 
 public:
-    static constexpr bool is_rare = false;
 
-    strike(bool upgraded_init = false);
+    strike();
     ~strike() = default;
 
     QString generate_description() override;
     void play(playInfo& play_info) override;
     void upgrade() override;
     void base_upgrade() override;
+
+    cardID get_card_id() override { return cardID::strike; }
+    bool is_rare() override { return false; }
+    TargetType get_target_type() override { return TargetType::single_target; }
+    bool is_strike() override { return true; }
+
 };
 
 #endif // STRIKE_H

@@ -7,7 +7,13 @@ struct damageInfo{
     abstractEntity* attacker = nullptr;
     abstractEntity* target = nullptr;
     int damage = 0;
+    bool block_active = true;
 };
 
+struct damageResult {
+    int final_damage = 0;
+    int blocked = 0;
+    bool killed = false;
+};
 
 #endif // DAMAGE_INFO_H

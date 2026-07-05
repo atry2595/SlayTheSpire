@@ -9,7 +9,8 @@ class blockPotion : public abstractPotion
 public:
     blockPotion(abstractEntity* owner);
     void play(playInfo&) override;
-    potionID get_type() override { return potionID::block_potion; }
+    potionID get_ID() override { return potionID::block_potion; }
+
 };
 
 #endif // BLOCKPOTION_H

@@ -8,6 +8,9 @@
 #include "combat/blocking_info.h"
 #include "categories/powers.h"
 #include <vector>
+#include "categories/enemies.h"
+
+struct game_action;
 
 class abstractPower;
 
@@ -39,6 +42,9 @@ public:
     virtual void combat_reset();
     virtual void turn_reset();
 
+    virtual entityType get_type() = 0;
+    virtual entityID get_ID() = 0;
+
     void set_max_hp(int i_init) { max_hp = i_init; }
     void set_hp(int i_init) { hp = i_init; }
     void set_block(int i_init) { block = i_init; }
@@ -47,14 +53,25 @@ public:
     int get_max_hp() { return max_hp;}
     int get_hp() { return hp;}
     int get_block() { return block;}
+    auto get_power_list() {return powers_list; }
 
-    void add_power(abstractPower*);
+    void add_power(game_action&, abstractPower*);
     void remove_power(abstractPower*);
     void remove_power_by_id(powerID);
+    abstractPower* get_spec_power(powerID);
+    void remove_zero_power();
 
-    virtual void modify_attack(attackInfo&) {};
-    virtual void modify_incoming_damage(damageInfo&) {};
-    virtual void modify_blocking(blockingInfo&) {};
+
+    void modify_attack(attackInfo&);
+    void modify_incoming_damage(damageInfo&);
+    void modify_blocking(blockingInfo&);
+    virtual void at_turn_start(game_action&);
+    virtual void at_turn_end(game_action&);
+    virtual void at_combat_start(game_action&);
+    virtual void at_combat_end(game_action&);
+    virtual void damage_applied(game_action&);
+
+
 
 };
 

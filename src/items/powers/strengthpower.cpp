@@ -8,7 +8,7 @@ strengthPower::strengthPower(abstractEntity* owner_init, int x)
 
 
 void strengthPower::modify_attack(attackInfo& info) {
-    info.damage += amount;
+    info.damage += amount * time_affect;
 }
 
 QString strengthPower::generate_description(){

@@ -17,6 +17,8 @@
         <file alias="strike.png">assests/image/cards/attack/strike.png</file>
         <file alias="twin_strike.png">assests/image/cards/attack/twin_strike.png</file>
         <file alias="uppercut.png">assests/image/cards/attack/uppercut.png</file>
+        <file alias="blood_for_blood.png">assests/image/cards/attack/blood_for_blood.png</file>
+        <file alias="whirlwind.png">assests/image/cards/attack/whirlwind.png</file>
     </qresource>
     <qresource prefix="/image/cards/skill">
         <file alias="battle_trance.png">assests/image/cards/skill/battle_trance.png</file>
@@ -92,6 +94,18 @@
         <file alias="strength.ico">assests/image/icon/buff/strengh.ico</file>
         <file alias="vulnerable.ico">assests/image/icon/buff/vulnerable.ico</file>
         <file alias="weak.ico">assests/image/icon/buff/weak.ico</file>
+        <file alias="barricade.ico">assests/image/icon/buff/barricade.ico</file>
+        <file alias="enrage.ico">assests/image/icon/buff/enrage.ico</file>
+        <file alias="entangled.ico">assests/image/icon/buff/entangled.ico</file>
+        <file alias="painful_stab.ico">assests/image/icon/buff/painful_stab.ico</file>
+        <file alias="ritual.ico">assests/image/icon/buff/ritual.ico</file>
+        <file alias="berserk.ico">assests/image/icon/buff/berserk.ico</file>
+        <file alias="brutality.ico">assests/image/icon/buff/brutality.ico</file>
+        <file alias="curl_up.ico">assests/image/icon/buff/curl_up.ico</file>
+        <file alias="dark_embrace.ico">assests/image/icon/buff/dark_embrace.ico</file>
+        <file alias="demon_form.ico">assests/image/icon/buff/demon_form.ico</file>
+        <file alias="feel_no_pain.ico">assests/image/icon/buff/feel_no_pain.ico</file>
+        <file alias="thievery.ico">assests/image/icon/buff/thievery.ico</file>
     </qresource>
     <qresource prefix="/icon/potion">
         <file alias="block_potion.ico">assests/image/icon/potion/block_potion.ico</file>

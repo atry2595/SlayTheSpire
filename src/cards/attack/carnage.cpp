@@ -1,7 +1,7 @@
 #include "carnage.h"
 
-carnage::carnage(bool upgraded_init)
-    :abstractAttackCard(tr("carnage"), "", 1, 20, upgraded_init, false, false, true, false)
+carnage::carnage()
+    :abstractAttackCard(tr("carnage"), "", 1, 20, false, false, true, false)
 {
     QString s;
     s += tr("Deal %1 damage.").arg(damage);
@@ -29,9 +29,9 @@ void carnage::upgrade(){
 }
 
 void carnage::base_upgrade(){
-    base_damage = 28;
+    base_damage = damage =28;
     is_upgraded = true;
     base_description = generate_description();
 
-    reset();
+    combat_reset();
 }

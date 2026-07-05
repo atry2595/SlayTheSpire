@@ -12,7 +12,15 @@ enum class powerID {
     ritual,
     entangled,
     enrage,
-    painful_stabs
+    painful_stabs,
+    demon_form,
+    brutality,
+    feel_no_pain,
+    dark_embrace,
+    berserk,
+    curl_up,
+    thievery,
+    rage
 };
 
 #endif // POWERS_H

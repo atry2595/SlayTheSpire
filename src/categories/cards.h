@@ -1,6 +1,15 @@
 #ifndef CARDS_H
 #define CARDS_H
 
+
+enum class CardType{
+    attack,
+    skill,
+    power,
+    status,
+    curse
+};
+
 enum class cardID{
     strike,
     reaper,
@@ -14,8 +23,8 @@ enum class cardID{
     perfected_strike,
     clash,
     uppercut,
-    heavy_blood,
-    pummel_strike,
+    heavy_blade,
+    pommel_strike,
     carnage,
     hemokinesis,
 

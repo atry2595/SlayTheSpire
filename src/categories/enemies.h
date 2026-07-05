@@ -1,7 +1,14 @@
 #ifndef ENEMIES_H
 #define ENEMIES_H
 
-enum class enemyID{
+enum class entityType{
+    player,
+    monster,
+    elite,
+    boss
+};
+
+enum class entityID{
     cultist,
     jaw_worm,
     red_louse,
@@ -22,7 +29,9 @@ enum class enemyID{
 
     king_slime,
     hexaghost,
-    the_champ
+    the_champ,
+
+    ironclad
 };
 
 #endif // ENEMIES_H

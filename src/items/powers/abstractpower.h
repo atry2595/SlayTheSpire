@@ -19,6 +19,7 @@ protected:
 
     QString description;
     int amount;
+    int time_affect = 1;
     int max_amount;
     int min_amount;
 
@@ -35,6 +36,9 @@ public:
     QString get_description() { return description; }
     int get_amount() { return amount; }
     int get_order() { return priority_order;}
+    bool get_is_buff() { return is_buff; }
+    int get_time_affect() {return time_affect; }
+    void set_time_affect(int x) {time_affect = x;}
     virtual powerID get_id() = 0;
 
     void increase(int x_init = 1);
@@ -47,6 +51,8 @@ public:
     virtual void at_turn_end(game_action&) {};
     virtual void at_combat_start(game_action&) {};
     virtual void at_combat_end(game_action&) {};
+    virtual void added_time(game_action&) {};
+    virtual void damage_applied(game_action&) {};
 
 };
 

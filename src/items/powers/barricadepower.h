@@ -8,6 +8,7 @@ class barricadePower : public abstractPower
     Q_OBJECT
 public:
     barricadePower(abstractEntity* owner_init, int x);
+    void added_time(game_action&) override;
     QString generate_description() override;
     powerID get_id() override { return powerID::barricade; }
 };
