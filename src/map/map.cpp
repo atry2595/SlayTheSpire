@@ -13,10 +13,7 @@ Map::Map()
     }
 }
 
-bool Map::causesCrossing(
-    int floor,
-    int fromCol,
-    int toCol) const
+bool Map::causesCrossing(int floor,int fromCol,int toCol) const
 {
     for(int col = 0;
          col < MAX_COLS;
@@ -184,6 +181,22 @@ RoomType Map::randomRoomType()
     return RNG::instance().weighted_choice(types,weights);
 }
 
+void Map::assignRoomTypes()
+{
+    for(int floor = 0;floor < TOTAL_FLOORS;++floor)
+    {
+        for(int col = 0;col < MAX_COLS;++col)
+        {
+            Room& room = grid[floor][col];
+
+            if(!room.active)
+                continue;
+
+            room.type = randomRoomType();
+        }
+    }
+}
+
 void Map::generate()
 {
     initGrid();
@@ -192,6 +205,8 @@ void Map::generate()
 
     mergeBossPaths();
 
-    // assignRoom;
+    assignRoomTypes();
     // applyFloors();
 }
+
+//add debug map str

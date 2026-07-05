@@ -39,6 +39,8 @@ private:
     void generateSinglePath(int startColumn);
     bool causesCrossing(int floor,int fromCol,int toCol) const;
     void mergeBossPaths();
+    RoomType randomRoomType();
+    void assignRoomTypes();
     // ؟ ...
     RoomType randomRoomType();
 
