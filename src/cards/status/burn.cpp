@@ -41,7 +41,7 @@ void burn::curse_upgrade(){
 }
 
 
-void burn::at_turn_end(playInfo& play_info){
+void burn::hand_turn_end(playInfo& play_info){
     play(play_info);
 }
 

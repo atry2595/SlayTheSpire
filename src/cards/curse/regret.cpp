@@ -40,7 +40,7 @@ void regret::base_upgrade(){
 }
 
 
-void regret::at_turn_end(playInfo& info){
+void regret::hand_turn_end(playInfo& info){
     play(info);
 }
 

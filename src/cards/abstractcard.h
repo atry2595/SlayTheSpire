@@ -91,7 +91,8 @@ public:
     virtual void base_upgrade() = 0;
     virtual void upgrade() = 0;
     virtual void play(playInfo& play_info) = 0;
-    virtual void at_turn_end(playInfo& play_info) {};
+    virtual void hand_turn_end(playInfo& play_info) {};
+    virtual void hand_turn_start(playInfo& play_info) {};
 
     virtual void update(playInfo& info);
 };

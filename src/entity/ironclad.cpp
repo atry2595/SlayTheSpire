@@ -214,6 +214,7 @@ void ironclad::at_turn_start(game_action& info) {
 
     for (auto item : hand_pile){
         item->update(pl);
+        item->at_turn_start(pl);
     }
 
     for (int i = 0; i < hand_card_number; i++) draw_card();

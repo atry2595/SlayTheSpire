@@ -22,7 +22,7 @@ public:
     void upgrade() override;
     void base_upgrade() override;
     void curse_upgrade();
-    void at_turn_end(playInfo& play_info) override;
+    void hand_turn_end(playInfo& play_info) override;
 
     cardID get_card_id() override { return cardID::burn; }
     bool is_rare() override { return false; }
