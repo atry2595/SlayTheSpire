@@ -141,6 +141,7 @@ add_executable(SlayTheSpire
     src/items/powers/enragepower.cpp src/items/powers/enragepower.h
     src/items/powers/entangledpower.cpp src/items/powers/entangledpower.h
     src/items/powers/painfulstabpower.cpp src/items/powers/painfulstabpower.h
+    src/items/powers/thieverypower.cpp src/items/powers/thieverypower.h
 
 
 
