@@ -7,7 +7,7 @@ dexterityPower::dexterityPower(abstractEntity* owner_init, int x)
 }
 
 void dexterityPower::modify_blocking(blockingInfo& info) {
-    info.block += amount * time_affect;
+    if (info.block > 0) info.block += amount * time_affect;
 }
 
 QString dexterityPower::generate_description(){
