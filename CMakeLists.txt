@@ -132,6 +132,8 @@ add_executable(SlayTheSpire
     src/cards/power/feel_no_pain.cpp src/cards/power/feel_no_pain.h
     src/items/powers/darkembracepower.cpp src/items/powers/darkembracepower.h
     src/cards/power/dark_embrace.cpp src/cards/power/dark_embrace.h
+    src/items/powers/berserkpower.cpp src/items/powers/berserkpower.h
+    src/cards/power/berserk.cpp src/cards/power/berserk.h
 
 
 
