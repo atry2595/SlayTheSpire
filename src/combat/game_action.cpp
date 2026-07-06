@@ -105,7 +105,7 @@ void game_action::play_card(playCardInfo& info) {
     ply.target_list = info.target_list;
 
     info.card->play(ply);
-    emit event->card_played(info.card);
+    emit event->card_played(info);
 }
 
 

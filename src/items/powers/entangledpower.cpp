@@ -24,9 +24,9 @@ void entangledPower::added_time(game_action& actions) {
     }
 
     add_card_connection = connect(actions.get_event(), &combatEvent::card_moved, this,
-        [this, &player](abstractCard* card, PileType from, PileType to){
-        if (from == PileType::none && card->get_card_type() == CardType::attack){
-            card->set_lock(true);
+        [this, &player](playCardInfo& card, PileType from, PileType to){
+        if (from == PileType::none && card.card->get_card_type() == CardType::attack && owner == card.owner){
+            card.card->set_lock(true);
         }
     });
 

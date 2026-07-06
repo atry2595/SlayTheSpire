@@ -30,13 +30,15 @@ void pain::base_upgrade(){
 
 void pain::hand_turn_start(playInfo& info) {
     play_card_connection = connect(info.actions.get_event(), &combatEvent::card_played, this,
-        [this, &info](abstractCard* card) {
-            damageInfo dmg;
-            dmg.damage = 1;
-            dmg.attacker = nullptr;
-            dmg.target = info.attacker;
-            dmg.block_active = false;
-            info.actions.apply_damage(dmg);
+        [this, &info](playCardInfo& card) {
+            if (card.owner == info.attacker){
+                damageInfo dmg;
+                dmg.damage = 1;
+                dmg.attacker = nullptr;
+                dmg.target = info.attacker;
+                dmg.block_active = false;
+                info.actions.apply_damage(dmg);
+            }
         });
 }
 

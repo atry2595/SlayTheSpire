@@ -62,7 +62,10 @@ void ironclad::hand_pile_add(abstractCard* card, bool independent){
     }
     if (independent) {
         combat_deck_add(card);
-        emit event->card_moved(card, PileType::none, PileType::hand);
+        playCardInfo c_info;
+        c_info.card = card;
+        c_info.owner = this;
+        emit event->card_moved(c_info, PileType::none, PileType::hand);
     }
 }
 void ironclad::hand_pile_remove(abstractCard* card, bool independent){
@@ -70,16 +73,21 @@ void ironclad::hand_pile_remove(abstractCard* card, bool independent){
     if (it != hand_pile.end()){
         hand_pile.erase(it);
     }
-
-    if (independent) emit event->card_moved(card, PileType::hand, PileType::none);
+    playCardInfo c_info;
+    c_info.card = card;
+    c_info.owner = this;
+    if (independent) emit event->card_moved(c_info, PileType::hand, PileType::none);
 }
 
 
 void ironclad::draw_pile_add(abstractCard* card, bool independent){
     draw_pile.push_back(card);
     if (independent) {
+        playCardInfo c_info;
+        c_info.card = card;
+        c_info.owner = this;
         combat_deck_add(card);
-        emit event->card_moved(card, PileType::none, PileType::draw);
+        emit event->card_moved(c_info, PileType::none, PileType::draw);
     }
 }
 
@@ -89,8 +97,11 @@ void ironclad::draw_pile_add_by_index(abstractCard* card, bool independent, int 
 
     draw_pile.insert(draw_pile.begin() + index, card);
     if (independent) {
+        playCardInfo c_info;
+        c_info.card = card;
+        c_info.owner = this;
         combat_deck_add(card);
-        emit event->card_moved(card, PileType::none, PileType::draw);
+        emit event->card_moved(c_info, PileType::none, PileType::draw);
     }
 }
 void ironclad::draw_pile_remove(abstractCard* card, bool independent){
@@ -98,15 +109,21 @@ void ironclad::draw_pile_remove(abstractCard* card, bool independent){
     if (it != draw_pile.end()){
         draw_pile.erase(it);
     }
-    if (independent) emit event->card_moved(card, PileType::draw, PileType::none);
+    playCardInfo c_info;
+    c_info.card = card;
+    c_info.owner = this;
+    if (independent) emit event->card_moved(c_info, PileType::draw, PileType::none);
 }
 
 
 void ironclad::discard_pile_add(abstractCard* card, bool independent){
     discard_pile.push_back(card);
     if (independent) {
+        playCardInfo c_info;
+        c_info.card = card;
+        c_info.owner = this;
         combat_deck_add(card);
-        emit event->card_moved(card, PileType::none, PileType::discard);
+        emit event->card_moved(c_info, PileType::none, PileType::discard);
     }
 }
 void ironclad::discard_pile_remove(abstractCard* card, bool independent){
@@ -114,15 +131,21 @@ void ironclad::discard_pile_remove(abstractCard* card, bool independent){
     if (it != discard_pile.end()){
         discard_pile.erase(it);
     }
-    if (independent) emit event->card_moved(card, PileType::discard, PileType::none);
+    playCardInfo c_info;
+    c_info.card = card;
+    c_info.owner = this;
+    if (independent) emit event->card_moved(c_info, PileType::discard, PileType::none);
 }
 
 
 void ironclad::exhaust_pile_add(abstractCard* card, bool independent){
     exhaust_pile.push_back(card);
     if (independent) {
+        playCardInfo c_info;
+        c_info.card = card;
+        c_info.owner = this;
         combat_deck_add(card);
-        emit event->card_moved(card, PileType::none, PileType::exhaust);
+        emit event->card_moved(c_info, PileType::none, PileType::exhaust);
     }
 }
 void ironclad::exhaust_pile_remove(abstractCard* card, bool independent){
@@ -130,7 +153,10 @@ void ironclad::exhaust_pile_remove(abstractCard* card, bool independent){
     if (it != exhaust_pile.end()){
         exhaust_pile.erase(it);
     }
-    if (independent) emit event->card_moved(card, PileType::exhaust, PileType::none);
+    playCardInfo c_info;
+    c_info.card = card;
+    c_info.owner = this;
+    if (independent) emit event->card_moved(c_info, PileType::exhaust, PileType::none);
 }
 
 
@@ -160,7 +186,10 @@ void ironclad::draw_card(){
     auto card = draw_pile[0];
     draw_pile_remove(card);
     hand_pile_add(card);
-    emit event->card_moved(card, PileType::draw, PileType::hand);
+    playCardInfo c_info;
+    c_info.card = card;
+    c_info.owner = this;
+    emit event->card_moved(c_info, PileType::draw, PileType::hand);
 
     if (draw_pile.size() == 0) apply_discard_pile();
 
@@ -196,15 +225,24 @@ void ironclad::play_card(playCardInfo& info) {
     hand_pile_remove(info.card);
 
     if (info.card->get_exhaust()) {
+        playCardInfo c_info;
+        c_info.card = info.card;
+        c_info.owner = this;
         exhaust_pile_add(info.card);
-        emit event->card_moved(info.card, PileType::hand, PileType::exhaust);
+        emit event->card_moved(c_info, PileType::hand, PileType::exhaust);
     }
     else if (info.card->get_card_type() == CardType::power){
-        emit event->card_moved(info.card, PileType::hand, PileType::none);
+        playCardInfo c_info;
+        c_info.card = info.card;
+        c_info.owner = this;
+        emit event->card_moved(c_info, PileType::hand, PileType::none);
     }
     else {
+        playCardInfo c_info;
+        c_info.card = info.card;
+        c_info.owner = this;
         discard_pile_add(info.card);
-        emit event->card_moved(info.card, PileType::hand, PileType::discard);
+        emit event->card_moved(c_info, PileType::hand, PileType::discard);
     }
 
     playInfo pl(actions);
@@ -260,15 +298,21 @@ void ironclad::at_turn_end(game_action& info) {
 
         if (hand_pile[i]->get_ethereal()){
             exhaust_pile_add(hand_pile[i]);
-            emit event->card_moved(hand_pile[i], PileType::hand, PileType::exhaust);
+            playCardInfo c_info;
+            c_info.card = hand_pile[i];
+            c_info.owner = this;
+            emit event->card_moved(c_info, PileType::hand, PileType::exhaust);
             hand_pile_remove(hand_pile[i]);
         }
 
         else if (hand_pile[i]->get_retain())  {}
 
         else {
+            playCardInfo c_info;
+            c_info.card = hand_pile[i];
+            c_info.owner = this;
             discard_pile_add(hand_pile[i]);
-            emit event->card_moved(hand_pile[i], PileType::hand, PileType::discard);
+            emit event->card_moved(c_info, PileType::hand, PileType::discard);
             hand_pile_remove(hand_pile[i]);
         }
 
@@ -285,8 +329,11 @@ void ironclad::at_combat_start(game_action& info){
 
     for (auto item : combat_deck){
         if (item->get_initial()) {
+            playCardInfo c_info;
+            c_info.card = item;
+            c_info.owner = this;
             hand_pile_add(item);
-            emit event->card_moved(item, PileType::draw, PileType::hand);
+            emit event->card_moved(c_info, PileType::draw, PileType::hand);
         }
         else {
             draw_pile_add(item);
