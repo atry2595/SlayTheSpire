@@ -167,6 +167,9 @@ add_executable(SlayTheSpire
     src/items/relics/abstractrelic.cpp src/items/relics/abstractrelic.h
     src/items/relics/burning_blood_relic.h src/items/relics/burning_blood_relic.cpp
     src/items/relics/girya_relic.cpp src/items/relics/girya_relic.h
+    src/items/relics/ice_cream_relic.h
+    src/items/relics/girya_relic.cpp src/items/relics/girya_relic.h
+    src/items/relics/ice_cream_relic.cpp src/items/relics/ice_cream_relic.h
 
 
 

@@ -32,6 +32,8 @@ protected:
     const int max_potion_number = 3;
     const int max_hand_card_number = 10;
 
+    bool reset_energy = true;
+
     std::vector<abstractCard*> deck;
     std::vector<abstractCard*> combat_deck;
     std::vector<abstractPotion*> potion_list;
@@ -64,10 +66,12 @@ public:
     std::vector<abstractCard*>& get_draw_pile() { return draw_pile; }
     std::vector<abstractCard*>& get_exhaust_pile() { return exhaust_pile; }
 
+
     void lock_draw_card() { draw_count = max_draw_card;}
 
     void set_base_energy(int i_init) { base_energy = i_init; }
     void set_energy(int i_init) {energy = i_init; }
+    void set_reset_energy(bool b_init) { reset_energy = b_init; }
 
     void combat_deck_add(abstractCard* card);
     void combat_deck_remove(abstractCard* card);

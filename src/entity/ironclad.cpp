@@ -211,7 +211,7 @@ void ironclad::at_turn_start(game_action& info) {
 
     playInfo pl(info);
     pl.attacker = this;
-    energy = base_energy;
+    energy += base_energy;
 
     for (auto item : hand_pile){
         item->update(pl);
@@ -226,6 +226,8 @@ void ironclad::at_turn_start(game_action& info) {
 
 void ironclad::at_turn_end(game_action& info) {
     abstractEntity::at_turn_end(info);
+
+    if (reset_energy) energy = 0;
 
     playInfo ply(info);
     ply.attacker = this;
@@ -263,7 +265,7 @@ void ironclad::at_combat_start(game_action& info){
     abstractEntity::at_combat_start(info);
 
     combat_deck = deck;
-
+    energy = 0;
 
     for (auto item : combat_deck){
         if (item->get_initial()) {

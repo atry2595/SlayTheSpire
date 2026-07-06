@@ -23,6 +23,7 @@ protected:
 public:
 
     abstractRelic(QString name_init, abstractEntity* owner_init);
+    virtual ~abstractRelic() = default;
 
     QString get_name() { return name; }
     abstractEntity* get_owner() { return owner; }
