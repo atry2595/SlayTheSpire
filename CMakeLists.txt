@@ -189,6 +189,7 @@ add_executable(SlayTheSpire
     src/items/relics/captains_wheel_relic.cpp src/items/relics/captains_wheel_relic.h
     src/items/relics/calling_bell_relic.cpp src/items/relics/calling_bell_relic.h
     src/items/relics/mark_of_pain_relic.cpp src/items/relics/mark_of_pain_relic.h
+    src/items/relics/velvet_choker_relic.cpp src/items/relics/velvet_choker_relic.h
 
 
 
