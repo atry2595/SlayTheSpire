@@ -16,7 +16,7 @@ enum class relicID{
     vajra,
     oddly_smooth_stone,
     the_boot,
-    orichalcum,
+    greenback,
     blood_vial,
     centennial_puzzle,
     gremlin_horn,
