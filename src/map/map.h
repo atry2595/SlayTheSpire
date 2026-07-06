@@ -42,6 +42,7 @@ private:
     RoomType randomRoomType();
     void assignRoomTypes();
     bool isRoomValid(int floor,int col,RoomType type) const;
+    void applyFixedFloors();
     // ؟ ...
     RoomType randomRoomType();
 

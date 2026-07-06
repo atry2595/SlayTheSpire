@@ -264,6 +264,33 @@ bool Map::isRoomValid(int floor,int col,RoomType type) const
     return true;
 }
 
+void Map::applyFixedFloors()
+{
+    for(int col = 0;col < MAX_COLS;++col)
+    {
+        if(grid[TREASURE_FLOOR - 1][col].active)
+        {
+            grid[TREASURE_FLOOR - 1][col].type =RoomType::TREASURE;
+        }
+    }
+
+    for(int col = 0;col < MAX_COLS;++col)
+    {
+        if(grid[REST_FLOOR - 1][col].active)
+        {
+            grid[REST_FLOOR - 1][col].type =RoomType::REST;
+        }
+    }
+
+    for(int col = 0;col < MAX_COLS;++col)
+    {
+        if(grid[BOSS_FLOOR - 1][col].active)
+        {
+            grid[BOSS_FLOOR - 1][col].type =RoomType::BOSS;
+        }
+    }
+}
+
 void Map::generate()
 {
     initGrid();
@@ -273,7 +300,7 @@ void Map::generate()
     mergeBossPaths();
 
     assignRoomTypes();
-    // applyFloors();
+    applyFixedFloors();
 }
 
 //add debug map str
