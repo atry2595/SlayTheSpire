@@ -158,6 +158,7 @@ add_executable(SlayTheSpire
     src/entity/slime_boss.cpp src/entity/slime_boss.h
     src/entity/looter.cpp src/entity/looter.h
     src/entity/mugger.cpp src/entity/mugger.h
+    src/entity/red_slaver.cpp src/entity/red_slaver.h
 
 
 
