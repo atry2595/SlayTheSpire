@@ -61,7 +61,7 @@ public:
     QList<Room> getRoomsOnFloor(int floor) const;
     QList<Room> getNextRooms(int floor, int col) const;
     void markVisited(int floor, int col);
-    QString toDebugString() const;
+   // QString toDebugString() const;
 
 
 };

@@ -23,7 +23,7 @@ QList<Room> Map::getNextRooms(int floor, int col) const
     if(floor >= TOTAL_FLOORS)
         return result;
 
-    const Room& current = grid[floor - 1][col];
+    const Room& current =getRoom(floor,col);
 
     for(int nextCol : current.nextCols)
         result.append(grid[floor][nextCol]);
@@ -112,7 +112,7 @@ void Map::initGrid()
 
 void Map::generatePaths()
 {
-    for(int floor = 0;floor < TOTAL_FLOORS;++floor)
+    for(int floor = 0;floor < TOTAL_FLOORS-1;++floor)
     {
         for(int col = 0;col < MAX_COLS;++col)
         {
@@ -291,6 +291,13 @@ bool Map::isRoomValid(int floor,int col,RoomType type) const
             return false;
 
         if(hasParentOfType(floor,col,RoomType::ELITE))
+        {
+            return false;
+        }
+    }
+    if(type == RoomType::UNKNOWN)
+    {
+        if(hasParentOfType(floor,col,RoomType::UNKNOWN))
         {
             return false;
         }
