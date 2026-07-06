@@ -36,12 +36,12 @@ looter* looter::create(game_action& actions){
 
     enemy->intent_list[(int)looter_move::mug] = intnt1;
     enemy->intent_list[(int)looter_move::lunge] = intnt2;
-    enemy->intent_list[(int)looter_move::smoke_bombe] = intnt3;
+    enemy->intent_list[(int)looter_move::smoke_bomb] = intnt3;
     enemy->intent_list[(int)looter_move::escape] = intnt4;
 
     enemy->current_move = (int)looter_move::mug;
 
-    abstractPower* p = PowerFactory::createPower(powerID::thievery, enemy, 1);
+    abstractPower* p = PowerFactory::createPower(powerID::thievery, enemy, 15);
     enemy->add_power(actions, p);
 
     return enemy;
@@ -54,12 +54,12 @@ void looter::choose_move() {
     
     if (current_move == last_move && current_move == (int)looter_move::mug){
         if (RNG::instance().chance(0.5)) current_move = (int)looter_move::lunge;
-        else current_move = (int)looter_move::smoke_bombe;
+        else current_move = (int)looter_move::smoke_bomb;
     }
     else if (current_move == (int)looter_move::mug){
         current_move = (int)looter_move::mug;
     }
-    else if (current_move == (int)looter_move::lunge) current_move = (int)looter_move::smoke_bombe;
+    else if (current_move == (int)looter_move::lunge) current_move = (int)looter_move::smoke_bomb;
     else {
         current_move = (int)looter_move::escape;
     }
@@ -82,7 +82,7 @@ void looter::play_turn(playInfo& info){
         break;
     }
 
-    case (looter_move::smoke_bombe):{
+    case (looter_move::smoke_bomb):{
         int block_count = 6;
 
         blockingInfo bl;

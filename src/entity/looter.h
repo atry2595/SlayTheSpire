@@ -6,7 +6,7 @@
 enum class looter_move {
     mug = 0,
     lunge = 1,
-    smoke_bombe = 2,
+    smoke_bomb = 2,
     escape = 3
 };
 
