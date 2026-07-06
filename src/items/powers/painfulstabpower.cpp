@@ -23,7 +23,7 @@ void painfulStabPower::added_time(game_action& actions) {
         if (inf.attacker == owner && inf.damage >= 0){
             abstractCard* nc = CardFactory::createCard(cardID::wound);
             ironclad* player = dynamic_cast<ironclad*>(inf.target);
-            player->discard_pile_add(nc);
+            player->discard_pile_add(nc, true);
         }
     });
 

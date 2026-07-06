@@ -92,9 +92,9 @@ void slime_boss::play_turn(playInfo& info){
             abstractCard* card2 = CardFactory::createCard(cardID::slimed);
             abstractCard* card3 = CardFactory::createCard(cardID::slimed);
             ironclad* player = dynamic_cast<ironclad*>(item);
-            if (player) player->discard_pile_add(card1);
-            if (player) player->discard_pile_add(card2);
-            if (player) player->discard_pile_add(card3);
+            if (player) player->discard_pile_add(card1, true);
+            if (player) player->discard_pile_add(card2, true);
+            if (player) player->discard_pile_add(card3, true);
         }
 
         break;

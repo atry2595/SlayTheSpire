@@ -104,7 +104,7 @@ void medium_slime::play_turn(playInfo& info){
         for (auto item : info.target_list) {
             abstractCard* card = CardFactory::createCard(cardID::slimed);
             ironclad* player = dynamic_cast<ironclad*>(item);
-            if (player) player->discard_pile_add(card);
+            if (player) player->discard_pile_add(card, true);
         }
 
         break;

@@ -65,8 +65,8 @@ void sentry::play_turn(playInfo& info){
             abstractCard* nc2 = CardFactory::createCard(cardID::dazed);
             ironclad* player = dynamic_cast<ironclad*>(item);
             if (!player) continue;
-            player->discard_pile_add(nc1);
-            player->discard_pile_add(nc2);
+            player->discard_pile_add(nc1, true);
+            player->discard_pile_add(nc2, true);
         }
 
         break;

@@ -49,7 +49,7 @@ void taskmaster::play_turn(playInfo& info){
             abstractCard* nc = CardFactory::createCard(cardID::wound);
             ironclad* player = dynamic_cast<ironclad*>(item);
             if (!player) continue;
-            player->discard_pile_add(nc);
+            player->discard_pile_add(nc, true);
         }
 
         break;

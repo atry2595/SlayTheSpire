@@ -41,6 +41,10 @@ ironclad::ironclad(combatEvent* eve)
 
 
 void ironclad::combat_deck_add(abstractCard* card){
+    for (auto item : combat_deck){
+        if (item == card) return;
+    }
+
     combat_deck.push_back(card);
 }
 void ironclad::combat_deck_remove(abstractCard* card){
@@ -61,8 +65,8 @@ void ironclad::hand_pile_add(abstractCard* card, bool independent){
     if (hand_pile.size() < max_hand_card_number){
         hand_pile.push_back(card);
     }
+    combat_deck_add(card);
     if (independent) {
-        combat_deck_add(card);
         playCardInfo c_info;
         c_info.card = card;
         c_info.owner = this;
@@ -83,11 +87,11 @@ void ironclad::hand_pile_remove(abstractCard* card, bool independent){
 
 void ironclad::draw_pile_add(abstractCard* card, bool independent){
     draw_pile.push_back(card);
+    combat_deck_add(card);
     if (independent) {
         playCardInfo c_info;
         c_info.card = card;
         c_info.owner = this;
-        combat_deck_add(card);
         emit event->card_moved(c_info, PileType::none, PileType::draw);
     }
 }
@@ -97,11 +101,11 @@ void ironclad::draw_pile_add_by_index(abstractCard* card, bool independent, int 
     if (index < 0) index = 0;
 
     draw_pile.insert(draw_pile.begin() + index, card);
+    combat_deck_add(card);
     if (independent) {
         playCardInfo c_info;
         c_info.card = card;
         c_info.owner = this;
-        combat_deck_add(card);
         emit event->card_moved(c_info, PileType::none, PileType::draw);
     }
 }
@@ -119,11 +123,11 @@ void ironclad::draw_pile_remove(abstractCard* card, bool independent){
 
 void ironclad::discard_pile_add(abstractCard* card, bool independent){
     discard_pile.push_back(card);
+    combat_deck_add(card);
     if (independent) {
         playCardInfo c_info;
         c_info.card = card;
         c_info.owner = this;
-        combat_deck_add(card);
         emit event->card_moved(c_info, PileType::none, PileType::discard);
     }
 }
@@ -141,11 +145,11 @@ void ironclad::discard_pile_remove(abstractCard* card, bool independent){
 
 void ironclad::exhaust_pile_add(abstractCard* card, bool independent){
     exhaust_pile.push_back(card);
+    combat_deck_add(card);
     if (independent) {
         playCardInfo c_info;
         c_info.card = card;
         c_info.owner = this;
-        combat_deck_add(card);
         emit event->card_moved(c_info, PileType::none, PileType::exhaust);
     }
 }

@@ -113,7 +113,7 @@ void hexaghost::play_turn(playInfo& info){
             for (int i = 0; i<card_count; i++) {
                 burn* nc = new burn();
                 if (upgrade_burn) nc->curse_upgrade();
-                player->discard_pile_add(nc);
+                player->discard_pile_add(nc, true);
             }
         }
 
@@ -151,7 +151,7 @@ void hexaghost::play_turn(playInfo& info){
             for (int i = 0; i<card_count; i++) {
                 burn* nc = new burn();
                 nc->curse_upgrade();
-                player->discard_pile_add(nc);
+                player->discard_pile_add(nc, true);
             }
         }
         upgrade_burn = true;
