@@ -4,9 +4,10 @@
 
 combat_manager::combat_manager(std::vector<ironclad*> players_init,
                std::vector<abstractEnemy*> enemies_init,
-                               combatEvent* eve)
+                entityType type, combatEvent* eve)
     :players(players_init),
     enemies(enemies_init),
+    combat_type(type),
     event(eve),
     actions(game_action(eve))
 {

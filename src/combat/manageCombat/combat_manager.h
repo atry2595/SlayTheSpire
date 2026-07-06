@@ -35,10 +35,13 @@ protected:
 
     TurnPhase current_phase = TurnPhase::player;
 
+    entityType combat_type;
+
 public:
 
     combat_manager(std::vector<ironclad*> players,
                    std::vector<abstractEnemy*> enemies,
+                   entityType type,
                    combatEvent* eve);
 
     void combat_start();
@@ -52,6 +55,7 @@ public:
 
     std::vector<ironclad*> get_players() {return players;}
     std::vector<abstractEnemy*> get_enemies() {return enemies;}
+    entityType get_type() {return combat_type;}
 
     int get_enemy_index(abstractEnemy* enmy){
         for (int i = 0; i < enemies.size(); i++) {
