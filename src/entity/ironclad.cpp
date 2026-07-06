@@ -13,6 +13,7 @@ abstractCard* ironclad::select_card(
     const std::vector<abstractCard*>& cards
     )
 {
+    //add_relic(ironclad::starting_relic);
     return nullptr;
 }
 

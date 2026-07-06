@@ -170,6 +170,7 @@ add_executable(SlayTheSpire
     src/items/relics/ice_cream_relic.h
     src/items/relics/girya_relic.cpp src/items/relics/girya_relic.h
     src/items/relics/ice_cream_relic.cpp src/items/relics/ice_cream_relic.h
+    src/items/relics/shuriken_relic.cpp src/items/relics/shuriken_relic.h
 
 
 
