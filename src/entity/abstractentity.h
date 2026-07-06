@@ -25,6 +25,7 @@ protected:
     int max_hp;
     int hp;
     int block;
+    int gold = 0;
 
     std::vector<abstractPower*> powers_list;
     bool block_reset_in_combat = true;
@@ -54,6 +55,14 @@ public:
     int get_hp() { return hp;}
     int get_block() { return block;}
     auto get_power_list() {return powers_list; }
+
+    int get_gold() { return gold; }
+    int lose_gold(int value) {
+        int stolen = std::min(gold, value);
+        gold -= stolen;
+        return stolen;
+    }
+    void earn_coin(int value) { gold += value; }
 
     void add_power(game_action&, abstractPower*);
     void remove_power(abstractPower*);

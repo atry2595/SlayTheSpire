@@ -138,6 +138,21 @@ add_executable(SlayTheSpire
     src/cards/curse/regret.cpp src/cards/curse/regret.h
     src/cards/curse/writhe.cpp src/cards/curse/writhe.h
     src/cards/curse/pain.cpp src/cards/curse/pain.h
+    src/items/powers/enragepower.cpp src/items/powers/enragepower.h
+    src/items/powers/entangledpower.cpp src/items/powers/entangledpower.h
+    src/items/powers/painfulstabpower.cpp src/items/powers/painfulstabpower.h
+    src/items/powers/thieverypower.cpp src/items/powers/thieverypower.h
+    src/items/potions/dexteritypotion.cpp src/items/potions/dexteritypotion.h
+    src/items/potions/energypotion.cpp src/items/potions/energypotion.h
+    src/items/potions/explosivepotion.cpp src/items/potions/explosivepotion.h
+    src/items/potions/fearpotion.cpp src/items/potions/fearpotion.h
+    src/items/potions/strengthpotion.cpp src/items/potions/strengthpotion.h
+    src/items/potions/swiftpotion.cpp src/items/potions/swiftpotion.h
+    src/items/potions/weakpotion.cpp src/items/potions/weakpotion.h
+    src/items/potions/whitebloodpotion.cpp src/items/potions/whitebloodpotion.h
+    src/items/potions/cultistpotion.cpp src/items/potions/cultistpotion.h
+    src/items/potions/fairyinabottle.cpp src/items/potions/fairyinabottle.h
+    src/items/potions/potionfactory.h src/items/potions/potionfactory.cpp
 
 
 

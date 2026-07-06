@@ -6,7 +6,20 @@ enum class potionID{
     fire_potion,
     energy_potion,
     swift_potion,
-    fairy_in_a_bottle
+    fairy_in_a_bottle,
+    dexterity_potion,
+    explosive_potion,
+    fear_potion,
+    strength_potion,
+    weak_potion,
+    white_blood_potion,
+    cultist_potion
+};
+
+enum class PotionType {
+    common,
+    uncommon,
+    rare
 };
 
 #endif // POTIONS_H

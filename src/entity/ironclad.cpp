@@ -25,6 +25,7 @@ ironclad::ironclad(combatEvent* eve)
         abstractCard* nc = CardFactory::createCard(item);
         deck.push_back(nc);
     }
+    gold = starting_gold;
 }
 
 
@@ -232,9 +233,12 @@ void ironclad::at_turn_end(game_action& info) {
         item->hand_turn_end(ply);
     }
 
+    for (auto item : combat_deck){
+        item->turn_reset();
+    }
+
     for (int i = hand_pile.size() - 1; i >= 0; i++){
 
-        hand_pile[i]->turn_reset();
 
         if (hand_pile[i]->get_ethereal()){
             exhaust_pile_add(hand_pile[i]);

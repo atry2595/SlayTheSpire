@@ -13,6 +13,21 @@ combat_manager::combat_manager(std::vector<ironclad*> players_init,
     for (int i = 0; i < players.size(); i++) player_is_alive.push_back(players[i]->get_hp() > 0);
     for (int i = 0; i < enemies.size(); i++) enemy_is_alive.push_back(true);
 
+    remove_connection = connect(event, &combatEvent::entity_removed, this,
+        [this](abstractEntity* entity){
+            for (int i = 0; i < players.size(); i++){
+                if (players[i] == entity){
+                    player_is_alive[i] = false;
+                }
+            }
+
+            for (int i = 0; i < enemies.size(); i++){
+                if (enemies[i] == entity){
+                    enemy_is_alive[i] = false;
+                }
+            }
+    });
+
 }
 
 void combat_manager::combat_start() {
@@ -142,6 +157,7 @@ void combat_manager::combat_end() {
 
         if (player_is_alive[i]) {
             players[i]->at_combat_end(actions);
+            players[i]->combat_reset();
         }
     }
 

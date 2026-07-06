@@ -108,11 +108,18 @@
         <file alias="thievery.ico">assests/image/icon/buff/thievery.ico</file>
     </qresource>
     <qresource prefix="/icon/potion">
-        <file alias="block_potion.ico">assests/image/icon/potion/block_potion.ico</file>
-        <file alias="energy_potion.ico">assests/image/icon/potion/energy_potion.ico</file>
-        <file alias="fairy_in_a_bottle.ico">assests/image/icon/potion/fairy_in_a_bottle.ico</file>
-        <file alias="fire_potion.ico">assests/image/icon/potion/fire_potion.ico</file>
         <file alias="swift_potion.ico">assests/image/icon/potion/swift_potion.ico</file>
+        <file alias="energy_potion.ico">assests/image/icon/potion/energy_potion.ico</file>
+        <file alias="block_potion.ico">assests/image/icon/potion/block_potion.ico</file>
+        <file alias="weak_potion.ico">assests/image/icon/potion/weak_potion.ico</file>
+        <file alias="strength_potion.ico">assests/image/icon/potion/strength_potion.ico</file>
+        <file alias="fire_potion.ico">assests/image/icon/potion/fire_potion.ico</file>
+        <file alias="fear_potion.ico">assests/image/icon/potion/fear_potion.ico</file>
+        <file alias="fairy_in_a_bottle.ico">assests/image/icon/potion/fairy_in_a_bottle.ico</file>
+        <file alias="explosive_potion.ico">assests/image/icon/potion/explosive_potion.ico</file>
+        <file alias="dexterity_potion.ico">assests/image/icon/potion/dexterity_potion.ico</file>
+        <file alias="cultist_potion.ico">assests/image/icon/potion/cultist_potion.ico</file>
+        <file alias="blood_potion.ico">assests/image/icon/potion/blood_potion.ico</file>
     </qresource>
     <qresource prefix="/icon/relic">
         <file alias="anchor.ico">assests/image/icon/relic/anchor.ico</file>
