@@ -50,6 +50,9 @@ public:
     void turn_end();
     void next_turn();
 
+    std::vector<ironclad*> get_players() {return players;}
+    std::vector<abstractEnemy*> get_enemies() {return enemies;}
+
     int get_enemy_index(abstractEnemy* enmy){
         for (int i = 0; i < enemies.size(); i++) {
             if (enemies[i] == enmy) return i;

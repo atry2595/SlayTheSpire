@@ -173,6 +173,7 @@ add_executable(SlayTheSpire
     src/items/relics/shuriken_relic.cpp src/items/relics/shuriken_relic.h
     src/items/relics/kunai_relic.cpp src/items/relics/kunai_relic.h
     src/items/relics/anchor_relic.cpp src/items/relics/anchor_relic.h
+    src/items/relics/bag_of_marbles_relic.cpp src/items/relics/bag_of_marbles_relic.h
 
 
 

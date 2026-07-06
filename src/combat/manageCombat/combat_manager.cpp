@@ -62,7 +62,7 @@ void combat_manager::combat_start() {
     current_player = 0;
     current_phase = TurnPhase::player;
 
-    emit event->combat_started();
+    emit event->combat_started(this);
 
 
     for (int i = 0; i < players.size(); i++) {
@@ -187,7 +187,7 @@ void combat_manager::combat_end() {
         }
     }
 
-    emit event->combat_ended(victory);
+    emit event->combat_ended(this, victory);
 
 }
 

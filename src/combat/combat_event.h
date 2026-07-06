@@ -7,6 +7,7 @@ class abstractEntity;
 class abstractCard;
 class abstractPower;
 class abstractPotion;
+class combat_manager;
 struct attackInfo;
 struct damageInfo;
 struct blockingInfo;
@@ -18,8 +19,8 @@ class combatEvent : public QObject{
     Q_OBJECT
 
 signals:
-    void combat_started();
-    void combat_ended(bool victory);
+    void combat_started(combat_manager*);
+    void combat_ended(combat_manager*, bool victory);
 
     void turn_started(abstractEntity*);
     void turn_ended(abstractEntity*);
