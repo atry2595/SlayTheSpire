@@ -31,6 +31,11 @@ QList<Room> Map::getNextRooms(int floor, int col) const
     return result;
 }
 
+void Map::markVisited(int floor, int col)
+{
+    grid[floor - 1][col].visited = true;
+}
+
 QList<Room> Map::getRoomsOnFloor(int floor) const
 {
     QList<Room> rooms;
