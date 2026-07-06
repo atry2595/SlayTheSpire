@@ -52,6 +52,7 @@ signals:
     void potion_used(abstractPotion*);
     void potion_removed(abstractPotion*);
 
+    void lift(abstractEntity*);
 
 };
 

@@ -166,6 +166,7 @@ add_executable(SlayTheSpire
     src/entity/hexaghost.cpp src/entity/hexaghost.h
     src/items/relics/abstractrelic.cpp src/items/relics/abstractrelic.h
     src/items/relics/burning_blood_relic.h src/items/relics/burning_blood_relic.cpp
+    src/items/relics/girya_relic.cpp src/items/relics/girya_relic.h
 
 
 
