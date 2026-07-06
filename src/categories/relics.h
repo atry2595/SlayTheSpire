@@ -22,7 +22,7 @@ enum class relicID{
     horn_cleat,
     gremlin_horn,
     tungsten_rod,
-    capitans_wheel,
+    captains_wheel,
 
     calling_bell,
     mark_of_pain,
