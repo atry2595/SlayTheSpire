@@ -177,6 +177,7 @@ add_executable(SlayTheSpire
     src/items/relics/happy_flower_relic.cpp src/items/relics/happy_flower_relic.h
     src/items/relics/red_skull_relic.cpp src/items/relics/red_skull_relic.h
     src/items/relics/preserved_insect_relic.cpp src/items/relics/preserved_insect_relic.h
+    src/items/relics/vajra_relic.cpp src/items/relics/vajra_relic.h
 
 
 
