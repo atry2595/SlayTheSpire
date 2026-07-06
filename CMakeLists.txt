@@ -187,6 +187,7 @@ add_executable(SlayTheSpire
     src/items/relics/gremlin_horn_relic.cpp src/items/relics/gremlin_horn_relic.h
     src/items/relics/tungsten_rod_relic.cpp src/items/relics/tungsten_rod_relic.h
     src/items/relics/captains_wheel_relic.cpp src/items/relics/captains_wheel_relic.h
+    src/items/relics/calling_bell_relic.cpp src/items/relics/calling_bell_relic.h
 
 
 
