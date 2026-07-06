@@ -10,6 +10,16 @@ abstractEntity::abstractEntity(QString name_init, int base_max_hp_init)
     initial_set();
 }
 
+abstractEntity::~abstractEntity()
+{
+    for (auto* p : powers_list)
+        delete p;
+
+    for (auto* r : relics_list)
+        delete r;
+}
+
+
 void abstractEntity::initial_set(){
     hp = max_hp = base_max_hp;
     block = 0;

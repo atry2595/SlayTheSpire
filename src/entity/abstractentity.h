@@ -41,7 +41,7 @@ protected:
 
 public:
     abstractEntity(QString name_init, int base_max_hp_init);
-    virtual ~abstractEntity() = default;
+    ~abstractEntity() override;
     virtual void act_reset();
     virtual void combat_reset();
     virtual void turn_reset();

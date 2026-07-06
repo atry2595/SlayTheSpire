@@ -16,6 +16,16 @@ abstractCard* ironclad::select_card(
     return nullptr;
 }
 
+ironclad::~ironclad(){
+    combat_deck_remove_unique();
+    for (auto* item : deck){
+        delete item;
+    }
+    for (auto* item : potion_list){
+        delete item;
+    }
+}
+
 ironclad::ironclad(combatEvent* eve)
     :abstractEntity(tr("Ironclad"), 80),
     event(eve)
@@ -36,6 +46,12 @@ void ironclad::combat_deck_remove(abstractCard* card){
     auto it = std::find(combat_deck.begin(), combat_deck.end(), card);
     if (it != combat_deck.end()){
         combat_deck.erase(it);
+    }
+}
+void ironclad::combat_deck_remove_unique(){
+    for (auto item : combat_deck){
+        auto it = std::find(deck.begin(), deck.end(), item);
+        if (it == deck.end())delete item;
     }
 }
 
@@ -286,11 +302,12 @@ void ironclad::at_combat_end(game_action& info) {
         card->combat_reset();
     }
 
-    combat_deck.clear();
     hand_pile.clear();
     exhaust_pile.clear();
     draw_pile.clear();
     discard_pile.clear();
+    combat_deck_remove_unique();
+    combat_deck.clear();
 }
 
 

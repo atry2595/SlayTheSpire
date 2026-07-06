@@ -9,7 +9,6 @@
 #include "combat/drink_potion_info.h"
 
 class abstractPotion;
-class abstractRelic;
 
 class ironclad : public abstractEntity
 {
@@ -37,7 +36,6 @@ protected:
     std::vector<abstractCard*> deck;
     std::vector<abstractCard*> combat_deck;
     std::vector<abstractPotion*> potion_list;
-    std::vector<abstractRelic*> relic_list;
 
     std::vector<abstractCard*> hand_pile;
     std::vector<abstractCard*> discard_pile;
@@ -52,6 +50,7 @@ public:
 
 
     ironclad(combatEvent* eve);
+    ~ironclad() override;
 
     int get_base_energy() { return base_energy; }
     int get_energy() { return energy; }
@@ -59,7 +58,6 @@ public:
     std::vector<abstractCard*>& get_deck() { return deck; }
     std::vector<abstractCard*>& get_combat_deck() { return combat_deck; }
     std::vector<abstractPotion*>& get_potion_list() { return potion_list; }
-    std::vector<abstractRelic*>& get_relic_list() { return relic_list; }
 
     std::vector<abstractCard*>& get_hand_pile() { return hand_pile; }
     std::vector<abstractCard*>& get_discard_pile() { return discard_pile; }
@@ -75,6 +73,7 @@ public:
 
     void combat_deck_add(abstractCard* card);
     void combat_deck_remove(abstractCard* card);
+    void combat_deck_remove_unique();
 
     void hand_pile_add(abstractCard* card, bool independent = false);
     void hand_pile_remove(abstractCard* card, bool independent = false);
@@ -91,6 +90,7 @@ public:
 
     void deck_add(abstractCard* card);
     void deck_remove(abstractCard* card);
+
 
     void draw_card();
     void apply_discard_pile();

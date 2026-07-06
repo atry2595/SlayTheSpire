@@ -20,7 +20,7 @@ protected:
 
 public:
     abstractPotion(QString name_init, QString desc_init, abstractEntity* owner_init);
-    virtual ~abstractPotion() = default;
+    ~abstractPotion() override = default;
 
     virtual void play(playInfo&) = 0;
     virtual void added_time(playInfo&) {};
