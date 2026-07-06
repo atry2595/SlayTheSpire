@@ -62,8 +62,11 @@ damageResult game_action::apply_damage(damageInfo& info) {
         }
     }
 
+
     int hp = target->get_hp();
     res.final_damage = dmg;
+    if (dmg == 0) return res;
+
     emit event->damage_before_taken(info);
 
     if (hp > dmg){

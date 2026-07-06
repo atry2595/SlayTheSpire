@@ -182,6 +182,7 @@ add_executable(SlayTheSpire
     src/items/relics/the_boot_relic.cpp src/items/relics/the_boot_relic.h
     src/items/relics/greenback_relic.cpp src/items/relics/greenback_relic.h
     src/items/relics/blood_vial_relic.cpp src/items/relics/blood_vial_relic.h
+    src/items/relics/centennial_puzzle_relic.cpp src/items/relics/centennial_puzzle_relic.h
 
 
 
