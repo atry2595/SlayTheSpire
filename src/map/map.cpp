@@ -295,13 +295,6 @@ bool Map::isRoomValid(int floor,int col,RoomType type) const
             return false;
         }
     }
-    if(type == RoomType::UNKNOWN)
-    {
-        if(hasParentOfType(floor,col,RoomType::UNKNOWN))
-        {
-            return false;
-        }
-    }
 
 
     return true;
