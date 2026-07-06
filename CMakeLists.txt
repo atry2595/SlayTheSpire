@@ -164,6 +164,8 @@ add_executable(SlayTheSpire
     src/entity/book_of_stabbing.cpp src/entity/book_of_stabbing.h
     src/entity/taskmaster.cpp src/entity/taskmaster.h
     src/entity/hexaghost.cpp src/entity/hexaghost.h
+    src/items/relics/abstractrelic.cpp src/items/relics/abstractrelic.h
+    src/items/relics/burning_blood_relic.h src/items/relics/burning_blood_relic.cpp
 
 
 

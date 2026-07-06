@@ -41,4 +41,15 @@ enum class relicID{
     gremlin_visage
 };
 
+enum class relicRarity {
+    starter,
+    common,
+    uncommon,
+    rare,
+    boss,
+    shop,
+    event,
+    special
+};
+
 #endif // RELICS_H
