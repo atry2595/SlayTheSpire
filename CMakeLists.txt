@@ -178,6 +178,7 @@ add_executable(SlayTheSpire
     src/items/relics/red_skull_relic.cpp src/items/relics/red_skull_relic.h
     src/items/relics/preserved_insect_relic.cpp src/items/relics/preserved_insect_relic.h
     src/items/relics/vajra_relic.cpp src/items/relics/vajra_relic.h
+    src/items/relics/oddly_smooth_stone_relic.cpp src/items/relics/oddly_smooth_stone_relic.h
 
 
 
