@@ -181,6 +181,7 @@ add_executable(SlayTheSpire
     src/items/relics/oddly_smooth_stone_relic.cpp src/items/relics/oddly_smooth_stone_relic.h
     src/items/relics/the_boot_relic.cpp src/items/relics/the_boot_relic.h
     src/items/relics/greenback_relic.cpp src/items/relics/greenback_relic.h
+    src/items/relics/blood_vial_relic.cpp src/items/relics/blood_vial_relic.h
 
 
 
