@@ -16,6 +16,21 @@ const Room& Map::getRoom(int floor, int col) const
     return grid[floor - 1][col];
 }
 
+QList<Room> Map::getNextRooms(int floor, int col) const
+{
+    QList<Room> result;
+
+    if(floor >= TOTAL_FLOORS)
+        return result;
+
+    const Room& current = grid[floor - 1][col];
+
+    for(int nextCol : current.nextCols)
+        result.append(grid[floor][nextCol]);
+
+    return result;
+}
+
 QList<Room> Map::getRoomsOnFloor(int floor) const
 {
     QList<Room> rooms;
