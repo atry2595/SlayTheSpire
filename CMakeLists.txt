@@ -163,6 +163,7 @@ add_executable(SlayTheSpire
     src/entity/sentry.cpp src/entity/sentry.h
     src/entity/book_of_stabbing.cpp src/entity/book_of_stabbing.h
     src/entity/taskmaster.cpp src/entity/taskmaster.h
+    src/entity/hexaghost.cpp src/entity/hexaghost.h
 
 
 
