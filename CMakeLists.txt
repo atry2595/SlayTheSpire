@@ -185,6 +185,7 @@ add_executable(SlayTheSpire
     src/items/relics/centennial_puzzle_relic.cpp src/items/relics/centennial_puzzle_relic.h
     src/items/relics/horn_cleat_relic.cpp src/items/relics/horn_cleat_relic.h
     src/items/relics/gremlin_horn_relic.cpp src/items/relics/gremlin_horn_relic.h
+    src/items/relics/tungsten_rod_relic.cpp src/items/relics/tungsten_rod_relic.h
 
 
 
