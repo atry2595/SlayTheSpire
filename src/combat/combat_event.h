@@ -26,7 +26,8 @@ signals:
     void turn_ended(abstractEntity*);
 
     void attack_started(attackInfo&);
-    void before_damage_taken(damageInfo&);
+    void damage_before_taken(damageInfo&);
+    void damage_before_blocking(damageInfo&);
     void before_block_set(blockingInfo&);
 
     void entity_killed(abstractEntity*);
