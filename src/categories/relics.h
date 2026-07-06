@@ -19,6 +19,7 @@ enum class relicID{
     greenback,
     blood_vial,
     centennial_puzzle,
+    horn_cleat,
     gremlin_horn,
     tungsten_rod,
     capitans_wheel,
