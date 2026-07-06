@@ -7,12 +7,14 @@
 #include "combat/combat_event.h"
 #include "combat/blocking_info.h"
 #include "categories/powers.h"
+#include "categories/relics.h"
 #include <vector>
 #include "categories/enemies.h"
 
 struct game_action;
 
 class abstractPower;
+class abstractRelic;
 
 class abstractEntity : public QObject
 {
@@ -28,6 +30,7 @@ protected:
     int gold = 0;
 
     std::vector<abstractPower*> powers_list;
+    std::vector<abstractRelic*> relics_list;
     bool block_reset_in_combat = true;
 
     // image + anim
@@ -55,6 +58,7 @@ public:
     int get_hp() { return hp;}
     int get_block() { return block;}
     auto get_power_list() {return powers_list; }
+    auto get_relic_list() { return relics_list; }
 
     int get_gold() { return gold; }
     int lose_gold(int value) {
@@ -70,6 +74,10 @@ public:
     abstractPower* get_spec_power(powerID);
     void remove_zero_power();
 
+    void add_relic(game_action&, abstractRelic*);
+    void remove_relic(abstractRelic*);
+    void remove_relic_by_id(relicID);
+    abstractRelic* get_spec_relic(relicID);
 
     void modify_attack(attackInfo&);
     void modify_incoming_damage(damageInfo&);

@@ -1,5 +1,6 @@
 #include "abstractentity.h"
 #include "items/powers/abstractpower.h"
+#include "items/relics/abstractrelic.h"
 #include <algorithm>
 #include "combat/game_action.h"
 
@@ -83,7 +84,6 @@ abstractPower* abstractEntity::get_spec_power(powerID power){
     return nullptr;
 }
 
-
 void abstractEntity::remove_zero_power(){
 
     for (int i = powers_list.size() - 1; i >= 0 ;i++){
@@ -95,8 +95,59 @@ void abstractEntity::remove_zero_power(){
 }
 
 
+
+
+void abstractEntity::add_relic(game_action& actions, abstractRelic* relic){
+    for (auto item : relics_list){
+        if (item->get_id() == relic->get_id()){
+            delete relic;
+            return;
+        }
+    }
+
+    relics_list.push_back(relic);
+    relic->added_time(actions);
+
+}
+
+void abstractEntity::remove_relic(abstractRelic* relic) {
+    for (int i = 0; i<relics_list.size(); i++){
+
+        if (relics_list[i] == relic) {
+            delete relics_list[i];
+            relics_list.erase(relics_list.begin() + i);
+        }
+    }
+}
+
+void abstractEntity::remove_relic_by_id(relicID relic) {
+    for (int i = 0; i<relics_list.size(); i++){
+
+        if (relics_list[i]->get_id() == relic) {
+            delete relics_list[i];
+            relics_list.erase(relics_list.begin() + i);
+        }
+    }
+}
+
+abstractRelic* abstractEntity::get_spec_relic(relicID relic){
+    for (int i = 0; i<relics_list.size(); i++){
+
+        if (relics_list[i]->get_id() == relic) {
+            return relics_list[i];
+        }
+    }
+
+    return nullptr;
+}
+
+
+
 void abstractEntity::modify_attack(attackInfo& info) {
     for (auto item : powers_list){
+        item->modify_attack(info);
+    }
+    for (auto item : relics_list){
         item->modify_attack(info);
     }
     remove_zero_power();
@@ -105,10 +156,16 @@ void abstractEntity::modify_incoming_damage(damageInfo& info) {
     for (auto item : powers_list){
         item->modify_incoming_damage(info);
     }
+    for (auto item : relics_list){
+        item->modify_incoming_damage(info);
+    }
     remove_zero_power();
 }
 void abstractEntity::modify_blocking(blockingInfo& info) {
     for (auto item : powers_list){
+        item->modify_blocking(info);
+    }
+    for (auto item : relics_list){
         item->modify_blocking(info);
     }
     remove_zero_power();
@@ -117,10 +174,16 @@ void abstractEntity::at_turn_start(game_action& info) {
     for (auto item : powers_list){
         item->at_turn_start(info);
     }
+    for (auto item : relics_list){
+        item->at_turn_start(info);
+    }
     remove_zero_power();
 }
 void abstractEntity::at_turn_end(game_action& info) {
     for (auto item : powers_list){
+        item->at_turn_end(info);
+    }
+    for (auto item : relics_list){
         item->at_turn_end(info);
     }
     remove_zero_power();
@@ -129,16 +192,25 @@ void abstractEntity::at_combat_start(game_action& info) {
     for (auto item : powers_list){
         item->at_combat_start(info);
     }
+    for (auto item : relics_list){
+        item->at_combat_start(info);
+    }
     remove_zero_power();
 }
 void abstractEntity::at_combat_end(game_action& info) {
     for (auto item : powers_list){
         item->at_combat_end(info);
     }
+    for (auto item : relics_list){
+        item->at_combat_end(info);
+    }
     remove_zero_power();
 }
 void abstractEntity::damage_applied(game_action&info) {
     for (auto item : powers_list){
+        item->damage_applied(info);
+    }
+    for (auto item : relics_list){
         item->damage_applied(info);
     }
     remove_zero_power();
