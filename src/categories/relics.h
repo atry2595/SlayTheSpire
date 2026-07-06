@@ -1,6 +1,8 @@
 #ifndef RELICS_H
 #define RELICS_H
 
+#include <vector>
+
 enum class relicID{
     burning_blood,
 
@@ -51,6 +53,34 @@ enum class relicRarity {
     shop,
     event,
     special
+};
+
+inline const std::vector<relicID> common_relic = {
+    relicID::anchor,
+    relicID::bag_of_marbles,
+    relicID::happy_flower,
+    relicID::red_skull,
+    relicID::preserved_insect,
+    relicID::vajra,
+    relicID::oddly_smooth_stone,
+    relicID::the_boot,
+    relicID::greenback,
+    relicID::blood_vial,
+    relicID::centennial_puzzle
+};
+
+inline const std::vector<relicID> uncommon_relic = {
+    relicID::shuriken,
+    relicID::kunai,
+    relicID::horn_cleat,
+    relicID::gremlin_horn
+};
+
+inline const std::vector<relicID> rare_relic = {
+    relicID::girya,
+    relicID::ice_cream,
+    relicID::tungsten_rod,
+    relicID::captains_wheel,
 };
 
 #endif // RELICS_H
