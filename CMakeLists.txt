@@ -174,6 +174,7 @@ add_executable(SlayTheSpire
     src/items/relics/kunai_relic.cpp src/items/relics/kunai_relic.h
     src/items/relics/anchor_relic.cpp src/items/relics/anchor_relic.h
     src/items/relics/bag_of_marbles_relic.cpp src/items/relics/bag_of_marbles_relic.h
+    src/items/relics/happy_flower_relic.cpp src/items/relics/happy_flower_relic.h
 
 
 
