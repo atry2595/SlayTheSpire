@@ -153,6 +153,17 @@ add_executable(SlayTheSpire
     src/items/potions/cultistpotion.cpp src/items/potions/cultistpotion.h
     src/items/potions/fairyinabottle.cpp src/items/potions/fairyinabottle.h
     src/items/potions/potionfactory.h src/items/potions/potionfactory.cpp
+    src/entity/medium_slime.cpp src/entity/medium_slime.h
+    src/entity/large_slime.cpp src/entity/large_slime.h
+    src/entity/slime_boss.cpp src/entity/slime_boss.h
+    src/entity/looter.cpp src/entity/looter.h
+    src/entity/mugger.cpp src/entity/mugger.h
+    src/entity/red_slaver.cpp src/entity/red_slaver.h
+    src/entity/gremlin_nob.cpp src/entity/gremlin_nob.h
+    src/entity/sentry.cpp src/entity/sentry.h
+    src/entity/book_of_stabbing.cpp src/entity/book_of_stabbing.h
+    src/entity/taskmaster.cpp src/entity/taskmaster.h
+    src/entity/hexaghost.cpp src/entity/hexaghost.h
 
 
 

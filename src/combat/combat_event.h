@@ -28,9 +28,10 @@ signals:
     void before_block_set(blockingInfo&);
 
     void entity_killed(abstractEntity*);
-    void entity_added(abstractEntity*);
     void entity_removed(abstractEntity*);
     void entity_escape(abstractEntity*);
+    void entity_add_after(abstractEntity* entity, abstractEntity* after);
+    void entity_add_before(abstractEntity* entity, abstractEntity* before);
 
     void hp_changed(abstractEntity*, int oldHP, int newHP);
     void block_changed(blockingInfo&);
@@ -50,6 +51,7 @@ signals:
     void potion_added(abstractPotion*);
     void potion_used(abstractPotion*);
     void potion_removed(abstractPotion*);
+
 
 };
 

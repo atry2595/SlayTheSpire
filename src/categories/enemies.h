@@ -23,11 +23,11 @@ enum class entityID{
     spheric_guardian,
 
     gremlin_nob,
-    sentries,
+    sentry,
     book_of_stabbing,
     taskmaster,
 
-    king_slime,
+    slime_boss,
     hexaghost,
     the_champ,
 

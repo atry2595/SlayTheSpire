@@ -40,9 +40,14 @@ blue_slaver* blue_slaver::create(game_action& actions){
 void blue_slaver::choose_move() {
     RNG& rng = RNG::instance();
 
+    int tmp = current_move;
 
-    if (rng.chance(0.6)) current_move = (int)blue_slaver_move::stab;
+    if (current_move == last_move && current_move == (int)blue_slaver_move::stab) current_move = (int)blue_slaver_move::rake;
+    else if (current_move == last_move && current_move == (int)blue_slaver_move::rake) current_move = (int)blue_slaver_move::stab;
+    else if (rng.chance(0.6)) current_move = (int)blue_slaver_move::stab;
     else current_move = (int)blue_slaver_move::rake;
+
+    last_move = tmp;
 }
 
 

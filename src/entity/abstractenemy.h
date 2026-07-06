@@ -17,7 +17,8 @@ class abstractEnemy : public abstractEntity
 protected:
 
     std::unordered_map<int, enemy_intent> intent_list;
-    int current_move;
+    int current_move = -1;
+    int last_move = -1;
     int enemy_turn = 0;
 
 public:
