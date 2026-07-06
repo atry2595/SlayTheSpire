@@ -1,5 +1,3 @@
-#ifndef MAP_H
-#define MAP_H
 
 #include "Map.h"
 
@@ -11,6 +9,22 @@ Map::Map()
     {
         grid[floor].resize(MAX_COLS);
     }
+}
+
+const Room& Map::getRoom(int floor, int col) const
+{
+    return grid[floor - 1][col];
+}
+
+QList<Room> Map::getRoomsOnFloor(int floor) const
+{
+    QList<Room> rooms;
+    for(int col = 0; col < MAX_COLS; ++col)
+    {
+        if(grid[floor - 1][col].active)
+            rooms.append(grid[floor - 1][col]);
+    }
+    return rooms;
 }
 
 bool Map::causesCrossing(int floor,int fromCol,int toCol) const
@@ -192,15 +206,15 @@ void Map::assignRoomTypes()
             if(!room.active)
                 continue;
 
-            RoomType candidate;
+            RoomType selectedType;
 
             do
             {
-                candidate = randomRoomType();
+                selectedType = randomRoomType();
             }
-            while(!isRoomValid(floor,col,candidate));
+            while(!isRoomValid(floor,col,selectedType));
 
-            room.type =candidate;
+            room.type =selectedType;
         }
     }
 }
@@ -250,16 +264,18 @@ bool Map::isRoomValid(int floor,int col,RoomType type) const
 
     if(type == RoomType::ELITE)
     {
+        if(floor < 3)
+            return false;
+
+        if(floor == REST_FLOOR - 1)
+            return false;
+
         if(hasParentOfType(floor,col,RoomType::ELITE))
         {
             return false;
         }
     }
 
-    if(type == RoomType::ELITE &&floor < 5)
-    {
-        return false;
-    }
 
     return true;
 }

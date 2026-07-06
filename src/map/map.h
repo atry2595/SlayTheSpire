@@ -3,6 +3,7 @@
 
 #include <QVector>
 #include <QList>
+#include <QString>
 #include "utils/RNG.h"
 
 enum class RoomType{
@@ -24,7 +25,7 @@ struct Room
     bool active; // +
     QList<int> nextCols;
 
-    Room(): type(RoomType::MONSTER),floor(-1),col(-1),visited(false){}
+    Room(): type(RoomType::MONSTER),floor(-1),col(-1),visited(false), active(false){}
 };
 
 class Map{
@@ -34,7 +35,6 @@ private:
     QVector<int> generateStartingColumns();
 
     void initGrid();
-
     void generatePaths();
     void generateSinglePath(int startColumn);
     bool causesCrossing(int floor,int fromCol,int toCol) const;
@@ -42,9 +42,9 @@ private:
     RoomType randomRoomType();
     void assignRoomTypes();
     bool isRoomValid(int floor,int col,RoomType type) const;
+    bool hasParentOfType(int floor, int col, RoomType type) const;
     void applyFixedFloors();
     // ؟ ...
-    RoomType randomRoomType();
 
 
 public:
@@ -56,6 +56,12 @@ public:
     static constexpr int BOSS_FLOOR = 16;
     Map();
     void generate(); //کامل شود
+
+    const Room& getRoom(int floor, int col) const;
+    QList<Room> getRoomsOnFloor(int floor) const;
+    QList<Room> getNextRooms(int floor, int col) const;
+    void markVisited(int floor, int col);
+    QString toDebugString() const;
 
 
 };
