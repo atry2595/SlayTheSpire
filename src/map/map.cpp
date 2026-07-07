@@ -168,6 +168,8 @@ void Map::generateSinglePath(int startColumn)
         if (!grid[floor][currentCol].nextCols.contains(nextCol)){
             grid[floor][currentCol].nextCols.append(nextCol);
         }
+        grid[floor + 1][nextCol].active = true;
+
         currentCol = nextCol;
     }
 
@@ -287,7 +289,13 @@ bool Map::isRoomValid(int floor,int col,RoomType type) const
         if(floor < 3)
             return false;
 
+        if(floor + 1 == TREASURE_FLOOR)
+            return false;
+
         if(floor == REST_FLOOR - 1)
+            return false;
+
+        if(floor + 1 == BOSS_FLOOR)
             return false;
 
         if(hasParentOfType(floor,col,RoomType::ELITE))
@@ -330,13 +338,70 @@ void Map::applyFixedFloors()
 void Map::generate()
 {
     initGrid();
-
     generatePaths();
-
     mergeBossPaths();
-
     assignRoomTypes();
     applyFixedFloors();
 }
 
-//add debug map str
+QString Map::toDebugString() const
+{
+    QString result;
+
+    for(int floor = TOTAL_FLOORS - 1;
+         floor >= 0;
+         --floor)
+    {
+        result += QString("Floor %1 : ")
+        .arg(floor + 1,2);
+
+        for(int col = 0;
+             col < MAX_COLS;
+             ++col)
+        {
+            const Room& room =
+                grid[floor][col];
+
+            if(!room.active)
+            {
+                result += " . ";
+                continue;
+            }
+
+            switch(room.type)
+            {
+            case RoomType::MONSTER:
+                result += " M ";
+                break;
+
+            case RoomType::ELITE:
+                result += " E ";
+                break;
+
+            case RoomType::REST:
+                result += " R ";
+                break;
+
+            case RoomType::MERCHANT:
+                result += " $ ";
+                break;
+
+            case RoomType::TREASURE:
+                result += " T ";
+                break;
+
+            case RoomType::UNKNOWN:
+                result += " ? ";
+                break;
+
+            case RoomType::BOSS:
+                result += " B ";
+                break;
+            }
+        }
+
+        result += "\n";
+    }
+
+    return result;
+}
