@@ -32,19 +32,23 @@ class Map{
 
 private:
     QVector<QVector<Room>> grid; //grid[floor-1][column-1]
-    QVector<int> generateStartingColumns();
+   // QVector<int> generateStartingColumns();
 
     void initGrid();
     void generatePaths();
-    void generateSinglePath(int startColumn);
-    bool causesCrossing(int floor,int fromCol,int toCol) const;
-    void mergeBossPaths();
-    void mergeTreasurePaths();
-    void mergeRestPaths();
-    RoomType randomRoomType();
+    void buildPath(int startColumn);
+    int chooseNextColumn(int floor,int currentColumn);
+   // void generateSinglePath(int startColumn);
+    bool causesCrossing(int floor,int from,int to) const;
+    bool canConnect(int floor,int from,int to) const;
+   // void mergeBossPaths();
+   // void mergeTreasurePaths();
+    //void mergeRestPaths();
+    //RoomType randomRoomType();
+    void removeOrphanNodes();
     void assignRoomTypes();
-    bool isRoomValid(int floor,int col,RoomType type) const;
-    bool hasParentOfType(int floor, int col, RoomType type) const;
+    //bool isRoomValid(int floor,int col,RoomType type) const;
+    //bool hasParentOfType(int floor, int col, RoomType type) const;
     void applyFixedFloors();
     // ؟ ...
 

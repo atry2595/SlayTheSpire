@@ -47,7 +47,7 @@ QList<Room> Map::getRoomsOnFloor(int floor) const
     return rooms;
 }
 
-bool Map::causesCrossing(int floor,int fromCol,int toCol) const
+bool Map::causesCrossing(int floor, int from, int to) const
 {
     for(int col = 0;
          col < MAX_COLS;
@@ -61,11 +61,11 @@ bool Map::causesCrossing(int floor,int fromCol,int toCol) const
 
         for(int next : room.nextCols)
         {
-            if(col < fromCol && next > toCol)
+            if(col < from && next > to)
             {
                 return true;
             }
-            if(col > fromCol && next < toCol)
+            if(col > from && next < to)
             {
                 return true;
             }
@@ -75,7 +75,7 @@ bool Map::causesCrossing(int floor,int fromCol,int toCol) const
     return false;
 }
 
-QVector<int> Map::generateStartingColumns()
+/*QVector<int> Map::generateStartingColumns()
 {
     QVector<int> starts;
 
@@ -90,7 +90,7 @@ QVector<int> Map::generateStartingColumns()
     }
 
     return starts;
-}
+} */
 
 void Map::initGrid()
 {
@@ -110,9 +110,48 @@ void Map::initGrid()
     }
 }
 
+void Map::buildPath(int startColumn)
+{
+    int currentCol = startColumn;
+
+    for (int floor = 0; floor < TOTAL_FLOORS - 1; floor++)
+    {
+        Room& current = grid[floor][currentCol];
+
+        current.active = true;
+
+        int nextCol = chooseNextColumn(floor, currentCol);
+
+        if (!current.nextCols.contains(nextCol))
+            current.nextCols.append(nextCol);
+
+        currentCol = nextCol;
+    }
+
+    grid[TOTAL_FLOORS - 1][currentCol].active = true;
+}
+
 void Map::generatePaths()
 {
-    for(int floor = 0;floor < TOTAL_FLOORS-1;++floor)
+    int first =RNG::instance().randint(0, MAX_COLS - 1);
+
+    int second;
+
+    do
+    {
+        second =RNG::instance().randint(0, MAX_COLS - 1);
+    }
+    while (second == first);
+
+    buildPath(first);
+
+    buildPath(second);
+
+    for (int i = 0; i < 4; i++)
+    {
+        buildPath(RNG::instance().randint(0, MAX_COLS - 1));
+    }
+    /*   for(int floor = 0;floor < TOTAL_FLOORS-1;++floor)
     {
         for(int col = 0;col < MAX_COLS;++col)
         {
@@ -126,10 +165,10 @@ void Map::generatePaths()
     for(int start : starts)
     {
         generateSinglePath(start);
-    }
+    }*/
 }
 
-void Map::generateSinglePath(int startColumn)
+/*void Map::generateSinglePath(int startColumn)
 {
     int currentCol = startColumn;
 
@@ -175,8 +214,9 @@ void Map::generateSinglePath(int startColumn)
 
     //Boss
     grid[TOTAL_FLOORS - 1][currentCol].active = true;
-}
-void Map::mergeBossPaths()
+} */
+
+/*void Map::mergeBossPaths()
 {
     int bossCol = MAX_COLS / 2;
 
@@ -252,7 +292,7 @@ void Map::mergeRestPaths()
         room.nextCols.clear();
         room.nextCols.append(restCol);
     }
-}
+} */
 
 RoomType Map::randomRoomType()
 {
@@ -389,9 +429,10 @@ void Map::generate()
 {
     initGrid();
     generatePaths();
-    mergeTreasurePaths();
-    mergeRestPaths();
-    mergeBossPaths();
+   // mergeTreasurePaths();
+    //mergeRestPaths();
+    //mergeBossPaths();
+    removeIsolatedRooms();
     assignRoomTypes();
     applyFixedFloors();
 }
@@ -400,9 +441,7 @@ QString Map::toDebugString() const
 {
     QString result;
 
-    for(int floor = TOTAL_FLOORS - 1;
-         floor >= 0;
-         --floor)
+    for(int floor = TOTAL_FLOORS - 1;floor >= 0;--floor)
     {
         result += QString("Floor %1 : ")
         .arg(floor + 1,2);
