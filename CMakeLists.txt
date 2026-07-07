@@ -196,6 +196,7 @@ add_executable(SlayTheSpire
     src/items/relics/mutagenic_strength_relic.cpp src/items/relics/mutagenic_strength_relic.h
     src/items/relics/red_mask_relic.cpp src/items/relics/red_mask_relic.h
     src/items/relics/helmet_of_the_cleric_relic.cpp src/items/relics/helmet_of_the_cleric_relic.h
+    src/items/relics/gremlin_visage_relic.cpp src/items/relics/gremlin_visage_relic.h
 
 
 
