@@ -4,6 +4,7 @@
 #include "utils/RNG.h"
 #include "items/potions/abstractpotion.h"
 #include "categories/general.h"
+#include "items/relics/relicfactory.h"
 
 const std::vector<cardID> ironclad::starting_deck =
     {cardID::strike, cardID::strike, cardID::strike, cardID::strike, cardID::strike,
@@ -13,7 +14,6 @@ abstractCard* ironclad::select_card(
     const std::vector<abstractCard*>& cards
     )
 {
-    //add_relic(ironclad::starting_relic);
     return nullptr;
 }
 
@@ -37,6 +37,9 @@ ironclad::ironclad(combatEvent* eve)
         deck.push_back(nc);
     }
     gold = starting_gold;
+
+    game_action actions(event);
+    add_relic(actions, RelicFactory::createRelic(ironclad::starting_relic, this));
 }
 
 

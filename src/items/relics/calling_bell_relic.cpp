@@ -3,6 +3,7 @@
 #include "cards/cardfactory.h"
 #include "utils/RNG.h"
 #include "entity/ironclad.h"
+#include "relicfactory.h"
 
 
 calling_bell_relic::calling_bell_relic(abstractEntity* owner_init)
@@ -65,5 +66,8 @@ void calling_bell_relic::added_time(game_action& actions){
     // -------- Third Relic --------
     take_from_pool(commons);
 
-    //factory
+    for (auto item : selected){
+        abstractRelic* nr = RelicFactory::createRelic(item, owner);
+        owner->add_relic(actions, nr);
+    }
 }
