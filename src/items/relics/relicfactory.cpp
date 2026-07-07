@@ -117,7 +117,7 @@ abstractRelic* RelicFactory::createRelic(relicID id, abstractEntity* owner)
 
     case relicID::red_mask:
         return new red_mask_relic(owner);
-    case relicID::helmet_of_the_cleric:
+    case relicID::helmet_of_cleric:
         return new helmet_of_cleric_relic(owner);
     case relicID::gremlin_visage:
         return new gremlin_visage_relic(owner);

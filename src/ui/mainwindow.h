@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QStackedWidget>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -18,6 +19,7 @@ public:
     ~MainWindow() override;
 
 private:
+    QStackedWidget* stack;
     Ui::MainWindow *ui;
 };
 #endif // MAINWINDOW_H
