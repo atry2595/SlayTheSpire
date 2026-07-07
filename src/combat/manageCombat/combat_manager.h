@@ -6,6 +6,7 @@
 #include "entity/abstractenemy.h"
 #include "entity/ironclad.h"
 #include "combat/combat_event.h"
+#include "combatRewards.h"
 
 enum class TurnPhase{
     player,
@@ -23,6 +24,8 @@ private:
     QMetaObject::Connection remove_connection;
     QMetaObject::Connection add_after_connection;
     QMetaObject::Connection add_before_connection;
+
+    std::vector<combatReward> rewards;
 
 protected:
     std::vector<ironclad*> players;
@@ -71,6 +74,16 @@ public:
     }
 
     void add_enemy(abstractEnemy*, int);
+
+
+
+    void add_returned_coin_reward(abstractEntity* player,int coin);
+    void add_coin_to_reward(abstractEntity* player,int coin);
+    void add_card_to_reward(abstractEntity* player,abstractCard* card);
+    void add_relic_to_reward(abstractEntity* player,abstractRelic* relic);
+    void add_potion_to_reward(abstractEntity* player,abstractPotion* potion);
+
+    void calculate_rewards();
 };
 
 #endif // COMBAT_MANAGER_H

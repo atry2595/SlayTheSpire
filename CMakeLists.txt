@@ -199,6 +199,7 @@ add_executable(SlayTheSpire
     src/items/relics/gremlin_visage_relic.cpp src/items/relics/gremlin_visage_relic.h
     src/items/relics/relicfactory.h src/items/relics/relicfactory.cpp
     src/items/relics/sozu_relic.cpp src/items/relics/sozu_relic.h
+    src/combat/manageCombat/combatRewards.h
 
 
 
