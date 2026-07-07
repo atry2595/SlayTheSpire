@@ -36,7 +36,7 @@ enum class relicID{
     sozu,
     slavers_collar,
 
-    wraped_tongs,
+    warped_tongs,
     mutagenic_strength,
     cultist_headpiece,
     red_mask,

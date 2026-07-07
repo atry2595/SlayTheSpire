@@ -192,6 +192,7 @@ add_executable(SlayTheSpire
     src/items/relics/velvet_choker_relic.cpp src/items/relics/velvet_choker_relic.h
     src/items/relics/oddly_smooth_stone_relic.h src/items/relics/philosophers_stone_relic.cpp src/items/relics/philosophers_stone_relic.h
     src/items/relics/slavers_collar_relic.cpp src/items/relics/slavers_collar_relic.h
+    src/items/relics/warped_tongs_relic.cpp src/items/relics/warped_tongs_relic.h
 
 
 

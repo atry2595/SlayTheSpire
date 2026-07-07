@@ -1,6 +1,4 @@
 #include "slavers_collar_relic.h"
-#include "cards/abstractcard.h"
-#include "items/powers/powerfactory.h"
 #include "combat/manageCombat/combat_manager.h"
 #include "entity/ironclad.h"
 
