@@ -106,6 +106,7 @@ public:
 
     void potion_list_add(abstractPotion*);
     void potion_list_remove(abstractPotion*);
+    void draw_potion(drinkPotionInfo&);
 };
 
 

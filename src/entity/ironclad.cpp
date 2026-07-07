@@ -387,3 +387,14 @@ void ironclad::potion_list_remove(abstractPotion* pot){
         }
     }
 }
+
+
+void ironclad::draw_potion(drinkPotionInfo& pot) {
+    if (abstractPotion::lock) return;
+    if (pot.potion->playable() == false) return;
+
+    game_action actions(event);
+    pot.owner = this;
+    actions.drink_potion(pot);
+    potion_list_remove(pot.potion);
+}

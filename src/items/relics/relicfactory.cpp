@@ -27,6 +27,7 @@
 #include "velvet_choker_relic.h"
 #include "philosophers_stone_relic.h"
 #include "slavers_collar_relic.h"
+#include "sozu_relic.h"
 
 #include "warped_tongs_relic.h"
 #include "mutagenic_strength_relic.h"
@@ -100,7 +101,7 @@ abstractRelic* RelicFactory::createRelic(relicID id, abstractEntity* owner)
         return nullptr;
 
     case relicID::sozu:
-        return nullptr;
+        return new sozu_relic(owner);
 
     case relicID::slavers_collar:
         return new slavers_collar_relic(owner);

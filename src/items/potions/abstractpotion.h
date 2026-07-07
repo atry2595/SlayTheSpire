@@ -19,6 +19,7 @@ protected:
     abstractEntity* owner;
 
 public:
+    static bool lock;
     abstractPotion(QString name_init, QString desc_init, abstractEntity* owner_init);
     ~abstractPotion() override = default;
 
