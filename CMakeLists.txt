@@ -190,6 +190,7 @@ add_executable(SlayTheSpire
     src/items/relics/calling_bell_relic.cpp src/items/relics/calling_bell_relic.h
     src/items/relics/mark_of_pain_relic.cpp src/items/relics/mark_of_pain_relic.h
     src/items/relics/velvet_choker_relic.cpp src/items/relics/velvet_choker_relic.h
+    src/items/relics/oddly_smooth_stone_relic.h src/items/relics/philosophers_stone_relic.cpp src/items/relics/philosophers_stone_relic.h
 
 
 
