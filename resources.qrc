@@ -29,7 +29,6 @@
         <file alias="entrench.png">assests/image/cards/skill/entrench.png</file>
         <file alias="exhume.png">assests/image/cards/skill/exhume.png</file>
         <file alias="impervious.png">assests/image/cards/skill/impervious.png</file>
-        <file alias="J.A.X.png">assests/image/cards/skill/J.A.X.png</file>
         <file alias="limit_break.png">assests/image/cards/skill/limit_break.png</file>
         <file alias="offering.png">assests/image/cards/skill/offering.png</file>
         <file alias="power_through.png">assests/image/cards/skill/power_through.png</file>
@@ -38,6 +37,7 @@
         <file alias="spot_weakness.png">assests/image/cards/skill/spot_weakness.png</file>
         <file alias="true_grit.png">assests/image/cards/skill/true_grit.png</file>
         <file alias="warcry.png">assests/image/cards/skill/warcry.png</file>
+        <file>assests/image/cards/skill/JAX.png</file>
     </qresource>
     <qresource prefix="/image/cards/power">
         <file alias="barricade.png">assests/image/cards/power/barricade.png</file>
@@ -256,5 +256,13 @@
         <file alias="Ancient_Writing.jpg">assests/image/events/photo_2026-07-12_19-30-20.jpg</file>
         <file alias="The_Joust.jpg">assests/image/events/photo_2026-07-12_19-30-21.jpg</file>
         <file alias="Pleading_Vagrant.jpg">assests/image/events/photo_2026-07-12_19-30-22.jpg</file>
+    <qresource prefix="/card/frame">
+        <file alias = "frame_black.png">assests/image/cards/frame/frame_black.png</file>
+        <file alias = "frame_gray.png">assests/image/cards/frame/frame_gray.png</file>
+        <file alias = "frame_green.png">assests/image/cards/frame/frame_green.png</file>
+        <file alias = "frame_purple.png">assests/image/cards/frame/frame_purple.png</file>
+        <file alias = "frame_red.png">assests/image/cards/frame/frame_red.png</file>
+        <file alias = "frame1.png">assests/image/cards/frame/frame1.png</file>
+        <file alias = "frame2.png">assests/image/cards/frame/frame2.png</file>
     </qresource>
 </RCC>

@@ -8,9 +8,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     stack = new QStackedWidget(this);
-    setCentralWidget(stack);
     stack->addWidget(new CombatPage());
-    ui->setupUi(this);
+    setCentralWidget(stack);
 }
 
 MainWindow::~MainWindow()
