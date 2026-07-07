@@ -200,6 +200,7 @@ add_executable(SlayTheSpire
     src/items/relics/relicfactory.h src/items/relics/relicfactory.cpp
     src/items/relics/sozu_relic.cpp src/items/relics/sozu_relic.h
     src/combat/manageCombat/combatRewards.h
+    src/items/relics/black_star_relic.cpp src/items/relics/black_star_relic.h
 
 
 
