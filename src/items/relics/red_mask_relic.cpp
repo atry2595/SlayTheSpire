@@ -4,7 +4,7 @@
 #include "combat/manageCombat/combat_manager.h"
 
 red_mask_relic::red_mask_relic(abstractEntity* owner_init)
-    :abstractRelic(tr("Bag Of Marbles"), owner_init)
+    :abstractRelic(tr("Red Mask"), owner_init)
 {
     description = tr("At the start of each combat, apply 1 Weak to ALL enemies.");
 }
