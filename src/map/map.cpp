@@ -204,6 +204,56 @@ void Map::mergeBossPaths()
     }
 }
 
+void Map::mergeTreasurePaths()
+{
+    int treasureCol = MAX_COLS / 2;
+
+    for (int col = 0; col < MAX_COLS; ++col)
+    {
+        grid[TREASURE_FLOOR - 1][col].active = false;
+        grid[TREASURE_FLOOR - 1][col].nextCols.clear();
+    }
+
+    grid[TREASURE_FLOOR - 1][treasureCol].active = true;
+    int prevFloor = TREASURE_FLOOR - 2;
+    for (int col = 0; col < MAX_COLS; ++col)
+    {
+        Room& room = grid[prevFloor][col];
+
+        if (!room.active)
+            continue;
+
+        room.nextCols.clear();
+        room.nextCols.append(treasureCol);
+    }
+}
+
+void Map::mergeRestPaths()
+{
+    int restCol = MAX_COLS / 2;
+
+    for (int col = 0; col < MAX_COLS; ++col)
+    {
+        grid[REST_FLOOR - 1][col].active = false;
+        grid[REST_FLOOR - 1][col].nextCols.clear();
+    }
+
+    grid[REST_FLOOR - 1][restCol].active = true;
+
+    int prevFloor = REST_FLOOR - 2;
+
+    for (int col = 0; col < MAX_COLS; ++col)
+    {
+        Room& room = grid[prevFloor][col];
+
+        if (!room.active)
+            continue;
+
+        room.nextCols.clear();
+        room.nextCols.append(restCol);
+    }
+}
+
 RoomType Map::randomRoomType()
 {
     std::vector<RoomType> types ={
@@ -339,6 +389,8 @@ void Map::generate()
 {
     initGrid();
     generatePaths();
+    mergeTreasurePaths();
+    mergeRestPaths();
     mergeBossPaths();
     assignRoomTypes();
     applyFixedFloors();
