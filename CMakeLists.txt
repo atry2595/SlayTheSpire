@@ -308,3 +308,14 @@ target_link_libraries(SlayTheSpire PRIVATE
     Qt6::Network
     Qt6::Multimedia
 )
+if(WIN32)
+    if(MSVC)
+        set_target_properties(SlayTheSpire PROPERTIES
+            LINK_FLAGS "/SUBSYSTEM:CONSOLE"
+        )
+    else()
+        set_target_properties(SlayTheSpire PROPERTIES
+            LINK_FLAGS "-Wl,-subsystem,console"
+        )
+    endif()
+endif()

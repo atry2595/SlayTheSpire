@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "map/map.h"
+#include <iostream>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -11,7 +12,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     map.generate();
 
-    qDebug() << map.toDebugString();
+    std::cout << map.debugMap().toStdString() << std::endl;
+
+    qDebug().noquote() << map.debugMap();
 }
 
 MainWindow::~MainWindow()
