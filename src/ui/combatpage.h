@@ -1,3 +1,4 @@
+// combatpage.h
 #ifndef COMBATPAGE_H
 #define COMBATPAGE_H
 
@@ -8,14 +9,16 @@
 class CombatPage : public QWidget
 {
     Q_OBJECT
-private:
-    QGraphicsView* combatView;
-    QGraphicsScene* combatScene;
 
 public:
     explicit CombatPage(QWidget *parent = nullptr);
 
-signals:
+protected:
+    void resizeEvent(QResizeEvent *event) override;  // این خط رو اضافه کن
+
+private:
+    QGraphicsView *combatView;
+    QGraphicsScene *combatScene;
 };
 
 #endif // COMBATPAGE_H

@@ -1,77 +1,214 @@
 #include "baseitem.h"
 
 #include <QPainter>
-#include <QDebug>
+#include <QParallelAnimationGroup>
 
-BaseItem::BaseItem(QGraphicsItem* parent)
-    : QGraphicsObject(parent)
+BaseItem::BaseItem(QGraphicsItem *parent,
+                   QSizeF home_size,
+                   QPointF home_pos)
+    : QGraphicsObject(parent),
+    home_pos(home_pos),
+    home_size(home_size)
 {
-    moveAnim = new QPropertyAnimation(this, "pos");
-    moveAnim->setDuration(80);
-    setAcceptedMouseButtons(Qt::LeftButton);
+    m_size = home_size;
+
+    this->home_size = home_size;
+
+    this->home_pos = home_pos;
+
+    setPos(home_pos);
+
     setAcceptHoverEvents(true);
-    valed = !(parent == nullptr);
-}
-
-QRectF BaseItem::boundingRect() const {
-    return QRectF(QPointF(0,0),itemSize);
-}
-
-void BaseItem::paint(QPainter* painter,
-                     const QStyleOptionGraphicsItem* option,
-                     QWidget* widget) {
-
-    if (hasPixmap){
-        painter->drawPixmap(boundingRect().toRect(), pixmap);
-    }
-    else {
-        if (selected) painter->setBrush(Qt::magenta);
-        else painter->setBrush(Qt::blue);
-        painter->drawRect(boundingRect());
-    }
 }
 
 
-void BaseItem::setSize(qreal width, qreal height) {
-    prepareGeometryChange();
-    itemSize = QSizeF(width, height);
+QRectF BaseItem::boundingRect() const
+{
+    return QRectF(pos().x(), pos().y(), m_size.width(), m_size.height());
 }
 
-void BaseItem::moveTo(QPointF point){
-    if (valed) return;
-    moveAnim->stop();
-
-    moveAnim->setStartValue(pos());
-    moveAnim->setEndValue(point);
-
-    moveAnim->start();
+void BaseItem::paint(QPainter *painter,
+                     const QStyleOptionGraphicsItem *,
+                     QWidget *)
+{
+    painter->setBrush(Qt::red);
+    painter->drawRect(boundingRect());
 }
 
-void BaseItem::mousePressEvent(QGraphicsSceneMouseEvent* event) {
-    if (valed) return;
-    qDebug() << "Presed";
-    selected = !selected;
+void BaseItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
     QGraphicsObject::mousePressEvent(event);
-    update();
 }
 
-void BaseItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* event) {
-    if (valed) return;
-    qDebug() << "Released"   ;
+void BaseItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
     QGraphicsObject::mouseReleaseEvent(event);
 }
 
-
-void BaseItem::hoverEnterEvent(QGraphicsSceneHoverEvent* event) {
-    if (valed) return;
-    qDebug() << "yoooooooooo";
-    moveTo(home + QPointF(0, -50));
+void BaseItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
+{
     QGraphicsObject::hoverEnterEvent(event);
 }
 
-void BaseItem::hoverLeaveEvent(QGraphicsSceneHoverEvent* event) {
-    if (valed) return;
-    qDebug() << "yeeeeeeeeeee";
-    if (!selected) moveTo(home);
+void BaseItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
     QGraphicsObject::hoverLeaveEvent(event);
+}
+
+// ---------- Home state ----------
+void BaseItem::saveHomeState() {
+    home_pos = pos();
+    home_size = m_size;
+    home_rotation = rotation();
+    home_scale = scale();
+    home_opacity = opacity();
+    home_z = zValue();
+}
+
+// =========================
+// Animation Factory
+// =========================
+
+QPropertyAnimation* BaseItem::createMoveAnimation(QPointF target,
+                                                  int duration,
+                                                  QEasingCurve easing)
+{
+    auto* anim = new QPropertyAnimation(this, "pos");
+    anim->setDuration(duration);
+    anim->setEndValue(target);
+    anim->setEasingCurve(easing);
+    return anim;
+}
+
+QPropertyAnimation* BaseItem::createRotateAnimation(qreal target,
+                                                    int duration,
+                                                    QEasingCurve easing)
+{
+    auto* anim = new QPropertyAnimation(this, "rotation");
+    anim->setDuration(duration);
+    anim->setEndValue(target);
+    anim->setEasingCurve(easing);
+    return anim;
+}
+
+QPropertyAnimation* BaseItem::createScaleAnimation(qreal target,
+                                                   int duration,
+                                                   QEasingCurve easing)
+{
+    auto* anim = new QPropertyAnimation(this, "scale");
+    anim->setDuration(duration);
+    anim->setEndValue(target);
+    anim->setEasingCurve(easing);
+    return anim;
+}
+
+QPropertyAnimation* BaseItem::createOpacityAnimation(qreal target,
+                                                     int duration,
+                                                     QEasingCurve easing)
+{
+    auto* anim = new QPropertyAnimation(this, "opacity");
+    anim->setDuration(duration);
+    anim->setEndValue(target);
+    anim->setEasingCurve(easing);
+    return anim;
+}
+
+QPropertyAnimation* BaseItem::createResizeAnimation(QSizeF target,
+                                                    int duration,
+                                                    QEasingCurve easing)
+{
+    auto* anim = new QPropertyAnimation(this, "size");
+    anim->setDuration(duration);
+    anim->setEndValue(target);
+    anim->setEasingCurve(easing);
+    return anim;
+}
+
+QPropertyAnimation* BaseItem::createGeometryAnimation(QRectF target,
+                                                      int duration,
+                                                      QEasingCurve easing)
+{
+    auto* anim = new QPropertyAnimation(this, "geometry");
+    anim->setDuration(duration);
+    anim->setEndValue(target);
+    anim->setEasingCurve(easing);
+    return anim;
+}
+
+// =========================
+// Quick Animation
+// =========================
+
+void BaseItem::moveTo(QPointF target,
+                      int duration,
+                      QEasingCurve easing)
+{
+    auto* anim = createMoveAnimation(target, duration, easing);
+    anim->start(QAbstractAnimation::DeleteWhenStopped);
+}
+
+void BaseItem::rotateTo(qreal target,
+                        int duration,
+                        QEasingCurve easing)
+{
+    auto* anim = createRotateAnimation(target, duration, easing);
+    anim->start(QAbstractAnimation::DeleteWhenStopped);
+}
+
+void BaseItem::scaleTo(qreal target,
+                       int duration,
+                       QEasingCurve easing)
+{
+    auto* anim = createScaleAnimation(target, duration, easing);
+    anim->start(QAbstractAnimation::DeleteWhenStopped);
+}
+
+void BaseItem::fadeTo(qreal target,
+                      int duration,
+                      QEasingCurve easing)
+{
+    auto* anim = createOpacityAnimation(target, duration, easing);
+    anim->start(QAbstractAnimation::DeleteWhenStopped);
+}
+
+void BaseItem::resizeTo(QSizeF target,
+                        int duration,
+                        QEasingCurve easing)
+{
+    auto* anim = createResizeAnimation(target, duration, easing);
+    anim->start(QAbstractAnimation::DeleteWhenStopped);
+}
+
+void BaseItem::geometryTo(QRectF target,
+                          int duration,
+                          QEasingCurve easing)
+{
+    auto* anim = createGeometryAnimation(target, duration, easing);
+    anim->start(QAbstractAnimation::DeleteWhenStopped);
+}
+
+
+void BaseItem::setSize(QSizeF size) {
+    if (m_size == size)
+        return;
+
+    prepareGeometryChange();
+
+    m_size = size;
+
+    update();
+}
+
+
+void BaseItem::returnToHome(int duration)
+{
+    auto* group = new QParallelAnimationGroup(this);
+
+    group->addAnimation(createMoveAnimation(home_pos, duration));
+    group->addAnimation(createRotateAnimation(home_rotation, duration));
+    group->addAnimation(createScaleAnimation(home_scale, duration));
+    group->addAnimation(createOpacityAnimation(home_opacity, duration));
+    group->addAnimation(createResizeAnimation(home_size, duration));
+
+    group->start(QAbstractAnimation::DeleteWhenStopped);
 }

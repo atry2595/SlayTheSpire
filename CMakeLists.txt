@@ -542,6 +542,7 @@ add_executable(SlayTheSpire
     src/utils/RNG.h
     src/main.cpp
     src/ui/baseitem.h src/ui/baseitem.cpp
+    src/ui/imageitem.h src/ui/imageitem.cpp
 )
 
 target_include_directories(SlayTheSpire PRIVATE
