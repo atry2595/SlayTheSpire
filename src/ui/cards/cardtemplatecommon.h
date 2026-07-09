@@ -22,16 +22,7 @@ private:
 
     qreal zValue;
 
-    //name
-    //energy
-    //desc
-    //cat
-    //frame
-    //pic
-    //is upgraded -> bold + green
-    //is rare -> gold
     //is locked -> back of cart
-    //is available -> (base):(red) energy
 
     CardParent* card_parent = nullptr;
     ImageItem* card_frame = nullptr;
@@ -43,6 +34,7 @@ private:
 
 
     void updateCard();
+    void reverseCard();
 
 public:
     CardTemplateCommon(abstractCard* source, QPointF pos, QSizeF size, qreal zValue);

@@ -9,105 +9,75 @@ class CardParent : public BaseItem
     Q_OBJECT
 
 private:
-    // State
+    //==========State==========
     bool can_hover = true;
     bool can_select = true;
-
     bool hovered = false;
-    bool selected = false;
+    QEasingCurve::Type final_easing = QEasingCurve::Linear;
+    //==========State==========
 
-    // Hover
+
+    //==========Hover==========
     qreal hover_scale = 1.5;
     qreal hover_offset = -100.0;
-
     int hover_time = 100;
-
+    qreal hover_z = 100;
     QEasingCurve::Type hover_enter_easing = QEasingCurve::OutSine;
     QEasingCurve::Type hover_leave_easing = QEasingCurve::InSine;
+    //==========Hover==========
 
-    // Selected
-    qreal selected_scale = 1.5;
-    qreal selected_offset = -100.0;
 
-    int selected_time = 100;
-
-    QEasingCurve::Type selected_enter_easing = QEasingCurve::OutSine;
-    QEasingCurve::Type selected_leave_easing = QEasingCurve::InSine;
-
-    QEasingCurve::Type final_easing = QEasingCurve::Linear;
-
+    //==========update place & size==========
+    void refreshTargetPos();
     void updateVisualState(QPointF targetPos);
 
     QSequentialAnimationGroup* animGroup = nullptr;
+    //==========update place & size==========
 
-    qreal z_value;
 
 protected:
+    //==========mouse event=================
     void mousePressEvent(QGraphicsSceneMouseEvent* event) override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) override;
     void hoverEnterEvent(QGraphicsSceneHoverEvent* event) override;
     void hoverLeaveEvent(QGraphicsSceneHoverEvent* event) override;
+    //==========mouse event=================
 
-    void refreshTargetPos();
 
 public:
+    //==========constructor==============
     explicit CardParent(QGraphicsItem* parent = nullptr,
                         QSizeF home_size = {0,0},
                         QPointF home_pos = {0,0},
-                        qreal zValue = 0);
+                        qreal z = 100);
+    //==========constructor==============
 
-    // Hover Enable
-    void setCanHover(bool value) { can_hover = value; }
-    bool canHover() const { return can_hover; }
 
-    // Select Enable
-    void setCanSelect(bool value) { can_select = value; }
-    bool canSelect() const { return can_select; }
-
-    // Hovered
-    void setHovered(bool value) { hovered = value; }
-    bool isHovered() const { return hovered; }
-
-    // Selected
-    void setSelected(bool value) { selected = value; }
-    bool isSelected() const { return selected; }
-
-    // Hover Scale
-    void setHoverScale(qreal value) { hover_scale = value; }
-    qreal hoverScale() const { return hover_scale; }
-
-    // Hover Offset
-    void setHoverOffset(qreal value) { hover_offset = value; }
-    qreal hoverOffset() const { return hover_offset; }
-
-    // Hover Time
-    void setHoverTime(int value) { hover_time = value; }
+    //=============getters===============
+    bool getCanHover() const { return can_hover; }
+    bool getCanSelect() const { return can_select; }
+    bool getIsHovered() const { return hovered; }
+    qreal getHoverScale() const { return hover_scale; }
+    qreal getHoverOffset() const { return hover_offset; }
     int hoverTime() const { return hover_time; }
-
-    // Hover Easing
-    void setHoverEnterEasing(QEasingCurve::Type value) { hover_enter_easing = value; }
+    qreal getHoverZ() const { return hover_z; }
     QEasingCurve::Type hoverEnterEasing() const { return hover_enter_easing; }
-
-    void setHoverLeaveEasing(QEasingCurve::Type value) { hover_leave_easing = value; }
     QEasingCurve::Type hoverLeaveEasing() const { return hover_leave_easing; }
+    //=============getters===============
 
-    // Selected Scale
-    void setSelectedScale(qreal value) { selected_scale = value; }
-    qreal selectedScale() const { return selected_scale; }
 
-    // Selected Offset
-    void setSelectedOffset(qreal value) { selected_offset = value; }
-    qreal selectedOffset() const { return selected_offset; }
+    //=============setters===============
+    void setCanHover(bool value);
+    void setCanSelect(bool value);
+    void setHovered(bool value) { hovered = value; }
+    void setHoverScale(qreal value) { hover_scale = value; }
+    void setHoverOffset(qreal value) { hover_offset = value; }
+    void setHoverTime(int value) { hover_time = value; }
+    void setHoverZ(qreal z) { hover_z = z; }
+    void setHoverEnterEasing(QEasingCurve::Type value) { hover_enter_easing = value; }
+    void setHoverLeaveEasing(QEasingCurve::Type value) { hover_leave_easing = value; }
+    //=============setters===============
 
-    // Selected Time
-    void setSelectedTime(int value) { selected_time = value; }
-    int selectedTime() const { return selected_time; }
-
-    // Selected Easing
-    void setSelectedEnterEasing(QEasingCurve::Type value) { selected_enter_easing = value; }
-    QEasingCurve::Type selectedEnterEasing() const { return selected_enter_easing; }
-
-    void setSelectedLeaveEasing(QEasingCurve::Type value) { selected_leave_easing = value; }
-    QEasingCurve::Type selectedLeaveEasing() const { return selected_leave_easing; }
 };
 
 #endif

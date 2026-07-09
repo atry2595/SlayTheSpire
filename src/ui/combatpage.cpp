@@ -67,6 +67,7 @@ CombatPage::CombatPage(QWidget *parent)
     abstractCard* c3 = CardFactory::createCard(cardID::bludgeon);
     c3->upgrade();
     abstractCard* c4 = CardFactory::createCard(cardID::true_grit);
+    c4->set_lock(true);
 
     CardTemplateCommon* card0 = new CardTemplateCommon(c0, {700 - 300, 700}, {200, 300}, 0);
     CardTemplateCommon* card1 = new CardTemplateCommon(c1, {700 - 150, 700}, {200, 300}, 1000);

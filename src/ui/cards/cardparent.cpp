@@ -1,68 +1,88 @@
 #include "cardparent.h"
 #include <QParallelAnimationGroup>
 
+
 CardParent::CardParent(QGraphicsItem *parent,
                        QSizeF home_size,
                        QPointF home_pos,
-                       qreal zValue)
+                       qreal z)
     :BaseItem(parent, home_size, home_pos),
-    z_value(zValue)
+    hover_z(z)
 {
+    if (can_hover || can_select) {
+        setFlag(QGraphicsItem::ItemIsMovable, true);
+    }
+    else {
+        setFlag(QGraphicsItem::ItemIsMovable, false);
+    }
+
+    if (can_select) {
+        setFlag(QGraphicsItem::ItemIsSelectable, true);
+    }
+    else {
+        setFlag(QGraphicsItem::ItemIsSelectable, false);
+    }
     animGroup = new QSequentialAnimationGroup();
 }
 
+//-----------------------------------------------------------------
 
 void CardParent::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (can_select) {
-        selected = !selected;
-        if (selected) final_easing = selected_enter_easing;
-        else final_easing = selected_leave_easing;
+    if (can_select && can_hover && !hovered){
         refreshTargetPos();
+        hoverEnterEvent(nullptr);
     }
     QGraphicsObject::mousePressEvent(event);
 }
 
+//-----------------------------------------------------------------
+
+void CardParent::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (can_select) {
+        refreshTargetPos();
+        hoverLeaveEvent(nullptr);
+    }
+    QGraphicsObject::mouseReleaseEvent(event);
+}
+
+//-----------------------------------------------------------------
 
 void CardParent::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-    if (can_hover) {
+    if (can_hover && !hovered) {
         hovered = true;
         final_easing = hover_enter_easing;
         refreshTargetPos();
+        setZValue(zValue() + hover_z);
     }
     QGraphicsObject::hoverEnterEvent(event);
 }
 
+//-----------------------------------------------------------------
+
 void CardParent::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    if (can_hover) {
+    if (can_hover && hovered) {
         hovered = false;
         final_easing = hover_leave_easing;
         refreshTargetPos();
+        setZValue(zValue() - hover_z);
     }
     QGraphicsObject::hoverLeaveEvent(event);
 }
 
+//-----------------------------------------------------------------
 
 void CardParent::refreshTargetPos() {
-    if (selected || hovered){
-        setZValue(z_value + 10000);
-    }
-    else{
-        setZValue(z_value);
-    }
 
     qreal h = homeSize().height();
     qreal w = homeSize().width();
     qreal n = 1; //sclae of card
     qreal k = 0; //vert offset of card
 
-    if (selected){
-        n = selected_scale;
-        k = selected_offset;
-    }
-    else if (hovered) {
+    if (hovered) {
         n = hover_scale;
         k = hover_offset;
     }
@@ -74,8 +94,10 @@ void CardParent::refreshTargetPos() {
     if (x != pos().x() || y != pos().y()) {
         updateVisualState(QPointF(x, y));
     }
+
 }
 
+//-----------------------------------------------------------------
 
 void CardParent::updateVisualState(QPointF targetPos){
     animGroup->stop();
@@ -88,11 +110,7 @@ void CardParent::updateVisualState(QPointF targetPos){
     int time = 150;
     qreal scl = 1;
 
-    if (selected) {
-        time = selected_time;
-        scl = selected_scale;
-    }
-    else if (hovered) {
+    if (hovered) {
         time = hover_time;
         scl = hover_scale;
     }
@@ -105,4 +123,45 @@ void CardParent::updateVisualState(QPointF targetPos){
     animGroup->setCurrentTime(0);
     animGroup->start();
 
+}
+
+//-----------------------------------------------------------------
+
+void CardParent::setCanHover(bool value) {
+    can_hover = value;
+
+
+    if (can_hover || can_select) {
+        setFlag(QGraphicsItem::ItemIsMovable, true);
+    }
+    else {
+        setFlag(QGraphicsItem::ItemIsMovable, false);
+    }
+
+    if (can_select) {
+        setFlag(QGraphicsItem::ItemIsSelectable, true);
+    }
+    else {
+        setFlag(QGraphicsItem::ItemIsSelectable, false);
+    }
+}
+
+
+void CardParent::setCanSelect(bool value) {
+    can_select = value;
+
+
+    if (can_hover || can_select) {
+        setFlag(QGraphicsItem::ItemIsMovable, true);
+    }
+    else {
+        setFlag(QGraphicsItem::ItemIsMovable, false);
+    }
+
+    if (can_select) {
+        setFlag(QGraphicsItem::ItemIsSelectable, true);
+    }
+    else {
+        setFlag(QGraphicsItem::ItemIsSelectable, false);
+    }
 }

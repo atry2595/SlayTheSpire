@@ -20,21 +20,21 @@ protected:
     bool base_is_playable;
     int base_energy;
     bool base_is_upgraded = false;
-    bool base_is_exhaust;
-    bool base_is_retain;
-    bool base_is_ethereal;
-    bool base_is_initial;
+    bool base_is_exhaust = false;
+    bool base_is_retain = false;
+    bool base_is_ethereal = false;
+    bool base_is_initial = false;
 
     QString name;
     QString description;
     bool playable;
     int energy;
-    bool turn_lock;
-    bool is_upgraded;
-    bool is_exhaust;
-    bool is_retain;
-    bool is_ethereal;
-    bool is_initial;
+    bool turn_lock = false;
+    bool is_upgraded = false;
+    bool is_exhaust = false;
+    bool is_retain = false;
+    bool is_ethereal = false;
+    bool is_initial = false;
 
     bool available;
 

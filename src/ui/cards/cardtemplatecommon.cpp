@@ -1,6 +1,7 @@
 #include "cardtemplatecommon.h"
 #include "ui/cards/getCardPixmap.h"
 #include "core/setting.h"
+#include <QParallelAnimationGroup>
 
 CardTemplateCommon::CardTemplateCommon(abstractCard* source, QPointF pos, QSizeF size, qreal z_value)
     :card_source(source),
@@ -107,7 +108,50 @@ CardTemplateCommon::CardTemplateCommon(abstractCard* source, QPointF pos, QSizeF
 }
 
 
+
+
 void CardTemplateCommon::updateCard() {
+
+    //=================locked==============
+    if (card_source->get_turn_lock()) {
+        card_parent->setCanSelect(false);
+        card_parent->setCanHover(false);
+
+        QParallelAnimationGroup* outAnim = new QParallelAnimationGroup();
+        QParallelAnimationGroup* inAnim = new QParallelAnimationGroup();
+        QSequentialAnimationGroup* gr = new QSequentialAnimationGroup();
+
+        gr->addPause(500);
+
+        qreal w = card_parent->size().width();
+
+        std::vector<BaseItem*> items = {card_parent, card_frame, card_name, card_image, card_description, card_category, card_cost};
+        for (auto item : items) {
+            outAnim->addAnimation(item->createGeometryAnimation(
+                {item->pos().x(), item->pos().y(),0, item->size().height()}
+                , 5000, QEasingCurve::OutSine));
+        }
+
+        gr->addAnimation(outAnim);
+        connect(outAnim, &QPropertyAnimation::finished, this, [this]() {
+            card_frame->setPixmap(QPixmap(":/image/cards/back/back.png"));
+        });
+
+        items = {card_frame, card_parent};
+        for (auto item: items) {
+            inAnim->addAnimation(item->createGeometryAnimation(
+                {item->pos().x(), item->pos().y(), w, item->size().height()}
+                , 5000, QEasingCurve::InSine));
+        }
+
+        gr->addAnimation(inAnim);
+
+        gr->start();
+
+    }
+    //=================locked==============
+
+
     //====================cost======================
     card_cost->setText(QString::number(card_source->get_energy()));
     if (card_source->repeat_x_time()){
@@ -122,6 +166,8 @@ void CardTemplateCommon::updateCard() {
     else{
         card_cost->setColor(Qt::red);
     }
+    //====================cost======================
+
 
 
     //===================name===================
@@ -137,12 +183,14 @@ void CardTemplateCommon::updateCard() {
         if (card_source->is_rare()) card_name->setColor({255, 230, 155}); //light gold
         else card_name->setColor(Qt::white);
     }
+    //===================name===================
 
 
     //=================desc=================
     card_description->setText(card_source->get_description());
+    //=================desc=================
 
-    // lock ?????
+
 }
 
 
