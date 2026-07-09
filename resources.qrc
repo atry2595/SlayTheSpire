@@ -1,6 +1,8 @@
 <RCC>
-    <qresource prefix="/image/cards">
+    <qresource prefix="/image/cards/back">
         <file alias="back.png">assests/image/cards/back.png</file>
+        <file alias="back1.png">assests/image/cards/back1.png</file>
+        <file alias="back2.png">assests/image/cards/back2.png</file>
     </qresource>
     <qresource prefix="/image/cards/attack">
         <file alias="bash.png">assests/image/cards/attack/bash.png</file>
@@ -37,7 +39,7 @@
         <file alias="spot_weakness.png">assests/image/cards/skill/spot_weakness.png</file>
         <file alias="true_grit.png">assests/image/cards/skill/true_grit.png</file>
         <file alias="warcry.png">assests/image/cards/skill/warcry.png</file>
-        <file>assests/image/cards/skill/JAX.png</file>
+        <file alias="JAX.png">assests/image/cards/skill/JAX.png</file>
     </qresource>
     <qresource prefix="/image/cards/power">
         <file alias="barricade.png">assests/image/cards/power/barricade.png</file>
@@ -256,13 +258,17 @@
         <file alias="Ancient_Writing.jpg">assests/image/events/photo_2026-07-12_19-30-20.jpg</file>
         <file alias="The_Joust.jpg">assests/image/events/photo_2026-07-12_19-30-21.jpg</file>
         <file alias="Pleading_Vagrant.jpg">assests/image/events/photo_2026-07-12_19-30-22.jpg</file>
-    <qresource prefix="/card/frame">
-        <file alias = "frame_black.png">assests/image/cards/frame/frame_black.png</file>
-        <file alias = "frame_gray.png">assests/image/cards/frame/frame_gray.png</file>
-        <file alias = "frame_green.png">assests/image/cards/frame/frame_green.png</file>
-        <file alias = "frame_purple.png">assests/image/cards/frame/frame_purple.png</file>
-        <file alias = "frame_red.png">assests/image/cards/frame/frame_red.png</file>
-        <file alias = "frame1.png">assests/image/cards/frame/frame1.png</file>
-        <file alias = "frame2.png">assests/image/cards/frame/frame2.png</file>
+    <qresource prefix="/image/card/frame">
+        <file alias="frame_black.png">assests/image/cards/frame/frame_black.png</file>
+        <file alias="frame_gray.png">assests/image/cards/frame/frame_gray.png</file>
+        <file alias="frame_green.png">assests/image/cards/frame/frame_green.png</file>
+        <file alias="frame_purple.png">assests/image/cards/frame/frame_purple.png</file>
+        <file alias="frame_red.png">assests/image/cards/frame/frame_red.png</file>
+        <file alias="frame2.png">assests/image/cards/frame/frame2.png</file>
+        <file alias="frame1.png">assests/image/cards/frame/frame1.png</file>
+    </qresource>
+    <qresource prefix="/fonts">
+        <file alias="koodak">assests/font/B Koodak Bold.ttf</file>
+        <file alias="cascadia">assests/font/CascadiaMono.ttf</file>
     </qresource>
 </RCC>

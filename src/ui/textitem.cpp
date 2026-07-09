@@ -49,21 +49,28 @@ void TextItem::renderText()
     if(size().isEmpty())
         return;
 
-    rendered_text = QPixmap(size().toSize());
+    QSize renderSize = (size() * 10).toSize();
 
-    rendered_text.fill(Qt::red);
+    rendered_text = QPixmap(renderSize);
+    rendered_text.fill(Qt::transparent);
 
     QPainter painter(&rendered_text);
 
-    painter.setRenderHint(QPainter::Antialiasing);
-    painter.setRenderHint(QPainter::TextAntialiasing);
+    painter.setRenderHint(QPainter::Antialiasing, true);
+    painter.setRenderHint(QPainter::TextAntialiasing, true);
+    painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
+
+    painter.scale(10,10);
+
 
     painter.setFont(font);
     painter.setPen(color);
 
+    QRectF rect(0,0,size().width(),size().height());
+
     painter.drawText(
-        rendered_text.rect(),
-        alignment,
+        rect,
+        alignment | Qt::TextWordWrap,
         text
         );
 
@@ -75,5 +82,6 @@ void TextItem::paint(QPainter* painter,
                      QWidget* widget) {
     painter->drawPixmap(
         boundingRect().toRect(),
-        rendered_text);
+        rendered_text
+        );
 }

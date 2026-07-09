@@ -3,6 +3,8 @@
 #include <QApplication>
 #include <QLocale>
 #include <QTranslator>
+#include <QFontDatabase>
+#include "core/setting.h"
 
 int main(int argc, char *argv[])
 {
@@ -17,6 +19,19 @@ int main(int argc, char *argv[])
             break;
         }
     }
+
+    int f1 = QFontDatabase::addApplicationFont(":/fonts/cascadia");
+    const QStringList cascadiaFamilies = QFontDatabase::applicationFontFamilies(f1);
+    if (!cascadiaFamilies.isEmpty())
+        Fonts::Cascadia = cascadiaFamilies.first();
+
+    int f2 = QFontDatabase::addApplicationFont(":/fonts/koodak");
+    const QStringList koodakFamilies = QFontDatabase::applicationFontFamilies(f2);
+    if (!koodakFamilies.isEmpty())
+        Fonts::koodak = koodakFamilies.first();
+
+
+
     MainWindow w;
     w.show();
     return QApplication::exec();

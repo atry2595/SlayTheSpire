@@ -25,19 +25,21 @@ BaseItem::BaseItem(QGraphicsItem *parent,
 
 QRectF BaseItem::boundingRect() const
 {
-    return QRectF(pos().x(), pos().y(), m_size.width(), m_size.height());
+    return QRectF(0, 0, m_size.width(), m_size.height());
 }
 
 void BaseItem::paint(QPainter *painter,
                      const QStyleOptionGraphicsItem *,
                      QWidget *)
 {
-    painter->drawRect(boundingRect());
 }
 
 void BaseItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     QGraphicsObject::mousePressEvent(event);
+    if (f){
+        qDebug() << "passed";
+    }
 }
 
 void BaseItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
@@ -70,6 +72,8 @@ void BaseItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
             l = false;
         }
         auto* f = new QParallelAnimationGroup();
+        f->addAnimation(createScaleAnimation(1, 100));
+        f->addAnimation(createMoveAnimation(home_pos, 100));
         f->start();
         setZValue(zValue() - 100);
     }
@@ -155,7 +159,6 @@ QPropertyAnimation* BaseItem::createGeometryAnimation(QRectF target,
 {
     auto* anim = new QPropertyAnimation(this, "geometry");
     anim->setDuration(duration);
-    anim->setStartValue(geometry());
     anim->setEndValue(target);
     anim->setEasingCurve(easing);
     return anim;

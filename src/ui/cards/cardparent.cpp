@@ -3,8 +3,10 @@
 
 CardParent::CardParent(QGraphicsItem *parent,
                        QSizeF home_size,
-                       QPointF home_pos)
-    :BaseItem(parent, home_size, home_pos)
+                       QPointF home_pos,
+                       qreal zValue)
+    :BaseItem(parent, home_size, home_pos),
+    z_value(zValue)
 {
     animGroup = new QSequentialAnimationGroup();
 }
@@ -44,6 +46,13 @@ void CardParent::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 
 
 void CardParent::refreshTargetPos() {
+    if (selected || hovered){
+        setZValue(z_value + 10000);
+    }
+    else{
+        setZValue(z_value);
+    }
+
     qreal h = homeSize().height();
     qreal w = homeSize().width();
     qreal n = 1; //sclae of card

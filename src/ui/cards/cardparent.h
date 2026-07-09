@@ -1,7 +1,7 @@
 #ifndef CARDPARENT_H
 #define CARDPARENT_H
 
-#include "baseitem.h"
+#include "ui/baseitem.h"
 #include <QSequentialAnimationGroup>
 
 class CardParent : public BaseItem
@@ -40,6 +40,8 @@ private:
 
     QSequentialAnimationGroup* animGroup = nullptr;
 
+    qreal z_value;
+
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent* event) override;
     void hoverEnterEvent(QGraphicsSceneHoverEvent* event) override;
@@ -50,7 +52,8 @@ protected:
 public:
     explicit CardParent(QGraphicsItem* parent = nullptr,
                         QSizeF home_size = {0,0},
-                        QPointF home_pos = {0,0});
+                        QPointF home_pos = {0,0},
+                        qreal zValue = 0);
 
     // Hover Enable
     void setCanHover(bool value) { can_hover = value; }
