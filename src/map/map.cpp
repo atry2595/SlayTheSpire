@@ -1088,80 +1088,108 @@ bool Map::hasValidFloorLayout(int level) const
 void Map::generate()
 {
 
-    for (int i = 0; i < 500; i++)
-    {
-        initGrid();
-
-        generatePaths();
-
-        mergeBossRoom();
-
-        removeOrphanNodes();
-
-        assignRoomTypes();
-
-        minimumElite();
-
-        if (validateMap() && hasValidFloorLayout(0))
-            return;
-    }
-
-    for (int i = 0; i < 300; i++)
-    {
-        initGrid();
-
-        generatePaths();
-
-        mergeBossRoom();
-
-        removeOrphanNodes();
-
-        assignRoomTypes();
-
-        minimumElite();
-
-        if (validateMap() && hasValidFloorLayout(1))
-            return;
-    }
 
     for (int i = 0; i < 200; i++)
     {
+        qDebug() << "Attempt" << i << "(Ideal)";
+
+        qDebug() << "init";
         initGrid();
 
+        qDebug() << "paths";
         generatePaths();
 
+        qDebug() << "boss";
         mergeBossRoom();
 
+        qDebug() << "orphan";
         removeOrphanNodes();
 
+        qDebug() << "assign";
         assignRoomTypes();
 
+        qDebug() << "elite";
         minimumElite();
 
-        if (validateMap() && hasValidFloorLayout(2))
+        qDebug() << "validate";
+        bool valid = validateMap();
+
+        qDebug() << "layout";
+        bool layout = hasValidFloorLayout(0);
+
+        if (valid && layout)
+        {
+            qDebug() << "Generated Ideal Map";
             return;
+        }
     }
 
-    for (int i = 0; i < 200; i++)
+
+    for (int i = 0; i < 150; i++)
     {
+        qDebug() << "Attempt" << i << "(Good)";
+
         initGrid();
-
         generatePaths();
-
         mergeBossRoom();
-
         removeOrphanNodes();
-
         assignRoomTypes();
+        minimumElite();
 
+        bool valid = validateMap();
+        bool layout = hasValidFloorLayout(1);
+
+        if (valid && layout)
+        {
+            qDebug() << "Generated Good Map";
+            return;
+        }
+    }
+
+
+    for (int i = 0; i < 100; i++)
+    {
+        qDebug() << "Attempt" << i << "(Acceptable)";
+
+        initGrid();
+        generatePaths();
+        mergeBossRoom();
+        removeOrphanNodes();
+        assignRoomTypes();
+        minimumElite();
+
+        bool valid = validateMap();
+        bool layout = hasValidFloorLayout(2);
+
+        if (valid && layout)
+        {
+            qDebug() << "Generated Acceptable Map";
+            return;
+        }
+    }
+
+
+    for (int i = 0; i < 100; i++)
+    {
+        qDebug() << "Attempt" << i << "(Fallback)";
+
+        initGrid();
+        generatePaths();
+        mergeBossRoom();
+        removeOrphanNodes();
+        assignRoomTypes();
         minimumElite();
 
         if (validateMap())
+        {
+            qDebug() << "Generated Fallback Map";
             return;
+        }
     }
 
     throw std::runtime_error("Generated map is invalid.");
 }
+
 //---------------------------------------------------------
 //by Ai:
 QString Map::debugMap() const
