@@ -1046,58 +1046,108 @@ int Map::getActiveRoomsCountInFloor(int floor) const {
     return activeCount;
 }
 
-bool Map::hasValidFloorLayout(int level) const
+bool Map::hasValidFloorLayout(int strictnessLevel) const
 {
-    int count2 = 0;
-    int count3 = 0;
-    int count5 = 0;
-    int count6 = 0;
+    int count2Rooms = 0;
+    int count3Rooms = 0;
+    int count5Rooms = 0;
+    int count6Rooms = 0;
 
     for (int floor = 0; floor < TOTAL_FLOORS - 1; floor++)
     {
-        switch (getActiveRoomsCountInFloor(floor))
+        int activeRooms = getActiveRoomsCountInFloor(floor);
+
+        switch (activeRooms)
         {
-        case 2: count2++; break;
-        case 3: count3++; break;
-        case 5: count5++; break;
-        case 6: count6++; break;
+        case 2: count2Rooms++; break;
+        case 3: count3Rooms++; break;
+        case 5: count5Rooms++; break;
+        case 6: count6Rooms++; break;
         default: break;
         }
     }
 
-    switch(level)
+    int firstFloorRooms = getActiveRoomsCountInFloor(0);
+
+    switch (strictnessLevel)
     {
-
     case 0:
-
-        if (count3 + count5 < 6)
+    {
+        if (count3Rooms < 2)
             return false;
 
-        if (count2 + count6 < 1)
+        if (count5Rooms < 2)
             return false;
 
-
-        if (count2 > 1)
+        if (count3Rooms + count5Rooms < 6)
             return false;
 
-        if (count6 > 1)
+        if (count2Rooms != 1)
+            return false;
+
+        if (count6Rooms != 1)
+            return false;
+
+        if (firstFloorRooms != 4 && firstFloorRooms != 5)
             return false;
 
         return true;
+    }
 
     case 1:
+    {
+        if (count3Rooms < 2)
+            return false;
 
-        if (count3 + count5 < 5)
+        if (count5Rooms < 2)
+            return false;
+
+        if (count3Rooms + count5Rooms < 6)
+            return false;
+
+        int specialRooms = count2Rooms + count6Rooms;
+
+        if (specialRooms < 1 || specialRooms > 2)
+            return false;
+
+        if (firstFloorRooms != 4 && firstFloorRooms != 5)
             return false;
 
         return true;
+    }
 
     case 2:
+    {
+        if (count3Rooms < 2)
+            return false;
 
-        if (count3 + count5 < 3)
+        if (count5Rooms < 2)
+            return false;
+
+        if (count3Rooms + count5Rooms < 5)
+            return false;
+
+        int specialRooms = count2Rooms + count6Rooms;
+
+        if (specialRooms < 1 || specialRooms > 2)
+            return false;
+
+        if (firstFloorRooms != 4 && firstFloorRooms != 5)
             return false;
 
         return true;
+    }
+
+    case 3:
+    {
+        if (count3Rooms + count5Rooms < 5)
+            return false;
+
+        if (firstFloorRooms != 4 && firstFloorRooms != 5)
+            return false;
+
+        return true;
+    }
 
     default:
         return true;
@@ -1106,48 +1156,10 @@ bool Map::hasValidFloorLayout(int level) const
 
 void Map::generate()
 {
+    int totalAttempts = 0;
 
-
-    for (int i = 0; i < 200; i++)
+    for (int i = 0; i < 500; i++, totalAttempts++)
     {
-        qDebug() << "Attempt" << i << "(Ideal)";
-
-        qDebug() << "init";
-        initGrid();
-
-        qDebug() << "paths";
-        generatePaths();
-
-        qDebug() << "boss";
-        mergeBossRoom();
-
-        qDebug() << "orphan";
-        removeOrphanNodes();
-
-        qDebug() << "assign";
-        assignRoomTypes();
-
-        qDebug() << "elite";
-        minimumElite();
-
-        qDebug() << "validate";
-        bool valid = validateMap();
-
-        qDebug() << "layout";
-        bool layout = hasValidFloorLayout(0);
-
-        if (valid && layout)
-        {
-            qDebug() << "Generated Ideal Map";
-            return;
-        }
-    }
-
-
-    for (int i = 0; i < 150; i++)
-    {
-        qDebug() << "Attempt" << i << "(Good)";
-
         initGrid();
         generatePaths();
         mergeBossRoom();
@@ -1155,21 +1167,16 @@ void Map::generate()
         assignRoomTypes();
         minimumElite();
 
-        bool valid = validateMap();
-        bool layout = hasValidFloorLayout(1);
-
-        if (valid && layout)
+        if (validateMap() && hasValidFloorLayout(0))
         {
-            qDebug() << "Generated Good Map";
+            qDebug() << "Generated IDEAL map";
+            qDebug() << "Attempts:" << totalAttempts + 1;
             return;
         }
     }
 
-
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < 500; i++, totalAttempts++)
     {
-        qDebug() << "Attempt" << i << "(Acceptable)";
-
         initGrid();
         generatePaths();
         mergeBossRoom();
@@ -1177,21 +1184,50 @@ void Map::generate()
         assignRoomTypes();
         minimumElite();
 
-        bool valid = validateMap();
-        bool layout = hasValidFloorLayout(2);
-
-        if (valid && layout)
+        if (validateMap() && hasValidFloorLayout(1))
         {
-            qDebug() << "Generated Acceptable Map";
+            qDebug() << "Generated GOOD map";
+            qDebug() << "Attempts:" << totalAttempts + 1;
             return;
         }
     }
 
-
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < 500; i++, totalAttempts++)
     {
-        qDebug() << "Attempt" << i << "(Fallback)";
+        initGrid();
+        generatePaths();
+        mergeBossRoom();
+        removeOrphanNodes();
+        assignRoomTypes();
+        minimumElite();
 
+        if (validateMap() && hasValidFloorLayout(2))
+        {
+            qDebug() << "Generated ACCEPTABLE map";
+            qDebug() << "Attempts:" << totalAttempts + 1;
+            return;
+        }
+    }
+
+    for (int i = 0; i < 500; i++, totalAttempts++)
+    {
+        initGrid();
+        generatePaths();
+        mergeBossRoom();
+        removeOrphanNodes();
+        assignRoomTypes();
+        minimumElite();
+
+        if (validateMap() && hasValidFloorLayout(3))
+        {
+            qDebug() << "Generated NORMAL map";
+            qDebug() << "Attempts:" << totalAttempts + 1;
+            return;
+        }
+    }
+
+    for (int i = 0; i < 200; i++, totalAttempts++)
+    {
         initGrid();
         generatePaths();
         mergeBossRoom();
@@ -1201,12 +1237,13 @@ void Map::generate()
 
         if (validateMap())
         {
-            qDebug() << "Generated Fallback Map";
+            qDebug() << "Generated map";
+            qDebug() << "Attempts:" << totalAttempts + 1;
             return;
         }
     }
 
-    throw std::runtime_error("Generated map is invalid.");
+    throw std::runtime_error("Failed to generate a valid map.");
 }
 
 //---------------------------------------------------------
