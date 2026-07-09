@@ -72,14 +72,33 @@ QVector<int> Map::generateStartingColumns()
 
         col = qBound(0, col, MAX_COLS - 1);
 
-        while (starts.contains(col))
+        if (starts.contains(col))
         {
-            if (col < MAX_COLS - 1)
-                col++;
-            else if (col > 0)
-                col--;
-            else
-                break;
+            bool found = false;
+
+            for (int offset = 1; offset < MAX_COLS; offset++)
+            {
+                int right = col + offset;
+
+                if (right < MAX_COLS && !starts.contains(right))
+                {
+                    col = right;
+                    found = true;
+                    break;
+                }
+
+                int left = col - offset;
+
+                if (left >= 0 && !starts.contains(left))
+                {
+                    col = left;
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found)
+                continue;
         }
 
         starts.append(col);
