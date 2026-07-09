@@ -21,6 +21,10 @@ Stats::Stats()
 int Stats::getScore() const { return score; }
 int Stats::getMonstersKilled() const { return monstersKilled; }
 int Stats::getElitesKilled() const { return elitesKilled; }
+int Stats::getHighestScore() const
+{
+    return highestScore;
+}
 int Stats::getBossesKilled() const { return bossesKilled; }
 int Stats::getTotalEnemiesKilled() const {
     return monstersKilled + elitesKilled + bossesKilled; }

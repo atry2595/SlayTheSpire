@@ -6,6 +6,9 @@
 
 class Stats
 {
+public:
+    static constexpr int SKIN_COUNT = 5;
+
 private:
     int score;
     int highestScore;
@@ -21,7 +24,6 @@ private:
     int timesLost;
 
 public:
-    static constexpr int SKIN_COUNT = 5;
 
     Stats();
 

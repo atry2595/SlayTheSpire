@@ -3,6 +3,7 @@
 
 #include <QString>
 #include "Stats.h"
+#include <QStringList>
 
 class Player
 {
@@ -32,7 +33,7 @@ public:
     static bool passwordsMatch(const QString &pass1,const QString &pass2);
     static bool login(const QString &username,const QString &password,const QList<Player> &players);
     static bool verifyUser(const QString &username,const QString &email,const QList<Player> &players);
-    static QString suggestUsername(const QString &username,const QList<Player> &players);
+    static QStringList suggestUsername(const QString &username,const QList<Player> &players);
     static bool registerPlayer(const QString &username,const QString &email,const QString &password,const QString &confirmPassword,const QList<Player> &players);
     QString getProfile() const;
 

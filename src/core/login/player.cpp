@@ -1,5 +1,4 @@
 #include "Player.h"
-#include <QStringList>
 #include <QCryptographicHash>
 #include <QRandomGenerator>
 
