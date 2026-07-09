@@ -58,6 +58,8 @@ private:
 
     void mergeBossRoom();
 
+    void minimumElite();
+
     void assignRoomTypes();
 
     void applyFixedFloors();

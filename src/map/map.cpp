@@ -131,6 +131,7 @@ int Map::chooseNextColumn(int floor, int currentCol)
 {
     QVector<int> candidates;
 
+
     for(int delta = -1; delta <= 1; delta++)
     {
         int nextCol = currentCol + delta;
@@ -444,7 +445,18 @@ bool Map::isRoomValid(int floor, int col, RoomType type) const
         return floor == BOSS_FLOOR - 1;
 
     if (type == RoomType::REST)
-        return floor == REST_FLOOR - 1;
+    {
+        if (floor == REST_FLOOR - 1)
+            return true;
+
+        if (floor < 2)
+            return false;
+
+        if (hasParentOfType(floor, col, RoomType::REST))
+            return false;
+
+        return true;
+    }
 
     if (type == RoomType::MERCHANT)
     {
@@ -460,6 +472,7 @@ bool Map::isRoomValid(int floor, int col, RoomType type) const
 
     return true;
 }
+
 void Map::mergeBossRoom()
 {
     int bossCol = MAX_COLS / 2;
@@ -624,6 +637,60 @@ QList<Room*> Map::getSelectableRooms()
     return rooms;
 }
 
+void Map::minimumElite()
+{
+    int eliteCount = 0;
+
+    for(int floor = 0; floor < TOTAL_FLOORS; floor++)
+    {
+        for(int col = 0; col < MAX_COLS; col++)
+        {
+            const Room& room = grid[floor][col];
+
+            if(room.active && room.type == RoomType::ELITE)
+            {
+                eliteCount++;
+            }
+        }
+    }
+
+    if(eliteCount >= 6)
+        return;
+
+    for(int floor = 2; floor < TOTAL_FLOORS; floor++)
+    {
+        if(floor == TREASURE_FLOOR - 1)
+            continue;
+
+        if(floor == REST_FLOOR - 1)
+            continue;
+
+        if(floor == BOSS_FLOOR - 1)
+            continue;
+
+        for(int col = 0; col < MAX_COLS; col++)
+        {
+            Room& room = grid[floor][col];
+
+            if(!room.active)
+                continue;
+
+            if(room.type != RoomType::MONSTER)
+                continue;
+
+            if(!isRoomValid(floor, col, RoomType::ELITE))
+                continue;
+
+            room.type = RoomType::ELITE;
+
+            eliteCount++;
+
+            if(eliteCount >= 6)
+                return;
+        }
+    }
+}
+
 bool Map::validateBoss() const
 {
     int bossCount = 0;
@@ -703,24 +770,20 @@ bool Map::validateTreasure() const
 
 bool Map::validateRest() const
 {
-    bool hasRestOnFloor15 = false;
-
-    for (int col = 0; col < MAX_COLS; col++)
+    for(int col = 0; col < MAX_COLS; col++)
     {
         const Room& room = grid[REST_FLOOR - 1][col];
 
-        if (!room.active)
+        if(!room.active)
             continue;
 
-        if (room.type == RoomType::REST)
-            hasRestOnFloor15 = true;
+        if(room.type != RoomType::REST)
+            return false;
     }
-
-    if (!hasRestOnFloor15)
-        return false;
 
     return true;
 }
+
 bool Map::validateConnections() const
 {
     for(int floor = 0; floor < TOTAL_FLOORS; floor++)
@@ -961,6 +1024,8 @@ void Map::generate()
     removeOrphanNodes();
 
     assignRoomTypes();
+
+    minimumElite();
 
     if (!validateMap())
     {
