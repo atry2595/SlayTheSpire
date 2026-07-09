@@ -47,6 +47,7 @@ void Map::markVisited(int floor, int col)
 
     grid[floor][col].visited = true;
 }
+
 bool Map::isInsideMap(int floor, int col) const
 {
     return floor >= 0 &&
@@ -297,6 +298,12 @@ void Map::assignRoomTypes()
 
             if (!room.active)
                 continue;
+
+            if (floor <= 1)
+            {
+                room.type = RoomType::MONSTER;
+                continue;
+            }
 
             if (floor == TREASURE_FLOOR - 1)
             {
