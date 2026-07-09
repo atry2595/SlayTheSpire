@@ -2,6 +2,7 @@
 
 #include <QPainter>
 #include <QParallelAnimationGroup>
+#include <QParallelAnimationGroup>
 
 BaseItem::BaseItem(QGraphicsItem *parent,
                    QSizeF home_size,
@@ -31,7 +32,6 @@ void BaseItem::paint(QPainter *painter,
                      const QStyleOptionGraphicsItem *,
                      QWidget *)
 {
-    painter->setBrush(Qt::red);
     painter->drawRect(boundingRect());
 }
 
@@ -48,11 +48,31 @@ void BaseItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void BaseItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     QGraphicsObject::hoverEnterEvent(event);
+    if (f) {
+        if (l){
+            home_pos = pos();
+            l = false;
+        }
+        auto* f = new QParallelAnimationGroup();
+        f->addAnimation(createScaleAnimation(1.5, 100));
+        f->addAnimation(createMoveAnimation(home_pos + QPointF(-50, -250), 100));
+        f->start();
+        setZValue(zValue() + 100);
+    }
 }
 
 void BaseItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     QGraphicsObject::hoverLeaveEvent(event);
+    if (f) {
+        if (l){
+            home_pos = pos();
+            l = false;
+        }
+        auto* f = new QParallelAnimationGroup();
+        f->start();
+        setZValue(zValue() - 100);
+    }
 }
 
 // ---------- Home state ----------
@@ -75,6 +95,7 @@ QPropertyAnimation* BaseItem::createMoveAnimation(QPointF target,
 {
     auto* anim = new QPropertyAnimation(this, "pos");
     anim->setDuration(duration);
+    anim->setStartValue(pos());
     anim->setEndValue(target);
     anim->setEasingCurve(easing);
     return anim;
@@ -86,6 +107,7 @@ QPropertyAnimation* BaseItem::createRotateAnimation(qreal target,
 {
     auto* anim = new QPropertyAnimation(this, "rotation");
     anim->setDuration(duration);
+    anim->setStartValue(rotation());
     anim->setEndValue(target);
     anim->setEasingCurve(easing);
     return anim;
@@ -97,6 +119,7 @@ QPropertyAnimation* BaseItem::createScaleAnimation(qreal target,
 {
     auto* anim = new QPropertyAnimation(this, "scale");
     anim->setDuration(duration);
+    anim->setStartValue(scale());
     anim->setEndValue(target);
     anim->setEasingCurve(easing);
     return anim;
@@ -108,6 +131,7 @@ QPropertyAnimation* BaseItem::createOpacityAnimation(qreal target,
 {
     auto* anim = new QPropertyAnimation(this, "opacity");
     anim->setDuration(duration);
+    anim->setStartValue(opacity());
     anim->setEndValue(target);
     anim->setEasingCurve(easing);
     return anim;
@@ -119,6 +143,7 @@ QPropertyAnimation* BaseItem::createResizeAnimation(QSizeF target,
 {
     auto* anim = new QPropertyAnimation(this, "size");
     anim->setDuration(duration);
+    anim->setStartValue(size());
     anim->setEndValue(target);
     anim->setEasingCurve(easing);
     return anim;
@@ -130,6 +155,7 @@ QPropertyAnimation* BaseItem::createGeometryAnimation(QRectF target,
 {
     auto* anim = new QPropertyAnimation(this, "geometry");
     anim->setDuration(duration);
+    anim->setStartValue(geometry());
     anim->setEndValue(target);
     anim->setEasingCurve(easing);
     return anim;

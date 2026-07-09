@@ -3,7 +3,10 @@
 
 ImageItem::ImageItem(QGraphicsItem* parent, QSizeF home_size, QPointF home_pos)
     :BaseItem(parent, home_size, home_pos)
-{}
+{
+    setAcceptedMouseButtons(Qt::NoButton);
+    setAcceptHoverEvents(false);
+}
 
 
 void ImageItem::setPixmap(const QPixmap& pix) {

@@ -14,7 +14,7 @@ public:
     explicit CombatPage(QWidget *parent = nullptr);
 
 protected:
-    void resizeEvent(QResizeEvent *event) override;  // این خط رو اضافه کن
+    void resizeEvent(QResizeEvent *event) override;
 
 private:
     QGraphicsView *combatView;

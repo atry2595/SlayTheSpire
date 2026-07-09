@@ -12,6 +12,8 @@ class BaseItem : public QGraphicsObject
 
     Q_PROPERTY(QSizeF size READ size WRITE setSize)
     Q_PROPERTY(QRectF geometry READ geometry WRITE setGeometry)
+    bool f = false;
+    bool l = true;
 
 public:
     explicit BaseItem(QGraphicsItem* parent = nullptr, QSizeF home_size = {0, 0}, QPointF home_pos = {0, 0});
@@ -22,6 +24,8 @@ public:
                const QStyleOptionGraphicsItem* option,
                QWidget* widget) override;
 
+
+    void setMovable() {f = true;}
 protected:
     // Mouse
     void mousePressEvent(QGraphicsSceneMouseEvent* event) override;

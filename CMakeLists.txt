@@ -543,6 +543,8 @@ add_executable(SlayTheSpire
     src/main.cpp
     src/ui/baseitem.h src/ui/baseitem.cpp
     src/ui/imageitem.h src/ui/imageitem.cpp
+    src/ui/textitem.h src/ui/textitem.cpp
+    src/ui/cardparent.h src/ui/cardparent.cpp
 )
 
 target_include_directories(SlayTheSpire PRIVATE
