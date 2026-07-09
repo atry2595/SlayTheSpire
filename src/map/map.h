@@ -92,6 +92,10 @@ private:
 
     bool validateDuplicates() const;
 
+    int getActiveRoomsCountInFloor(int floor) const;
+
+    bool hasValidFloorLayout(int strictnessLevel = 0) const;
+
     QList<Room*> getSelectableRooms();
 
 public:

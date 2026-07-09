@@ -1013,24 +1013,154 @@ bool Map::validateMap() const
 
     return true;
 }
+
+int Map::getActiveRoomsCountInFloor(int floor) const {
+    if (floor < 0 || floor >= TOTAL_FLOORS) {
+        return 0;
+    }
+    int activeCount = 0;
+    for (int col = 0; col < MAX_COLS; ++col) {
+        if (grid[floor][col].active) {
+            activeCount++;
+        }
+    }
+    return activeCount;
+}
+
+bool Map::hasValidFloorLayout(int level) const
+{
+    int count2 = 0;
+    int count3 = 0;
+    int count5 = 0;
+    int count6 = 0;
+
+    for (int floor = 0; floor < TOTAL_FLOORS - 1; floor++)
+    {
+        switch (getActiveRoomsCountInFloor(floor))
+        {
+        case 2: count2++; break;
+        case 3: count3++; break;
+        case 5: count5++; break;
+        case 6: count6++; break;
+        default: break;
+        }
+    }
+
+    switch(level)
+    {
+
+    case 0:
+
+        if (count3 + count5 < 6)
+            return false;
+
+        if (count2 + count6 < 1)
+            return false;
+
+
+        if (count2 > 1)
+            return false;
+
+        if (count6 > 1)
+            return false;
+
+        return true;
+
+    case 1:
+
+        if (count3 + count5 < 5)
+            return false;
+
+        return true;
+
+    case 2:
+
+        if (count3 + count5 < 3)
+            return false;
+
+        return true;
+
+    default:
+        return true;
+    }
+}
+
 void Map::generate()
 {
-    initGrid();
 
-    generatePaths();
-
-    mergeBossRoom();
-
-    removeOrphanNodes();
-
-    assignRoomTypes();
-
-    minimumElite();
-
-    if (!validateMap())
+    for (int i = 0; i < 500; i++)
     {
-        throw std::runtime_error("Generated map is invalid.");
+        initGrid();
+
+        generatePaths();
+
+        mergeBossRoom();
+
+        removeOrphanNodes();
+
+        assignRoomTypes();
+
+        minimumElite();
+
+        if (validateMap() && hasValidFloorLayout(0))
+            return;
     }
+
+    for (int i = 0; i < 300; i++)
+    {
+        initGrid();
+
+        generatePaths();
+
+        mergeBossRoom();
+
+        removeOrphanNodes();
+
+        assignRoomTypes();
+
+        minimumElite();
+
+        if (validateMap() && hasValidFloorLayout(1))
+            return;
+    }
+
+    for (int i = 0; i < 200; i++)
+    {
+        initGrid();
+
+        generatePaths();
+
+        mergeBossRoom();
+
+        removeOrphanNodes();
+
+        assignRoomTypes();
+
+        minimumElite();
+
+        if (validateMap() && hasValidFloorLayout(2))
+            return;
+    }
+
+    for (int i = 0; i < 200; i++)
+    {
+        initGrid();
+
+        generatePaths();
+
+        mergeBossRoom();
+
+        removeOrphanNodes();
+
+        assignRoomTypes();
+
+        minimumElite();
+
+        if (validateMap())
+            return;
+    }
+
+    throw std::runtime_error("Generated map is invalid.");
 }
 //---------------------------------------------------------
 //by Ai:
