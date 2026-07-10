@@ -4,7 +4,9 @@
 #include <QSequentialAnimationGroup>
 #include "imageitem.h"
 #include "cards/cardfactory.h"
-#include "cards/cardtemplatecommon.h"
+#include "ui/cards/cardtemplatecommon.h"
+#include "ui/cards/cardtemplateuncommon.h"
+#include "ui/cards/cardtemplaterare.h"
 #include <QParallelAnimationGroup>
 
 CombatPage::CombatPage(QWidget *parent)
@@ -60,20 +62,20 @@ CombatPage::CombatPage(QWidget *parent)
 
 
 
-    abstractCard* c0 = CardFactory::createCard(cardID::reaper);
-    abstractCard* c1 = CardFactory::createCard(cardID::perfected_strike);
-    abstractCard* c2 = CardFactory::createCard(cardID::whirlwind);
+    abstractCard* c0 = CardFactory::createCard(cardID::bash);
+    c0->set_lock(true);
+    abstractCard* c1 = CardFactory::createCard(cardID::immolate);
+    abstractCard* c2 = CardFactory::createCard(cardID::demon_form);
     c2->upgrade();
-    abstractCard* c3 = CardFactory::createCard(cardID::bludgeon);
+    abstractCard* c3 = CardFactory::createCard(cardID::JAX);
     c3->upgrade();
-    abstractCard* c4 = CardFactory::createCard(cardID::true_grit);
-    c4->set_lock(true);
+    abstractCard* c4 = CardFactory::createCard(cardID::pommel_strike);
 
-    CardTemplateCommon* card0 = new CardTemplateCommon(c0, {700 - 300, 700}, {200, 300}, 0);
-    CardTemplateCommon* card1 = new CardTemplateCommon(c1, {700 - 150, 700}, {200, 300}, 1000);
-    CardTemplateCommon* card2 = new CardTemplateCommon(c2, {700, 700}, {200, 300}, 2000);
-    CardTemplateCommon* card3 = new CardTemplateCommon(c3, {700 + 150, 700}, {200, 300}, 3000);
-    CardTemplateCommon* card4 = new CardTemplateCommon(c4, {700 + 300, 700}, {200, 300}, 4000);
+    CardTemplateRare* card0 = new CardTemplateRare(c0, {700 - 300, 700}, {200, 300}, 0);
+    CardTemplateRare* card1 = new CardTemplateRare(c1, {700 - 150, 700}, {200, 300}, 10);
+    CardTemplateRare* card2 = new CardTemplateRare(c2, {700, 700}, {200, 300}, 20);
+    CardTemplateRare* card3 = new CardTemplateRare(c3, {700 + 150, 700}, {200, 300}, 30);
+    CardTemplateRare* card4 = new CardTemplateRare(c4, {700 + 300, 700}, {200, 300}, 40);
 
 
     combatScene->addItem(card0->getParent());

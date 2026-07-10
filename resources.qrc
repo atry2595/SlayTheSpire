@@ -270,5 +270,9 @@
     <qresource prefix="/fonts">
         <file alias="koodak">assests/font/B Koodak Bold.ttf</file>
         <file alias="cascadia">assests/font/CascadiaMono.ttf</file>
+        <file alias="titrZ">assests/font/Titr Zebr.ttf</file>
+        <file alias="rock">assests/font/Typoster ROCK-ON Demo.otf</file>
+        <file alias="cinema">assests/font/Cinema Font.ttf</file>
+        <file alias="lotrance">assests/font/Lotrance-Regular.otf</file>
     </qresource>
 </RCC>

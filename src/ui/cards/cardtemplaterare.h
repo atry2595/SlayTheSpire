@@ -1,5 +1,5 @@
-#ifndef CARDTEMPLATECOMMON_H
-#define CARDTEMPLATECOMMON_H
+#ifndef CARDTEMPLATEUNRARE_H
+#define CARDTEMPLATEUNRARE_H
 
 #include "ui/textitem.h"
 #include "ui/imageitem.h"
@@ -8,7 +8,7 @@
 #include "categories/cards.h"
 #include <QObject>
 
-class CardTemplateCommon : public QObject
+class CardTemplateRare : public QObject
 {
     Q_OBJECT
 
@@ -37,7 +37,7 @@ private:
     void reverseCard();
 
 public:
-    CardTemplateCommon(abstractCard* source, QPointF pos, QSizeF size, qreal zValue);
+    CardTemplateRare(abstractCard* source, QPointF pos, QSizeF size, qreal zValue);
 
     // Card Size
     void setCardpos(QPointF value) { card_pos = value; }
@@ -60,4 +60,4 @@ public:
     CardParent* getParent() { return card_parent; }
 };
 
-#endif // CARDTEMPLATECOMMON_H
+#endif // CARDTEMPLATEUNRARE_H

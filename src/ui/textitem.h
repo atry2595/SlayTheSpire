@@ -12,6 +12,7 @@ private:
     QString text;
     QFont font;
     QColor color;
+    bool has_text = false;
 
     Qt::Alignment alignment;
 
@@ -40,7 +41,7 @@ public:
                const QStyleOptionGraphicsItem* option,
                QWidget* widget) override;
 
-
+    void clearText();
 
 
 };

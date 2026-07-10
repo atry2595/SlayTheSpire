@@ -4,7 +4,7 @@
 #include <QPixmap>
 #include "categories/cards.h"
 
-QPixmap getCardPixmap(cardID id)
+inline QPixmap getCardPixmap(cardID id)
 {
     switch (id)
     {
@@ -71,7 +71,7 @@ QPixmap getCardPixmap(cardID id)
     return QPixmap();
 }
 
-QPixmap getCardFrame(CardType id)
+inline QPixmap getCardFrame(CardType id)
 {
     switch (id){
 

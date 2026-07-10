@@ -30,6 +30,26 @@ int main(int argc, char *argv[])
     if (!koodakFamilies.isEmpty())
         Fonts::koodak = koodakFamilies.first();
 
+    int f3 = QFontDatabase::addApplicationFont(":/fonts/titrZ");
+    const QStringList titrFamilies = QFontDatabase::applicationFontFamilies(f3);
+    if (!titrFamilies.isEmpty())
+        Fonts::titrZ = titrFamilies.first();
+
+    int f4 = QFontDatabase::addApplicationFont(":/fonts/rock");
+    const QStringList rockFamilies = QFontDatabase::applicationFontFamilies(f4);
+    if (!rockFamilies.isEmpty())
+        Fonts::rock = rockFamilies.first();
+
+    int f5 = QFontDatabase::addApplicationFont(":/fonts/cinema");
+    const QStringList cinemaFamilies = QFontDatabase::applicationFontFamilies(f5);
+    if (!cinemaFamilies.isEmpty())
+        Fonts::cinema = cinemaFamilies.first();
+
+    int f6 = QFontDatabase::addApplicationFont(":/fonts/lotrance");
+    const QStringList lotranceFamilies = QFontDatabase::applicationFontFamilies(f6);
+    if (!lotranceFamilies.isEmpty())
+        Fonts::lotrance = lotranceFamilies.first();
+
 
 
     MainWindow w;

@@ -18,6 +18,7 @@ TextItem::TextItem(QGraphicsItem* parent,
 
 void TextItem::setText(const QString& t)
 {
+    has_text = true;
     text = t;
     renderText();
     update();
@@ -80,8 +81,16 @@ void TextItem::renderText()
 void TextItem::paint(QPainter* painter,
            const QStyleOptionGraphicsItem* option,
                      QWidget* widget) {
-    painter->drawPixmap(
-        boundingRect().toRect(),
-        rendered_text
-        );
+    if (has_text){
+        painter->drawPixmap(
+            boundingRect().toRect(),
+            rendered_text
+            );
+    }
+}
+
+void TextItem::clearText()  {
+    has_text = false;
+    rendered_text = QPixmap();
+    update();
 }

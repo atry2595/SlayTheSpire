@@ -16,5 +16,9 @@ struct setting {
 namespace Fonts {
 inline QString Cascadia;
 inline QString koodak;
+inline QString titrZ;
+inline QString rock;
+inline QString cinema;
+inline QString lotrance;
 }
 #endif // SETTING_H

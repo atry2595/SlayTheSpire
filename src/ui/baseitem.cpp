@@ -99,7 +99,6 @@ QPropertyAnimation* BaseItem::createMoveAnimation(QPointF target,
 {
     auto* anim = new QPropertyAnimation(this, "pos");
     anim->setDuration(duration);
-    anim->setStartValue(pos());
     anim->setEndValue(target);
     anim->setEasingCurve(easing);
     return anim;
@@ -147,7 +146,6 @@ QPropertyAnimation* BaseItem::createResizeAnimation(QSizeF target,
 {
     auto* anim = new QPropertyAnimation(this, "size");
     anim->setDuration(duration);
-    anim->setStartValue(size());
     anim->setEndValue(target);
     anim->setEasingCurve(easing);
     return anim;
