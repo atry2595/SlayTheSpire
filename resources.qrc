@@ -244,4 +244,8 @@
         <file alias="map2_normal.jpg">assests/image/scene/map2_normal.jpg</file>
         <file alias="rest.png">assests/image/scene/rest.png</file>
     </qresource>
+    <qresource prefix="/image/events">
+        <file alias="lab.jpg">assests/image/events/400px-Event-Lab.jpg</file>
+        <file>assests/image/events/400px-Event-GoldenIdol.jpg</file>
+    </qresource>
 </RCC>

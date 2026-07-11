@@ -3,13 +3,15 @@
 
 #include <QString>
 #include <QStringList>
-
-class Player;
+#include "combat/game_action.h"
+#include "entity/abstractentity.h"
 
 class Event
 {
 public:
-
+//abstract entity*
+//game action& در کانستراکتور این دو تا  رو باید کاربر بده
+    // به عنوان متغیر ذخیره شه
     virtual ~Event() = default;
 
     virtual QString getName() const = 0;
