@@ -18,6 +18,8 @@ public:
 
     virtual QStringList getChoices() const = 0;
 
+    virtual bool canAppear(int act) const = 0;
+
     virtual void executeChoice(int choice, Player& player) = 0;
 };
 
