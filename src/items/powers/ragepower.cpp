@@ -16,8 +16,8 @@ QString ragePower::generate_description(){
 
 void ragePower::added_time(game_action& actions) {
     play_card_connection = connect(actions.get_event(), &combatEvent::card_played, this,
-        [this, &actions](abstractCard* card) {
-            if (card->get_card_type() == CardType::attack){
+        [this, &actions](playCardInfo& card) {
+            if (card.card->get_card_type() == CardType::attack && card.owner == owner){
                 blockingInfo bl;
                 bl.affected_by_other = false;
                 bl.block = amount;

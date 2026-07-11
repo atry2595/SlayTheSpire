@@ -17,8 +17,8 @@ QString enragePower::generate_description(){
 
 void enragePower::added_time(game_action& actions) {
     play_card_connection = connect(actions.get_event(), &combatEvent::card_played, this,
-        [this, &actions](abstractCard* card) {
-            if (card->get_card_type() == CardType::skill){
+        [this, &actions](playCardInfo& card) {
+            if (card.card->get_card_type() == CardType::skill && card.owner == owner){
                 abstractPower* np = PowerFactory::createPower(powerID::strength, owner, amount);
                 owner->add_power(actions, np);
             }

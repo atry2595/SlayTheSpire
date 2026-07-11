@@ -30,6 +30,7 @@ protected:
 public:
 
     abstractPower(QString name_init, abstractEntity* owner_init, int x, int max_x, int min_x, bool buff_init, int priority_init);
+    ~abstractPower() override = default;
 
     QString get_name() { return name; }
     abstractEntity* get_owner() { return owner; }

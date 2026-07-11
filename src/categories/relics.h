@@ -1,6 +1,8 @@
 #ifndef RELICS_H
 #define RELICS_H
 
+#include <vector>
+
 enum class relicID{
     burning_blood,
 
@@ -16,12 +18,13 @@ enum class relicID{
     vajra,
     oddly_smooth_stone,
     the_boot,
-    orichalcum,
+    greenback,
     blood_vial,
     centennial_puzzle,
+    horn_cleat,
     gremlin_horn,
     tungsten_rod,
-    capitans_wheel,
+    captains_wheel,
 
     calling_bell,
     mark_of_pain,
@@ -33,12 +36,51 @@ enum class relicID{
     sozu,
     slavers_collar,
 
-    wraped_tongs,
+    warped_tongs,
     mutagenic_strength,
     cultist_headpiece,
     red_mask,
     helmet_of_the_cleric,
     gremlin_visage
+};
+
+enum class relicRarity {
+    starter,
+    common,
+    uncommon,
+    rare,
+    boss,
+    shop,
+    event,
+    special
+};
+
+inline const std::vector<relicID> common_relic = {
+    relicID::anchor,
+    relicID::bag_of_marbles,
+    relicID::happy_flower,
+    relicID::red_skull,
+    relicID::preserved_insect,
+    relicID::vajra,
+    relicID::oddly_smooth_stone,
+    relicID::the_boot,
+    relicID::greenback,
+    relicID::blood_vial,
+    relicID::centennial_puzzle
+};
+
+inline const std::vector<relicID> uncommon_relic = {
+    relicID::shuriken,
+    relicID::kunai,
+    relicID::horn_cleat,
+    relicID::gremlin_horn
+};
+
+inline const std::vector<relicID> rare_relic = {
+    relicID::girya,
+    relicID::ice_cream,
+    relicID::tungsten_rod,
+    relicID::captains_wheel,
 };
 
 #endif // RELICS_H

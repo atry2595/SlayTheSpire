@@ -33,7 +33,7 @@ damageResult game_action::apply_damage(damageInfo& info) {
     auto target = info.target;
 
     target->modify_incoming_damage(info);
-    emit event->before_damage_taken(info);
+    emit event->damage_before_blocking(info);
 
     int dmg = info.damage;
 
@@ -62,8 +62,12 @@ damageResult game_action::apply_damage(damageInfo& info) {
         }
     }
 
+
     int hp = target->get_hp();
     res.final_damage = dmg;
+    if (dmg == 0) return res;
+
+    emit event->damage_before_taken(info);
 
     if (hp > dmg){
         target->set_hp(hp - dmg);
@@ -105,7 +109,7 @@ void game_action::play_card(playCardInfo& info) {
     ply.target_list = info.target_list;
 
     info.card->play(ply);
-    emit event->card_played(info.card);
+    emit event->card_played(info);
 }
 
 

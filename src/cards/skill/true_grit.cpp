@@ -42,7 +42,7 @@ void true_grit::play(playInfo& play_info){
     else card = ironclad::select_card(selectable);
 
     player->hand_pile_remove(card, true);
-    player->exhaust_pile_add(card);
+    player->exhaust_pile_add(card, true);
 }
 
 void true_grit::upgrade(){

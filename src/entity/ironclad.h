@@ -9,7 +9,6 @@
 #include "combat/drink_potion_info.h"
 
 class abstractPotion;
-class abstractRelic;
 
 class ironclad : public abstractEntity
 {
@@ -32,10 +31,11 @@ protected:
     const int max_potion_number = 3;
     const int max_hand_card_number = 10;
 
+    bool reset_energy = true;
+
     std::vector<abstractCard*> deck;
     std::vector<abstractCard*> combat_deck;
     std::vector<abstractPotion*> potion_list;
-    std::vector<abstractRelic*> relic_list;
 
     std::vector<abstractCard*> hand_pile;
     std::vector<abstractCard*> discard_pile;
@@ -50,6 +50,7 @@ public:
 
 
     ironclad(combatEvent* eve);
+    ~ironclad() override;
 
     int get_base_energy() { return base_energy; }
     int get_energy() { return energy; }
@@ -57,20 +58,22 @@ public:
     std::vector<abstractCard*>& get_deck() { return deck; }
     std::vector<abstractCard*>& get_combat_deck() { return combat_deck; }
     std::vector<abstractPotion*>& get_potion_list() { return potion_list; }
-    std::vector<abstractRelic*>& get_relic_list() { return relic_list; }
 
     std::vector<abstractCard*>& get_hand_pile() { return hand_pile; }
     std::vector<abstractCard*>& get_discard_pile() { return discard_pile; }
     std::vector<abstractCard*>& get_draw_pile() { return draw_pile; }
     std::vector<abstractCard*>& get_exhaust_pile() { return exhaust_pile; }
 
+
     void lock_draw_card() { draw_count = max_draw_card;}
 
     void set_base_energy(int i_init) { base_energy = i_init; }
     void set_energy(int i_init) {energy = i_init; }
+    void set_reset_energy(bool b_init) { reset_energy = b_init; }
 
     void combat_deck_add(abstractCard* card);
     void combat_deck_remove(abstractCard* card);
+    void combat_deck_remove_unique();
 
     void hand_pile_add(abstractCard* card, bool independent = false);
     void hand_pile_remove(abstractCard* card, bool independent = false);
@@ -88,6 +91,7 @@ public:
     void deck_add(abstractCard* card);
     void deck_remove(abstractCard* card);
 
+
     void draw_card();
     void apply_discard_pile();
     void shuffle_pile(std::vector<abstractCard*>& pile);
@@ -102,6 +106,7 @@ public:
 
     void potion_list_add(abstractPotion*);
     void potion_list_remove(abstractPotion*);
+    void draw_potion(drinkPotionInfo&);
 };
 
 

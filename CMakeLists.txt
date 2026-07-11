@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-set(CMAKE_AUROUIC ON)
+set(CMAKE_AUTOUIC ON)
 
 find_package(Qt6 REQUIRED COMPONENTS
     Widgets
@@ -164,6 +164,43 @@ add_executable(SlayTheSpire
     src/entity/book_of_stabbing.cpp src/entity/book_of_stabbing.h
     src/entity/taskmaster.cpp src/entity/taskmaster.h
     src/entity/hexaghost.cpp src/entity/hexaghost.h
+    src/items/relics/abstractrelic.cpp src/items/relics/abstractrelic.h
+    src/items/relics/burning_blood_relic.h src/items/relics/burning_blood_relic.cpp
+    src/items/relics/girya_relic.cpp src/items/relics/girya_relic.h
+    src/items/relics/ice_cream_relic.h
+    src/items/relics/girya_relic.cpp src/items/relics/girya_relic.h
+    src/items/relics/ice_cream_relic.cpp src/items/relics/ice_cream_relic.h
+    src/items/relics/shuriken_relic.cpp src/items/relics/shuriken_relic.h
+    src/items/relics/kunai_relic.cpp src/items/relics/kunai_relic.h
+    src/items/relics/anchor_relic.cpp src/items/relics/anchor_relic.h
+    src/items/relics/bag_of_marbles_relic.cpp src/items/relics/bag_of_marbles_relic.h
+    src/items/relics/happy_flower_relic.cpp src/items/relics/happy_flower_relic.h
+    src/items/relics/red_skull_relic.cpp src/items/relics/red_skull_relic.h
+    src/items/relics/preserved_insect_relic.cpp src/items/relics/preserved_insect_relic.h
+    src/items/relics/vajra_relic.cpp src/items/relics/vajra_relic.h
+    src/items/relics/oddly_smooth_stone_relic.cpp src/items/relics/oddly_smooth_stone_relic.h
+    src/items/relics/the_boot_relic.cpp src/items/relics/the_boot_relic.h
+    src/items/relics/greenback_relic.cpp src/items/relics/greenback_relic.h
+    src/items/relics/blood_vial_relic.cpp src/items/relics/blood_vial_relic.h
+    src/items/relics/centennial_puzzle_relic.cpp src/items/relics/centennial_puzzle_relic.h
+    src/items/relics/horn_cleat_relic.cpp src/items/relics/horn_cleat_relic.h
+    src/items/relics/gremlin_horn_relic.cpp src/items/relics/gremlin_horn_relic.h
+    src/items/relics/tungsten_rod_relic.cpp src/items/relics/tungsten_rod_relic.h
+    src/items/relics/captains_wheel_relic.cpp src/items/relics/captains_wheel_relic.h
+    src/items/relics/calling_bell_relic.cpp src/items/relics/calling_bell_relic.h
+    src/items/relics/mark_of_pain_relic.cpp src/items/relics/mark_of_pain_relic.h
+    src/items/relics/velvet_choker_relic.cpp src/items/relics/velvet_choker_relic.h
+    src/items/relics/oddly_smooth_stone_relic.h src/items/relics/philosophers_stone_relic.cpp src/items/relics/philosophers_stone_relic.h
+    src/items/relics/slavers_collar_relic.cpp src/items/relics/slavers_collar_relic.h
+    src/items/relics/warped_tongs_relic.cpp src/items/relics/warped_tongs_relic.h
+    src/items/relics/mutagenic_strength_relic.cpp src/items/relics/mutagenic_strength_relic.h
+    src/items/relics/red_mask_relic.cpp src/items/relics/red_mask_relic.h
+    src/items/relics/helmet_of_the_cleric_relic.cpp src/items/relics/helmet_of_the_cleric_relic.h
+    src/items/relics/gremlin_visage_relic.cpp src/items/relics/gremlin_visage_relic.h
+    src/items/relics/relicfactory.h src/items/relics/relicfactory.cpp
+    src/items/relics/sozu_relic.cpp src/items/relics/sozu_relic.h
+    src/combat/manageCombat/combatRewards.h
+    src/items/relics/black_star_relic.cpp src/items/relics/black_star_relic.h
 
 
 
