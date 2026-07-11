@@ -22,46 +22,100 @@ qt_add_translations(SlayTheSpire
 )
 
 add_executable(SlayTheSpire
+    # Main
     src/main.cpp
+
+    # UI
     src/ui/mainwindow.h
     src/ui/mainwindow.cpp
     src/ui/mainwindow.ui
-    src/ui/mainwindow.cpp src/ui/mainwindow.h src/ui/mainwindow.ui src/main.cpp
+
+    # Resources
     resources.qrc
+
+    # Combat
     src/combat/attack_info.h
     src/combat/damage_info.h
     src/combat/combat_event.h
-    src/combat/game_action.h src/combat/game_action.cpp
-    src/cards/abstractcard.h src/cards/abstractcard.cpp
-    src/cards/attack/abstractattackcard.h src/cards/attack/abstractattackcard.cpp
-    src/cards/attack/strike.h src/cards/attack/strike.cpp
-    src/cards/attack/abstractattackcard.cpp src/cards/attack/abstractattackcard.h src/cards/attack/bludgeon.cpp src/cards/attack/bludgeon.h src/cards/attack/carnage.cpp src/cards/attack/carnage.h src/cards/attack/strike.cpp src/cards/attack/strike.h src/cards/attack/twin_strike.cpp src/cards/attack/twin_strike.h src/cards/abstractcard.cpp src/cards/abstractcard.h
+    src/combat/game_action.h
+    src/combat/game_action.cpp
     src/combat/play_info.h
-    src/entity/abstractentity.h src/entity/abstractentity.cpp
-    src/entity/abstractenemy.h src/entity/abstractenemy.cpp
-    src/entity/ironclad.h src/entity/ironclad.cpp
-    src/combat/play_info.h
-    src/items/powers/abstractpower.h src/items/powers/abstractpower.cpp
-    src/items/powers/abstractpower.h
-    src/items/powers/abstractpower.cpp src/items/powers/abstractpower.h
-    src/items/powers/abstractpower.cpp
-    src/items/powers/abstractpower.cpp
-    src/items/powers/strengthpower.h src/items/powers/strengthpower.cpp
     src/combat/blocking_info.h
-    src/items/powers/dexteritypower.h src/items/powers/dexteritypower.cpp
-    src/items/powers/abstractpower.cpp src/items/powers/abstractpower.h src/items/powers/dexteritypower.cpp src/items/powers/dexteritypower.h src/items/powers/metallicizePower.cpp src/items/powers/metallicizePower.h src/items/powers/strengthpower.cpp src/items/powers/strengthpower.h
-    src/items/powers/abstractpower.cpp src/items/powers/abstractpower.h src/items/powers/dexteritypower.cpp src/items/powers/dexteritypower.h src/items/powers/metallicizePower.cpp src/items/powers/metallicizePower.h src/items/powers/strengthpower.cpp src/items/powers/strengthpower.h src/items/powers/vulnerablePower.cpp src/items/powers/vulnerablePower.h
-    src/items/powers/abstractpower.cpp src/items/powers/abstractpower.h src/items/powers/dexteritypower.cpp src/items/powers/dexteritypower.h src/items/powers/metallicizePower.cpp src/items/powers/metallicizePower.h src/items/powers/strengthpower.cpp src/items/powers/strengthpower.h src/items/powers/vulnerablePower.cpp src/items/powers/vulnerablePower.h src/items/powers/weakpower.cpp src/items/powers/weakpower.h
-    src/items/powers/abstractpower.cpp src/items/powers/abstractpower.h src/items/powers/dexteritypower.cpp src/items/powers/dexteritypower.h src/items/powers/frailpower.cpp src/items/powers/frailpower.h src/items/powers/metallicizePower.cpp src/items/powers/metallicizePower.h src/items/powers/strengthpower.cpp src/items/powers/strengthpower.h src/items/powers/vulnerablePower.cpp src/items/powers/vulnerablePower.h src/items/powers/weakpower.cpp src/items/powers/weakpower.h
-    src/items/powers/abstractpower.cpp src/items/powers/abstractpower.h src/items/powers/dexteritypower.cpp src/items/powers/dexteritypower.h src/items/powers/frailPower.cpp src/items/powers/frailPower.h src/items/powers/metallicizePower.cpp src/items/powers/metallicizePower.h src/items/powers/ritualpower.cpp src/items/powers/ritualpower.h src/items/powers/strengthpower.cpp src/items/powers/strengthpower.h src/items/powers/vulnerablePower.cpp src/items/powers/vulnerablePower.h src/items/powers/weakpower.cpp src/items/powers/weakpower.h
-    src/categories/powers.h
-    src/items/powers/powerfactory.h src/items/powers/powerfactory.cpp
-    src/items/powers/abstractpower.cpp src/items/powers/abstractpower.h src/items/powers/barricadepower.cpp src/items/powers/barricadepower.h src/items/powers/dexteritypower.cpp src/items/powers/dexteritypower.h src/items/powers/frailPower.cpp src/items/powers/frailPower.h src/items/powers/metallicizePower.cpp src/items/powers/metallicizePower.h src/items/powers/powerfactory.cpp src/items/powers/powerfactory.h src/items/powers/ritualpower.cpp src/items/powers/ritualpower.h src/items/powers/strengthpower.cpp src/items/powers/strengthpower.h src/items/powers/vulnerablePower.cpp src/items/powers/vulnerablePower.h src/items/powers/weakpower.cpp src/items/powers/weakpower.h
-    src/items/powers/abstractpower.cpp src/items/powers/abstractpower.h src/items/powers/barricadepower.cpp src/items/powers/barricadepower.h src/items/powers/dexteritypower.cpp src/items/powers/dexteritypower.h src/items/powers/frailPower.cpp src/items/powers/frailPower.h src/items/powers/metallicizePower.cpp src/items/powers/metallicizePower.h src/items/powers/powerfactory.cpp src/items/powers/powerfactory.h src/items/powers/ritualpower.cpp src/items/powers/ritualpower.h src/items/powers/strengthpower.cpp src/items/powers/strengthpower.h src/items/powers/vulnerablePower.cpp src/items/powers/vulnerablePower.h src/items/powers/weakpower.cpp src/items/powers/weakpower.h
-    src/items/powers/frailpower.h src/items/powers/frailpower.cpp
+
+    # Cards
+    src/cards/abstractcard.h
+    src/cards/abstractcard.cpp
+
+    src/cards/attack/abstractattackcard.h
+    src/cards/attack/abstractattackcard.cpp
+
+    src/cards/attack/strike.h
+    src/cards/attack/strike.cpp
+
+    src/cards/attack/bludgeon.h
+    src/cards/attack/bludgeon.cpp
+
+    src/cards/attack/carnage.h
+    src/cards/attack/carnage.cpp
+
+    src/cards/attack/twin_strike.h
+    src/cards/attack/twin_strike.cpp
+
+    # Entity
+    src/entity/abstractentity.h
+    src/entity/abstractentity.cpp
+
+    src/entity/abstractenemy.h
+    src/entity/abstractenemy.cpp
+
+    src/entity/ironclad.h
+    src/entity/ironclad.cpp
+
+    # Powers
+    src/items/powers/abstractpower.h
+    src/items/powers/abstractpower.cpp
+
+    src/items/powers/strengthpower.h
+    src/items/powers/strengthpower.cpp
+
+    src/items/powers/dexteritypower.h
+    src/items/powers/dexteritypower.cpp
+
+    src/items/powers/metallicizePower.h
+    src/items/powers/metallicizePower.cpp
+
+    src/items/powers/vulnerablePower.h
+    src/items/powers/vulnerablePower.cpp
+
+    src/items/powers/weakpower.h
+    src/items/powers/weakpower.cpp
+
+    src/items/powers/frailPower.h
+    src/items/powers/frailPower.cpp
+
+    src/items/powers/ritualpower.h
+    src/items/powers/ritualpower.cpp
+
+    src/items/powers/barricadepower.h
+    src/items/powers/barricadepower.cpp
+
+    src/items/powers/powerfactory.h
+    src/items/powers/powerfactory.cpp
+
+    # Potions
+    src/items/potions/abstractpotion.h
+    src/items/potions/abstractpotion.cpp
+
+    src/items/potions/blockpotion.h
+    src/items/potions/blockpotion.cpp
+
+    src/items/potions/firepotion.h
+    src/items/potions/firepotion.cpp
+
+    # Categories
     src/categories/cards.h
     src/categories/enemies.h
-    src/categories/relics.h
+    src/categories/powers.h
     src/categories/potions.h
     src/items/potions/abstractpotion.h src/items/potions/abstractpotion.cpp
     src/items/potions/blockpotion.h src/items/potions/blockpotion.cpp
@@ -97,6 +151,14 @@ add_executable(SlayTheSpire
     src/entity/small_slime.cpp src/entity/small_slime.h
     src/entity/spheric_guardian.cpp src/entity/spheric_guardian.h
     src/entity/the_champ.cpp src/entity/the_champ.h
+    src/categories/relics.h
+
+    # Utils
+    src/utils/RNG.h
+
+    # Map
+    src/map/map.h
+    src/map/map.cpp
 
     src/cards/cardfactory.h src/cards/cardfactory.cpp
     src/combat/manageCombat/combat_manager.h src/combat/manageCombat/combat_manager.cpp
@@ -246,3 +308,14 @@ target_link_libraries(SlayTheSpire PRIVATE
     Qt6::Network
     Qt6::Multimedia
 )
+if(WIN32)
+    if(MSVC)
+        set_target_properties(SlayTheSpire PROPERTIES
+            LINK_FLAGS "/SUBSYSTEM:CONSOLE"
+        )
+    else()
+        set_target_properties(SlayTheSpire PROPERTIES
+            LINK_FLAGS "-Wl,-subsystem,console"
+        )
+    endif()
+endif()
