@@ -3,6 +3,7 @@
         <file alias="back.png">assests/image/cards/back.png</file>
         <file alias="back1.png">assests/image/cards/back1.png</file>
         <file alias="back2.png">assests/image/cards/back2.png</file>
+        <file alias="back3.png">assests/image/cards/back3.png</file>
     </qresource>
     <qresource prefix="/image/cards/attack">
         <file alias="bash.png">assests/image/cards/attack/bash.png</file>
@@ -266,6 +267,7 @@
         <file alias="frame_red.png">assests/image/cards/frame/frame_red.png</file>
         <file alias="frame2.png">assests/image/cards/frame/frame2.png</file>
         <file alias="frame1.png">assests/image/cards/frame/frame1.png</file>
+        <file alias="frame3.png">assests/image/cards/frame/frame3.png</file>
     </qresource>
     <qresource prefix="/fonts">
         <file alias="koodak">assests/font/B Koodak Bold.ttf</file>
@@ -274,5 +276,7 @@
         <file alias="rock">assests/font/Typoster ROCK-ON Demo.otf</file>
         <file alias="cinema">assests/font/Cinema Font.ttf</file>
         <file alias="lotrance">assests/font/Lotrance-Regular.otf</file>
+        <file alias="ebhaar">assests/font/Ebhaar.otf</file>
+        <file alias="forte">assests/font/FORTE.TTF</file>
     </qresource>
 </RCC>

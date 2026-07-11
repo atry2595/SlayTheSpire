@@ -551,6 +551,7 @@ add_executable(SlayTheSpire
     src/core/setting.h
     src/ui/cards/cardtemplateuncommon.cpp src/ui/cards/cardtemplateuncommon.h
     src/ui/cards/cardtemplaterare.cpp src/ui/cards/cardtemplaterare.h
+    src/ui/cards/cardtemplatelegend.cpp src/ui/cards/cardtemplatelegend.h
 )
 
 target_include_directories(SlayTheSpire PRIVATE

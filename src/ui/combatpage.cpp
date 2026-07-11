@@ -7,6 +7,7 @@
 #include "ui/cards/cardtemplatecommon.h"
 #include "ui/cards/cardtemplateuncommon.h"
 #include "ui/cards/cardtemplaterare.h"
+#include "ui/cards/cardtemplatelegend.h"
 #include <QParallelAnimationGroup>
 
 CombatPage::CombatPage(QWidget *parent)
@@ -47,7 +48,7 @@ CombatPage::CombatPage(QWidget *parent)
     combatScene->addItem(bg);
 
     ImageItem* ir = new ImageItem(nullptr, {400, 275}, {155, 370});
-    ir->setPixmap(QPixmap(":/image/characters/ironclad1.png"));
+    ir->setPixmap(QPixmap(":/image/characters/ironclad5.png"));
     ir->setZValue(0);
 
     auto u = ir->createGeometryAnimation({155, 370 -14, 400, 275 + 14}, 750, QEasingCurve::InSine);
@@ -64,18 +65,18 @@ CombatPage::CombatPage(QWidget *parent)
 
     abstractCard* c0 = CardFactory::createCard(cardID::bash);
     c0->set_lock(true);
-    abstractCard* c1 = CardFactory::createCard(cardID::immolate);
-    abstractCard* c2 = CardFactory::createCard(cardID::demon_form);
+    abstractCard* c1 = CardFactory::createCard(cardID::demon_form);
+    abstractCard* c2 = CardFactory::createCard(cardID::reaper);
     c2->upgrade();
-    abstractCard* c3 = CardFactory::createCard(cardID::JAX);
+    abstractCard* c3 = CardFactory::createCard(cardID::heavy_blade);
     c3->upgrade();
-    abstractCard* c4 = CardFactory::createCard(cardID::pommel_strike);
+    abstractCard* c4 = CardFactory::createCard(cardID::feel_no_pain);
 
-    CardTemplateRare* card0 = new CardTemplateRare(c0, {700 - 300, 700}, {200, 300}, 0);
-    CardTemplateRare* card1 = new CardTemplateRare(c1, {700 - 150, 700}, {200, 300}, 10);
-    CardTemplateRare* card2 = new CardTemplateRare(c2, {700, 700}, {200, 300}, 20);
-    CardTemplateRare* card3 = new CardTemplateRare(c3, {700 + 150, 700}, {200, 300}, 30);
-    CardTemplateRare* card4 = new CardTemplateRare(c4, {700 + 300, 700}, {200, 300}, 40);
+    CardTemplateLegend* card0 = new CardTemplateLegend(c0, {700 - 300, 700}, {200, 300}, 0);
+    CardTemplateLegend* card1 = new CardTemplateLegend(c1, {700 - 150, 700}, {200, 300}, 10);
+    CardTemplateLegend* card2 = new CardTemplateLegend(c2, {700, 700}, {200, 300}, 20);
+    CardTemplateLegend* card3 = new CardTemplateLegend(c3, {700 + 150, 700}, {200, 300}, 30);
+    CardTemplateLegend* card4 = new CardTemplateLegend(c4, {700 + 300, 700}, {200, 300}, 40);
 
 
     combatScene->addItem(card0->getParent());

@@ -50,6 +50,16 @@ int main(int argc, char *argv[])
     if (!lotranceFamilies.isEmpty())
         Fonts::lotrance = lotranceFamilies.first();
 
+    int f7 = QFontDatabase::addApplicationFont(":/fonts/forte");
+    const QStringList forteFamilies = QFontDatabase::applicationFontFamilies(f6);
+    if (!forteFamilies.isEmpty())
+        Fonts::forte = forteFamilies.first();
+
+    int f8 = QFontDatabase::addApplicationFont(":/fonts/ebhaar");
+    const QStringList ebhaarFamilies = QFontDatabase::applicationFontFamilies(f8);
+    if (!ebhaarFamilies.isEmpty())
+        Fonts::ebhaar = ebhaarFamilies.first();
+
 
 
     MainWindow w;

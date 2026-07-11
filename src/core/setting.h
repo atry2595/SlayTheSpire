@@ -20,5 +20,7 @@ inline QString titrZ;
 inline QString rock;
 inline QString cinema;
 inline QString lotrance;
+inline QString ebhaar;
+inline QString forte;
 }
 #endif // SETTING_H

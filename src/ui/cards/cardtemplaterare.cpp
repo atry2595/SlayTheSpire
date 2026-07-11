@@ -119,7 +119,7 @@ void CardTemplateRare::updateCard() {
         QParallelAnimationGroup* inAnim = new QParallelAnimationGroup();
         QSequentialAnimationGroup* gr = new QSequentialAnimationGroup();
 
-        gr->addPause(10000);
+        gr->addPause(500);
 
         outAnim->addAnimation(card_parent->createMoveAnimation(
             {card_pos + QPointF(0, card_size.height())}

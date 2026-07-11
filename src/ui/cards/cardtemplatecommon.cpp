@@ -121,7 +121,7 @@ void CardTemplateCommon::updateCard() {
         QParallelAnimationGroup* inAnim = new QParallelAnimationGroup();
         QSequentialAnimationGroup* gr = new QSequentialAnimationGroup();
 
-        gr->addPause(200);
+        gr->addPause(500);
 
         outAnim->addAnimation(card_parent->createMoveAnimation(
             {card_pos + QPointF(0, card_size.height())}
