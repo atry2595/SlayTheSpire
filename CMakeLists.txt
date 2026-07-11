@@ -265,6 +265,7 @@ add_executable(SlayTheSpire
     src/items/relics/black_star_relic.cpp src/items/relics/black_star_relic.h
     src/events/UnknownMap.h
     src/categories/unknowns.h
+    src/events/ominousforge.h src/events/ominousforge.cpp
 
 
 

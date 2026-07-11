@@ -1,7 +1,7 @@
 #ifndef UNKNOWNMAP_H
 #define UNKNOWNMAP_H
 
-#include <QString>
+#include <QObject>
 #include "categories/unknowns.h"
 
 struct UnknownNode {
@@ -30,5 +30,7 @@ struct UnknownManager {
 
     std::vector<UnknownNode> nodes;
 };
+
+inline UnknownNode leave_node {QObject::tr("Leave"), "", [](){}, [](){return true;}, {}};
 
 #endif // UNKNOWNMAP_H
