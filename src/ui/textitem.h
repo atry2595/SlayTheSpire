@@ -13,6 +13,8 @@ private:
     QFont font;
     QColor color;
     bool has_text = false;
+    bool have_bg = false;
+    QPixmap background;
 
     Qt::Alignment alignment;
 
@@ -42,6 +44,10 @@ public:
                QWidget* widget) override;
 
     void clearText();
+
+    void setBackground(const QPixmap& pix);
+
+    void clearBackground();
 
 
 };

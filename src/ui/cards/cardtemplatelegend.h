@@ -33,8 +33,6 @@ private:
     TextItem* card_description = nullptr;
 
 
-    void updateCard();
-    void reverseCard();
 
 public:
     CardTemplateLegend(abstractCard* source, QPointF pos, QSizeF size, qreal zValue);
@@ -58,6 +56,9 @@ public:
     const QColor& getBaseColor() const { return base_color; }
 
     CardParent* getParent() { return card_parent; }
+
+
+    void updateCard();
 };
 
 #endif // CARDTEMPLATELEGEND_H

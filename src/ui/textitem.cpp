@@ -47,8 +47,11 @@ void TextItem::setAlignment(Qt::Alignment align)
 
 void TextItem::renderText()
 {
+
     if(size().isEmpty())
         return;
+
+
 
     QSize renderSize = (size() * 10).toSize();
 
@@ -68,6 +71,10 @@ void TextItem::renderText()
     painter.setPen(color);
 
     QRectF rect(0,0,size().width(),size().height());
+
+    if (have_bg) {
+        painter.drawPixmap(rendered_text.rect(), background);
+    }
 
     painter.drawText(
         rect,
@@ -92,5 +99,19 @@ void TextItem::paint(QPainter* painter,
 void TextItem::clearText()  {
     has_text = false;
     rendered_text = QPixmap();
+    update();
+}
+
+void TextItem::setBackground(const QPixmap& pix) {
+    background = pix;
+    have_bg = true;
+    renderText();
+    update();
+}
+
+void TextItem::clearBackground() {
+    background = QPixmap();
+    have_bg = false;
+    renderText();
     update();
 }

@@ -33,13 +33,11 @@ private:
     TextItem* card_description = nullptr;
 
 
-    void updateCard();
-    void reverseCard();
 
 public:
     CardTemplateCommon(abstractCard* source, QPointF pos, QSizeF size, qreal zValue);
 
-    // Card Size
+    // Card pos
     void setCardpos(QPointF value) { card_pos = value; }
     void setCardpos(qreal w, qreal h) { card_pos = QPointF(w, h); }
     QPointF getCardpos() const { return card_pos; }
@@ -58,6 +56,9 @@ public:
     const QColor& getBaseColor() const { return base_color; }
 
     CardParent* getParent() { return card_parent; }
+
+
+    void updateCard();
 };
 
 #endif // CARDTEMPLATECOMMON_H
