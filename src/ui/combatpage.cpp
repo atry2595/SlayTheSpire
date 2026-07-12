@@ -8,6 +8,9 @@
 #include "ui/cards/cardtemplateuncommon.h"
 #include "ui/cards/cardtemplaterare.h"
 #include "ui/cards/cardtemplatelegend.h"
+#include "ui/entities/ironcladitem.h"
+#include "items//powers/powerfactory.h"
+#include "entity/ironclad.h"
 #include <QParallelAnimationGroup>
 
 CombatPage::CombatPage(QWidget *parent)
@@ -47,19 +50,39 @@ CombatPage::CombatPage(QWidget *parent)
     bg->setZValue(-1000);
     combatScene->addItem(bg);
 
-    ImageItem* ir = new ImageItem(nullptr, {400, 275}, {155, 370});
-    ir->setPixmap(QPixmap(":/image/characters/ironclad5.png"));
-    ir->setZValue(0);
+    // ImageItem* ir = new ImageItem(nullptr, {400, 275}, {155, 370});
+    // ir->setPixmap(QPixmap(":/image/characters/ironclad5.png"));
+    // ir->setZValue(0);
 
-    auto u = ir->createGeometryAnimation({155, 370 -14, 400, 275 + 14}, 750, QEasingCurve::InSine);
-    auto f = ir->createGeometryAnimation({155, 370, 400, 275}, 750, QEasingCurve::OutSine);
 
-    auto* gr = new QSequentialAnimationGroup();
-    gr->addAnimation(u);
-    gr->addAnimation(f);
-    gr->setLoopCount(-1);
-    gr->start();
-    combatScene->addItem(ir);
+    auto plyr = new ironclad(nullptr);
+    auto pwr = PowerFactory::createPower(powerID::strength, plyr, 5);
+    game_action acts(nullptr);
+    plyr->add_power(acts, pwr);
+
+    pwr = PowerFactory::createPower(powerID::strength, plyr, -3);
+    plyr->add_power(acts, pwr);
+
+    pwr = PowerFactory::createPower(powerID::dexterity, plyr, -3);
+    plyr->add_power(acts, pwr);
+
+    pwr = PowerFactory::createPower(powerID::berserk, plyr, 1);
+    plyr->add_power(acts, pwr);
+
+    auto plyr_item = new IroncladItem(plyr, {170, 400}, 100);
+    combatScene->addItem(plyr_item->getParent());
+    plyr_item->getParent()->activeAttackAnimation();
+
+
+    // auto u = ir->createGeometryAnimation({155, 370 -14, 400, 275 + 14}, 750, QEasingCurve::InSine);
+    // auto f = ir->createGeometryAnimation({155, 370, 400, 275}, 750, QEasingCurve::OutSine);
+
+    // auto* gr = new QSequentialAnimationGroup();
+    // gr->addAnimation(u);
+    // gr->addAnimation(f);
+    // gr->setLoopCount(-1);
+    // gr->start();
+    // combatScene->addItem(ir);
 
 
 

@@ -2,6 +2,7 @@
 #define ENTITYPARENT_H
 
 #include "ui/baseitem.h"
+#include <QSequentialAnimationGroup>
 
 class EntityParent : public BaseItem
 {
@@ -9,7 +10,7 @@ class EntityParent : public BaseItem
 
 private:
     bool is_enemy = false;
-    QPropertyAnimation* attack_animation = nullptr;
+
 
 public:
     EntityParent(QGraphicsItem* parent = nullptr,
@@ -19,7 +20,8 @@ public:
     void setIsEnemy(bool enmy) { is_enemy = enmy; }
     bool getIsEnemy() { return is_enemy; }
 
-    void activeAttackAnimation() { attack_animation->start(); }
+    QSequentialAnimationGroup* attack_animation = nullptr;
+    void activeAttackAnimation() { if (attack_animation) attack_animation->start(); }
 };
 
 #endif // ENTITYPARENT_H

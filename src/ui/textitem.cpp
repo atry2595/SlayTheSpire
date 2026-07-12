@@ -73,9 +73,18 @@ void TextItem::renderText()
     QRectF rect(0,0,size().width(),size().height());
 
     if (have_bg) {
-        painter.drawPixmap(rendered_text.rect(), background);
+        painter.drawPixmap(rect.toRect(), background);
     }
 
+    if (border){
+        painter.setPen(Qt::black);
+        painter.drawText(rect.translated(-1, -1), alignment, text);
+        painter.drawText(rect.translated( 1, -1), alignment, text);
+        painter.drawText(rect.translated(-1,  1), alignment, text);
+        painter.drawText(rect.translated( 1,  1), alignment, text);
+    }
+
+    painter.setPen(color);
     painter.drawText(
         rect,
         alignment | Qt::TextWordWrap,
@@ -88,12 +97,11 @@ void TextItem::renderText()
 void TextItem::paint(QPainter* painter,
            const QStyleOptionGraphicsItem* option,
                      QWidget* widget) {
-    if (has_text){
-        painter->drawPixmap(
+
+    painter->drawPixmap(
             boundingRect().toRect(),
             rendered_text
             );
-    }
 }
 
 void TextItem::clearText()  {
@@ -115,3 +123,4 @@ void TextItem::clearBackground() {
     renderText();
     update();
 }
+

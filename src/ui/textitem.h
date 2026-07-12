@@ -15,6 +15,7 @@ private:
     bool has_text = false;
     bool have_bg = false;
     QPixmap background;
+    bool border = false;
 
     Qt::Alignment alignment;
 
@@ -38,6 +39,8 @@ public:
     const Qt::Alignment& getAligment() const {return alignment;}
 
     const QPixmap& getRendered_text() const {return rendered_text;}
+
+    void setBorder(bool b) { border = b; }
 
     void paint(QPainter* painter,
                const QStyleOptionGraphicsItem* option,
