@@ -31,6 +31,4 @@ struct UnknownManager {
     std::vector<UnknownNode> nodes;
 };
 
-inline UnknownNode leave_node {QObject::tr("Leave"), "", [](){}, [](){return true;}, {}};
-
 #endif // UNKNOWNMAP_H

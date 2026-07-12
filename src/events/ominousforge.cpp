@@ -55,6 +55,7 @@ OminousForge::OminousForge(game_action& actions, ironclad* player) {
     //---------------------------------------------------
 
     manager.nodes.push_back(root);
+    int rootIdx = manager.nodes.size() - 1;
 
     manager.nodes.push_back(forge_node);
     int forgeIdx = manager.nodes.size() - 1;
@@ -62,5 +63,5 @@ OminousForge::OminousForge(game_action& actions, ironclad* player) {
     manager.nodes.push_back(rummage_node);
     int rummageIdx = manager.nodes.size() - 1;
 
-    manager.nodes[0].next_nodes = {forgeIdx, rummageIdx, -1};
+    manager.nodes[rootIdx].next_nodes = {forgeIdx, rummageIdx, -1};
 }
