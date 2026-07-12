@@ -249,5 +249,6 @@
         <file>assests/image/events/400px-Event-GoldenIdol.jpg</file>
         <file alias="Ominous_Forge.jpg">assests/image/events/photo_2026-07-12_19-35-32.jpg</file>
         <file alias="Bonfire_Spirits.jpg">assests/image/events/photo_2026-07-12_19-30-12.jpg</file>
+        <file alias="Golden_Shrine.jpg">assests/image/events/photo_2026-07-12_19-30-14.jpg</file>
     </qresource>
 </RCC>
