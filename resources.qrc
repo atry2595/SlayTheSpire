@@ -253,5 +253,6 @@
         <file alias="Lab.jpg">assests/image/events/photo_2026-07-12_19-30-15.jpg</file>
         <file alias="Golden_Idol.jpg">assests/image/events/photo_2026-07-12_19-30-16.jpg</file>
         <file alias="The_Cleric.jpg">assests/image/events/photo_2026-07-12_19-54-58.jpg</file>
+        <file alias="Shining_Light.jpg">assests/image/events/photo_2026-07-12_19-30-18 (2).jpg</file>
     </qresource>
 </RCC>
