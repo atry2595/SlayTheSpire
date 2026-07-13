@@ -5,15 +5,14 @@
 #include "imageitem.h"
 #include "cards/cardfactory.h"
 #include "ui/cards/cardtemplatecommon.h"
-#include "ui/cards/cardtemplateuncommon.h"
-#include "ui/cards/cardtemplaterare.h"
-#include "ui/cards/cardtemplatelegend.h"
 #include "ui/entities/ironcladitem.h"
 #include "items//powers/powerfactory.h"
 #include "entity/ironclad.h"
 #include <QParallelAnimationGroup>
 #include "ui/entities/blueslaveritem.h"
 #include "entity/blue_slaver.h"
+#include "ui/entities/redslaveritem.h"
+#include "entity/red_slaver.h"
 
 CombatPage::CombatPage(QWidget *parent)
     : QWidget{parent}
@@ -68,23 +67,32 @@ CombatPage::CombatPage(QWidget *parent)
     pwr = PowerFactory::createPower(powerID::dexterity, plyr, -3);
     plyr->add_power(acts, pwr);
 
-    pwr = PowerFactory::createPower(powerID::berserk, plyr, 1);
+    pwr = PowerFactory::createPower(powerID::entangled, plyr, 1);
     plyr->add_power(acts, pwr);
 
     auto plyr_item = new IroncladItem(plyr, {170, 360}, 100);
     combatScene->addItem(plyr_item->getParent());
     plyr_item->getParent()->activeAttackAnimation();
 
-    auto enm = blue_slaver::create(acts);
+    auto enm = red_slaver::create(acts);
     pwr = PowerFactory::createPower(powerID::strength, enm, 3);
     enm->add_power(acts, pwr);
 
     pwr = PowerFactory::createPower(powerID::vulnerable, enm, 2);
     enm->add_power(acts, pwr);
 
-    auto enm_item = new BlueSlaverItem(enm, {1600 - 500, 360}, 100);
+    auto enm_item = new RedSlaverItem(enm, {1600 - 400, 360}, 100);
     combatScene->addItem(enm_item->getParent());
     enm_item->getParent()->activeAttackAnimation();
+
+    auto enm2 = blue_slaver::create(acts);
+
+    pwr = PowerFactory::createPower(powerID::vulnerable, enm2, 2);
+    enm2->add_power(acts, pwr);
+
+    auto enm2_item = new BlueSlaverItem(enm2, {1600 - 700, 360}, 100);
+    combatScene->addItem(enm2_item->getParent());
+    enm2_item->getParent()->activeAttackAnimation();
 
     // auto u = ir->createGeometryAnimation({155, 370 -14, 400, 275 + 14}, 750, QEasingCurve::InSine);
     // auto f = ir->createGeometryAnimation({155, 370, 400, 275}, 750, QEasingCurve::OutSine);
@@ -107,11 +115,11 @@ CombatPage::CombatPage(QWidget *parent)
     c3->upgrade();
     abstractCard* c4 = CardFactory::createCard(cardID::feel_no_pain);
 
-    CardTemplateLegend* card0 = new CardTemplateLegend(c0, {700 - 300, 700}, {200, 300}, 0);
-    CardTemplateLegend* card1 = new CardTemplateLegend(c1, {700 - 150, 700}, {200, 300}, 10);
-    CardTemplateLegend* card2 = new CardTemplateLegend(c2, {700, 700}, {200, 300}, 20);
-    CardTemplateLegend* card3 = new CardTemplateLegend(c3, {700 + 150, 700}, {200, 300}, 30);
-    CardTemplateLegend* card4 = new CardTemplateLegend(c4, {700 + 300, 700}, {200, 300}, 40);
+    CardTemplateCommon* card0 = new CardTemplateCommon(c0, {700 - 300, 700}, {200, 300}, 0);
+    CardTemplateCommon* card1 = new CardTemplateCommon(c1, {700 - 150, 700}, {200, 300}, 10);
+    CardTemplateCommon* card2 = new CardTemplateCommon(c2, {700, 700}, {200, 300}, 20);
+    CardTemplateCommon* card3 = new CardTemplateCommon(c3, {700 + 150, 700}, {200, 300}, 30);
+    CardTemplateCommon* card4 = new CardTemplateCommon(c4, {700 + 300, 700}, {200, 300}, 40);
 
 
     combatScene->addItem(card0->getParent());

@@ -6,12 +6,12 @@
 entangledPower::entangledPower(abstractEntity* owner_init, int x)
     : abstractPower(tr("Entangled"), owner_init, x, 1, 0, false, 0)
 {
-    description = tr("You may not play any Attacks this turn.").arg(amount);
+    description = tr("You may not play any Attacks this turn.");
 }
 
 
 QString entangledPower::generate_description(){
-    description = tr("You may not play any Attacks this turn.").arg(amount);
+    description = tr("You may not play any Attacks this turn.");
     return description;
 }
 

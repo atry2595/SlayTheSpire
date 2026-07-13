@@ -2,7 +2,7 @@
 #include <QSequentialAnimationGroup>
 
 IroncladItem::IroncladItem(abstractEntity* source, QPointF pos, qreal zValue)
-    :abstractEntityItem(source, pos, {IroncladItem::height, IroncladItem::width + 110}, zValue)
+    :abstractEntityItem(source, pos, {IroncladItem::width, IroncladItem::height + 110}, zValue)
 {
     //=======parent=========
     entity_parent = new EntityParent(nullptr, entity_size, entity_pos);
@@ -14,7 +14,7 @@ IroncladItem::IroncladItem(abstractEntity* source, QPointF pos, qreal zValue)
 
 
     //=======image========
-    entity_image = new ImageItem(entity_parent, {IroncladItem::height, IroncladItem::width}, {0, 50});
+    entity_image = new ImageItem(entity_parent, {IroncladItem::width, IroncladItem::height}, {0, 50});
     entity_image->setPixmap(QPixmap(":/image/characters/ironclad1.png")); // switch case
     QSequentialAnimationGroup* gr = new QSequentialAnimationGroup(entity_image);
 
@@ -29,11 +29,11 @@ IroncladItem::IroncladItem(abstractEntity* source, QPointF pos, qreal zValue)
 
     //=======hpBar========
     hp_bar = new SimpleHpBar();
-    hp_bar->setSize(IroncladItem::height, 15);
+    hp_bar->setSize(IroncladItem::width, 15);
 
     hp_proxy = new QGraphicsProxyWidget(entity_parent);
     hp_proxy->setWidget(hp_bar);
-    hp_proxy->setPos({0, IroncladItem::width + 50});
+    hp_proxy->setPos({0, IroncladItem::height + 50});
 
 
     //=======anim=========
@@ -63,7 +63,7 @@ void IroncladItem::updateEntity() {
     powers.clear();
 
     for (int i = 0; i < entity_source->get_power_list().size(); i++){
-        TextItem* p = new TextItem(entity_parent, {35, 35}, QPointF(35*i, IroncladItem::width + 50 + 20));
+        TextItem* p = new TextItem(entity_parent, {35, 35}, QPointF(35*i, IroncladItem::height + 50 + 20));
         auto pwr = entity_source->get_power_list()[i];
         p->setBackground(getPowerIcon(pwr->get_id()));
 

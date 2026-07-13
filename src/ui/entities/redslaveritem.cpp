@@ -1,11 +1,11 @@
-#include "blueslaveritem.h"
+#include "redslaveritem.h"
 #include "ui/entities/getIntentIcon.h"
 #include "ui/entities/getCharacterPixmap.h"
 #include "entity/abstractenemy.h"
 #include <QSequentialAnimationGroup>
 
-BlueSlaverItem::BlueSlaverItem(abstractEntity* source, QPointF pos, qreal zValue)
-    :abstractEntityItem(source, pos, {BlueSlaverItem::width, BlueSlaverItem::height + 110}, zValue)
+RedSlaverItem::RedSlaverItem(abstractEntity* source, QPointF pos, qreal zValue)
+    :abstractEntityItem(source, pos, {RedSlaverItem::width, RedSlaverItem::height + 110}, zValue)
 {
     //=======parent=========
     entity_parent = new EntityParent(nullptr, entity_size, entity_pos);
@@ -13,7 +13,7 @@ BlueSlaverItem::BlueSlaverItem(abstractEntity* source, QPointF pos, qreal zValue
 
 
     //=======image========
-    entity_image = new ImageItem(entity_parent, {BlueSlaverItem::width, BlueSlaverItem::height}, {0, 50});
+    entity_image = new ImageItem(entity_parent, {RedSlaverItem::width, RedSlaverItem::height}, {0, 50});
     entity_image->setPixmap(getCharacterPixmap(source->get_ID()));
     QSequentialAnimationGroup* gr = new QSequentialAnimationGroup(entity_image);
 
@@ -28,17 +28,17 @@ BlueSlaverItem::BlueSlaverItem(abstractEntity* source, QPointF pos, qreal zValue
 
     //=======hpBar========
     hp_bar = new SimpleHpBar();
-    hp_bar->setSize(BlueSlaverItem::width, 15);
+    hp_bar->setSize(RedSlaverItem::width, 15);
 
     hp_proxy = new QGraphicsProxyWidget(entity_parent);
     hp_proxy->setWidget(hp_bar);
-    hp_proxy->setPos({0, BlueSlaverItem::height + 50});
+    hp_proxy->setPos({0, RedSlaverItem::height + 50});
 
 
     //=======anim=========
     auto& anim = entity_parent->attack_animation;
     anim = new QSequentialAnimationGroup(entity_parent);
-    anim->addAnimation(entity_parent->createMoveAnimation({pos.x() - BlueSlaverItem::height / 2, pos.y()}, 321, QEasingCurve::InQuart));
+    anim->addAnimation(entity_parent->createMoveAnimation({pos.x() - RedSlaverItem::height / 2, pos.y()}, 321, QEasingCurve::InQuart));
     anim->addAnimation(entity_parent->createMoveAnimation({pos.x(), pos.y()}, 321, QEasingCurve::OutQuart));
 
 
@@ -47,11 +47,11 @@ BlueSlaverItem::BlueSlaverItem(abstractEntity* source, QPointF pos, qreal zValue
 }
 
 
-void BlueSlaverItem::updateEntity() {
+void RedSlaverItem::updateEntity() {
 
     //=======intent======
     if (intent) delete intent;
-    intent = new TextItem(entity_parent, {45, 45}, {(BlueSlaverItem::width/2), -8});
+    intent = new TextItem(entity_parent, {45, 45}, {(RedSlaverItem::width/2), -8});
     abstractEnemy* enmy = dynamic_cast<abstractEnemy*>(entity_source);
     auto intnt = enmy->get_intent_list()[enmy->get_current_move()];
 
@@ -76,8 +76,8 @@ void BlueSlaverItem::updateEntity() {
     QSequentialAnimationGroup* gr = new QSequentialAnimationGroup(intent);
 
 
-    gr->addAnimation(intent->createMoveAnimation({(BlueSlaverItem::width/2), -8 -10}, 1500, QEasingCurve::InOutSine));
-    gr->addAnimation(intent->createMoveAnimation({(BlueSlaverItem::width/2), -8}, 1500, QEasingCurve::InOutSine));
+    gr->addAnimation(intent->createMoveAnimation({(RedSlaverItem::width/2), -8 -10}, 1500, QEasingCurve::InOutSine));
+    gr->addAnimation(intent->createMoveAnimation({(RedSlaverItem::width/2), -8}, 1500, QEasingCurve::InOutSine));
     gr->setLoopCount(-1);
     gr->start();
 
@@ -95,7 +95,7 @@ void BlueSlaverItem::updateEntity() {
     powers.clear();
 
     for (int i = 0; i < entity_source->get_power_list().size(); i++){
-        TextItem* p = new TextItem(entity_parent, {35, 35}, QPointF(35*i, BlueSlaverItem::height + 50 + 20));
+        TextItem* p = new TextItem(entity_parent, {35, 35}, QPointF(35*i, RedSlaverItem::height + 50 + 20));
         auto pwr = entity_source->get_power_list()[i];
         p->setBackground(getPowerIcon(pwr->get_id()));
 

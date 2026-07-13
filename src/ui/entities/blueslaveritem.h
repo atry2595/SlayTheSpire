@@ -6,8 +6,8 @@
 class BlueSlaverItem : public abstractEntityItem
 {
     Q_OBJECT
-    constexpr static int width = 214;
-    constexpr static int height = 254;
+    constexpr static int width = 254;
+    constexpr static int height = 214;
 public:
     BlueSlaverItem(abstractEntity* source, QPointF pos, qreal zValue);
 
