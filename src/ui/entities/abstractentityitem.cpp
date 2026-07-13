@@ -10,8 +10,7 @@ abstractEntityItem::abstractEntityItem(abstractEntity* source, QPointF pos, QSiz
 abstractEntityItem::~abstractEntityItem() {
     delete entity_image;
     delete entity_name;
-    delete intent_icon;
-    delete intent_value;
+    delete intent;
     delete hp_bar;
     delete hp_proxy;
     for (auto item : powers) delete item;

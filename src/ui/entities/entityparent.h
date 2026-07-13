@@ -9,7 +9,6 @@ class EntityParent : public BaseItem
     Q_OBJECT
 
 private:
-    bool is_enemy = false;
 
 
 public:
@@ -17,8 +16,6 @@ public:
                  QSizeF home_size = {0,0},
                  QPointF home_pos = {0,0});
 
-    void setIsEnemy(bool enmy) { is_enemy = enmy; }
-    bool getIsEnemy() { return is_enemy; }
 
     QSequentialAnimationGroup* attack_animation = nullptr;
     void activeAttackAnimation() { if (attack_animation) attack_animation->start(); }

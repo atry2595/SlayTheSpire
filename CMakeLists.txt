@@ -558,6 +558,8 @@ add_executable(SlayTheSpire
     src/ui/entities/ironcladitem.h src/ui/entities/ironcladitem.cpp
     src/ui/entities/getCharacterPixmap.h
     src/ui/entities/getPowerIcon.h
+    src/ui/entities/blueslaveritem.cpp src/ui/entities/blueslaveritem.h
+    src/ui/entities/getIntentIcon.h
 )
 
 target_include_directories(SlayTheSpire PRIVATE

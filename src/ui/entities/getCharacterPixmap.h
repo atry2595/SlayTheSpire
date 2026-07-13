@@ -4,7 +4,7 @@
 #include <QPixmap>
 #include "categories/enemies.h"
 
-QPixmap getCharacterPixmap(entityID id)
+inline QPixmap getCharacterPixmap(entityID id)
 {
     switch (id)
     {
@@ -65,7 +65,9 @@ QPixmap getCharacterPixmap(entityID id)
     case entityID::the_champ:
         return QPixmap(":/image/characters/the_champ.png");
 
+    default:
     return QPixmap();
+    }
 }
 
 #endif // GETCHARACTERPIXMAP_H

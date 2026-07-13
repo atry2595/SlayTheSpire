@@ -29,8 +29,7 @@ protected:
     EntityParent* entity_parent = nullptr;
     ImageItem* entity_image = nullptr;
     TextItem* entity_name = nullptr;
-    ImageItem* intent_icon = nullptr;
-    TextItem* intent_value = nullptr;
+    TextItem* intent = nullptr;
     SimpleHpBar* hp_bar = nullptr;
     QGraphicsProxyWidget* hp_proxy = nullptr;
     std::vector<TextItem*> powers = {};

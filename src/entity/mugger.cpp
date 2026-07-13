@@ -31,7 +31,7 @@ mugger* mugger::create(game_action& actions){
 
     enemy_intent intnt4;
     intnt4.name = tr("Escape");
-    intnt4.type = intent_type::special;
+    intnt4.type = intent_type::escape;
 
 
     enemy->intent_list[(int)mugger_move::mug] = intnt1;

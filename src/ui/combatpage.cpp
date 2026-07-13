@@ -12,6 +12,8 @@
 #include "items//powers/powerfactory.h"
 #include "entity/ironclad.h"
 #include <QParallelAnimationGroup>
+#include "ui/entities/blueslaveritem.h"
+#include "entity/blue_slaver.h"
 
 CombatPage::CombatPage(QWidget *parent)
     : QWidget{parent}
@@ -60,7 +62,7 @@ CombatPage::CombatPage(QWidget *parent)
     game_action acts(nullptr);
     plyr->add_power(acts, pwr);
 
-    pwr = PowerFactory::createPower(powerID::strength, plyr, -3);
+    pwr = PowerFactory::createPower(powerID::demon_form, plyr, 3);
     plyr->add_power(acts, pwr);
 
     pwr = PowerFactory::createPower(powerID::dexterity, plyr, -3);
@@ -69,10 +71,20 @@ CombatPage::CombatPage(QWidget *parent)
     pwr = PowerFactory::createPower(powerID::berserk, plyr, 1);
     plyr->add_power(acts, pwr);
 
-    auto plyr_item = new IroncladItem(plyr, {170, 400}, 100);
+    auto plyr_item = new IroncladItem(plyr, {170, 360}, 100);
     combatScene->addItem(plyr_item->getParent());
     plyr_item->getParent()->activeAttackAnimation();
 
+    auto enm = blue_slaver::create(acts);
+    pwr = PowerFactory::createPower(powerID::strength, enm, 3);
+    enm->add_power(acts, pwr);
+
+    pwr = PowerFactory::createPower(powerID::vulnerable, enm, 2);
+    enm->add_power(acts, pwr);
+
+    auto enm_item = new BlueSlaverItem(enm, {1600 - 500, 360}, 100);
+    combatScene->addItem(enm_item->getParent());
+    enm_item->getParent()->activeAttackAnimation();
 
     // auto u = ir->createGeometryAnimation({155, 370 -14, 400, 275 + 14}, 750, QEasingCurve::InSine);
     // auto f = ir->createGeometryAnimation({155, 370, 400, 275}, 750, QEasingCurve::OutSine);
