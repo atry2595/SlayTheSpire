@@ -8,6 +8,7 @@ class SimpleHpBar : public QWidget
 {
     Q_OBJECT
     Q_PROPERTY(float displayPercent READ displayPercent WRITE setDisplayPercent)
+    const QPixmap shield_pix;
 
 public:
     explicit SimpleHpBar(QWidget *parent = nullptr);

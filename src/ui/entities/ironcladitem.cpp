@@ -29,11 +29,11 @@ IroncladItem::IroncladItem(abstractEntity* source, QPointF pos, qreal zValue)
 
     //=======hpBar========
     hp_bar = new SimpleHpBar();
-    hp_bar->setSize(IroncladItem::width, 15);
+    hp_bar->setSize(IroncladItem::width, 30);
 
     hp_proxy = new QGraphicsProxyWidget(entity_parent);
     hp_proxy->setWidget(hp_bar);
-    hp_proxy->setPos({0, IroncladItem::height + 50});
+    hp_proxy->setPos({0, IroncladItem::height + 60});
 
 
     //=======anim=========
@@ -63,7 +63,7 @@ void IroncladItem::updateEntity() {
     powers.clear();
 
     for (int i = 0; i < entity_source->get_power_list().size(); i++){
-        TextItem* p = new TextItem(entity_parent, {35, 35}, QPointF(35*i, IroncladItem::height + 50 + 20));
+        TextItem* p = new TextItem(entity_parent, {35, 35}, QPointF(35*i, IroncladItem::height + 60 + 30));
         auto pwr = entity_source->get_power_list()[i];
         p->setBackground(getPowerIcon(pwr->get_id()));
 

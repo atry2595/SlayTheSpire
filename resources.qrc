@@ -296,4 +296,7 @@
         <file alias="ebhaar">assests/font/Ebhaar.otf</file>
         <file alias="forte">assests/font/FORTE.TTF</file>
     </qresource>
+    <qresource prefix="/icon">
+        <file alias="shield.ico">assests/image/icon/shield.png</file>
+    </qresource>
 </RCC>

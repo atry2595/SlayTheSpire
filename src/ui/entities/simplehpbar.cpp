@@ -1,6 +1,7 @@
 #include "simplehpbar.h"
 #include <QPainter>
 #include <QPainterPath>
+#include "core/setting.h"
 
 SimpleHpBar::SimpleHpBar(QWidget *parent)
     : QWidget(parent)
@@ -8,6 +9,7 @@ SimpleHpBar::SimpleHpBar(QWidget *parent)
     , m_maxHp(100)
     , m_shield(0)
     , m_displayPercent(1.0f)
+    , shield_pix(QPixmap(":/icon/shield.ico"))
 {
     m_animation = new QPropertyAnimation(this, "displayPercent");
     m_animation->setDuration(300);
@@ -59,6 +61,7 @@ void SimpleHpBar::setHp(int hp)
 
 void SimpleHpBar::setShield(int shield)
 {
+    qDebug() << shield;
     m_shield = qMax(0, shield);
     update();
 }
@@ -80,14 +83,13 @@ void SimpleHpBar::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing, true);
 
-    // پس‌زمینه شفاف
     painter.fillRect(rect(), Qt::transparent);
 
-    int pad = 0;
-    QRectF barRect(pad, pad, width() - pad * 2, height() - pad * 2);
+    int pad = height() / 2;
+    QRectF barRect(pad, 9, width() - pad * 2, height() - 18);
 
-    painter.setPen(QPen(QColor(80, 80, 80), 1.5));  // خط خاکستری
-    painter.setBrush(Qt::NoBrush);  // داخلش خالی باشه
+    painter.setPen(QPen(QColor(80, 80, 80), 1.5));
+    painter.setBrush(Qt::NoBrush);
     painter.drawRoundedRect(barRect, 4, 4);
 
     // رنگ نوار
@@ -106,20 +108,41 @@ void SimpleHpBar::paintEvent(QPaintEvent *event)
 
     // ===== سپر =====
     if (m_shield > 0) {
-        int iconSize = barRect.height() - 4;
-        QRectF iconRect(barRect.x() + 3, barRect.y() + 2, iconSize, iconSize);
+        int iconSize = height();
+        QRectF iconRect(0, 0, iconSize, iconSize);
 
-        painter.setPen(Qt::NoPen); // ine
-        painter.setBrush(QColor(74, 144, 217, 100));
-        painter.drawRect(iconRect);
+        painter.drawPixmap(iconRect.toRect(), shield_pix.scaled(
+                                                  iconRect.size().toSize(),
+                                                  Qt::IgnoreAspectRatio,
+                                                  Qt::SmoothTransformation));
 
-        painter.setFont(QFont("Arial", 8, QFont::Bold));
+
+        QRectF textRect(iconSize, 0, iconSize, iconSize);
+        QFont fn;
+        fn.setFamily(Fonts::Cascadia);
+        fn.setPixelSize(13);
+        fn.setBold(true);
+        painter.setFont(fn);
+
+        painter.setPen(Qt::black);
+        painter.drawText(iconRect.translated(-1, -1), Qt::AlignCenter, QString::number(m_shield));
+        painter.drawText(iconRect.translated( 1, -1), Qt::AlignCenter, QString::number(m_shield));
+        painter.drawText(iconRect.translated(-1,  1), Qt::AlignCenter, QString::number(m_shield));
+        painter.drawText(iconRect.translated( 1,  1), Qt::AlignCenter, QString::number(m_shield));
+
+        painter.setPen(Qt::white);
         painter.drawText(iconRect, Qt::AlignCenter, QString::number(m_shield));
+
     }
 
     // ===== متن HP =====
     painter.setPen(Qt::white);
-    painter.setFont(QFont("Arial", 9, QFont::Bold));
+    QFont fn;
+    fn.setFamily(Fonts::Cascadia);
+    fn.setPixelSize(12);
+    fn.setBold(true);
+
+    painter.setFont(fn);
     painter.drawText(barRect, Qt::AlignCenter,
                      QString("%1/%2").arg(m_hp).arg(m_maxHp));
 }

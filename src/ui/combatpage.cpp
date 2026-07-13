@@ -11,8 +11,14 @@
 #include <QParallelAnimationGroup>
 #include "ui/entities/blueslaveritem.h"
 #include "entity/blue_slaver.h"
-#include "ui/entities/redslaveritem.h"
+#include "ui/entities/EnemyItem.h"
+#include "entity/hexaghost.h"
+#include "entity/medium_slime.h"
+#include "entity/book_of_stabbing.h"
+#include "entity/red_louse.h"
+#include "ui/entities/enemyitem.h"
 #include "entity/red_slaver.h"
+#include "entity/spheric_guardian.h"
 
 CombatPage::CombatPage(QWidget *parent)
     : QWidget{parent}
@@ -74,25 +80,17 @@ CombatPage::CombatPage(QWidget *parent)
     combatScene->addItem(plyr_item->getParent());
     plyr_item->getParent()->activeAttackAnimation();
 
-    auto enm = red_slaver::create(acts);
+    auto enm = spheric_guardian::create(acts);
     pwr = PowerFactory::createPower(powerID::strength, enm, 3);
     enm->add_power(acts, pwr);
 
     pwr = PowerFactory::createPower(powerID::vulnerable, enm, 2);
     enm->add_power(acts, pwr);
 
-    auto enm_item = new RedSlaverItem(enm, {1600 - 400, 360}, 100);
+    auto enm_item = new EnemyItem(enm, {1600 - 600, 360 - 100}, 100);
     combatScene->addItem(enm_item->getParent());
     enm_item->getParent()->activeAttackAnimation();
 
-    auto enm2 = blue_slaver::create(acts);
-
-    pwr = PowerFactory::createPower(powerID::vulnerable, enm2, 2);
-    enm2->add_power(acts, pwr);
-
-    auto enm2_item = new BlueSlaverItem(enm2, {1600 - 700, 360}, 100);
-    combatScene->addItem(enm2_item->getParent());
-    enm2_item->getParent()->activeAttackAnimation();
 
     // auto u = ir->createGeometryAnimation({155, 370 -14, 400, 275 + 14}, 750, QEasingCurve::InSine);
     // auto f = ir->createGeometryAnimation({155, 370, 400, 275}, 750, QEasingCurve::OutSine);
