@@ -45,15 +45,13 @@ FaceTrader::FaceTrader(game_action& actions, ironclad* player)
         "His face was completely blank."
         );
 
-    touch_node.actions =
-        [player, &actions]()
+    touch_node.actions =[player, &actions]()
     {
         Q_UNUSED(actions);
 
         int percent = RNG::instance().randint(5,10);
 
-        int damage =
-            player->get_max_health() * percent / 100;
+        int damage =player->get_max_health() * percent / 100;
 
         player->lose_health(damage);
 
@@ -95,8 +93,7 @@ FaceTrader::FaceTrader(game_action& actions, ironclad* player)
             break;
         }
 
-        abstractRelic* reward =
-            RelicFactory::createRelic(relic, player);
+        abstractRelic* reward =RelicFactory::createRelic(relic, player);
 
         player->add_relic(actions, reward);
     };

@@ -15,8 +15,6 @@ OminousForge::OminousForge(game_action& actions, ironclad* player) {
     root.description = tr("You duck inside a small hut. Inside you find what appears to be a forge. The smithing tools are covered with dust, yet a fire roars inside the furnace. You feel on edge...");
     root.title = "";
 
-    //---------------------------------------------------
-
     UnknownNode forge_node;
     forge_node.title = tr("[Forge] Upgrade a card in your deck.");
     forge_node.description = tr("You decide to put the forge to use and...\nCLANG CLAAANG CLANG!\n...improve your arsenal!");
@@ -35,8 +33,6 @@ OminousForge::OminousForge(game_action& actions, ironclad* player) {
     forge_node.canUse = [](){ return true; };
     forge_node.next_nodes = {-1};
 
-    //---------------------------------------------------
-
     UnknownNode rummage_node;
     rummage_node.title = tr("[Rummage] Obtain a special relic. Become Cursed - Pain.");
     rummage_node.description = tr("You decide to see if you can find anything of use. After uncovering tarps, looking through boxes, and checking nooks and crannies, you find a dust covered relic!\n\nTaking the relic, you can't shake a sudden feeling of sharp pain as you exit the hut. Maybe you disturbed some sort of spirit?");
@@ -51,8 +47,6 @@ OminousForge::OminousForge(game_action& actions, ironclad* player) {
     };
     rummage_node.canUse = [](){ return true; };
     rummage_node.next_nodes = {-1};
-
-    //---------------------------------------------------
 
     manager.nodes.push_back(root);
     int rootIdx = manager.nodes.size() - 1;
