@@ -273,6 +273,7 @@ add_executable(SlayTheSpire
     src/Events/lab.h src/Events/lab.cpp
     src/Events/thecleric.h src/Events/thecleric.cpp
     src/Events/shininglight.h src/Events/shininglight.cpp
+    src/Events/ancientwriting.h src/Events/ancientwriting.cpp
 
 
 
