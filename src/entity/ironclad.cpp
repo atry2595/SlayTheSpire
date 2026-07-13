@@ -436,7 +436,7 @@ void ironclad::damage_applied(game_action& info) {
 void ironclad::potion_list_add(abstractPotion* pot){
     if (potion_list.size() < max_potion_number) {
         potion_list.push_back(pot);
-        emit event->potion_added(pot);
+        // emit event->potion_added(pot);
     }
 }
 void ironclad::potion_list_remove(abstractPotion* pot){

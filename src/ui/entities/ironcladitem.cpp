@@ -1,4 +1,7 @@
 #include "ironcladitem.h"
+#include "entity/ironclad.h"
+#include "items/potions/abstractpotion.h"
+#include "ui/entities/getPotionIcon.h"
 #include <QSequentialAnimationGroup>
 
 IroncladItem::IroncladItem(abstractEntity* source, QPointF pos, qreal zValue)
@@ -79,6 +82,22 @@ void IroncladItem::updateEntity() {
             p->setFont(fnt);
         }
         powers.push_back(p);
+    }
+
+
+    //========potions=========
+    for (auto item:potions){
+        delete item;
+    }
+    potions.clear();
+
+    ironclad* player = dynamic_cast<ironclad*>(entity_source);
+
+    for (int i = 0; i < std::min(3, (int)player->get_potion_list().size()); i++) {
+        ImageItem* p = new ImageItem(entity_parent, {58, 58}, QPointF(-60, 50 * (i+1) + 28 * i));
+        auto pot = player->get_potion_list()[i];
+        p->setPixmap(getPotionIcon(pot->get_ID()));
+        potions.push_back(p);
     }
 
 }

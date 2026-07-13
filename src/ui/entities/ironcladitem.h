@@ -8,6 +8,8 @@ class IroncladItem : public abstractEntityItem
     Q_OBJECT
     constexpr static int width = 300;
     constexpr static int height = 214;
+
+    std::vector<ImageItem*> potions;
 public:
     IroncladItem(abstractEntity* source, QPointF pos, qreal zValue);
 

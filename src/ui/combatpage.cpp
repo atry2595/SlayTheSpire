@@ -9,7 +9,7 @@
 #include "items//powers/powerfactory.h"
 #include "entity/ironclad.h"
 #include <QParallelAnimationGroup>
-#include "ui/entities/blueslaveritem.h"
+#include "items/potions/potionfactory.h"
 #include "entity/blue_slaver.h"
 #include "ui/entities/EnemyItem.h"
 #include "entity/hexaghost.h"
@@ -75,6 +75,20 @@ CombatPage::CombatPage(QWidget *parent)
 
     pwr = PowerFactory::createPower(powerID::entangled, plyr, 1);
     plyr->add_power(acts, pwr);
+
+    auto pot = PotionFactory::createPotion(potionID::energy_potion, plyr);
+    plyr->potion_list_add(pot);
+
+    pot = PotionFactory::createPotion(potionID::fairy_in_a_bottle, plyr);
+    plyr->potion_list_add(pot);
+
+    pot = PotionFactory::createPotion(potionID::fear_potion, plyr);
+    plyr->potion_list_add(pot);
+
+    pot = PotionFactory::createPotion(potionID::strength_potion, plyr);
+    plyr->potion_list_add(pot);
+
+
 
     auto plyr_item = new IroncladItem(plyr, {170, 360}, 100);
     combatScene->addItem(plyr_item->getParent());
