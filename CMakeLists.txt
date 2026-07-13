@@ -266,6 +266,7 @@ add_executable(SlayTheSpire
     src/events/UnknownMap.h
     src/categories/unknowns.h
     src/events/ominousforge.h src/events/ominousforge.cpp
+    src/Events/goldenidol.h src/Events/goldenidol.cpp
 
 
 
