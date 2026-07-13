@@ -270,6 +270,7 @@ add_executable(SlayTheSpire
     src/Events/augmenter.h src/Events/augmenter.cpp
     src/Events/facetrader.h src/Events/facetrader.cpp
     src/Events/goldenshrine.h src/Events/goldenshrine.cpp
+    src/Events/lab.h src/Events/lab.cpp
 
 
 

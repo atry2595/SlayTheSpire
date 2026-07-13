@@ -2,12 +2,24 @@
 #define AUGMENTER_H
 
 #include <QObject>
+#include "events/UnknownMap.h"
+#include "combat/game_action.h"
+#include "entity/ironclad.h"
 
 class Augmenter
 {
     Q_OBJECT
+
+private:
+    UnknownManager manager;
+
 public:
-    Augmenter();
+    Augmenter(game_action&, ironclad*);
+
+    const UnknownManager getManager() const
+    {
+        return manager;
+    }
 };
 
 #endif // AUGMENTER_H
