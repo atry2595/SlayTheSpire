@@ -268,6 +268,7 @@ add_executable(SlayTheSpire
     src/events/ominousforge.h src/events/ominousforge.cpp
     src/Events/goldenidol.h src/Events/goldenidol.cpp
     src/Events/augmenter.h src/Events/augmenter.cpp
+    src/Events/facetrader.h src/Events/facetrader.cpp
 
 
 
