@@ -23,11 +23,23 @@ Augmenter::Augmenter(game_action& actions, ironclad* player)
 
     UnknownNode testJAX;
 
-    testJAX.title = tr("[Test J.A.X.]");
+    testJAX.title =
+        tr("[Test J.A.X.] Get JAXXED.");
+
+    transform.title =
+        tr("[Become Test Subject] Transform 2 cards.");
+
+    mutagen.title =
+        tr("[Ingest Mutagens] Obtain a special relic.");
 
     testJAX.description =
-        tr("\"Excellent.\"\n\n"
-           "The man hands over a dangerous looking syringe filled with a glowing liquid before skulking off into a shadowy alley.");
+        tr(
+            "Adds J.A.X. to your deck.\n\n"
+
+            "\"Excellent.\"\n\n"
+
+            "The man hands over a dangerous looking syringe filled with a glowing liquid before skulking off into a shadowy alley."
+            );
 
     testJAX.actions = [player]()
     {
@@ -43,8 +55,13 @@ Augmenter::Augmenter(game_action& actions, ironclad* player)
     transform.title = tr("[Become Test Subject]");
 
     transform.description =
-        tr("\"Marvelous.\"\n\n"
-           "You quaff the mysterious substance. Immediately, you are invigorated and feel your muscle fibers twitch.");
+        tr(
+            "Transform 2 cards.\n\n"
+
+            "\"Marvelous.\"\n\n"
+
+            "You quaff the mysterious substance. Immediately, you are invigorated and feel your muscle fibers twitch."
+            );
 
     transform.actions = [player]()
     {
@@ -105,9 +122,15 @@ Augmenter::Augmenter(game_action& actions, ironclad* player)
     mutagen.title = tr("[Ingest Mutagens]");
 
     mutagen.description =
-        tr("\"Superb.\"\n\n"
-           "The man injects you with three unknown substances and pulls out a notepad. As you begin to feel light-headed, he starts to frantically write down notes.\n\n"
-           "Losing track of time completely, by the time you regain your senses, the shady character has disappeared.");
+        tr(
+            "Obtain Mutagenic Strength.\n\n"
+
+            "\"Superb.\"\n\n"
+
+            "The man injects you with three unknown substances and pulls out a notepad. As you begin to feel light-headed, he starts to frantically write down notes.\n\n"
+
+            "Losing track of time completely, by the time you regain your senses, the shady character has disappeared."
+            );
 
     mutagen.actions = [player, &actions]()
     {

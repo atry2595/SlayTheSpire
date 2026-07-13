@@ -19,8 +19,6 @@ FaceTrader::FaceTrader(game_action& actions, ironclad* player)
     root.actions = [](){};
     root.canUse = [](){ return true; };
 
-    //---------------------------------------------------
-
     UnknownNode continue_node;
     continue_node.title = tr("[Continue]");
 
@@ -33,7 +31,6 @@ FaceTrader::FaceTrader(game_action& actions, ironclad* player)
     continue_node.actions = [](){};
     continue_node.canUse = [](){ return true; };
 
-    //---------------------------------------------------
 
     UnknownNode touch_node;
 
@@ -66,7 +63,6 @@ FaceTrader::FaceTrader(game_action& actions, ironclad* player)
     touch_node.canUse = [](){ return true; };
     touch_node.next_nodes = {-1};
 
-    //---------------------------------------------------
 
     UnknownNode trade_node;
 
@@ -108,8 +104,6 @@ FaceTrader::FaceTrader(game_action& actions, ironclad* player)
     trade_node.canUse = [](){ return true; };
     trade_node.next_nodes = {-1};
 
-    //---------------------------------------------------
-
     UnknownNode leave_node;
 
     leave_node.title = tr("[Leave]");
@@ -123,8 +117,6 @@ FaceTrader::FaceTrader(game_action& actions, ironclad* player)
 
     leave_node.canUse = [](){ return true; };
     leave_node.next_nodes = {-1};
-
-    //---------------------------------------------------
 
     manager.nodes.push_back(root);
     int rootIdx = manager.nodes.size() - 1;
