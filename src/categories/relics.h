@@ -41,7 +41,8 @@ enum class relicID{
     cultist_headpiece,
     red_mask,
     helmet_of_the_cleric,
-    gremlin_visage
+    gremlin_visage,
+    golden_idol
 };
 
 enum class relicRarity {

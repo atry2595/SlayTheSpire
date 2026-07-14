@@ -17,21 +17,21 @@ TheCleric::TheCleric(game_action& actions, ironclad* player)
            "\"Hello friend! I am Cleric! Are you interested in my services?!\" the creature shouts, loudly.");
 
     UnknownNode heal;
-
-    heal.title =tr("[Heal] 35 Gold: Heal 25% Max HP.");
+    int hhp = (int) player->get_max_hp() / 4;
+    heal.title =tr("[Heal] 35 Gold: Heal %1 Max HP.").arg(hhp);
 
     heal.description =tr(
         "A warm golden light envelops your body and dissipates.\n\n"
         "The creature grins.\n\n"
         "\"Cleric best healer. Have a good day!\"");
 
-    heal.actions = [player, &actions]()
+    heal.actions = [player, &actions, hhp]()
     {
         player->lose_gold(35);
 
         healInfo info;
         info.owner = player;
-        info.value = player->get_max_hp() / 4;
+        info.value = hhp;
 
         actions.heal(info);
     };
@@ -56,8 +56,14 @@ TheCleric::TheCleric(game_action& actions, ironclad* player)
     {
         player->lose_gold(50);
 
+        std::vector<abstractCard*> pool;
+
+        for (auto item : player->get_deck()) {
+            if (item->can_remove_from_deck()) pool.push_back(item);
+        }
+
         abstractCard* selected =
-            ironclad::select_card(player->get_deck());
+            ironclad::select_card(pool);
 
         if(selected)
         {
@@ -73,20 +79,6 @@ TheCleric::TheCleric(game_action& actions, ironclad* player)
 
     purify.next_nodes = {-1};
 
-    UnknownNode leave;
-
-    leave.title =tr("[Leave]");
-
-    leave.description =tr("You don't trust this \"Cleric\", so you leave.");
-
-    leave.actions = [](){};
-
-    leave.canUse = []()
-    {
-        return true;
-    };
-
-    leave.next_nodes = {-1};
 
     manager.nodes.push_back(root);
     int rootIdx = manager.nodes.size() - 1;
@@ -97,13 +89,11 @@ TheCleric::TheCleric(game_action& actions, ironclad* player)
     manager.nodes.push_back(purify);
     int purifyIdx = manager.nodes.size() - 1;
 
-    manager.nodes.push_back(leave);
-    int leaveIdx = manager.nodes.size() - 1;
 
     manager.nodes[rootIdx].next_nodes =
         {
             healIdx,
             purifyIdx,
-            leaveIdx
+            -1
         };
 }

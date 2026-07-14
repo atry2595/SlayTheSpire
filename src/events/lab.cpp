@@ -39,24 +39,7 @@ Lab::Lab(game_action& actions, ironclad* player)
 
         RNG::instance().shuffle(pool);
 
-        search.actions = [player]()
-        {
-            std::vector<potionID> pool = common_potions;
-
-            pool.insert(pool.end(),uncommon_potions.begin(),uncommon_potions.end());
-
-            pool.insert(pool.end(),rare_potions.begin(),rare_potions.end());
-
-            RNG::instance().shuffle(pool);
-
-            for (int i = 0; i < 3 && i < static_cast<int>(pool.size()); i++)
-            {
-                abstractPotion* potion =PotionFactory::createPotion(pool[i], player);
-
-                if (potion)
-                    player->potion_list_add(potion);
-            }
-        };
+        //complete
     };
 
     search.canUse = [](){ return true; };

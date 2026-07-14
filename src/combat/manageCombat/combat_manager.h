@@ -84,6 +84,7 @@ public:
     void add_potion_to_reward(abstractEntity* player,abstractPotion* potion);
 
     void calculate_rewards();
+
 };
 
 #endif // COMBAT_MANAGER_H

@@ -194,6 +194,8 @@ void combat_manager::combat_end() {
         }
     }
 
+    calculate_rewards();
+
     emit event->combat_ended(this, victory);
 
 }

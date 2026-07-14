@@ -275,6 +275,9 @@ add_executable(SlayTheSpire
     src/Events/shininglight.h src/Events/shininglight.cpp
     src/Events/ancientwriting.h src/Events/ancientwriting.cpp
     src/Events/pleadingvagrant.h src/Events/pleadingvagrant.cpp
+    src/items/relics/golden_idol_relic.cpp src/items/relics/golden_idol_relic.h
+    "src/cards/curse/injury.cpp" "src/cards/curse/injury.h"
+    src/cards/curse/shame.cpp src/cards/curse/shame.h
 
 
 

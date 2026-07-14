@@ -6,7 +6,7 @@
 #include "combat/game_action.h"
 #include "entity/ironclad.h"
 
-class Lab
+class Lab  : public QObject
 {
     Q_OBJECT
 

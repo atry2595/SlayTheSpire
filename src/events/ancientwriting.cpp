@@ -63,7 +63,7 @@ AncientWriting::AncientWriting(game_action& actions, ironclad* player)
     {
         for (auto card : player->get_deck())
         {
-            if ((card->is_strike() || card->get_card_id() == cardID::defend) && !card->get_upgraded())
+            if ((card->get_card_id() == cardID::strike || card->get_card_id() == cardID::defend) && !card->get_upgraded())
             {
                 card->base_upgrade();
             }

@@ -33,8 +33,8 @@ FaceTrader::FaceTrader(game_action& actions, ironclad* player)
 
 
     UnknownNode touch_node;
-
-    touch_node.title = tr("[Touch]");
+    int dmg = (int) player->get_max_hp() / 10;
+    touch_node.title = tr("[Touch] Lose %1 HP, gain 75 (50)Ascension.png 15 Gold.").arg(dmg);
 
     touch_node.description = tr(
         "\"Compensation? Compensation.\"\n\n"
@@ -45,17 +45,19 @@ FaceTrader::FaceTrader(game_action& actions, ironclad* player)
         "His face was completely blank."
         );
 
-    touch_node.actions =[player, &actions]()
+
+    touch_node.actions =[player, &actions, dmg]()
     {
-        Q_UNUSED(actions);
 
-        int percent = RNG::instance().randint(5,10);
+        damageInfo inf;
+        inf.damage = dmg;
+        inf.block_active = false;
+        inf.target = player;
+        inf.attacker = nullptr;
 
-        int damage =player->get_max_health() * percent / 100;
+        actions.apply_damage(inf);
 
-        player->lose_health(damage);
-
-        player->add_gold(75);
+        player->earn_coin(75);
     };
 
     touch_node.canUse = [](){ return true; };
@@ -64,7 +66,7 @@ FaceTrader::FaceTrader(game_action& actions, ironclad* player)
 
     UnknownNode trade_node;
 
-    trade_node.title = tr("[Trade]");
+    trade_node.title = tr("[Trade] 50%: Good Face. 50%: Bad Face.");
 
     trade_node.description = tr(
         "\"For me? FOR ME? Oh yes.. Yes. Yes.. mmm...\"\n\n"
@@ -101,19 +103,6 @@ FaceTrader::FaceTrader(game_action& actions, ironclad* player)
     trade_node.canUse = [](){ return true; };
     trade_node.next_nodes = {-1};
 
-    UnknownNode leave_node;
-
-    leave_node.title = tr("[Leave]");
-
-    leave_node.description = tr(
-        "\"Stop. Stop. Stop. Stop. Stop.\"\n\n"
-        "This was probably the right call."
-        );
-
-    leave_node.actions = [](){};
-
-    leave_node.canUse = [](){ return true; };
-    leave_node.next_nodes = {-1};
 
     manager.nodes.push_back(root);
     int rootIdx = manager.nodes.size() - 1;
@@ -127,8 +116,6 @@ FaceTrader::FaceTrader(game_action& actions, ironclad* player)
     manager.nodes.push_back(trade_node);
     int tradeIdx = manager.nodes.size() - 1;
 
-    manager.nodes.push_back(leave_node);
-    int leaveIdx = manager.nodes.size() - 1;
 
     manager.nodes[rootIdx].next_nodes =
         {
@@ -139,6 +126,6 @@ FaceTrader::FaceTrader(game_action& actions, ironclad* player)
         {
             touchIdx,
             tradeIdx,
-            leaveIdx
+            -1
         };
 }

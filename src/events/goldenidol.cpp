@@ -1,4 +1,6 @@
 #include "goldenidol.h"
+#include "cards/cardfactory.h"
+#include "items/relics/relicfactory.h"
 
 GoldenIdol::GoldenIdol(game_action& actions, ironclad* player)
 {
@@ -19,7 +21,7 @@ GoldenIdol::GoldenIdol(game_action& actions, ironclad* player)
         );
 
     UnknownNode take_node;
-    take_node.title = tr("[Take]");
+    take_node.title = tr("[Take] Obtain Golden Idol. Trigger a trap.");
     take_node.description = tr(
         "As you grab the Idol and stow it away, a giant boulder smashes through the ceiling into the ground next to you.\n\n"
         "You realize that the floor is slanted downwards as the boulder starts to roll towards you."
@@ -27,17 +29,14 @@ GoldenIdol::GoldenIdol(game_action& actions, ironclad* player)
 
     take_node.actions = [player, &actions]()
     {
-        Q_UNUSED(player);
-        Q_UNUSED(actions);
-
-        // +++؟
+        player->add_relic(actions, RelicFactory::createRelic(relicID::golden_idol, player));
     };
 
     take_node.canUse = [](){ return true; };
 
 
     UnknownNode outrun_node;
-    outrun_node.title = tr("[Outrun]");
+    outrun_node.title = tr("[Outrun] Become Cursed - Injury.");
     outrun_node.description = tr(
         "RUUUUUUUUUUN!\n\n"
         "You barely leap into a side passageway as the boulder rushes by.\n"
@@ -46,58 +45,49 @@ GoldenIdol::GoldenIdol(game_action& actions, ironclad* player)
 
     outrun_node.actions = [player]()
     {
-        Q_UNUSED(player);
-
-        // +++؟
+        player->deck_add(CardFactory::createCard(cardID::injury));
     };
 
     outrun_node.canUse = [](){ return true; };
     outrun_node.next_nodes = {-1};
 
     UnknownNode smash_node;
-    smash_node.title = tr("[Smash]");
+    int dmg = (int) player->get_max_hp() / 4;
+    smash_node.title = tr("[Smash] Take %1 Damage.").arg(dmg);
     smash_node.description = tr(
         "You throw yourself at the boulder with everything you have. When the dust clears, you can make a safe way out."
         );
 
-    smash_node.actions = [player]()
+    smash_node.actions = [player, &actions, dmg]()
     {
-        Q_UNUSED(player);
+        damageInfo inf;
+        inf.damage = dmg;
+        inf.attacker = nullptr;
+        inf.block_active = false;
+        inf.target = player;
 
-        // +++؟
+        actions.apply_damage(inf);
     };
 
     smash_node.canUse = [](){ return true; };
     smash_node.next_nodes = {-1};
 
     UnknownNode hide_node;
-    hide_node.title = tr("[Hide]");
+    int lmh = (int) player->get_max_hp() * 8 / 100;
+    hide_node.title = tr("[Hide] Lose %1 Max HP.").arg(lmh);
     hide_node.description = tr(
         "SQUISH!\n"
         "The boulder flattens you a little as it passes by, but otherwise you can get out of here."
         );
 
-    hide_node.actions = [player]()
+    hide_node.actions = [player, lmh]()
     {
-        Q_UNUSED(player);
-
-        // +++؟
+        player->set_max_hp(player->get_max_hp() - lmh);
     };
 
     hide_node.canUse = [](){ return true; };
     hide_node.next_nodes = {-1};
 
-    UnknownNode leave_node;
-    leave_node.title = tr("[Leave]");
-    leave_node.description = tr(
-        "If there was ever an obvious trap, this would be it.\n"
-        "You decide not to interfere with objects placed upon pedestals."
-        );
-
-    leave_node.actions = [](){};
-
-    leave_node.canUse = [](){ return true; };
-    leave_node.next_nodes = {-1};
 
     manager.nodes.push_back(root);
     int rootIdx = manager.nodes.size() - 1;
@@ -114,13 +104,11 @@ GoldenIdol::GoldenIdol(game_action& actions, ironclad* player)
     manager.nodes.push_back(hide_node);
     int hideIdx = manager.nodes.size() - 1;
 
-    manager.nodes.push_back(leave_node);
-    int leaveIdx = manager.nodes.size() - 1;
 
     manager.nodes[rootIdx].next_nodes =
         {
             takeIdx,
-            leaveIdx
+            -1
         };
 
     manager.nodes[takeIdx].next_nodes =

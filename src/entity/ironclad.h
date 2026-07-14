@@ -44,6 +44,7 @@ protected:
 
 public:
     static abstractCard* select_card(const std::vector<abstractCard*>&);
+    static abstractCard* transformCard(abstractCard*);
 
     entityType get_type() override { return entityType::player; }
     entityID get_ID() override { return entityID::ironclad; }

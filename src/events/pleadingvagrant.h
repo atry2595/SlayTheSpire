@@ -7,7 +7,7 @@
 #include "combat/game_action.h"
 #include "entity/ironclad.h"
 
-class PleadingVagrant
+class PleadingVagrant  : public QObject
 {
     Q_OBJECT
 

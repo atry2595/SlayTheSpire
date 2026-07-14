@@ -6,7 +6,7 @@
 #include "combat/game_action.h"
 #include "entity/ironclad.h"
 
-class GoldenIdol
+class GoldenIdol : public QObject
 {
     Q_OBJECT
 

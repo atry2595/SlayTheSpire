@@ -6,7 +6,7 @@
 #include "combat/game_action.h"
 #include "entity/ironclad.h"
 
-class Augmenter
+class Augmenter : public QObject
 {
     Q_OBJECT
 

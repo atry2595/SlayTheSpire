@@ -78,26 +78,12 @@ PleadingVagrant::PleadingVagrant(game_action& actions, ironclad* player)
 
         player->add_relic(actions, relic);
 
-        // atry
-        // Add
-        // player->deck_add(CardFactory::createCard(cardID::shame));
+        player->deck_add(CardFactory::createCard(cardID::shame));
     };
 
     rob.canUse = [](){ return true; };
 
     rob.next_nodes = {-1};
-
-    UnknownNode leave;
-
-    leave.title =tr("[Leave]");
-
-    leave.description =tr("You decide to leave the strange man behind.");
-
-    leave.actions = [](){};
-
-    leave.canUse = [](){ return true; };
-
-    leave.next_nodes = {-1};
 
     manager.nodes.push_back(root);
     int rootIdx = manager.nodes.size() - 1;
@@ -108,13 +94,10 @@ PleadingVagrant::PleadingVagrant(game_action& actions, ironclad* player)
     manager.nodes.push_back(rob);
     int robIdx = manager.nodes.size() - 1;
 
-    manager.nodes.push_back(leave);
-    int leaveIdx = manager.nodes.size() - 1;
-
     manager.nodes[rootIdx].next_nodes =
         {
             offerIdx,
             robIdx,
-            leaveIdx
+            -1
         };
 }

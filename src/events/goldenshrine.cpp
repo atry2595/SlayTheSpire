@@ -28,7 +28,7 @@ GoldenShrine::GoldenShrine(game_action& actions, ironclad* player)
 
     pray.actions = [player]()
     {
-        player->gain_gold(100);
+        player->earn_coin(100);
     };
 
     pray.canUse = [](){ return true; };
@@ -45,7 +45,7 @@ GoldenShrine::GoldenShrine(game_action& actions, ironclad* player)
 
     desecrate.actions = [player]()
     {
-        player->gain_gold(275);
+        player->earn_coin(275);
 
         abstractCard* curse =CardFactory::createCard(cardID::regret);
 
@@ -56,17 +56,6 @@ GoldenShrine::GoldenShrine(game_action& actions, ironclad* player)
 
     desecrate.next_nodes = {-1};
 
-    UnknownNode leave;
-
-    leave.title =tr("[Leave]");
-
-    leave.description =tr("You ignore the shrine.");
-
-    leave.actions = [](){};
-
-    leave.canUse = [](){ return true; };
-
-    leave.next_nodes = {-1};
 
     //------------------------------------------------------------
 
@@ -79,13 +68,11 @@ GoldenShrine::GoldenShrine(game_action& actions, ironclad* player)
     manager.nodes.push_back(desecrate);
     int desecrateIdx = manager.nodes.size() - 1;
 
-    manager.nodes.push_back(leave);
-    int leaveIdx = manager.nodes.size() - 1;
 
     manager.nodes[rootIdx].next_nodes =
         {
             prayIdx,
             desecrateIdx,
-            leaveIdx
+            -1
         };
 }

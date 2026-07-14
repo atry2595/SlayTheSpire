@@ -65,7 +65,9 @@ enum class cardID{
     curse_of_the_bell,
     regret,
     writhe,
-    pain
+    pain,
+    injury,
+    shame
 };
 
 
@@ -185,7 +187,8 @@ const std::vector<cardID> curse_cards = {
     cardID::curse_of_the_bell,
     cardID::regret,
     cardID::writhe,
-    cardID::pain
+    cardID::pain,
+    cardID::injury
 };
 
 #endif // CARDS_H

@@ -7,7 +7,7 @@
 #include "combat/game_action.h"
 #include "entity/ironclad.h"
 
-class AncientWriting
+class AncientWriting : public QObject
 {
     Q_OBJECT
 

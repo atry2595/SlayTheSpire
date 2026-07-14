@@ -2,7 +2,7 @@
 
 #include "cards/cardfactory.h"
 #include "items/relics/relicfactory.h"
-#include "utils/RNG.h"
+#include "entity/ironclad.h"
 #include "categories/cards.h"
 Augmenter::Augmenter(game_action& actions, ironclad* player)
 {
@@ -26,19 +26,12 @@ Augmenter::Augmenter(game_action& actions, ironclad* player)
     testJAX.title =
         tr("[Test J.A.X.] Get JAXXED.");
 
-    transform.title =
-        tr("[Become Test Subject] Transform 2 cards.");
 
-    mutagen.title =
-        tr("[Ingest Mutagens] Obtain a special relic.");
 
     testJAX.description =
         tr(
-            "Adds J.A.X. to your deck.\n\n"
-
             "\"Excellent.\"\n\n"
-
-            "The man hands over a dangerous looking syringe filled with a glowing liquid before skulking off into a shadowy alley."
+            "The man hands over a dangerous looking syringe filled with a glowing liquid before skulking off into a shadowy alleyway."
             );
 
     testJAX.actions = [player]()
@@ -52,78 +45,42 @@ Augmenter::Augmenter(game_action& actions, ironclad* player)
 
     UnknownNode transform;
 
-    transform.title = tr("[Become Test Subject]");
+    transform.title = tr("[Become Test Subject] Transform 2 cards.");
 
     transform.description =
         tr(
-            "Transform 2 cards.\n\n"
-
             "\"Marvelous.\"\n\n"
-
             "You quaff the mysterious substance. Immediately, you are invigorated and feel your muscle fibers twitch."
             );
 
     transform.actions = [player]()
     {
-        std::vector<cardID> pool = non_rare_cards;
-        pool.insert(pool.end(), rare_cards.begin(), rare_cards.end());
 
-        std::vector<abstractCard*> selectable;
-
-        for (auto card : player->get_deck())
-        {
-            if (card->get_card_type() != CardType::curse &&
-                card->get_card_type() != CardType::status)
-            {
-                selectable.push_back(card);
-            }
-        }
-
-        if (selectable.empty())
-            return;
-
-
-        abstractCard* first = ironclad::select_card(selectable);
-
-        cardID randomCard1 = RNG::instance().choice(pool);
+        abstractCard* first = ironclad::select_card(player->get_deck());
+        abstractCard* rand1 = ironclad::transformCard(first);
 
         player->deck_remove(first);
         delete first;
-        player->deck_add(CardFactory::createCard(randomCard1));
+        player->deck_add(rand1);
 
 
-        selectable.clear();
-
-        for (auto card : player->get_deck())
-        {
-            if (card->get_card_type() != CardType::curse &&
-                card->get_card_type() != CardType::status)
-            {
-                selectable.push_back(card);
-            }
-        }
-
-        if (selectable.empty())
-            return;
-
-        abstractCard* second = ironclad::select_card(selectable);
-
-        cardID randomCard2 = RNG::instance().choice(pool);
+        abstractCard* second = ironclad::select_card(player->get_deck());
+        abstractCard* rand2 = ironclad::transformCard(second);
 
         player->deck_remove(second);
         delete second;
-        player->deck_add(CardFactory::createCard(randomCard2));
+        player->deck_add(rand2);
+
     };
     transform.canUse = [](){ return true; };
     transform.next_nodes = {-1};
 
     UnknownNode mutagen;
 
-    mutagen.title = tr("[Ingest Mutagens]");
+    mutagen.title = tr("[Ingest Mutagens] Obtain a special relic.");
 
     mutagen.description =
         tr(
-            "Obtain Mutagenic Strength.\n\n"
 
             "\"Superb.\"\n\n"
 
