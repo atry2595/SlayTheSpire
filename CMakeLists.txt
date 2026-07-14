@@ -280,6 +280,7 @@ add_executable(SlayTheSpire
     src/cards/curse/shame.cpp src/cards/curse/shame.h
     src/Events/colosseum.h src/Events/colosseum.cpp
     src/Events/bonfirespirits.h src/Events/bonfirespirits.cpp
+    src/Events/thessssserpent.h src/Events/thessssserpent.cpp
 
 
 
