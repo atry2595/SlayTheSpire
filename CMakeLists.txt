@@ -281,6 +281,7 @@ add_executable(SlayTheSpire
     src/Events/colosseum.h src/Events/colosseum.cpp
     src/Events/bonfirespirits.h src/Events/bonfirespirits.cpp
     src/Events/thessssserpent.h src/Events/thessssserpent.cpp
+    src/Events/joust.h src/Events/joust.cpp
 
 
 
