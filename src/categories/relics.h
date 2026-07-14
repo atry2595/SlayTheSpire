@@ -41,7 +41,9 @@ enum class relicID{
     cultist_headpiece,
     red_mask,
     helmet_of_the_cleric,
-    gremlin_visage
+    gremlin_visage,
+    golden_idol,
+    spirit_poop
 };
 
 enum class relicRarity {
@@ -81,6 +83,18 @@ inline const std::vector<relicID> rare_relic = {
     relicID::ice_cream,
     relicID::tungsten_rod,
     relicID::captains_wheel,
+};
+
+inline const std::vector<relicID> boss_relic = {
+    relicID::calling_bell,
+    relicID::mark_of_pain,
+    relicID::velvet_choker,
+    relicID::black_star,
+    relicID::lively_plant,
+    relicID::philosophers_stone,
+    relicID::cursed_key,
+    relicID::sozu,
+    relicID::slavers_collar
 };
 
 #endif // RELICS_H

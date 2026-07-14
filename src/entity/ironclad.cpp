@@ -17,6 +17,65 @@ abstractCard* ironclad::select_card(
     return nullptr;
 }
 
+
+abstractCard* ironclad::transformCard(abstractCard* selected_card) {
+
+    if (selected_card->get_card_type() == CardType::curse) {
+        auto copy_cards = curse_cards;
+        auto rsc = RNG::instance().choice(copy_cards);
+        return CardFactory::createCard(rsc);
+    }
+
+
+    else if (selected_card->is_rare()) {
+        std::vector<double> weight;
+        std::vector<cardID> cards;
+
+        for (auto item : non_rare_cards) {
+            cards.push_back(item);
+            weight.push_back(1);
+        }
+        for (auto item : rare_cards) {
+            cards.push_back(item);
+            weight.push_back(3);
+        }
+
+        auto rsc = RNG::instance().weighted_choice(cards, weight);
+
+        auto res = CardFactory::createCard(rsc);
+
+        if (selected_card->get_upgraded() && RNG::instance().chance(0.75))
+            res->base_upgrade();
+
+        return res;
+    }
+
+
+    else {
+        std::vector<double> weight;
+        std::vector<cardID> cards;
+
+        for (auto item : non_rare_cards) {
+            cards.push_back(item);
+            weight.push_back(2);
+        }
+        for (auto item : rare_cards) {
+            cards.push_back(item);
+            weight.push_back(1);
+        }
+        auto rsc = RNG::instance().weighted_choice(cards, weight);
+
+        auto res = CardFactory::createCard(rsc);
+
+        if (selected_card->get_upgraded() && RNG::instance().chance(0.80))
+            res->base_upgrade();
+
+        return res;
+    }
+}
+
+
+
 ironclad::~ironclad(){
     combat_deck_remove_unique();
     for (auto* item : deck){

@@ -263,6 +263,26 @@ add_executable(SlayTheSpire
     src/items/relics/sozu_relic.cpp src/items/relics/sozu_relic.h
     src/combat/manageCombat/combatRewards.h
     src/items/relics/black_star_relic.cpp src/items/relics/black_star_relic.h
+    src/events/UnknownMap.h
+    src/categories/unknowns.h
+    src/events/ominousforge.h src/events/ominousforge.cpp
+    src/Events/goldenidol.h src/Events/goldenidol.cpp
+    src/Events/augmenter.h src/Events/augmenter.cpp
+    src/Events/facetrader.h src/Events/facetrader.cpp
+    src/Events/goldenshrine.h src/Events/goldenshrine.cpp
+    src/Events/lab.h src/Events/lab.cpp
+    src/Events/thecleric.h src/Events/thecleric.cpp
+    src/Events/shininglight.h src/Events/shininglight.cpp
+    src/Events/ancientwriting.h src/Events/ancientwriting.cpp
+    src/Events/pleadingvagrant.h src/Events/pleadingvagrant.cpp
+    src/items/relics/golden_idol_relic.cpp src/items/relics/golden_idol_relic.h
+    "src/cards/curse/injury.cpp" "src/cards/curse/injury.h"
+    src/cards/curse/shame.cpp src/cards/curse/shame.h
+    src/Events/colosseum.h src/Events/colosseum.cpp
+    src/Events/bonfirespirits.h src/Events/bonfirespirits.cpp
+    src/Events/thessssserpent.h src/Events/thessssserpent.cpp
+    src/Events/joust.h src/Events/joust.cpp
+    src/cards/curse/doubt.cpp src/cards/curse/doubt.h
 
 
 

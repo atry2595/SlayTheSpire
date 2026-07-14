@@ -23,6 +23,9 @@
 #include "cards/curse/pain.h"
 #include "cards/curse/regret.h"
 #include "cards/curse/writhe.h"
+#include "cards/curse/injury.h"
+#include "cards/curse/shame.h"
+#include "cards/curse/doubt.h"
 
 // Power
 #include "cards/power/barricade.h"
@@ -86,6 +89,9 @@ abstractCard* CardFactory::createCard(cardID id)
     case cardID::pain: return new pain;
     case cardID::regret: return new regret;
     case cardID::writhe: return new writhe;
+    case cardID::injury: return new injury;
+    case cardID::shame: return new shame;
+    case cardID::doubt: return new doubt;
 
     // Power
     case cardID::barricade: return new barricade;
