@@ -4,8 +4,8 @@
 #include "items/relics/relicfactory.h"
 
 Colosseum::Colosseum(game_action& actions, ironclad* player) {
-    // //atry: مقدار unknownID::colosseum را به enumهای مربوطه اضافه کن.
-    manager.unknown_ID = unknownID::colosseum;
+
+    manager.unknown_ID = unknownID::the_colosseum;
     manager.unknown_name = tr("The Colosseum");
     manager.isEvent = true;
 
@@ -19,6 +19,8 @@ Colosseum::Colosseum(game_action& actions, ironclad* player) {
     root.canUse = []() { return true; };
     root.actions = []() {};
 
+    //---------------------------------------------------------------------
+
     UnknownNode wake_up_node;
     wake_up_node.title = tr("[Continue]");
     wake_up_node.description = tr("Groggy and with a throbbing head, you awaken to find yourself thrown in the center of a massive stadium with an overflowing audience of Slavers, Cultists, and other denizens of the City!\n\n"
@@ -28,10 +30,15 @@ Colosseum::Colosseum(game_action& actions, ironclad* player) {
     wake_up_node.canUse = []() { return true; };
     wake_up_node.actions = []() {};
 
+    //---------------------------------------------------------------------
+
     UnknownNode fight_one_node;
     fight_one_node.title = tr("[Fight] Enter combat with Blue Slaver and Red Slaver.");
     fight_one_node.description = "";
     fight_one_node.canUse = []() { return true; };
+    fight_one_node.actions = [](){};
+
+    //---------------------------------------------------------------------
 
     UnknownNode choice_node;
     choice_node.title = tr("[Continue]");
@@ -44,6 +51,8 @@ Colosseum::Colosseum(game_action& actions, ironclad* player) {
     choice_node.canUse = []() { return true; };
     choice_node.actions = []() {};
 
+    //---------------------------------------------------------------------
+
     UnknownNode cowardice_node;
     cowardice_node.title = tr("[COWARDICE] Escape.");
     cowardice_node.description = "";
@@ -51,10 +60,15 @@ Colosseum::Colosseum(game_action& actions, ironclad* player) {
     cowardice_node.actions = []() {};
     cowardice_node.next_nodes = {-1};
 
+    //---------------------------------------------------------------------
+
     UnknownNode victory_node;
     victory_node.title = tr("[VICTORY] A powerful fight with many rewards.");
     victory_node.description = "";
     victory_node.canUse = []() { return true; };
+    victory_node.actions = [](){};
+
+    //---------------------------------------------------------------------
 
     manager.nodes.push_back(root);
     int rootIdx = manager.nodes.size() - 1;
@@ -82,21 +96,4 @@ Colosseum::Colosseum(game_action& actions, ironclad* player) {
     manager.nodes[victoryIdx].next_nodes = {-1};
 
 
-    //atry: نحوه شروع مبارزه عادی و فراخوانی دشمنان (Blue Slaver و Red Slaver) را بر اساس سیستم مبارزه پروژه تنظیم کن.
-    manager.nodes[fightOneIdx].actions = [&actions, player]() {
-        // ??
-    };
-
-
-    // //atry: شروع مبارزه الیت با Gremlin Nob و Taskmaster و ست کردن جوایز آن شامل ۱۰۰ سکه طلا، یک رلیک Rare و یک رلیک Uncommon.
-    manager.nodes[victoryIdx].actions = [&actions, player]() {
-        // شروع مبارزه الیت دوم
-        // actions.start_combat({enemyID::taskmaster, enemyID::gremlin_nob}, combatType::elite);
-
-        // اهدای پاداش‌ها (می‌تواند مستقیم به موجودی بازیکن اضافه شود یا از طریق سیستم پاداش مبارزه (combatRewards) هندل شود):
-        player->set_gold(player->get_gold() + 100);
-
-        //atry: سیستم گرفتن رلیک تصادفی بر اساس Rarity را فراخوانی کنید.
-        //??
-    };
 }

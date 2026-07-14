@@ -282,6 +282,7 @@ add_executable(SlayTheSpire
     src/Events/bonfirespirits.h src/Events/bonfirespirits.cpp
     src/Events/thessssserpent.h src/Events/thessssserpent.cpp
     src/Events/joust.h src/Events/joust.cpp
+    src/cards/curse/doubt.cpp src/cards/curse/doubt.h
 
 
 
