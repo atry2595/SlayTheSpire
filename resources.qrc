@@ -276,6 +276,7 @@
         <file alias="Ancient_Writing.jpg">assests/image/events/photo_2026-07-12_19-30-20.jpg</file>
         <file alias="The_Joust.jpg">assests/image/events/photo_2026-07-12_19-30-21.jpg</file>
         <file alias="Pleading_Vagrant.jpg">assests/image/events/photo_2026-07-12_19-30-22.jpg</file>
+    </qresource>
     <qresource prefix="/image/card/frame">
         <file alias="frame_black.png">assests/image/cards/frame/frame_black.png</file>
         <file alias="frame_gray.png">assests/image/cards/frame/frame_gray.png</file>

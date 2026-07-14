@@ -23,7 +23,7 @@ void JAX::play(playInfo& play_info){
     dmg_info.damage = dmg;
     dmg_info.attacker = nullptr;
     dmg_info.target = play_info.attacker;
-    dmg_info.damage = self;
+    dmg_info.attack_type = attackType::self;
     dmg_info.block_active = false;
 
     play_info.actions.apply_damage(dmg_info);
