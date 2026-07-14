@@ -38,7 +38,6 @@ void BaseItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     QGraphicsObject::mousePressEvent(event);
     if (f){
-        qDebug() << "passed";
     }
 }
 

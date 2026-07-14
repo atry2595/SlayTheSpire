@@ -24,6 +24,9 @@ inline EntityVisualData getEntityVisual(entityID id)
     switch (id)
     {
 
+    case entityID::ironclad:
+        return {{300,214}, EntityAnimType::Humanoid};
+
     case entityID::blue_slaver:
         return {{254,214}, EntityAnimType::Humanoid};
 

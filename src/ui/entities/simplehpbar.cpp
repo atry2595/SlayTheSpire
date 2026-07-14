@@ -61,7 +61,6 @@ void SimpleHpBar::setHp(int hp)
 
 void SimpleHpBar::setShield(int shield)
 {
-    qDebug() << shield;
     m_shield = qMax(0, shield);
     update();
 }

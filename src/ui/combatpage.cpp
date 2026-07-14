@@ -1,27 +1,13 @@
 #include "combatpage.h"
 #include <QVBoxLayout>
 #include <QResizeEvent>
-#include <QSequentialAnimationGroup>
-#include "imageitem.h"
-#include "cards/cardfactory.h"
-#include "ui/cards/cardtemplatecommon.h"
-#include "ui/entities/ironcladitem.h"
-#include "items//powers/powerfactory.h"
-#include "entity/ironclad.h"
-#include <QParallelAnimationGroup>
-#include "items/potions/potionfactory.h"
-#include "entity/blue_slaver.h"
-#include "ui/entities/EnemyItem.h"
-#include "entity/hexaghost.h"
-#include "entity/medium_slime.h"
-#include "entity/book_of_stabbing.h"
-#include "entity/red_louse.h"
-#include "ui/entities/enemyitem.h"
-#include "entity/red_slaver.h"
-#include "entity/spheric_guardian.h"
+#include "ui/entities/getvisualdata.h"
+#include <QTimer>
 
-CombatPage::CombatPage(QWidget *parent)
+
+CombatPage::CombatPage(QWidget *parent, combat_manager* m)
     : QWidget{parent}
+    , manager(m)
 {
     combatView = new QGraphicsView(this);
     combatScene = new QGraphicsScene(this);
@@ -37,9 +23,6 @@ CombatPage::CombatPage(QWidget *parent)
     combatView->setRenderHint(QPainter::Antialiasing);
 
 
-
-
-
     auto* layout = new QVBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
@@ -50,101 +33,10 @@ CombatPage::CombatPage(QWidget *parent)
         combatView->fitInView(combatScene->sceneRect(), Qt::KeepAspectRatio);
     }, Qt::QueuedConnection);
 
-
-
-    ImageItem* bg = new ImageItem(nullptr, {1620, 920}, {-10, -10});
-    bg->setPixmap(QPixmap(":/image/scene/map2_epic.jpg"));
-    bg->setZValue(-1000);
-    combatScene->addItem(bg);
-
-    // ImageItem* ir = new ImageItem(nullptr, {400, 275}, {155, 370});
-    // ir->setPixmap(QPixmap(":/image/characters/ironclad5.png"));
-    // ir->setZValue(0);
-
-
-    auto plyr = new ironclad(nullptr);
-    auto pwr = PowerFactory::createPower(powerID::strength, plyr, 5);
-    game_action acts(nullptr);
-    plyr->add_power(acts, pwr);
-
-    pwr = PowerFactory::createPower(powerID::demon_form, plyr, 3);
-    plyr->add_power(acts, pwr);
-
-    pwr = PowerFactory::createPower(powerID::dexterity, plyr, -3);
-    plyr->add_power(acts, pwr);
-
-    pwr = PowerFactory::createPower(powerID::entangled, plyr, 1);
-    plyr->add_power(acts, pwr);
-
-    auto pot = PotionFactory::createPotion(potionID::energy_potion, plyr);
-    plyr->potion_list_add(pot);
-
-    pot = PotionFactory::createPotion(potionID::fairy_in_a_bottle, plyr);
-    plyr->potion_list_add(pot);
-
-    pot = PotionFactory::createPotion(potionID::fear_potion, plyr);
-    plyr->potion_list_add(pot);
-
-    pot = PotionFactory::createPotion(potionID::strength_potion, plyr);
-    plyr->potion_list_add(pot);
-
-
-
-    auto plyr_item = new IroncladItem(plyr, {170, 360}, 100);
-    combatScene->addItem(plyr_item->getParent());
-    plyr_item->getParent()->activeAttackAnimation();
-
-    auto enm = spheric_guardian::create(acts);
-    pwr = PowerFactory::createPower(powerID::strength, enm, 3);
-    enm->add_power(acts, pwr);
-
-    pwr = PowerFactory::createPower(powerID::vulnerable, enm, 2);
-    enm->add_power(acts, pwr);
-
-    auto enm_item = new EnemyItem(enm, {1600 - 600, 360 - 100}, 100);
-    combatScene->addItem(enm_item->getParent());
-    enm_item->getParent()->activeAttackAnimation();
-
-
-    // auto u = ir->createGeometryAnimation({155, 370 -14, 400, 275 + 14}, 750, QEasingCurve::InSine);
-    // auto f = ir->createGeometryAnimation({155, 370, 400, 275}, 750, QEasingCurve::OutSine);
-
-    // auto* gr = new QSequentialAnimationGroup();
-    // gr->addAnimation(u);
-    // gr->addAnimation(f);
-    // gr->setLoopCount(-1);
-    // gr->start();
-    // combatScene->addItem(ir);
-
-
-
-    abstractCard* c0 = CardFactory::createCard(cardID::bash);
-    c0->set_lock(true);
-    abstractCard* c1 = CardFactory::createCard(cardID::demon_form);
-    abstractCard* c2 = CardFactory::createCard(cardID::reaper);
-    c2->upgrade();
-    abstractCard* c3 = CardFactory::createCard(cardID::heavy_blade);
-    c3->upgrade();
-    abstractCard* c4 = CardFactory::createCard(cardID::feel_no_pain);
-
-    CardTemplateCommon* card0 = new CardTemplateCommon(c0, {700 - 300, 700}, {200, 300}, 0);
-    CardTemplateCommon* card1 = new CardTemplateCommon(c1, {700 - 150, 700}, {200, 300}, 10);
-    CardTemplateCommon* card2 = new CardTemplateCommon(c2, {700, 700}, {200, 300}, 20);
-    CardTemplateCommon* card3 = new CardTemplateCommon(c3, {700 + 150, 700}, {200, 300}, 30);
-    CardTemplateCommon* card4 = new CardTemplateCommon(c4, {700 + 300, 700}, {200, 300}, 40);
-
-
-    combatScene->addItem(card0->getParent());
-    combatScene->addItem(card1->getParent());
-    combatScene->addItem(card2->getParent());
-    combatScene->addItem(card3->getParent());
-    combatScene->addItem(card4->getParent());
-
-
-
-
-
+    start_combat();
 }
+
+
 
 void CombatPage::resizeEvent(QResizeEvent *event)
 {
@@ -152,5 +44,89 @@ void CombatPage::resizeEvent(QResizeEvent *event)
 
     if (combatView && combatScene) {
         combatView->fitInView(combatScene->sceneRect(), Qt::KeepAspectRatioByExpanding);
+    }
+}
+
+
+
+void CombatPage::start_combat() {
+    if (!manager) return;
+
+    initialize_layout();
+}
+
+
+
+void CombatPage::initialize_layout() {
+
+    int players_count = manager->get_players().size();
+    int sum_players_width = 1;
+    int players_margine_width = 0;
+
+    int enemies_count = manager->get_enemies().size();
+    int sum_enemies_width = 1;
+    int enemies_margine_width = 0;
+
+
+
+    for (auto item :manager->get_players()){
+        sum_players_width += getEntityVisual(item->get_ID()).size.width();
+    }
+    for (auto item : manager->get_enemies()){
+        sum_enemies_width += getEntityVisual(item->get_ID()).size.width();
+    }
+
+
+    players_scene_width = std::min(sum_players_width * 1600 / (sum_players_width + sum_enemies_width), 800);
+    enemies_scene_width = 1600 - players_scene_width;
+
+    players_margine_width = (players_scene_width - sum_players_width) / (players_count + 1);
+    enemies_margine_width = (enemies_scene_width - sum_enemies_width) / (enemies_count + 1);
+
+    qreal x = players_margine_width;
+    for (auto item : manager->get_players())  {
+        auto p = new IroncladItem(item, {x, 565 - getEntityVisual(item->get_ID()).size.height()}, 100);
+        players.push_back(p);
+        combatScene->addItem(p->getParent());
+        x += getEntityVisual(item->get_ID()).size.width() + players_margine_width;
+    }
+
+    x += enemies_margine_width;
+    for (auto item : manager->get_enemies())  {
+        auto p = new EnemyItem(item, {x, 565 - getEntityVisual(item->get_ID()).size.height()}, 200);
+        enemies.push_back(p);
+        combatScene->addItem(p->getParent());
+        x += getEntityVisual(item->get_ID()).size.width() + enemies_margine_width;
+    }
+
+}
+
+
+
+void CombatPage::reset_layout() {
+    for (auto item : enemies) delete item;
+    enemies.clear();
+
+    int sum_enemy = 0;
+    int count = 0;
+
+    for (int i = 0; i < manager->get_enemies().size(); i++){
+        if (manager->get_enemy_is_alive()[i]){
+            count++;
+            sum_enemy += getEntityVisual(manager->get_enemies()[i]->get_ID()).size.width();
+        }
+    }
+
+    int margine = (enemies_scene_width - sum_enemy) / (count + 1);
+
+    qreal x = players_scene_width + margine;
+
+    for (int i = 0; i < manager->get_enemies().size(); i++){
+        if (manager->get_enemy_is_alive()[i]){
+            auto p = new EnemyItem(manager->get_enemies()[i], {x, 565 - getEntityVisual(manager->get_enemies()[i]->get_ID()).size.height()}, 200);
+            enemies.push_back(p);
+            combatScene->addItem(p->getParent());
+            x += getEntityVisual(manager->get_enemies()[i]->get_ID()).size.width() + margine;
+        }
     }
 }

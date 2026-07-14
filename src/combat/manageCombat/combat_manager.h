@@ -58,6 +58,8 @@ public:
 
     std::vector<ironclad*> get_players() {return players;}
     std::vector<abstractEnemy*> get_enemies() {return enemies;}
+    std::vector<bool> get_player_is_alive() { return player_is_alive; }
+    std::vector<bool> get_enemy_is_alive() { return enemy_is_alive; }
     entityType get_type() {return combat_type;}
 
     int get_enemy_index(abstractEnemy* enmy){

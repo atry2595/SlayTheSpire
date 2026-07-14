@@ -35,6 +35,7 @@ protected:
     std::vector<TextItem*> powers = {};
 
 
+
 public:
     abstractEntityItem(abstractEntity* source, QPointF pos, QSizeF size, qreal zValue);
     ~abstractEntityItem();
@@ -51,6 +52,8 @@ public:
 
     EntityParent* getParent() { return entity_parent; }
 
+    void dieAnim();
+    void escapeAnim();
 };
 
 #endif // ABSTRACTENTITYITEM_H
