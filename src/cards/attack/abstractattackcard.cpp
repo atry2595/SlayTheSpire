@@ -23,6 +23,7 @@ attackResult abstractAttackCard::perform_attack(abstractEntity* attacker, std::v
     inf.attacker = attacker;
     inf.target_list = target_list;
     inf.damage = damage;
+    inf.attack_type = attackType::card;
 
     return actions.attack(inf);
 }

@@ -16,6 +16,9 @@ class CombatPage : public QWidget
 public:
     explicit CombatPage(QWidget *parent = nullptr, combat_manager* manager = nullptr);
     void reset_layout();
+    void escape_entity(abstractEntity*);
+    void died_entity(abstractEntity*);
+    void remove_entity(abstractEntity*);
 
 protected:
     void resizeEvent(QResizeEvent *event) override;

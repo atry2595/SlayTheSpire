@@ -130,3 +130,50 @@ void CombatPage::reset_layout() {
         }
     }
 }
+
+
+
+
+void CombatPage::escape_entity(abstractEntity* entity) {
+    for (int i = 0; i < players.size(); i++) {
+        if (entity == players[i]->getSource()) {
+            players[i]->escapeAnim();
+        }
+    }
+    for (int i = 0; i < enemies.size(); i++) {
+        if (entity == enemies[i]->getSource()) {
+            enemies[i]->escapeAnim();
+        }
+    }
+}
+
+void CombatPage::died_entity(abstractEntity* entity) {
+    for (int i = 0; i < players.size(); i++) {
+        if (entity == players[i]->getSource()) {
+            players[i]->escapeAnim();
+        }
+    }
+    for (int i = 0; i < enemies.size(); i++) {
+        if (entity == enemies[i]->getSource()) {
+            enemies[i]->escapeAnim();
+        }
+    }
+}
+
+
+void CombatPage::remove_entity(abstractEntity* entity) {
+    for (int i = 0; i < players.size(); i++) {
+        if (entity == players[i]->getSource()) {
+            delete players[i];
+            players.erase(players.begin() + i);
+            return;
+        }
+    }
+    for (int i = 0; i < enemies.size(); i++) {
+        if (entity == enemies[i]->getSource()) {
+            delete enemies[i];
+            enemies.erase(enemies.begin() + i);
+            return;
+        }
+    }
+}

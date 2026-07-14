@@ -37,6 +37,7 @@ void pain::hand_turn_start(playInfo& info) {
                 dmg.attacker = nullptr;
                 dmg.target = info.attacker;
                 dmg.block_active = false;
+                dmg.attack_type = attackType::self;
                 info.actions.apply_damage(dmg);
             }
         });

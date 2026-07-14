@@ -22,6 +22,7 @@ void brutalityPower::at_turn_start(game_action& actions) {
     info.attacker = nullptr;
     info.target = owner;
     info.block_active = false;
+    info.attack_type = attackType::self;
     actions.apply_damage(info);
 
     ironclad* player = dynamic_cast<ironclad*>(owner);

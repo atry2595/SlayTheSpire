@@ -51,6 +51,7 @@ public:
     QSizeF getEntitySize() const { return entity_size; }
 
     EntityParent* getParent() { return entity_parent; }
+    abstractEntity* getSource() { return entity_source; }
 
     void dieAnim();
     void escapeAnim();

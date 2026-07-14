@@ -11,6 +11,7 @@ void firePotion::play(playInfo& info){
     a.attacker = nullptr; //without is affected by others
     a.target_list = info.target_list;
     a.damage = amount;
+    a.attack_type = attackType::potion;
 
     info.actions.attack(a);
 }
