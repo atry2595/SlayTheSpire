@@ -4,15 +4,10 @@
 #include <QParallelAnimationGroup>
 
 CardTemplateRare::CardTemplateRare(abstractCard* source, QPointF pos, QSizeF size, qreal z_value)
-    :card_source(source),
-    card_pos(pos),
-    card_size(size),
-    zValue(z_value)
+    :abstractCardTemplate(source, pos, size, z_value)
 {
     qreal w = card_size.width();
     qreal h = card_size.height();
-
-    card_parent = new CardParent(nullptr, card_size, card_pos, z_value_zone);
 
 
 
@@ -100,9 +95,6 @@ CardTemplateRare::CardTemplateRare(abstractCard* source, QPointF pos, QSizeF siz
     card_description->setColor(Qt::white);
     card_description->setZValue(zValue + 3);
 
-
-
-    updateCard();
 }
 
 

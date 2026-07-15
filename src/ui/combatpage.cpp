@@ -3,12 +3,23 @@
 #include <QResizeEvent>
 #include "ui/entities/getvisualdata.h"
 #include <QTimer>
+#include "ui/cards/cardtemplatecommon.h"
+#include "ui/cards/cardtemplateuncommon.h"
+#include "ui/cards/cardtemplaterare.h"
+#include "ui/cards/cardtemplatelegend.h"
+#include "ui/cards/getCardPixmap.h"
+#include "core/setting.h"
 
 
-CombatPage::CombatPage(QWidget *parent, combat_manager* m)
+CombatPage::CombatPage(QWidget *parent, combat_manager* m, ironclad* plyr)
     : QWidget{parent}
     , manager(m)
+    , player(plyr)
+    , eve(m->get_event())
 {
+    tmpl = cardTemplate::legend;
+
+    //----------------------------------------------------
     combatView = new QGraphicsView(this);
     combatScene = new QGraphicsScene(this);
 
@@ -20,7 +31,8 @@ CombatPage::CombatPage(QWidget *parent, combat_manager* m)
     combatView->setFrameShape(QFrame::NoFrame);
     combatView->setStyleSheet("background: red;");
 
-    combatView->setRenderHint(QPainter::Antialiasing);
+    combatView->setRenderHint(QPainter::Antialiasing, true);
+    combatView->setRenderHint(QPainter::SmoothPixmapTransform, true);
 
 
     auto* layout = new QVBoxLayout(this);
@@ -33,7 +45,46 @@ CombatPage::CombatPage(QWidget *parent, combat_manager* m)
         combatView->fitInView(combatScene->sceneRect(), Qt::KeepAspectRatio);
     }, Qt::QueuedConnection);
 
+    //----------------------------------------------------
+    ImageItem* bg = new ImageItem(nullptr, {1632, 918}, {-16, -9});
+    bg->setPixmap(QPixmap(":/image/scene/map1_dark.jpg"));
+    bg->setZValue(0);
+
+    QFont f;
+    f.setBold(true);
+    f.setFamily(Fonts::Cascadia);
+    f.setPixelSize(22);
+
+    draw_pile = new TextItem(nullptr, {50, 75}, {10, 710});
+    draw_pile->setBackground(getBackCard(tmpl));
+    draw_pile->setColor(Qt::white);
+    draw_pile->setFont(f);
+    draw_pile->setAlignment(Qt::AlignHCenter | Qt::AlignBottom);
+    draw_pile->setBorder(true);
+    draw_pile->setZValue(5500);
+
+    discard_pile = new TextItem(nullptr, {50, 75}, {1600 - 10 - 50, 710});
+    discard_pile->setBackground(getBackCard(tmpl));
+    discard_pile->setColor(Qt::white);
+    discard_pile->setFont(f);
+    discard_pile->setAlignment(Qt::AlignHCenter | Qt::AlignBottom);
+    discard_pile->setBorder(true);
+    discard_pile->setZValue(5500);
+
+    combatScene->addItem(bg);
+    combatScene->addItem(draw_pile);
+    combatScene->addItem(discard_pile);
+
+    draw_pile->setText(QString::number(player->get_deck().size()));
+    discard_pile->setText(QString::number(player->get_discard_pile().size()));
+    //----------------------------------------------------
+
     start_combat();
+
+    connect(eve, &combatEvent::card_moved, this, [=](playCardInfo& card, PileType from, PileType to){
+        this->cardMoveTo(card.card, from, to);
+    });
+    //----------------------------------------------------
 }
 
 
@@ -176,4 +227,172 @@ void CombatPage::remove_entity(abstractEntity* entity) {
             return;
         }
     }
+}
+
+
+void CombatPage::cardAdd(abstractCard* card, qreal z) {
+    if (created_cards.find(card) != created_cards.end()) return;
+
+    switch (tmpl) {
+    case cardTemplate::common:
+        created_cards[card] = new CardTemplateCommon(card, {1650, 950}, {200, 300}, z);
+        break;
+
+    case cardTemplate::uncommon:
+        created_cards[card] = new CardTemplateUncommon(card, {1650, 950}, {200, 300}, z);
+        break;
+    case cardTemplate::rare:
+        created_cards[card] = new CardTemplateRare(card, {1650, 950}, {200, 300}, z);
+        break;
+    case cardTemplate::legend:
+        created_cards[card] = new CardTemplateLegend(card, {1650, 950}, {200, 300}, z);
+        break;
+    }
+    combatScene->addItem(created_cards[card]->getParent());
+    created_cards[card]->updateCard();
+}
+
+
+void CombatPage::setHandCardPoint(abstractCard* card, bool enter) {
+    int hand_count = player->get_hand_pile().size();
+    int i;
+    for (i = 0; i < hand_count; i++) {
+        if (player->get_hand_pile()[i] == card) break;
+    }
+    created_cards[card]->getParent()->setZValue(4401 + 10 * i);
+    QPointF orig = created_cards[card]->getCardpos();
+
+    if (i == hand_count) {
+        created_cards[card]->setCardpos({orig.x(), 950});
+        return;
+    }
+
+    qreal x = 770 - 70 * hand_count + 140 * i;
+    if (enter) {
+        created_cards[card]->setCardpos({x, 950});
+        QTimer* t = new QTimer();
+        t->start(500);
+
+        connect(t, &QTimer::timeout, this, [=](){
+            t->stop();
+            created_cards[card]->setCardpos({x, 700});
+        });
+    }
+
+    else {
+        created_cards[card]->setCardpos({x, orig.y()});
+    }
+
+}
+
+
+void CombatPage::cardMoveTo(abstractCard* card, PileType from, PileType to) {
+    draw_pile->setText(QString::number(player->get_draw_pile().size()));
+    discard_pile->setText(QString::number(player->get_discard_pile().size()));
+
+    if (from == PileType::hand){
+        setHandCardPoint(card);
+
+        QTimer* t = new QTimer(this);
+        t->start(3000);
+
+        connect(t, &QTimer::timeout, this, [=](){
+            t->stop();
+            delete created_cards[card];
+            created_cards.erase(card);
+        });
+
+        for (auto item : player->get_hand_pile()) {
+            setHandCardPoint(item);
+        }
+
+    }
+
+    if (to == PileType::hand){
+        cardAdd(card);
+
+        for (auto item : player->get_hand_pile()) {
+            setHandCardPoint(item, true);
+        }
+
+    }
+
+
+    if (from == PileType::discard){
+        ImageItem* img = new ImageItem(nullptr, {40, 60}, {1650, 950});
+        combatScene->addItem(img);
+        img->setPixmap(getBackCard(tmpl));
+
+        QPointF org = discard_pile->pos() + QPointF(5, 0);
+        QPointF dest = discard_pile->pos() + QPointF(5, 200);
+        auto anim = img->createMoveAnimation({dest}, 500);
+        anim->setStartValue(org);
+        anim->start();
+
+        QTimer* t = new QTimer(this);
+        t->start(3000);
+
+        connect(t, &QTimer::timeout, this, [=](){
+            t->stop();
+            delete img;
+        });
+    }
+    if (to == PileType::discard){
+        ImageItem* img = new ImageItem(nullptr, {40, 60}, {1650, 950});
+        combatScene->addItem(img);
+        img->setPixmap(getBackCard(tmpl));
+
+        QPointF dest = discard_pile->pos() + QPointF(5, 0);
+        QPointF org = discard_pile->pos() + QPointF(5, 200);
+        auto anim = img->createMoveAnimation({dest}, 500);
+        anim->setStartValue(org);
+        anim->start();
+
+        QTimer* t = new QTimer(this);
+        t->start(3000);
+
+        connect(t, &QTimer::timeout, this, [=](){
+            t->stop();
+            delete img;
+        });
+    }
+    if (from == PileType::draw){
+        ImageItem* img = new ImageItem(nullptr, {40, 60}, {1650, 950});
+        combatScene->addItem(img);
+        img->setPixmap(getBackCard(tmpl));
+
+        QPointF org = draw_pile->pos() + QPointF(5, 0);
+        QPointF dest = draw_pile->pos() + QPointF(5, 200);
+        auto anim = img->createMoveAnimation({dest}, 500);
+        anim->setStartValue(org);
+        anim->start();
+
+        QTimer* t = new QTimer(this);
+        t->start(3000);
+
+        connect(t, &QTimer::timeout, this, [=](){
+            t->stop();
+            delete img;
+        });
+    }
+    if (to == PileType::draw){
+        ImageItem* img = new ImageItem(nullptr, {40, 60}, {1650, 950});
+        combatScene->addItem(img);
+        img->setPixmap(getBackCard(tmpl));
+
+        QPointF dest = draw_pile->pos() + QPointF(5, 0);
+        QPointF org = draw_pile->pos() + QPointF(5, 200);
+        auto anim = img->createMoveAnimation({dest}, 500);
+        anim->setStartValue(org);
+        anim->start();
+
+        QTimer* t = new QTimer(this);
+        t->start(3000);
+
+        connect(t, &QTimer::timeout, this, [=](){
+            t->stop();
+            delete img;
+        });
+    }
+
 }

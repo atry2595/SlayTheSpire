@@ -62,7 +62,7 @@ public:
     void saveHomeState();
     void returnToHome(int duration = 250);
 
-    void setHomePos(QPointF p) { home_pos = p;}
+    virtual void setHomePos(QPointF p) { home_pos = p;}
     QPointF homePos() const { return home_pos; }
 
     void setHomeSize(QSizeF s) { home_size = s; }

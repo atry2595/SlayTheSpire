@@ -565,6 +565,7 @@ add_executable(SlayTheSpire
     src/ui/entities/getvisualdata.h
     src/ui/entities/enemyitem.cpp src/ui/entities/enemyitem.h
     src/ui/entities/getPotionIcon.h
+    src/ui/cards/abstractcardtemplate.h src/ui/cards/abstractcardtemplate.cpp
 )
 
 target_include_directories(SlayTheSpire PRIVATE

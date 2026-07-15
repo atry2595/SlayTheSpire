@@ -330,6 +330,7 @@ void ironclad::consume_all_energy() {
 void ironclad::at_turn_start(game_action& info) {
     abstractEntity::at_turn_start(info);
 
+
     playInfo pl(info);
     pl.attacker = this;
     energy += base_energy;
@@ -392,6 +393,7 @@ void ironclad::at_combat_start(game_action& info){
     abstractEntity::at_combat_start(info);
 
     combat_deck = deck;
+    RNG::instance().shuffle(combat_deck);
     energy = 0;
 
     for (auto item : combat_deck){

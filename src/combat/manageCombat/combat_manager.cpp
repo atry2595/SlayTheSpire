@@ -101,6 +101,7 @@ void combat_manager::turn_start() {
             players[current_player]->at_turn_start(actions);
             // play + trun end
             // timer
+            return;
         }
     }
 

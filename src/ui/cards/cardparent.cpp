@@ -76,7 +76,6 @@ void CardParent::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 //-----------------------------------------------------------------
 
 void CardParent::refreshTargetPos() {
-
     qreal h = homeSize().height();
     qreal w = homeSize().width();
     qreal n = 1; //sclae of card
@@ -164,4 +163,10 @@ void CardParent::setCanSelect(bool value) {
     else {
         setFlag(QGraphicsItem::ItemIsSelectable, false);
     }
+}
+
+//-------------------------------------------------------------------------
+void CardParent::setHomePos(QPointF h) {
+    BaseItem::setHomePos(h);
+    refreshTargetPos();
 }

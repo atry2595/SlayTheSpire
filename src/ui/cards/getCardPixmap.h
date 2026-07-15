@@ -3,6 +3,7 @@
 
 #include <QPixmap>
 #include "categories/cards.h"
+#include "abstractcardtemplate.h"
 
 inline QPixmap getCardPixmap(cardID id)
 {
@@ -83,6 +84,18 @@ inline QPixmap getCardFrame(CardType id)
 
     }
 
+    return QPixmap();
+}
+
+inline QPixmap getBackCard(cardTemplate id) {
+    switch (id) {
+
+    case cardTemplate::common: return QPixmap(":/image/cards/back/back.png");
+    case cardTemplate::uncommon: return QPixmap(":/image/cards/back/back1.png");
+    case cardTemplate::rare: return QPixmap(":/image/cards/back/back2.png");
+    case cardTemplate::legend: return QPixmap(":/image/cards/back/back3.png");
+
+    }
     return QPixmap();
 }
 

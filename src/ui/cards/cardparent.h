@@ -76,6 +76,7 @@ public:
     void setHoverZ(qreal z) { hover_z = z; }
     void setHoverEnterEasing(QEasingCurve::Type value) { hover_enter_easing = value; }
     void setHoverLeaveEasing(QEasingCurve::Type value) { hover_leave_easing = value; }
+    void setHomePos(QPointF) override;
     //=============setters===============
 
 };

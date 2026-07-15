@@ -8,34 +8,48 @@
 #include "combat/manageCombat/combat_manager.h"
 #include "ui/entities/enemyitem.h"
 #include "ui/entities/ironcladitem.h"
+#include "ui/cards/abstractcardtemplate.h"
 
 class CombatPage : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit CombatPage(QWidget *parent = nullptr, combat_manager* manager = nullptr);
+    explicit CombatPage(QWidget *parent = nullptr, combat_manager* manager = nullptr, ironclad* plyr = nullptr);
     void reset_layout();
     void escape_entity(abstractEntity*);
     void died_entity(abstractEntity*);
     void remove_entity(abstractEntity*);
+
+    void cardAdd(abstractCard*, qreal z = -1);
+    void cardMoveTo(abstractCard*, PileType from, PileType to);
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
 
     void start_combat();
     void initialize_layout();
+    void setHandCardPoint(abstractCard* card, bool enter = false);
+
+    cardTemplate tmpl;
 
 private:
+    combatEvent* eve;
+
     QGraphicsView *combatView;
     QGraphicsScene *combatScene;
     combat_manager* manager;
+    ironclad* player;
+
+    TextItem* discard_pile = nullptr;
+    TextItem* draw_pile = nullptr;
 
     int enemies_scene_width = 0;
     int players_scene_width = 0;
 
     std::vector<IroncladItem*> players;
     std::vector<EnemyItem*> enemies;
+    std::unordered_map<abstractCard*, abstractCardTemplate*> created_cards;
 };
 
 #endif // COMBATPAGE_H

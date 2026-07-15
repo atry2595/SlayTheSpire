@@ -96,7 +96,7 @@ abstractPower* abstractEntity::get_spec_power(powerID power){
 
 void abstractEntity::remove_zero_power(){
 
-    for (int i = powers_list.size() - 1; i >= 0 ;i++){
+    for (int i = powers_list.size() - 1; i >= 0 ;i--){
         if (powers_list[i]->get_amount() == 0){
             delete powers_list[i];
             powers_list.erase(powers_list.begin() + i);

@@ -2,8 +2,6 @@
 #include "ui_mainwindow.h"
 #include "combatpage.h"
 #include "entity/ironclad.h"
-#include "entity/taskmaster.h"
-#include "entity/gremlin_nob.h"
 #include "entity/spheric_guardian.h"
 #include "combat/combat_event.h"
 #include "combat/game_action.h"
@@ -23,12 +21,20 @@ MainWindow::MainWindow(QWidget *parent)
     auto en1 = spheric_guardian::create(acts);
     auto en2 = spheric_guardian::create(acts);
     combat_manager* com = new combat_manager({pl, pll}, {en1, en2}, entityType::monster, eve);
-    auto cp = new CombatPage(nullptr, com);
+    auto cp = new CombatPage(nullptr, com, pl);
+
 
     stack = new QStackedWidget(this);
     stack->addWidget(cp);
     setCentralWidget(stack);
     showFullScreen();
+
+    QTimer* t = new QTimer();
+    t->start(1000);
+    connect(t, &QTimer::timeout, this, [=](){
+        t->stop();
+        com->combat_start();
+    });
 }
 
 MainWindow::~MainWindow()

@@ -87,6 +87,8 @@ public:
 
     void calculate_rewards();
 
+    combatEvent* get_event() { return event;}
+
 };
 
 #endif // COMBAT_MANAGER_H
