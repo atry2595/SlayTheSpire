@@ -17,25 +17,23 @@ void Merchant::generateShop()
     generateCardRemovalService();
 }
 
-cardID Merchant::getRandomCardIDByFilter(CardType type, CardRarity rarity)
+const std::vector<ShopItem>& Merchant::getItems() const
+{
+    return m_items;
+}
+
+cardID Merchant::getRandomCardIDByFilter(CardType type, bool isRare)
 {
     std::vector<cardID> candidates;
-    if (rarity == CardRarity::rare) {
-        for (const auto& cid : rare_cards) {
-            abstractCard* temp = CardFactory::createCard(cid);
-            if (temp) {
-                if (temp->get_card_type() == type) candidates.push_back(cid);
-                delete temp;
+    const auto& listSource = isRare ? rare_cards : non_rare_cards;
+
+    for (const auto& cid : listSource) {
+        abstractCard* temp = CardFactory::createCard(cid);
+        if (temp) {
+            if (temp->get_card_type() == type) {
+                candidates.push_back(cid);
             }
-        }
-    }
-    else {
-        for (const auto& cid : non_rare_cards) {
-            abstractCard* temp = CardFactory::createCard(cid);
-            if (temp) {
-                if (temp->get_card_type() == type) candidates.push_back(cid);
-                delete temp;
-            }
+            delete temp;
         }
     }
 
@@ -57,15 +55,14 @@ cardID Merchant::getRandomCardID()
     return RNG::instance().choice(all);
 }
 
-int Merchant::calculateCardPrice(CardRarity rarity, bool isSale)
+int Merchant::calculateCardPrice(bool isRare, bool isSale)
 {
     int price = 0;
     RNG& rng = RNG::instance();
-    switch (rarity) {
-    case CardRarity::common:   price = rng.randint(45, 55); break;
-    case CardRarity::uncommon: price = rng.randint(68, 82); break;
-    case CardRarity::rare:     price = rng.randint(135, 165); break;
-    default:                   price = 50; break;
+    if (isRare) {
+        price = rng.randint(135, 165);
+    } else {
+        price = rng.randint(50, 80);
     }
     return isSale ? (price / 2) : price;
 }
@@ -77,23 +74,23 @@ void Merchant::generateCards()
     // Rare 2
     for (int i = 0; i < 2; ++i) {
         CardType type = static_cast<CardType>(rng.randint(0, 2));
-        cardID cid = getRandomCardIDByFilter(type, CardRarity::rare);
-        int price = calculateCardPrice(CardRarity::rare, false);
+        cardID cid = getRandomCardIDByFilter(type, true);
+        int price = calculateCardPrice(true, false);
         abstractCard* temp = CardFactory::createCard(cid);
-        std::string name = temp ? temp->get_name() : "Rare Card";
+        QString name = temp ? temp->get_name() : "Rare Card";
         delete temp;
         m_items.emplace_back(ShopItemType::Card, static_cast<int>(cid), price, name);
     }
 
     size_t commonStartIndex = m_items.size();
 
-    //Common 5
+    //Non-Rare 5
     for (int i = 0; i < 5; ++i) {
         CardType type = static_cast<CardType>(rng.randint(0, 2));
-        cardID cid = getRandomCardIDByFilter(type, CardRarity::common);
-        int price = calculateCardPrice(CardRarity::common, false);
+        cardID cid = getRandomCardIDByFilter(type, false);
+        int price = calculateCardPrice(false, false);
         abstractCard* temp = CardFactory::createCard(cid);
-        std::string name = temp ? temp->get_name() : "Common Card";
+        QString name = temp ? temp->get_name() : "Common Card";
         delete temp;
         m_items.emplace_back(ShopItemType::Card, static_cast<int>(cid), price, name);
     }
@@ -105,16 +102,6 @@ void Merchant::generateCards()
     }
 
     generateSpecialCard();
-}
-
-void Merchant::generateSpecialCard()
-{
-    cardID cid = getRandomCardID();
-    int price = calculateCardPrice(CardRarity::uncommon, false);
-    abstractCard* temp = CardFactory::createCard(cid);
-    std::string name = temp ? temp->get_name() + " (Special)" : "Special Card";
-    delete temp;
-    m_items.emplace_back(ShopItemType::Card, static_cast<int>(cid), price, name);
 }
 
 
@@ -142,18 +129,18 @@ void Merchant::generatePotions()
 
     for (int i = 0; i < 3; ++i) {
         potionID pid = rng.choice(all_potions);
-        PotionType rarity = PotionType::common;
 
+        PotionType rarity = PotionType::common;
         if (std::find(uncommon_potions.begin(), uncommon_potions.end(), pid) != uncommon_potions.end()) {
             rarity = PotionType::uncommon;
-        }
-        else if (std::find(rare_potions.begin(), rare_potions.end(), pid) != rare_potions.end()) {
+        } else if (std::find(rare_potions.begin(), rare_potions.end(), pid) != rare_potions.end()) {
             rarity = PotionType::rare;
         }
 
         int price = calculatePotionPrice(rarity);
+
         abstractPotion* temp = PotionFactory::createPotion(pid, m_player);
-        std::string name = temp ? temp->get_name() : "Potion";
+        QString name = temp ? temp->get_name() : "Potion";
         delete temp;
 
         m_items.emplace_back(ShopItemType::Potion, static_cast<int>(pid), price, name);
@@ -164,4 +151,60 @@ void Merchant::generateCardRemovalService()
 {
     int currentRemovalPrice = getRemovalPrice();
     m_items.emplace_back(ShopItemType::CardRemoval, -1, currentRemovalPrice, "Card Removal Service");
+}
+
+int Merchant::getRemovalPrice() const
+{
+    return m_removalBasePrice + (m_removalCount * 25);
+}
+
+PurchaseResult Merchant::buyItem(size_t index)
+{
+    if (index >= m_items.size()) {
+        return PurchaseResult::InvalidIndex;
+    }
+
+    ShopItem& item = m_items[index];
+
+    if (item.isPurchased()) {
+        return PurchaseResult::AlreadyPurchased;
+    }
+
+    if (!m_player) {
+        return PurchaseResult::InvalidPlayer;
+    }
+
+    if (m_player->get_gold() < item.getPrice()) {
+        return PurchaseResult::NotEnoughGold;
+    }
+
+    if (item.getType() == ShopItemType::Card) {
+        cardID cid = static_cast<cardID>(item.getId());
+        abstractCard* newCard = CardFactory::createCard(cid);
+        if (!newCard) {
+            return PurchaseResult::CreationError;
+        }
+        m_player->deck_add(newCard);
+    }
+    else if (item.getType() == ShopItemType::Potion) {
+        if (m_player->get_potion_list().size() >= 3) {
+            return PurchaseResult::InventoryFull;
+        }
+
+        potionID pid = static_cast<potionID>(item.getId());
+        abstractPotion* newPotion = PotionFactory::createPotion(pid, m_player);
+        if (!newPotion) {
+            return PurchaseResult::CreationError;
+        }
+
+        m_player->potion_list_add(newPotion);
+    }
+    else if (item.getType() == ShopItemType::CardRemoval) {
+        m_removalCount++;
+    }
+
+    m_player->lose_gold(item.getPrice());
+    item.setPurchased(true);
+
+    return PurchaseResult::Success;
 }

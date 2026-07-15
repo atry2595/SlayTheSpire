@@ -8,6 +8,15 @@
 #include "categories/cards.h"
 #include "categories/potions.h"
 
+enum class PurchaseResult {
+    Success,
+    InvalidIndex,
+    AlreadyPurchased,
+    NotEnoughGold,
+    InventoryFull,
+    InvalidPlayer,
+    CreationError
+};
 
 class Merchant
 {
@@ -19,8 +28,8 @@ private:
 
     void generateCards();
     void generateSpecialCard();
-    int calculateCardPrice(CardRarity rarity, bool isSale);
-    cardID getRandomCardIDByFilter(CardType type, CardRarity rarity);
+    int calculateCardPrice(bool isRare, bool isSale);
+    cardID getRandomCardIDByFilter(CardType type, bool isRare);
     cardID getRandomCardID();
 
     void generatePotions();
@@ -30,9 +39,10 @@ private:
 public:
     explicit Merchant(ironclad* player);
 
-    const std::vector<ShopItem>& getItems() const { return m_items; }
-    int getRemovalPrice() const { return m_removalBasePrice + (m_removalCount * 25); }
-    void generateShopInventory();
+    const std::vector<ShopItem>& getItems() const ;
+    int getRemovalPrice() const ;
+    void generateShop();
+    PurchaseResult buyItem(size_t index);
 };
 
 #endif
