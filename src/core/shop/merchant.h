@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <vector>
-#include "ShopItem.h"
+#include "shopitem.h"
 #include "entity/ironclad.h"
 #include "categories/cards.h"
 #include "categories/potions.h"
@@ -17,11 +17,18 @@ private:
     int m_removalBasePrice;
     int m_removalCount;
 
+    void generateCards();
+    void generateSpecialCard();
+    int calculateCardPrice(CardRarity rarity, bool isSale);
+    cardID getRandomCardIDByFilter(CardType type, CardRarity rarity);
+    cardID getRandomCardID();
+
 public:
     explicit Merchant(ironclad* player);
 
     const std::vector<ShopItem>& getItems() const { return m_items; }
     int getRemovalPrice() const { return m_removalBasePrice + (m_removalCount * 25); }
+    void generateShopInventory();
 };
 
 #endif
