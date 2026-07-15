@@ -34,7 +34,6 @@ private:
     abstractCard* generateRandomMysteryCard();
 
     int calculateCardPrice(bool isRare, bool isSale);
-    cardID getRandomCardIDByFilter(CardType type, bool isRare);
 
     int calculatePotionPrice(PotionType rarity);
 

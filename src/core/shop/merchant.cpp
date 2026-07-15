@@ -27,29 +27,6 @@ int Merchant::getRemovalPrice() const
     return m_removalPrice;
 }
 
-cardID Merchant::getRandomCardIDByFilter(CardType type, bool isRare)
-{
-    std::vector<cardID> candidates;
-    const auto& listSource = isRare ? rare_cards : non_rare_cards;
-
-    for (const auto& cid : listSource) {
-        abstractCard* temp = CardFactory::createCard(cid);
-        if (temp) {
-            if (temp->get_card_type() == type)
-                candidates.push_back(cid);
-
-            delete temp;
-        }
-    }
-
-    Q_ASSERT(!candidates.empty());
-    if (candidates.empty()) {
-        return cardID::strike;
-    }
-
-    return RNG::instance().choice(candidates);
-}
-
 abstractCard* Merchant::generateRandomMysteryCard()
 {
     RNG& rng = RNG::instance();
@@ -65,7 +42,7 @@ abstractCard* Merchant::generateRandomMysteryCard()
 
     // Rare (2/6)
 
-    else if (roll <= 3) (roll <= 3)
+    else if (roll <= 3)
     {
         return CardFactory::createCard(rng.choice(rare_cards));
     }
@@ -91,21 +68,16 @@ void Merchant::generateCards()
 {
     RNG& rng = RNG::instance();
 
-    CardType types[] =
-        {
-            CardType::attack,
-            CardType::skill,
-            CardType::power
-        };
+    std::vector<cardID> rarePool = rare_cards;
+    std::vector<cardID> nonRarePool = non_rare_cards;
 
     // 2 Rare Cards
-
-    for (int i = 0; i < 2; ++i)
+    for (int i = 0; i < 2 && !rarePool.empty(); ++i)
     {
+        int index = rng.randint(0, static_cast<int>(rarePool.size() - 1));
 
-        CardType type = types[rng.randint(0,2)];
-
-        cardID cid = getRandomCardIDByFilter(type, true);
+        cardID cid = rarePool[index];
+        rarePool.erase(rarePool.begin() + index);
 
         abstractCard* card = CardFactory::createCard(cid);
 
@@ -117,16 +89,15 @@ void Merchant::generateCards()
         m_items.emplace_back(card, price);
     }
 
-    // 5 Non-Rare Cards
-
+    // 5 Non Rare Cards
     size_t commonStart = m_items.size();
 
-    for (int i = 0; i < 5; ++i)
+    for (int i = 0; i < 5 && !nonRarePool.empty(); ++i)
     {
+        int index = rng.randint(0, static_cast<int>(nonRarePool.size() - 1));
 
-        CardType type = types[rng.randint(0,2)];
-
-        cardID cid = getRandomCardIDByFilter(type, false);
+        cardID cid = nonRarePool[index];
+        nonRarePool.erase(nonRarePool.begin() + index);
 
         abstractCard* card = CardFactory::createCard(cid);
 
@@ -137,20 +108,16 @@ void Merchant::generateCards()
 
         m_items.emplace_back(card, price);
     }
-
 
     if (m_items.size() > commonStart)
     {
-        int saleIndex =
-            rng.randint(
-                static_cast<int>(commonStart),
-                static_cast<int>(m_items.size() - 1));
+        int saleIndex = rng.randint(
+            static_cast<int>(commonStart),
+            static_cast<int>(m_items.size() - 1));
 
         m_items[saleIndex].setSale(true);
-
         m_items[saleIndex].setPrice(m_items[saleIndex].getPrice() / 2);
     }
-
 }
 
 void Merchant::generateRandomCard()
@@ -160,7 +127,7 @@ void Merchant::generateRandomCard()
     if (!card)
         return;
 
-    m_items.emplace_back(card, MYSTERY_CARD_PRICE);
+    m_items.emplace_back(card, MYSTERY_PRICE);
     m_items.back().setMystery(true);
 }
 
