@@ -33,6 +33,10 @@ public:
 
     bool isPurchased() const;
     void setPurchased(bool purchased);
+
+    bool canBuy(int playerGold) const {
+        return !m_isPurchased && playerGold >= m_price;
+    }
 };
 
 #endif // SHOPITEM_H

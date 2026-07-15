@@ -2,6 +2,7 @@
 #define MERCHANT_H
 
 #include <QObject>
+#include <QString>
 #include <vector>
 #include "shopitem.h"
 #include "entity/ironclad.h"
@@ -23,11 +24,11 @@ class Merchant
 private:
     ironclad* m_player;
     std::vector<ShopItem> m_items;
-    int m_removalBasePrice;
-    int m_removalCount;
+    int m_removalPrice;
 
     void generateCards();
-    void generateSpecialCard();
+    void generateRandomCard();
+    void generateSpecialCard(); //؟
     int calculateCardPrice(bool isRare, bool isSale);
     cardID getRandomCardIDByFilter(CardType type, bool isRare);
     cardID getRandomCardID();
@@ -35,6 +36,7 @@ private:
     void generatePotions();
     void generateCardRemovalService();
     int calculatePotionPrice(PotionType rarity);
+    static QString getCardNameByID(cardID cid);
 
 public:
     explicit Merchant(ironclad* player);
