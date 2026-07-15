@@ -28,15 +28,16 @@ private:
 
     void generateCards();
     void generateRandomCard();
-    void generateSpecialCard(); //؟
+    void generatePotions();
+    void generateCardRemovalService();
+    abstractCard* generateRandomMysteryCard();
+
+    void applyDiscount();
     int calculateCardPrice(bool isRare, bool isSale);
     cardID getRandomCardIDByFilter(CardType type, bool isRare);
     cardID getRandomCardID();
 
-    void generatePotions();
-    void generateCardRemovalService();
     int calculatePotionPrice(PotionType rarity);
-    static QString getCardNameByID(cardID cid);
 
 public:
     explicit Merchant(ironclad* player);
