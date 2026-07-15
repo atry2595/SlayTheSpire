@@ -45,6 +45,26 @@ IroncladItem::IroncladItem(abstractEntity* source, QPointF pos, qreal zValue)
     anim->addAnimation(entity_parent->createMoveAnimation({pos.x() + IroncladItem::width/2, pos.y()}, 321, QEasingCurve::InQuart));
     anim->addAnimation(entity_parent->createMoveAnimation({pos.x(), pos.y()}, 321, QEasingCurve::OutQuart));
 
+    //=======corners=========
+    ImageItem* c1 = new ImageItem(entity_parent, {30, 30});
+    c1->setPixmap(QPixmap(":/icon/corner.ico"));
+    c1->setOpacity(0);
+    c1->setZValue(9999);
+    ImageItem* c2 = new ImageItem(entity_parent, {30, 30});
+    c2->setPixmap(QPixmap(":/icon/corner.ico"));
+    c2->setOpacity(0);
+    c2->setRotation(90);
+    c1->setZValue(9999);
+    ImageItem* c3 = new ImageItem(entity_parent, {30, 30});
+    c3->setPixmap(QPixmap(":/icon/corner.ico"));
+    c3->setRotation(180);
+    c3->setOpacity(0);
+    c1->setZValue(9999);
+    ImageItem* c4 = new ImageItem(entity_parent, {30, 30});
+    c4->setPixmap(QPixmap(":/icon/corner.ico"));
+    c4->setRotation(270);
+    c4->setOpacity(0);
+    c1->setZValue(9999);
 
     updateEntity();
 

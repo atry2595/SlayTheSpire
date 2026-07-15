@@ -21,11 +21,27 @@ void ImageItem::clearPixmap()  {
     update();
 }
 
+void ImageItem::setHighlight(bool b) {
+    has_highlight = b;
+    update();
+}
+
 void ImageItem::paint(QPainter* painter,
            const QStyleOptionGraphicsItem* option,
                       QWidget* widget) {
     if (has_pixmap){
+
+        painter->setPen(Qt::NoPen);
         painter->drawPixmap(boundingRect().toRect(), pixmap);
+
+        if (has_highlight){
+            QPen p;
+            p.setColor(highlight_color);
+            p.setWidth(6);
+            painter->setPen(p);
+            painter->setBrush(Qt::NoBrush);
+            painter->drawRoundedRect(boundingRect(), 8, 8);
+        }
     }
     else {
         BaseItem::paint(painter, option, widget);

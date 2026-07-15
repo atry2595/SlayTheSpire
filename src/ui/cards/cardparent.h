@@ -21,7 +21,7 @@ private:
     qreal hover_scale = 1.5;
     qreal hover_offset = -100.0;
     int hover_time = 100;
-    qreal hover_z = 100;
+    qreal hover_z = 400;
     QEasingCurve::Type hover_enter_easing = QEasingCurve::OutSine;
     QEasingCurve::Type hover_leave_easing = QEasingCurve::InSine;
     //==========Hover==========
@@ -49,7 +49,7 @@ public:
     explicit CardParent(QGraphicsItem* parent = nullptr,
                         QSizeF home_size = {0,0},
                         QPointF home_pos = {0,0},
-                        qreal z = 100);
+                        qreal z = 400);
     //==========constructor==============
 
 

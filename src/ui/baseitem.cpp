@@ -37,8 +37,7 @@ void BaseItem::paint(QPainter *painter,
 void BaseItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     QGraphicsObject::mousePressEvent(event);
-    if (f){
-    }
+
 }
 
 void BaseItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
@@ -49,33 +48,12 @@ void BaseItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void BaseItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     QGraphicsObject::hoverEnterEvent(event);
-    if (f) {
-        if (l){
-            home_pos = pos();
-            l = false;
-        }
-        auto* f = new QParallelAnimationGroup();
-        f->addAnimation(createScaleAnimation(1.5, 100));
-        f->addAnimation(createMoveAnimation(home_pos + QPointF(-50, -250), 100));
-        f->start();
-        setZValue(zValue() + 100);
-    }
 }
 
 void BaseItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     QGraphicsObject::hoverLeaveEvent(event);
-    if (f) {
-        if (l){
-            home_pos = pos();
-            l = false;
-        }
-        auto* f = new QParallelAnimationGroup();
-        f->addAnimation(createScaleAnimation(1, 100));
-        f->addAnimation(createMoveAnimation(home_pos, 100));
-        f->start();
-        setZValue(zValue() - 100);
-    }
+
 }
 
 // ---------- Home state ----------

@@ -71,3 +71,24 @@ void abstractEntityItem::escapeAnim() {
     animGr->start();
 
 }
+
+
+
+void abstractEntityItem::setHighlight(bool b) {
+    entity_image->setHighlight(b);
+}
+void abstractEntityItem::setHighlightColor(QColor clr){
+    entity_image->setHighlightColor(clr);
+}
+
+
+void abstractEntityItem::setBorder(bool b) {
+
+    QParallelAnimationGroup* gr = new QParallelAnimationGroup(this);
+    gr->addAnimation(corners[0]->createOpacityAnimation(b));
+    gr->addAnimation(corners[1]->createOpacityAnimation(b));
+    gr->addAnimation(corners[2]->createOpacityAnimation(b));
+    gr->addAnimation(corners[3]->createOpacityAnimation(b));
+    gr->start();
+    qDebug() << "corner : " << corners[0]->zValue();
+}
