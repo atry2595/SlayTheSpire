@@ -2,6 +2,8 @@
 #define SHOPITEM_H
 
 #include <QString>
+#include "cards/abstractcard.h"
+#include "items/potions/abstractpotion.h"
 
 enum class ShopItemType {
     Card,
@@ -13,20 +15,30 @@ class ShopItem
 {
 private:
     ShopItemType m_type;
-    int m_id;
+    abstractCard* m_card;
+    abstractPotion* m_potion;
     int m_price;
-    QString m_name;
     bool m_isSale;
     bool m_isPurchased;
 
 public:
-    ShopItem(ShopItemType type, int id, int price, const QString& name);
+
+    ShopItem(abstractCard* card, int price);
+    ShopItem(abstractPotion* potion, int price);
+    ShopItem(int removalPrice);
+
+    ~ShopItem();
 
     ShopItemType getType() const;
-    int getId() const;
+
+    abstractCard* getCard() const;
+    abstractPotion* getPotion() const;
+
+    void releaseCard();
+    void releasePotion();
+
     int getPrice() const;
     void setPrice(int price);
-    QString getName() const;
 
     bool isSale() const;
     void setSale(bool sale);
@@ -34,9 +46,7 @@ public:
     bool isPurchased() const;
     void setPurchased(bool purchased);
 
-    bool canBuy(int playerGold) const {
-        return !m_isPurchased && playerGold >= m_price;
-    }
+    bool canBuy(int gold) const;
 };
 
 #endif // SHOPITEM_H

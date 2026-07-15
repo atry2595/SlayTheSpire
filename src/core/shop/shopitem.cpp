@@ -1,8 +1,51 @@
 #include "ShopItem.h"
 
-ShopItem::ShopItem(ShopItemType type, int id, int price, const QString& name)
-    : m_type(type), m_id(id), m_price(price), m_name(name), m_isSale(false), m_isPurchased(false)
+ShopItem::ShopItem(abstractCard* card, int price)
 {
+    m_type = ShopItemType::Card;
+
+    m_card = card;
+    m_potion = nullptr;
+
+    m_price = price;
+
+    m_isSale = false;
+    m_isPurchased = false;
+}
+
+ShopItem::ShopItem(abstractPotion* potion, int price)
+{
+    m_type = ShopItemType::Potion;
+
+    m_card = nullptr;
+    m_potion = potion;
+
+    m_price = price;
+
+    m_isSale = false;
+    m_isPurchased = false;
+}
+
+ShopItem::ShopItem(int removalPrice)
+{
+    m_type = ShopItemType::CardRemoval;
+
+    m_card = nullptr;
+    m_potion = nullptr;
+
+    m_price = removalPrice;
+
+    m_isSale = false;
+    m_isPurchased = false;
+}
+
+ShopItem::~ShopItem()
+{
+    if (!m_isPurchased)
+    {
+        delete m_card;
+        delete m_potion;
+    }
 }
 
 ShopItemType ShopItem::getType() const
@@ -10,9 +53,24 @@ ShopItemType ShopItem::getType() const
     return m_type;
 }
 
-int ShopItem::getId() const
+abstractCard* ShopItem::getCard() const
 {
-    return m_id;
+    return m_card;
+}
+
+abstractPotion* ShopItem::getPotion() const
+{
+    return m_potion;
+}
+
+void ShopItem::releaseCard()
+{
+    m_card = nullptr;
+}
+
+void ShopItem::releasePotion()
+{
+    m_potion = nullptr;
 }
 
 int ShopItem::getPrice() const
@@ -23,11 +81,6 @@ int ShopItem::getPrice() const
 void ShopItem::setPrice(int price)
 {
     m_price = price;
-}
-
-QString ShopItem::getName() const
-{
-    return m_name;
 }
 
 bool ShopItem::isSale() const
