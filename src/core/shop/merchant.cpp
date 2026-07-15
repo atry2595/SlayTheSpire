@@ -122,10 +122,36 @@ void Merchant::generateCards()
 
 void Merchant::generateRandomCard()
 {
-    abstractCard* card = generateRandomMysteryCard();
+    abstractCard* card = nullptr;
 
-    if (!card)
-        return;
+    while (true)
+    {
+        card = generateRandomMysteryCard();
+
+        if (!card)
+            return;
+
+        bool duplicate = false;
+
+        for (const auto& item : m_items)
+        {
+            if (item.getType() != ShopItemType::Card)
+                continue;
+
+            abstractCard* shopCard = item.getCard();
+
+            if (shopCard && shopCard->get_card_id() == card->get_card_id())
+            {
+                duplicate = true;
+                break;
+            }
+        }
+
+        if (!duplicate)
+            break;
+
+        delete card;
+    }
 
     m_items.emplace_back(card, MYSTERY_PRICE);
     m_items.back().setMystery(true);
@@ -155,7 +181,7 @@ void Merchant::generatePotions()
 
     RNG& rng = RNG::instance();
 
-    for (int i = 0; i < 3; ++i) {
+    for (int i = 0; i < 3  && !all_potions.empty(); ++i) {
         potionID pid = rng.choice(all_potions);
         all_potions.erase(
             std::remove(all_potions.begin(), all_potions.end(), pid),
