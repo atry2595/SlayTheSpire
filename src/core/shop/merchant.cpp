@@ -13,6 +13,8 @@ void Merchant::generateShop()
 {
     m_items.clear();
     generateCards();
+    generatePotions();
+    generateCardRemovalService();
 }
 
 cardID Merchant::getRandomCardIDByFilter(CardType type, CardRarity rarity)
@@ -113,4 +115,53 @@ void Merchant::generateSpecialCard()
     std::string name = temp ? temp->get_name() + " (Special)" : "Special Card";
     delete temp;
     m_items.emplace_back(ShopItemType::Card, static_cast<int>(cid), price, name);
+}
+
+
+int Merchant::calculatePotionPrice(PotionType rarity)
+{
+    RNG& rng = RNG::instance();
+    switch (rarity) {
+    case PotionType::common:return rng.randint(48, 52);
+    case PotionType::uncommon:return rng.randint(72, 78);
+    case PotionType::rare:return rng.randint(95, 105);
+    default:return 50;
+    }
+}
+
+void Merchant::generatePotions()
+{
+    std::vector<potionID> all_potions;
+    for (const auto& pid : common_potions) all_potions.push_back(pid);
+    for (const auto& pid : uncommon_potions) all_potions.push_back(pid);
+    for (const auto& pid : rare_potions) all_potions.push_back(pid);
+
+    if (all_potions.empty()) return;
+
+    RNG& rng = RNG::instance();
+
+    for (int i = 0; i < 3; ++i) {
+        potionID pid = rng.choice(all_potions);
+        PotionType rarity = PotionType::common;
+
+        if (std::find(uncommon_potions.begin(), uncommon_potions.end(), pid) != uncommon_potions.end()) {
+            rarity = PotionType::uncommon;
+        }
+        else if (std::find(rare_potions.begin(), rare_potions.end(), pid) != rare_potions.end()) {
+            rarity = PotionType::rare;
+        }
+
+        int price = calculatePotionPrice(rarity);
+        abstractPotion* temp = PotionFactory::createPotion(pid, m_player);
+        std::string name = temp ? temp->get_name() : "Potion";
+        delete temp;
+
+        m_items.emplace_back(ShopItemType::Potion, static_cast<int>(pid), price, name);
+    }
+}
+
+void Merchant::generateCardRemovalService()
+{
+    int currentRemovalPrice = getRemovalPrice();
+    m_items.emplace_back(ShopItemType::CardRemoval, -1, currentRemovalPrice, "Card Removal Service");
 }

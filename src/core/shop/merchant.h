@@ -23,6 +23,10 @@ private:
     cardID getRandomCardIDByFilter(CardType type, CardRarity rarity);
     cardID getRandomCardID();
 
+    void generatePotions();
+    void generateCardRemovalService();
+    int calculatePotionPrice(PotionType rarity);
+
 public:
     explicit Merchant(ironclad* player);
 
