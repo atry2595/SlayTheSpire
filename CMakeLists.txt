@@ -291,6 +291,7 @@ add_executable(SlayTheSpire
     src/core/login/leaderboard.h src/core/login/leaderboard.cpp
     src/core/login/filemanager.h src/core/login/filemanager.cpp
     src/core/shop/shopitem.h src/core/shop/shopitem.cpp
+    src/core/shop/merchant.h src/core/shop/merchant.cpp
 
 
     # Core
