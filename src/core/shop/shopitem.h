@@ -20,7 +20,7 @@ private:
     int m_price;
     bool m_isSale;
     bool m_isPurchased;
-
+    bool m_isHidden;
 public:
 
     ShopItem(abstractCard* card, int price);
@@ -28,6 +28,9 @@ public:
     ShopItem(int removalPrice);
 
     ~ShopItem();
+
+    ShopItem(const ShopItem&) = delete;
+    ShopItem& operator=(const ShopItem&) = delete;
 
     ShopItemType getType() const;
 
@@ -47,6 +50,9 @@ public:
     void setPurchased(bool purchased);
 
     bool canBuy(int gold) const;
+
+    bool isMystery() const;
+    void setMystery(bool mystery);
 };
 
 #endif // SHOPITEM_H

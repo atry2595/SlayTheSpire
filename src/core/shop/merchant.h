@@ -25,6 +25,7 @@ private:
     ironclad* m_player;
     std::vector<ShopItem> m_items;
     int m_removalPrice;
+    static constexpr int MYSTERY_PRICE = 100;
 
     void generateCards();
     void generateRandomCard();
@@ -32,10 +33,8 @@ private:
     void generateCardRemovalService();
     abstractCard* generateRandomMysteryCard();
 
-    void applyDiscount();
     int calculateCardPrice(bool isRare, bool isSale);
     cardID getRandomCardIDByFilter(CardType type, bool isRare);
-    cardID getRandomCardID();
 
     int calculatePotionPrice(PotionType rarity);
 

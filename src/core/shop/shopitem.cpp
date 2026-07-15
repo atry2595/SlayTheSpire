@@ -11,6 +11,7 @@ ShopItem::ShopItem(abstractCard* card, int price)
 
     m_isSale = false;
     m_isPurchased = false;
+    bool m_isHidden = false;
 }
 
 ShopItem::ShopItem(abstractPotion* potion, int price)
@@ -24,6 +25,7 @@ ShopItem::ShopItem(abstractPotion* potion, int price)
 
     m_isSale = false;
     m_isPurchased = false;
+    bool m_isHidden = false;
 }
 
 ShopItem::ShopItem(int removalPrice)
@@ -37,6 +39,7 @@ ShopItem::ShopItem(int removalPrice)
 
     m_isSale = false;
     m_isPurchased = false;
+    bool m_isHidden = false;
 }
 
 ShopItem::~ShopItem()
@@ -98,7 +101,22 @@ bool ShopItem::isPurchased() const
     return m_isPurchased;
 }
 
+bool ShopItem::canBuy(int gold) const
+{
+    return gold >= m_price;
+}
+
 void ShopItem::setPurchased(bool purchased)
 {
     m_isPurchased = purchased;
+}
+
+bool ShopItem::isMystery() const
+{
+    return m_isMystery;
+}
+
+void ShopItem::setMystery(bool mystery)
+{
+    m_isMystery = mystery;
 }
