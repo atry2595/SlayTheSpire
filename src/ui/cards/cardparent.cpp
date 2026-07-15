@@ -1,12 +1,15 @@
 #include "cardparent.h"
 #include <QParallelAnimationGroup>
+#include <QGraphicsSceneMouseEvent>
 
 
-CardParent::CardParent(QGraphicsItem *parent,
+CardParent::CardParent(combatEvent* eve,
+                       QGraphicsItem *parent,
                        QSizeF home_size,
                        QPointF home_pos,
                        qreal z)
     :BaseItem(parent, home_size, home_pos),
+    event(eve),
     hover_z(z)
 {
     if (can_hover || can_select) {
@@ -29,11 +32,24 @@ CardParent::CardParent(QGraphicsItem *parent,
 
 void CardParent::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (can_select && can_hover && !hovered){
+    if (can_select && can_hover){
         refreshTargetPos();
         hoverEnterEvent(nullptr);
+        emit this->event->cardPressed(this);
     }
     QGraphicsObject::mousePressEvent(event);
+
+}
+
+//-----------------------------------------------------------------
+
+void CardParent::mouseMoveEvent(QGraphicsSceneMouseEvent* event) {
+
+    if (can_select) {
+        QPointF scene = event->scenePos();
+        emit this->event->cardMoved(this, scene);
+    }
+    QGraphicsObject::mouseMoveEvent(event);
 }
 
 //-----------------------------------------------------------------
@@ -41,8 +57,10 @@ void CardParent::mousePressEvent(QGraphicsSceneMouseEvent *event)
 void CardParent::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (can_select) {
+        QPointF scene = event->scenePos();
         refreshTargetPos();
         hoverLeaveEvent(nullptr);
+        emit this->event->cardReleased(this, scene);
     }
     QGraphicsObject::mouseReleaseEvent(event);
 }

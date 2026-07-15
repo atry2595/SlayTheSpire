@@ -1,12 +1,14 @@
 #include "abstractcardtemplate.h"
 
-abstractCardTemplate::abstractCardTemplate(abstractCard* source, QPointF pos, QSizeF size, qreal z_value)
+abstractCardTemplate::abstractCardTemplate(combatEvent* eve, abstractCard* source, QPointF pos, QSizeF size, qreal z_value)
     :card_source(source),
     card_pos(pos),
     card_size(size),
-    zValue(z_value)
+    zValue(z_value),
+    event(eve)
 {
-    card_parent = new CardParent(nullptr, card_size, card_pos, z_value_zone);
+    card_parent = new CardParent(eve, nullptr, card_size, card_pos, z_value_zone);
+    card_parent->setSource(source);
 }
 
 

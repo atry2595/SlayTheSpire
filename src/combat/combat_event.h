@@ -2,12 +2,14 @@
 #define COMBAT_EVENT_H
 
 #include <QObject>
+#include <QPointF>
 
 class abstractEntity;
 class abstractCard;
 class abstractPower;
 class abstractPotion;
 class combat_manager;
+class CardParent;
 struct attackInfo;
 struct damageInfo;
 struct blockingInfo;
@@ -56,6 +58,11 @@ signals:
     void potion_removed(abstractPotion*);
 
     void lift(abstractEntity*);
+
+    //=============ui=========================
+    void cardPressed(CardParent*);
+    void cardMoved(CardParent*, const QPointF&);
+    void cardReleased(CardParent*, const QPointF&);
 
 };
 

@@ -20,6 +20,7 @@ BaseItem::BaseItem(QGraphicsItem *parent,
     setPos(home_pos);
 
     setAcceptHoverEvents(true);
+    setAcceptedMouseButtons(Qt::LeftButton);
 }
 
 

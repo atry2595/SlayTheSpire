@@ -9,6 +9,7 @@
 #include "ui/entities/enemyitem.h"
 #include "ui/entities/ironcladitem.h"
 #include "ui/cards/abstractcardtemplate.h"
+#include "ui/effects/entitycornersframe.h"
 
 class CombatPage : public QWidget
 {
@@ -22,7 +23,7 @@ public:
     void remove_entity(abstractEntity*);
 
     void cardAdd(abstractCard*, qreal z = -1);
-    void cardMoveTo(abstractCard*, PileType from, PileType to);
+    void cardMovePile(abstractCard*, PileType from, PileType to);
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
@@ -50,6 +51,13 @@ private:
     std::vector<IroncladItem*> players;
     std::vector<EnemyItem*> enemies;
     std::unordered_map<abstractCard*, abstractCardTemplate*> created_cards;
+
+    std::unordered_map<abstractEntity*, entityCornersFrame*> entity_corner_effect;
+
+private slots:
+    void card_pressed(CardParent*) {};
+    void card_moved(CardParent*, const QPointF&);
+    void card_released(CardParent*, const QPointF&);
 };
 
 #endif // COMBATPAGE_H

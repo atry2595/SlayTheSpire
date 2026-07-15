@@ -3,6 +3,7 @@
 
 #include "ui/baseitem.h"
 #include <QSequentialAnimationGroup>
+#include "cards/abstractcard.h"
 
 class CardParent : public BaseItem
 {
@@ -34,11 +35,17 @@ private:
     QSequentialAnimationGroup* animGroup = nullptr;
     //==========update place & size==========
 
+    //=============data========
+    abstractCard* source = nullptr;
+    combatEvent* event;
+    //=============data========
+
 
 protected:
     //==========mouse event=================
     void mousePressEvent(QGraphicsSceneMouseEvent* event) override;
     void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) override;
+    void mouseMoveEvent(QGraphicsSceneMouseEvent* event) override;
     void hoverEnterEvent(QGraphicsSceneHoverEvent* event) override;
     void hoverLeaveEvent(QGraphicsSceneHoverEvent* event) override;
     //==========mouse event=================
@@ -46,7 +53,8 @@ protected:
 
 public:
     //==========constructor==============
-    explicit CardParent(QGraphicsItem* parent = nullptr,
+    explicit CardParent(combatEvent* eve,
+                        QGraphicsItem* parent = nullptr,
                         QSizeF home_size = {0,0},
                         QPointF home_pos = {0,0},
                         qreal z = 400);
@@ -63,6 +71,7 @@ public:
     qreal getHoverZ() const { return hover_z; }
     QEasingCurve::Type hoverEnterEasing() const { return hover_enter_easing; }
     QEasingCurve::Type hoverLeaveEasing() const { return hover_leave_easing; }
+    abstractCard* getSource() { return source; }
     //=============getters===============
 
 
@@ -77,6 +86,7 @@ public:
     void setHoverEnterEasing(QEasingCurve::Type value) { hover_enter_easing = value; }
     void setHoverLeaveEasing(QEasingCurve::Type value) { hover_leave_easing = value; }
     void setHomePos(QPointF) override;
+    void setSource(abstractCard* c) { source = c; }
     //=============setters===============
 
 };

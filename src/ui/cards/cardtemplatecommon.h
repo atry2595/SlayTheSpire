@@ -8,7 +8,7 @@ class CardTemplateCommon : public abstractCardTemplate
     Q_OBJECT
 
 public:
-    CardTemplateCommon(abstractCard* source, QPointF pos, QSizeF size, qreal zValue);
+    CardTemplateCommon(combatEvent* eve, abstractCard* source, QPointF pos, QSizeF size, qreal zValue);
 
     void updateCard() override;
 };

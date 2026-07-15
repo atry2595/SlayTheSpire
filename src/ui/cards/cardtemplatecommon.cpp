@@ -3,8 +3,8 @@
 #include "core/setting.h"
 #include <QParallelAnimationGroup>
 
-CardTemplateCommon::CardTemplateCommon(abstractCard* source, QPointF pos, QSizeF size, qreal z_value)
-    : abstractCardTemplate(source, pos, size, z_value)
+CardTemplateCommon::CardTemplateCommon(combatEvent* eve, abstractCard* source, QPointF pos, QSizeF size, qreal z_value)
+    : abstractCardTemplate(eve, source, pos, size, z_value)
 {
     qreal w = card_size.width();
     qreal h = card_size.height();

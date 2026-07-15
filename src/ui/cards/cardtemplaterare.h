@@ -8,7 +8,7 @@ class CardTemplateRare : public abstractCardTemplate
     Q_OBJECT
 
 public:
-    CardTemplateRare(abstractCard* source, QPointF pos, QSizeF size, qreal zValue);
+    CardTemplateRare(combatEvent* eve, abstractCard* source, QPointF pos, QSizeF size, qreal zValue);
 
     void updateCard();
 };

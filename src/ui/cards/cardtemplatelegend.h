@@ -8,10 +8,8 @@ class CardTemplateLegend : public abstractCardTemplate
     Q_OBJECT
 
 
-
-
 public:
-    CardTemplateLegend(abstractCard* source, QPointF pos, QSizeF size, qreal zValue);
+    CardTemplateLegend(combatEvent* eve, abstractCard* source, QPointF pos, QSizeF size, qreal zValue);
 
     void updateCard() override;
 };

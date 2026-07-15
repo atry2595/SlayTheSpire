@@ -10,6 +10,9 @@
 #include "ui/cards/getCardPixmap.h"
 #include "core/setting.h"
 
+//=================================================================================
+//=====================contructur and intializer functions=========================
+//=================================================================================
 
 CombatPage::CombatPage(QWidget *parent, combat_manager* m, ironclad* plyr)
     : QWidget{parent}
@@ -82,8 +85,11 @@ CombatPage::CombatPage(QWidget *parent, combat_manager* m, ironclad* plyr)
     start_combat();
 
     connect(eve, &combatEvent::card_moved, this, [=](playCardInfo& card, PileType from, PileType to){
-        this->cardMoveTo(card.card, from, to);
+        this->cardMovePile(card.card, from, to);
     });
+    connect(eve, &combatEvent::cardPressed, this, &CombatPage::card_pressed);
+    connect(eve, &combatEvent::cardMoved, this, &CombatPage::card_moved);
+    connect(eve, &combatEvent::cardReleased, this, &CombatPage::card_released);
     //----------------------------------------------------
 }
 
@@ -182,7 +188,9 @@ void CombatPage::reset_layout() {
     }
 }
 
-
+//=================================================================================
+//====================characters functions & animations============================
+//=================================================================================
 
 
 void CombatPage::escape_entity(abstractEntity* entity) {
@@ -229,23 +237,26 @@ void CombatPage::remove_entity(abstractEntity* entity) {
     }
 }
 
+//=================================================================================
+//=====================card functions & aniamtions=================================
+//=================================================================================
 
 void CombatPage::cardAdd(abstractCard* card, qreal z) {
     if (created_cards.find(card) != created_cards.end()) return;
 
     switch (tmpl) {
     case cardTemplate::common:
-        created_cards[card] = new CardTemplateCommon(card, {1650, 950}, {200, 300}, z);
+        created_cards[card] = new CardTemplateCommon(eve, card, {1650, 950}, {200, 300}, z);
         break;
 
     case cardTemplate::uncommon:
-        created_cards[card] = new CardTemplateUncommon(card, {1650, 950}, {200, 300}, z);
+        created_cards[card] = new CardTemplateUncommon(eve, card, {1650, 950}, {200, 300}, z);
         break;
     case cardTemplate::rare:
-        created_cards[card] = new CardTemplateRare(card, {1650, 950}, {200, 300}, z);
+        created_cards[card] = new CardTemplateRare(eve, card, {1650, 950}, {200, 300}, z);
         break;
     case cardTemplate::legend:
-        created_cards[card] = new CardTemplateLegend(card, {1650, 950}, {200, 300}, z);
+        created_cards[card] = new CardTemplateLegend(eve, card, {1650, 950}, {200, 300}, z);
         break;
     }
     combatScene->addItem(created_cards[card]->getParent());
@@ -286,7 +297,7 @@ void CombatPage::setHandCardPoint(abstractCard* card, bool enter) {
 }
 
 
-void CombatPage::cardMoveTo(abstractCard* card, PileType from, PileType to) {
+void CombatPage::cardMovePile(abstractCard* card, PileType from, PileType to) {
     draw_pile->setText(QString::number(player->get_draw_pile().size()));
     discard_pile->setText(QString::number(player->get_discard_pile().size()));
 
@@ -394,5 +405,116 @@ void CombatPage::cardMoveTo(abstractCard* card, PileType from, PileType to) {
             delete img;
         });
     }
+
+}
+
+
+
+//====================================================================
+//======================manager slots=================================
+//====================================================================
+
+
+void CombatPage::card_moved(CardParent* card, const QPointF& pos) {
+
+    switch (card->getSource()->get_target_type()) {
+
+    case TargetType::single_target:
+
+        for (auto item : enemies) {
+
+
+            if (entity_corner_effect.find(item->getSource()) == entity_corner_effect.end()){
+                auto img = item->getImage();
+                entity_corner_effect[item->getSource()] = new entityCornersFrame(img->scenePos(), img->size());
+                combatScene->addItem(entity_corner_effect[item->getSource()]->getParent());
+            }
+            if (item->getParent()->contains(item->getParent()->mapFromScene(pos))
+                && entity_corner_effect[item->getSource()]->getVisisble() == false) {
+                qDebug() << "in single :" << entity_corner_effect[item->getSource()]->getParent()->scenePos();
+                entity_corner_effect[item->getSource()]->EntranceEffect();
+            }
+            else if (!item->getParent()->contains(item->getParent()->mapFromScene(pos))
+                && entity_corner_effect[item->getSource()]->getVisisble() == true) {
+                qDebug() << "in single :" << entity_corner_effect[item->getSource()]->getParent()->scenePos();
+                entity_corner_effect[item->getSource()]->ExitEffect();
+            }
+        }
+        break;
+
+    case TargetType::enemies: {
+        if (pos.y() < 650) {
+            for (auto item : enemies) {
+
+
+                if (entity_corner_effect.find(item->getSource()) == entity_corner_effect.end()){
+                    auto img = item->getImage();
+                    entity_corner_effect[item->getSource()] = new entityCornersFrame(img->scenePos(), img->size());
+                    combatScene->addItem(entity_corner_effect[item->getSource()]->getParent());
+                }
+                if (entity_corner_effect[item->getSource()]->getVisisble() == false) {
+                    qDebug() << "in enemies :" << entity_corner_effect[item->getSource()]->getParent()->scenePos();
+                    entity_corner_effect[item->getSource()]->EntranceEffect();
+                }
+            }
+        }
+        else {
+            for (auto item : enemies) {
+
+
+                if (entity_corner_effect.find(item->getSource()) == entity_corner_effect.end()){
+                    auto img = item->getImage();
+                    entity_corner_effect[item->getSource()] = new entityCornersFrame(img->scenePos(), img->size());
+                    combatScene->addItem(entity_corner_effect[item->getSource()]->getParent());
+                }
+                if (entity_corner_effect[item->getSource()]->getVisisble() == true) {
+                    entity_corner_effect[item->getSource()]->ExitEffect();
+                }
+            }
+        }
+        break;
+    }
+
+    case TargetType::self: {
+        if (pos.y() < 650) {
+            for (auto item : players) {
+                if (item->getSource() != player) continue;
+
+                if (entity_corner_effect.find(item->getSource()) == entity_corner_effect.end()){
+                    auto img = item->getImage();
+                    entity_corner_effect[item->getSource()] = new entityCornersFrame(img->scenePos(), img->size());
+                    combatScene->addItem(entity_corner_effect[item->getSource()]->getParent());
+                }
+                if (entity_corner_effect[item->getSource()]->getVisisble() == false) {
+                    qDebug() << "in enemies :" << entity_corner_effect[item->getSource()]->getParent()->scenePos();
+                    entity_corner_effect[item->getSource()]->EntranceEffect();
+                }
+            }
+        }
+        else {
+            for (auto item : players) {
+                if (item->getSource() != player) continue;
+
+                if (entity_corner_effect.find(item->getSource()) == entity_corner_effect.end()){
+                    auto img = item->getImage();
+                    entity_corner_effect[item->getSource()] = new entityCornersFrame(img->scenePos(), img->size());
+                    combatScene->addItem(entity_corner_effect[item->getSource()]->getParent());
+                }
+                if (entity_corner_effect[item->getSource()]->getVisisble() == true) {
+                    entity_corner_effect[item->getSource()]->ExitEffect();
+                }
+            }
+        }
+        break;
+    }
+    default:
+        break;
+    }
+
+}
+
+
+void CombatPage::card_released(CardParent*, const QPointF& pos) {
+    qDebug() << pos;
 
 }

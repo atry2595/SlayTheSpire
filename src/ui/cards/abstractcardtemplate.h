@@ -19,6 +19,9 @@ class abstractCardTemplate : public QObject
 {
     Q_OBJECT
 
+private:
+    combatEvent* event;
+
 protected:
     abstractCard* card_source = nullptr;
 
@@ -40,7 +43,7 @@ protected:
     TextItem* card_description = nullptr;
 
 public:
-    abstractCardTemplate(abstractCard* source, QPointF pos, QSizeF size, qreal zValue);
+    abstractCardTemplate(combatEvent* eve, abstractCard* source, QPointF pos, QSizeF size, qreal zValue);
 
     // Card pos
     void setCardpos(QPointF value);

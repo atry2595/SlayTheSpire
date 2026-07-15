@@ -34,7 +34,7 @@ protected:
     QGraphicsProxyWidget* hp_proxy = nullptr;
     std::vector<TextItem*> powers = {};
 
-    std::vector<ImageItem*> corners = {};
+
 
 
 
@@ -54,11 +54,10 @@ public:
 
     EntityParent* getParent() { return entity_parent; }
     abstractEntity* getSource() { return entity_source; }
+    ImageItem* getImage() { return entity_image; }
 
     void setHighlight(bool b);
     void setHighlightColor(QColor clr = Qt::yellow);
-
-    void setBorder(bool b);
 
     void dieAnim();
     void escapeAnim();
