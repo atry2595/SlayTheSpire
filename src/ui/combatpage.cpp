@@ -208,6 +208,27 @@ void CombatPage::escape_entity(abstractEntity* entity) {
             enemies[i]->escapeAnim();
         }
     }
+
+    QTimer* t = new QTimer;
+    t->start(1000);
+    connect(t, &QTimer::timeout, this, [=](){
+        t->stop();
+        for (int i = 0; i < players.size(); i++) {
+            if (entity == players[i]->getSource()) {
+                delete players[i];
+                players.erase(players.begin() + i);
+            }
+        }
+        for (int i = 0; i < enemies.size(); i++) {
+            if (entity == enemies[i]->getSource()) {
+                delete enemies[i];
+                enemies.erase(enemies.begin() + i);
+            }
+        }
+        delete entity_corner_effect[entity];
+        entity_corner_effect.erase(entity);
+    });
+
 }
 
 void CombatPage::died_entity(abstractEntity* entity) {
@@ -221,24 +242,26 @@ void CombatPage::died_entity(abstractEntity* entity) {
             enemies[i]->dieAnim();
         }
     }
-}
 
-
-void CombatPage::remove_entity(abstractEntity* entity) {
-    for (int i = 0; i < players.size(); i++) {
-        if (entity == players[i]->getSource()) {
-            delete players[i];
-            players.erase(players.begin() + i);
-            return;
+    QTimer* t = new QTimer;
+    t->start(1000);
+    connect(t, &QTimer::timeout, this, [=](){
+        t->stop();
+        for (int i = 0; i < players.size(); i++) {
+            if (entity == players[i]->getSource()) {
+                delete players[i];
+                players.erase(players.begin() + i);
+            }
         }
-    }
-    for (int i = 0; i < enemies.size(); i++) {
-        if (entity == enemies[i]->getSource()) {
-            delete enemies[i];
-            enemies.erase(enemies.begin() + i);
-            return;
+        for (int i = 0; i < enemies.size(); i++) {
+            if (entity == enemies[i]->getSource()) {
+                delete enemies[i];
+                enemies.erase(enemies.begin() + i);
+            }
         }
-    }
+        delete entity_corner_effect[entity];
+        entity_corner_effect.erase(entity);
+    });
 }
 
 //=================================================================================
@@ -285,18 +308,15 @@ void CombatPage::setHandCardPoint(abstractCard* card, bool enter) {
     qreal x = 770 - 70 * hand_count + 140 * i;
     if (enter) {
         created_cards[card]->setCardpos({x, 950});
-        QTimer* t = new QTimer();
-        t->start(500);
-
-        connect(t, &QTimer::timeout, this, [=](){
-            t->stop();
-            created_cards[card]->setCardpos({x, 700});
-        });
     }
 
-    else {
-        created_cards[card]->setCardpos({x, orig.y()});
-    }
+    QTimer* t = new QTimer();
+    t->start(500);
+
+    connect(t, &QTimer::timeout, this, [=](){
+        t->stop();
+        created_cards[card]->setCardpos({x, 700});
+    });
 
 }
 
@@ -308,15 +328,6 @@ void CombatPage::cardMovePile(abstractCard* card, PileType from, PileType to) {
     //------------------------------------------------------------------------------------
     if (from == PileType::hand){
         setHandCardPoint(card);
-
-        QTimer* t = new QTimer(this);
-        t->start(3000);
-
-        connect(t, &QTimer::timeout, this, [=](){
-            t->stop();
-            delete created_cards[card];
-            created_cards.erase(card);
-        });
 
         for (auto item : player->get_hand_pile()) {
             setHandCardPoint(item);
@@ -330,7 +341,7 @@ void CombatPage::cardMovePile(abstractCard* card, PileType from, PileType to) {
         cardAdd(card);
 
         for (auto item : player->get_hand_pile()) {
-            setHandCardPoint(item, true);
+            setHandCardPoint(item, item == card);
         }
 
     }
@@ -578,6 +589,7 @@ void CombatPage::card_released(CardParent* card, const QPointF& pos) {
     }
     //-----------------------------------------------------------------------------------------------
     case TargetType::enemies: {
+        if (pos.y() >= 650) break;
         playCardInfo inf;
         inf.card = card->getSource();
         inf.owner = player;
@@ -593,6 +605,7 @@ void CombatPage::card_released(CardParent* card, const QPointF& pos) {
     }
     //-----------------------------------------------------------------------------------------------
     case TargetType::self: {
+        if (pos.y() >= 650) break;
         playCardInfo inf;
         inf.card = card->getSource();
         inf.owner = player;

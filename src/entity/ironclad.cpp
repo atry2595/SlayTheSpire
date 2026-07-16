@@ -7,8 +7,8 @@
 #include "items/relics/relicfactory.h"
 
 const std::vector<cardID> ironclad::starting_deck =
-    {cardID::strike, cardID::strike, cardID::strike, cardID::strike, cardID::strike,
-     cardID::defend, cardID::defend, cardID::defend, cardID::defend, cardID::bash};
+    {cardID::strike, cardID::strike, cardID::strike, cardID::pommel_strike, cardID::strike,
+     cardID::offering};
 
 abstractCard* ironclad::select_card(
     const std::vector<abstractCard*>& cards
@@ -284,10 +284,6 @@ void ironclad::play_card(playCardInfo& info) {
     if (info.card->get_turn_playable() == false) return;
     if (energy < info.card->get_energy()) return;
 
-    game_action actions(event);
-    info.owner = this;
-    actions.play_card(info);
-
     energy -= info.card->get_energy();
 
     hand_pile_remove(info.card);
@@ -296,8 +292,8 @@ void ironclad::play_card(playCardInfo& info) {
         playCardInfo c_info;
         c_info.card = info.card;
         c_info.owner = this;
-        exhaust_pile_add(info.card);
         emit event->card_moved(c_info, PileType::hand, PileType::exhaust);
+        exhaust_pile_add(info.card);
     }
     else if (info.card->get_card_type() == CardType::power){
         playCardInfo c_info;
@@ -309,9 +305,13 @@ void ironclad::play_card(playCardInfo& info) {
         playCardInfo c_info;
         c_info.card = info.card;
         c_info.owner = this;
-        discard_pile_add(info.card);
         emit event->card_moved(c_info, PileType::hand, PileType::discard);
+        discard_pile_add(info.card);
     }
+
+    game_action actions(event);
+    info.owner = this;
+    actions.play_card(info);
 
     playInfo pl(actions);
     pl.attacker = info.owner;
@@ -366,23 +366,23 @@ void ironclad::at_turn_end(game_action& info) {
 
 
         if (hand_pile[i]->get_ethereal()){
+            hand_pile_remove(hand_pile[i]);
             exhaust_pile_add(hand_pile[i]);
             playCardInfo c_info;
             c_info.card = hand_pile[i];
             c_info.owner = this;
             emit event->card_moved(c_info, PileType::hand, PileType::exhaust);
-            hand_pile_remove(hand_pile[i]);
         }
 
         else if (hand_pile[i]->get_retain())  {}
 
         else {
+            hand_pile_remove(hand_pile[i]);
+            discard_pile_add(hand_pile[i]);
             playCardInfo c_info;
             c_info.card = hand_pile[i];
             c_info.owner = this;
-            discard_pile_add(hand_pile[i]);
             emit event->card_moved(c_info, PileType::hand, PileType::discard);
-            hand_pile_remove(hand_pile[i]);
         }
 
     }
