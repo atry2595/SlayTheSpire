@@ -29,6 +29,7 @@ inline QPixmap getPowerIcon(powerID id) {
         return QPixmap(":/icon/buff/dexterity.ico");
 
     case powerID::enrage:
+    case powerID::rage:
         return QPixmap(":/icon/buff/enrage.ico");
 
     case powerID::entangled:

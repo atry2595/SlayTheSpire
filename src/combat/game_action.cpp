@@ -49,6 +49,7 @@ damageResult game_action::apply_damage(damageInfo& info) {
             bl.owner = target;
             emit event->block_changed(bl);
 
+            emit event->entityUpdate(info.target);
             return res;
         }
         else {
@@ -60,6 +61,7 @@ damageResult game_action::apply_damage(damageInfo& info) {
             emit event->block_break(bl);
 
             dmg -= block;
+            emit event->entityUpdate(info.target);
         }
     }
 
@@ -75,10 +77,14 @@ damageResult game_action::apply_damage(damageInfo& info) {
         info.damage = dmg;
         info.target->damage_applied(*this);
         emit event->damage_applied(info);
+        emit event->hp_changed(info.target, hp, hp - dmg);
+        emit event->entityUpdate(info.target);
     }
     else{
         target->set_hp(0);
         res.killed = true;
+        emit event->hp_changed(info.target, hp, 0);
+        emit event->entityUpdate(info.target);
         emit event->entity_killed(target);
         if (target->get_hp() <= 0){
             emit event->entity_removed(target);
@@ -100,6 +106,7 @@ void game_action::apply_block(blockingInfo& info){
     info.block = new_block;
 
     emit event->block_changed(info);
+    emit event->entityUpdate(info.owner);
 }
 
 
@@ -130,6 +137,7 @@ void game_action::heal(healInfo& info){
     int newHP = std::min(oldHP + info.value, info.owner->get_max_hp());
     info.owner->set_hp(newHP);
     emit event->hp_changed(info.owner, oldHP, newHP);
+    emit event->entityUpdate(info.owner);
 }
 
 

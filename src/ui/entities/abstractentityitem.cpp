@@ -22,6 +22,8 @@ abstractEntityItem::~abstractEntityItem() {
 void abstractEntityItem::dieAnim() {
     if (!entity_parent) return;
 
+    QSequentialAnimationGroup* mainAnim =  new QSequentialAnimationGroup(entity_parent);
+
     QParallelAnimationGroup* anim = new QParallelAnimationGroup(entity_parent);
 
     QSequentialAnimationGroup* moveGr = new QSequentialAnimationGroup(entity_parent);
@@ -39,7 +41,10 @@ void abstractEntityItem::dieAnim() {
     anim->addAnimation(moveGr);
     anim->addAnimation(entity_parent->createOpacityAnimation(0, 640));
 
-    anim->start();
+    mainAnim->addPause(100);
+    mainAnim->addAnimation(anim);
+
+    mainAnim->start();
 
 }
 void abstractEntityItem::escapeAnim() {

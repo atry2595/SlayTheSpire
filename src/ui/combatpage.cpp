@@ -91,6 +91,9 @@ CombatPage::CombatPage(QWidget *parent, combat_manager* m, ironclad* plyr)
     connect(eve, &combatEvent::cardMoved, this, &CombatPage::card_moved);
     connect(eve, &combatEvent::cardReleased, this, &CombatPage::card_released);
     connect(eve, &combatEvent::cardUpdated, this, &CombatPage::card_updated);
+    // connect(eve, &combatEvent::entityUpdate, this, &CombatPage::entity_update);
+    connect(eve, &combatEvent::entity_escape, this, &CombatPage::escape_entity);
+    connect(eve, &combatEvent::entity_removed, this, &CombatPage::died_entity);
     //----------------------------------------------------
 }
 
@@ -210,12 +213,12 @@ void CombatPage::escape_entity(abstractEntity* entity) {
 void CombatPage::died_entity(abstractEntity* entity) {
     for (int i = 0; i < players.size(); i++) {
         if (entity == players[i]->getSource()) {
-            players[i]->escapeAnim();
+            players[i]->dieAnim();
         }
     }
     for (int i = 0; i < enemies.size(); i++) {
         if (entity == enemies[i]->getSource()) {
-            enemies[i]->escapeAnim();
+            enemies[i]->dieAnim();
         }
     }
 }
@@ -564,6 +567,9 @@ void CombatPage::card_released(CardParent* card, const QPointF& pos) {
 
                 game_action acts(eve);
                 player->play_card(inf);
+                qDebug() << "man hame ro";
+                for (auto item : players) item->updateEntity();
+                for (auto item : enemies) item->updateEntity();
 
                 return;
             }
@@ -580,6 +586,9 @@ void CombatPage::card_released(CardParent* card, const QPointF& pos) {
         }
         game_action acts(eve);
         player->play_card(inf);
+        qDebug() << "man hame ro";
+        for (auto item : players) item->updateEntity();
+        for (auto item : enemies) item->updateEntity();
         return;
     }
     //-----------------------------------------------------------------------------------------------
@@ -590,6 +599,9 @@ void CombatPage::card_released(CardParent* card, const QPointF& pos) {
 
         game_action acts(eve);
         player->play_card(inf);
+        qDebug() << "man hame ro";
+        for (auto item : players) item->updateEntity();
+        for (auto item : enemies) item->updateEntity();
         return;
     }
     default:
@@ -600,5 +612,16 @@ void CombatPage::card_released(CardParent* card, const QPointF& pos) {
 void CombatPage::card_updated(abstractCard* card) {
     if (created_cards.find(card) != created_cards.end()){
         created_cards[card]->updateCard();
+    }
+}
+
+
+void CombatPage::entity_update(abstractEntity* entity) {
+    qDebug() << "ordak tak tak tak tak ordak";
+    for (auto item : players){
+        if (item->getSource() == entity) item->updateEntity();
+    }
+    for (auto item : enemies){
+        if (item->getSource() == entity) item->updateEntity();
     }
 }

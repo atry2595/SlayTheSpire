@@ -64,6 +64,7 @@ signals:
     void cardMoved(CardParent*, const QPointF&);
     void cardReleased(CardParent*, const QPointF&);
     void cardUpdated(abstractCard*);
+    void entityUpdate(abstractEntity*);
 
 };
 

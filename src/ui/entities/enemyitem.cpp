@@ -89,6 +89,8 @@ EnemyItem::EnemyItem(abstractEntity* source, QPointF pos, qreal zValue)
 
 void EnemyItem::updateEntity() {
 
+    qDebug() << "del dar moyad darad khane, majroh gardad cho zani hardam shane";
+
     //=======intent======
     if (intent) delete intent;
     intent = new TextItem(entity_parent, {45, 45}, {((width - 45) / 2), -8});

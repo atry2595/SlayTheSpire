@@ -73,6 +73,7 @@ IroncladItem::IroncladItem(abstractEntity* source, QPointF pos, qreal zValue)
 
 void IroncladItem::updateEntity() {
 
+
     //=======hpBar=======
     hp_bar->setMaxHp(entity_source->get_max_hp());
     hp_bar->setHp(entity_source->get_hp());
