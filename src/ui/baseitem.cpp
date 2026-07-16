@@ -112,7 +112,6 @@ QPropertyAnimation* BaseItem::createOpacityAnimation(qreal target,
 {
     auto* anim = new QPropertyAnimation(this, "opacity");
     anim->setDuration(duration);
-    anim->setStartValue(opacity());
     anim->setEndValue(target);
     anim->setEasingCurve(easing);
     return anim;

@@ -568,6 +568,8 @@ add_executable(SlayTheSpire
     src/ui/cards/abstractcardtemplate.h src/ui/cards/abstractcardtemplate.cpp
     src/ui/effects/abstracteffect.h
     src/ui/effects/entitycornersframe.h src/ui/effects/entitycornersframe.cpp
+    src/ui/effects/getDamageEffect.h
+    src/ui/effects/damageeffect.h src/ui/effects/damageeffect.cpp
 )
 
 target_include_directories(SlayTheSpire PRIVATE

@@ -7,8 +7,8 @@
 #include "items/relics/relicfactory.h"
 
 const std::vector<cardID> ironclad::starting_deck =
-    {cardID::strike, cardID::strike, cardID::strike, cardID::pommel_strike, cardID::strike,
-     cardID::offering};
+    {cardID::strike, cardID::strike, cardID::strike, cardID::strike, cardID::strike,
+     cardID::defend, cardID::defend, cardID::defend, cardID::defend, cardID::bash};
 
 abstractCard* ironclad::select_card(
     const std::vector<abstractCard*>& cards

@@ -12,6 +12,7 @@ struct attackInfo{
     std::vector<abstractEntity*> target_list;
     int damage = 0;
     attackType attack_type;
+    cardID card_id = cardID::NULLCARD;
 };
 
 struct attackResult {

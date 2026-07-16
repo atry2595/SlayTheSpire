@@ -60,6 +60,7 @@ private slots:
     void card_released(CardParent*, const QPointF&);
     void card_updated(abstractCard*);
     void entity_update(abstractEntity*);
+    void attack(attackInfo&);
 };
 
 #endif // COMBATPAGE_H

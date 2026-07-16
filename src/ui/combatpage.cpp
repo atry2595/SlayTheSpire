@@ -9,6 +9,7 @@
 #include "ui/cards/cardtemplatelegend.h"
 #include "ui/cards/getCardPixmap.h"
 #include "core/setting.h"
+#include "ui/effects/damageeffect.h"
 
 //=================================================================================
 //=====================contructur and intializer functions=========================
@@ -94,6 +95,7 @@ CombatPage::CombatPage(QWidget *parent, combat_manager* m, ironclad* plyr)
     // connect(eve, &combatEvent::entityUpdate, this, &CombatPage::entity_update);
     connect(eve, &combatEvent::entity_escape, this, &CombatPage::escape_entity);
     connect(eve, &combatEvent::entity_removed, this, &CombatPage::died_entity);
+    connect(eve, &combatEvent::attack_started, this, &CombatPage::attack);
     //----------------------------------------------------
 }
 
@@ -461,12 +463,10 @@ void CombatPage::card_moved(CardParent* card, const QPointF& pos) {
             }
             if (item->getParent()->contains(item->getParent()->mapFromScene(pos))
                 && entity_corner_effect[item->getSource()]->getVisisble() == false) {
-                qDebug() << "in single :" << entity_corner_effect[item->getSource()]->getParent()->scenePos();
                 entity_corner_effect[item->getSource()]->EntranceEffect();
             }
             else if (!item->getParent()->contains(item->getParent()->mapFromScene(pos))
                 && entity_corner_effect[item->getSource()]->getVisisble() == true) {
-                qDebug() << "in single :" << entity_corner_effect[item->getSource()]->getParent()->scenePos();
                 entity_corner_effect[item->getSource()]->ExitEffect();
             }
         }
@@ -484,7 +484,6 @@ void CombatPage::card_moved(CardParent* card, const QPointF& pos) {
                     combatScene->addItem(entity_corner_effect[item->getSource()]->getParent());
                 }
                 if (entity_corner_effect[item->getSource()]->getVisisble() == false) {
-                    qDebug() << "in enemies :" << entity_corner_effect[item->getSource()]->getParent()->scenePos();
                     entity_corner_effect[item->getSource()]->EntranceEffect();
                 }
             }
@@ -517,7 +516,6 @@ void CombatPage::card_moved(CardParent* card, const QPointF& pos) {
                     combatScene->addItem(entity_corner_effect[item->getSource()]->getParent());
                 }
                 if (entity_corner_effect[item->getSource()]->getVisisble() == false) {
-                    qDebug() << "in enemies :" << entity_corner_effect[item->getSource()]->getParent()->scenePos();
                     entity_corner_effect[item->getSource()]->EntranceEffect();
                 }
             }
@@ -556,11 +554,6 @@ void CombatPage::card_released(CardParent* card, const QPointF& pos) {
         card->getSource()->get_turn_lock() == true ||
         card->getSource()->get_energy() > player->get_energy() )
     {
-        qDebug() << card->getSource()->get_available() ;
-        qDebug() << card->getSource()->get_turn_playable();
-        qDebug() << card->getSource()->get_turn_lock();
-        qDebug() << card->getSource()->get_energy() ;
-        qDebug() << player->get_energy() ;
         return;
     }
 
@@ -574,11 +567,8 @@ void CombatPage::card_released(CardParent* card, const QPointF& pos) {
                 inf.owner = player;
                 inf.target_list = {item->getSource()};
 
-                qDebug() << "salam mamadd";
-
                 game_action acts(eve);
                 player->play_card(inf);
-                qDebug() << "man hame ro";
                 for (auto item : players) item->updateEntity();
                 for (auto item : enemies) item->updateEntity();
 
@@ -598,7 +588,6 @@ void CombatPage::card_released(CardParent* card, const QPointF& pos) {
         }
         game_action acts(eve);
         player->play_card(inf);
-        qDebug() << "man hame ro";
         for (auto item : players) item->updateEntity();
         for (auto item : enemies) item->updateEntity();
         return;
@@ -612,7 +601,6 @@ void CombatPage::card_released(CardParent* card, const QPointF& pos) {
 
         game_action acts(eve);
         player->play_card(inf);
-        qDebug() << "man hame ro";
         for (auto item : players) item->updateEntity();
         for (auto item : enemies) item->updateEntity();
         return;
@@ -630,11 +618,57 @@ void CombatPage::card_updated(abstractCard* card) {
 
 
 void CombatPage::entity_update(abstractEntity* entity) {
-    qDebug() << "ordak tak tak tak tak ordak";
+
     for (auto item : players){
         if (item->getSource() == entity) item->updateEntity();
     }
     for (auto item : enemies){
         if (item->getSource() == entity) item->updateEntity();
+    }
+}
+
+
+void CombatPage::attack(attackInfo& inf) {
+
+    for (auto item : inf.target_list) {
+        //----------------------------------------------------------------------------------------
+        for (auto enmy : enemies){
+
+            if (item == enmy->getSource()) {
+                qDebug() << "va";
+                auto img = enmy->getImage();
+                auto eff = new damageEffect(inf.card_id, img->scenePos(), img->size());
+                combatScene->addItem(eff->getParent());
+                eff->EntranceEffect();
+
+                QTimer* t = new QTimer();
+                t->start(5000);
+                connect(t, &QTimer::timeout, this, [=](){
+                    t->stop();
+                });
+            }
+
+        }
+        //----------------------------------------------------------------------------------------
+        for (auto plyr : players){
+
+            if (item == plyr->getSource()) {
+                auto img = plyr->getImage();
+                auto atckr = entityID::NULLENTITY;
+                if (inf.attacker) atckr = inf.attacker->get_ID();
+
+                auto eff = new damageEffect(atckr, img->scenePos(), img->size());
+                combatScene->addItem(eff->getParent());
+                eff->EntranceEffect();
+
+                QTimer* t = new QTimer();
+                t->start(5000);
+                connect(t, &QTimer::timeout, this, [=](){
+                    t->stop();
+                    delete eff;
+                });
+            }
+        }
+        //----------------------------------------------------------------------------------------
     }
 }

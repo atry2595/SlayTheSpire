@@ -63,6 +63,9 @@
         <file alias="pain.png">assests/image/cards/curse/pain.png</file>
         <file alias="regret.png">assests/image/cards/curse/regret.png</file>
         <file alias="writhe.png">assests/image/cards/curse/writhe.png</file>
+        <file alias="doubt.png">assests/image/cards/curse/doubt.png</file>
+        <file alias="injury.png">assests/image/cards/curse/injury.png</file>
+        <file alias="shame.png">assests/image/cards/curse/shame.png</file>
     </qresource>
     <qresource prefix="/image/characters">
         <file alias="blue_slaver.png">assests/image/characters/blue_slaver.png</file>
@@ -234,7 +237,7 @@
         <file alias="select.wav">assests/sound/effect/select.wav</file>
         <file alias="smith.wav">assests/sound/effect/smith.wav</file>
     </qresource>
-    <qresource prefix="/image/damage_effect">
+    <qresource prefix="/image/effect">
         <file alias="bite.png">assests/image/damage_effect/bite.png</file>
         <file alias="dmg.png">assests/image/damage_effect/dmg.png</file>
         <file alias="dmg2.png">assests/image/damage_effect/dmg2.png</file>
