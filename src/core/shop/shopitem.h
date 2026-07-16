@@ -31,6 +31,8 @@ public:
 
     ShopItem(const ShopItem&) = delete;
     ShopItem& operator=(const ShopItem&) = delete;
+    ShopItem(ShopItem&& other) noexcept;
+    ShopItem& operator=(ShopItem&& other) noexcept;
 
     ShopItemType getType() const;
 

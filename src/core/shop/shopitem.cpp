@@ -11,7 +11,7 @@ ShopItem::ShopItem(abstractCard* card, int price)
 
     m_isSale = false;
     m_isPurchased = false;
-    bool m_isHidden = false;
+    m_isHidden = false;
 }
 
 ShopItem::ShopItem(abstractPotion* potion, int price)
@@ -25,7 +25,7 @@ ShopItem::ShopItem(abstractPotion* potion, int price)
 
     m_isSale = false;
     m_isPurchased = false;
-    bool m_isHidden = false;
+    m_isHidden = false;
 }
 
 ShopItem::ShopItem(int removalPrice)
@@ -39,7 +39,43 @@ ShopItem::ShopItem(int removalPrice)
 
     m_isSale = false;
     m_isPurchased = false;
-    bool m_isHidden = false;
+    m_isHidden = false;
+}
+
+ShopItem::ShopItem(ShopItem&& other) noexcept
+{
+    m_type = other.m_type;
+    m_card = other.m_card;
+    m_potion = other.m_potion;
+    m_price = other.m_price;
+    m_isSale = other.m_isSale;
+    m_isPurchased = other.m_isPurchased;
+    m_isHidden = other.m_isHidden;
+
+    other.m_card = nullptr;
+    other.m_potion = nullptr;
+}
+
+ShopItem& ShopItem::operator=(ShopItem&& other) noexcept
+{
+    if (this != &other)
+    {
+        delete m_card;
+        delete m_potion;
+
+        m_type = other.m_type;
+        m_card = other.m_card;
+        m_potion = other.m_potion;
+        m_price = other.m_price;
+        m_isSale = other.m_isSale;
+        m_isPurchased = other.m_isPurchased;
+        m_isHidden = other.m_isHidden;
+
+        other.m_card = nullptr;
+        other.m_potion = nullptr;
+    }
+
+    return *this;
 }
 
 ShopItem::~ShopItem()
@@ -113,10 +149,10 @@ void ShopItem::setPurchased(bool purchased)
 
 bool ShopItem::isMystery() const
 {
-    return m_isMystery;
+    return m_isHidden;
 }
 
 void ShopItem::setMystery(bool mystery)
 {
-    m_isMystery = mystery;
+    m_isHidden = mystery;
 }

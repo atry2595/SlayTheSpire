@@ -37,22 +37,26 @@ abstractCard* Merchant::generateRandomMysteryCard()
 
     if (roll == 1)
     {
-        return CardFactory::createCard(rng.choice(curse_cards));
+        std::vector<cardID> pool = curse_cards;
+        return CardFactory::createCard(rng.choice(pool));
     }
 
     // Rare (2/6)
 
     else if (roll <= 3)
     {
-        return CardFactory::createCard(rng.choice(rare_cards));
+        std::vector<cardID> pool = rare_cards;
+        return CardFactory::createCard(rng.choice(pool));
+
     }
 
     // Non Rare (3/6)
 
-    return CardFactory::createCard(rng.choice(non_rare_cards));
+    std::vector<cardID> pool = non_rare_cards;
+    return CardFactory::createCard(rng.choice(pool));
 }
 
-int Merchant::calculateCardPrice(bool isRare, bool isSale)
+int Merchant::calculateCardPrice(bool isRare)
 {
     int price = 0;
     RNG& rng = RNG::instance();
@@ -61,7 +65,7 @@ int Merchant::calculateCardPrice(bool isRare, bool isSale)
     } else {
         price = rng.randint(45, 75);
     }
-    return isSale ? (price / 2) : price;
+    return price;
 }
 
 void Merchant::generateCards()
@@ -84,7 +88,7 @@ void Merchant::generateCards()
         if (!card)
             continue;
 
-        int price = calculateCardPrice(card->is_rare(), false);
+        int price = calculateCardPrice(card->is_rare());
 
         m_items.emplace_back(card, price);
     }
@@ -104,7 +108,7 @@ void Merchant::generateCards()
         if (!card)
             continue;
 
-        int price = calculateCardPrice(card->is_rare(), false);
+        int price = calculateCardPrice(card->is_rare());
 
         m_items.emplace_back(card, price);
     }
@@ -209,8 +213,7 @@ void Merchant::generatePotions()
 
 void Merchant::generateCardRemovalService()
 {
-    int currentRemovalPrice = getRemovalPrice();
-    m_items.emplace_back(currentRemovalPrice);
+    m_items.emplace_back(m_removalPrice);
 }
 
 

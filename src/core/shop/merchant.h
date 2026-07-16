@@ -33,7 +33,7 @@ private:
     void generateCardRemovalService();
     abstractCard* generateRandomMysteryCard();
 
-    int calculateCardPrice(bool isRare, bool isSale);
+    int calculateCardPrice(bool isRare);
 
     int calculatePotionPrice(PotionType rarity);
 
