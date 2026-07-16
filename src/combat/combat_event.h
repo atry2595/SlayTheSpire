@@ -63,6 +63,7 @@ signals:
     void cardPressed(CardParent*);
     void cardMoved(CardParent*, const QPointF&);
     void cardReleased(CardParent*, const QPointF&);
+    void cardUpdated(abstractCard*);
 
 };
 

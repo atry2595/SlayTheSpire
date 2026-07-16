@@ -17,7 +17,7 @@ protected:
 
     QString base_name;
     QString base_description;
-    bool base_is_playable;
+    bool base_is_playable = true;
     int base_energy;
     bool base_is_upgraded = false;
     bool base_is_exhaust = false;
@@ -27,7 +27,7 @@ protected:
 
     QString name;
     QString description;
-    bool playable;
+    bool playable = true;
     int energy;
     bool turn_lock = false;
     bool is_upgraded = false;
@@ -36,7 +36,7 @@ protected:
     bool is_ethereal = false;
     bool is_initial = false;
 
-    bool available;
+    bool available = false;
 
 
     //card image + generate + anim + music

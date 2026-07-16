@@ -58,6 +58,7 @@ private slots:
     void card_pressed(CardParent*) {};
     void card_moved(CardParent*, const QPointF&);
     void card_released(CardParent*, const QPointF&);
+    void card_updated(abstractCard*);
 };
 
 #endif // COMBATPAGE_H

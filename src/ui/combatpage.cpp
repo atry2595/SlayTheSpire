@@ -90,6 +90,7 @@ CombatPage::CombatPage(QWidget *parent, combat_manager* m, ironclad* plyr)
     connect(eve, &combatEvent::cardPressed, this, &CombatPage::card_pressed);
     connect(eve, &combatEvent::cardMoved, this, &CombatPage::card_moved);
     connect(eve, &combatEvent::cardReleased, this, &CombatPage::card_released);
+    connect(eve, &combatEvent::cardUpdated, this, &CombatPage::card_updated);
     //----------------------------------------------------
 }
 
@@ -301,6 +302,7 @@ void CombatPage::cardMovePile(abstractCard* card, PileType from, PileType to) {
     draw_pile->setText(QString::number(player->get_draw_pile().size()));
     discard_pile->setText(QString::number(player->get_discard_pile().size()));
 
+    //------------------------------------------------------------------------------------
     if (from == PileType::hand){
         setHandCardPoint(card);
 
@@ -319,6 +321,8 @@ void CombatPage::cardMovePile(abstractCard* card, PileType from, PileType to) {
 
     }
 
+    //------------------------------------------------------------------------------------
+
     if (to == PileType::hand){
         cardAdd(card);
 
@@ -328,6 +332,7 @@ void CombatPage::cardMovePile(abstractCard* card, PileType from, PileType to) {
 
     }
 
+    //------------------------------------------------------------------------------------
 
     if (from == PileType::discard){
         ImageItem* img = new ImageItem(nullptr, {40, 60}, {1650, 950});
@@ -348,6 +353,9 @@ void CombatPage::cardMovePile(abstractCard* card, PileType from, PileType to) {
             delete img;
         });
     }
+
+    //------------------------------------------------------------------------------------
+
     if (to == PileType::discard){
         ImageItem* img = new ImageItem(nullptr, {40, 60}, {1650, 950});
         combatScene->addItem(img);
@@ -367,6 +375,9 @@ void CombatPage::cardMovePile(abstractCard* card, PileType from, PileType to) {
             delete img;
         });
     }
+
+    //------------------------------------------------------------------------------------
+
     if (from == PileType::draw){
         ImageItem* img = new ImageItem(nullptr, {40, 60}, {1650, 950});
         combatScene->addItem(img);
@@ -386,6 +397,9 @@ void CombatPage::cardMovePile(abstractCard* card, PileType from, PileType to) {
             delete img;
         });
     }
+
+    //------------------------------------------------------------------------------------
+
     if (to == PileType::draw){
         ImageItem* img = new ImageItem(nullptr, {40, 60}, {1650, 950});
         combatScene->addItem(img);
@@ -405,6 +419,8 @@ void CombatPage::cardMovePile(abstractCard* card, PileType from, PileType to) {
             delete img;
         });
     }
+//------------------------------------------------------------------------------------
+    created_cards[card]->updateCard();
 
 }
 
@@ -418,8 +434,8 @@ void CombatPage::cardMovePile(abstractCard* card, PileType from, PileType to) {
 void CombatPage::card_moved(CardParent* card, const QPointF& pos) {
 
     switch (card->getSource()->get_target_type()) {
-
-    case TargetType::single_target:
+    //--------------------------------------------------------------------------------------------
+    case TargetType::single_target: {
 
         for (auto item : enemies) {
 
@@ -441,7 +457,8 @@ void CombatPage::card_moved(CardParent* card, const QPointF& pos) {
             }
         }
         break;
-
+    }
+    //--------------------------------------------------------------------------------------------
     case TargetType::enemies: {
         if (pos.y() < 650) {
             for (auto item : enemies) {
@@ -474,7 +491,7 @@ void CombatPage::card_moved(CardParent* card, const QPointF& pos) {
         }
         break;
     }
-
+    //--------------------------------------------------------------------------------------------
     case TargetType::self: {
         if (pos.y() < 650) {
             for (auto item : players) {
@@ -507,6 +524,7 @@ void CombatPage::card_moved(CardParent* card, const QPointF& pos) {
         }
         break;
     }
+    //--------------------------------------------------------------------------------------------
     default:
         break;
     }
@@ -514,7 +532,73 @@ void CombatPage::card_moved(CardParent* card, const QPointF& pos) {
 }
 
 
-void CombatPage::card_released(CardParent*, const QPointF& pos) {
-    qDebug() << pos;
+void CombatPage::card_released(CardParent* card, const QPointF& pos) {
+    for (auto item : entity_corner_effect) {
+        if (item.second->getVisisble()) item.second->ExitEffect();
+    }
 
+    if (card->getSource()->get_available() == false ||
+        card->getSource()->get_turn_playable() == false ||
+        card->getSource()->get_turn_lock() == true ||
+        card->getSource()->get_energy() > player->get_energy() )
+    {
+        qDebug() << card->getSource()->get_available() ;
+        qDebug() << card->getSource()->get_turn_playable();
+        qDebug() << card->getSource()->get_turn_lock();
+        qDebug() << card->getSource()->get_energy() ;
+        qDebug() << player->get_energy() ;
+        return;
+    }
+
+    switch (card->getSource()->get_target_type()) {
+    //-----------------------------------------------------------------------------------------------
+    case TargetType::single_target: {
+        for (auto item : enemies) {
+            if (item->getParent()->contains(item->getParent()->mapFromScene(pos))) {
+                playCardInfo inf;
+                inf.card = card->getSource();
+                inf.owner = player;
+                inf.target_list = {item->getSource()};
+
+                qDebug() << "salam mamadd";
+
+                game_action acts(eve);
+                player->play_card(inf);
+
+                return;
+            }
+        }
+        break;
+    }
+    //-----------------------------------------------------------------------------------------------
+    case TargetType::enemies: {
+        playCardInfo inf;
+        inf.card = card->getSource();
+        inf.owner = player;
+        for (auto item : enemies) {
+            inf.target_list.push_back(item->getSource());
+        }
+        game_action acts(eve);
+        player->play_card(inf);
+        return;
+    }
+    //-----------------------------------------------------------------------------------------------
+    case TargetType::self: {
+        playCardInfo inf;
+        inf.card = card->getSource();
+        inf.owner = player;
+
+        game_action acts(eve);
+        player->play_card(inf);
+        return;
+    }
+    default:
+        return;
+    }
+}
+
+void CombatPage::card_updated(abstractCard* card) {
+    if (created_cards.find(card) != created_cards.end()){
+        created_cards[card]->updateCard();
+    }
 }

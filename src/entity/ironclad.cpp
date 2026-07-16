@@ -256,6 +256,7 @@ void ironclad::draw_card(){
     playCardInfo c_info;
     c_info.card = card;
     c_info.owner = this;
+
     emit event->card_moved(c_info, PileType::draw, PileType::hand);
 
     if (draw_pile.size() == 0) apply_discard_pile();
@@ -328,19 +329,19 @@ void ironclad::consume_all_energy() {
 
 
 void ironclad::at_turn_start(game_action& info) {
+    energy += base_energy;
     abstractEntity::at_turn_start(info);
 
 
     playInfo pl(info);
     pl.attacker = this;
-    energy += base_energy;
+
+    for (int i = 0; i < hand_card_number; i++) draw_card();
 
     for (auto item : hand_pile){
         item->update(pl);
         item->hand_turn_start(pl);
     }
-
-    for (int i = 0; i < hand_card_number; i++) draw_card();
 
     draw_count = 0;
 }
@@ -390,11 +391,12 @@ void ironclad::at_turn_end(game_action& info) {
 
 
 void ironclad::at_combat_start(game_action& info){
+    energy = 0;
+
     abstractEntity::at_combat_start(info);
 
     combat_deck = deck;
     RNG::instance().shuffle(combat_deck);
-    energy = 0;
 
     for (auto item : combat_deck){
         if (item->get_initial()) {

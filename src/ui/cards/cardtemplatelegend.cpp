@@ -151,6 +151,7 @@ void CardTemplateLegend::updateCard() {
     if (card_source->repeat_x_time()){
         card_cost->setText("X");
     }
+    qDebug() << "alam : " << card_source->get_available();
     if (card_source->get_available()){
         if (card_source->get_upgraded()) card_cost->setColor(Qt::green);
         else card_cost->setColor(Qt::white);
