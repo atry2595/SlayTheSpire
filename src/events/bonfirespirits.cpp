@@ -20,11 +20,21 @@ BonfireSpirits::BonfireSpirits(game_action& actions, ironclad* player) {
     offer_node.canUse = [](){ return true; };
     offer_node.actions = [player, &actions, &offer_node] () {
 
-        std::vector<abstractCard*> deck = player->get_deck();
-        if (deck.empty()) return;
+        std::vector<abstractCard*> selectable;
 
-        abstractCard* selected = ironclad::select_card(deck);
-        if (!selected) return;
+        for (auto* card : player->get_deck())
+        {
+            if (card->can_remove_from_deck())
+                selectable.push_back(card);
+        }
+
+        if (selectable.empty())
+            return;
+
+        abstractCard* selected = ironclad::select_card(selectable);
+
+        if (!selected)
+            return;
 
         player->deck_remove(selected);
 

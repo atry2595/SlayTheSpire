@@ -45,7 +45,6 @@ AncientWriting::AncientWriting(game_action& actions, ironclad* player)
         abstractCard* selected =ironclad::select_card(selectable);
 
         player->deck_remove(selected);
-        delete selected;
     };
 
     elegance.canUse = [](){ return true; };
