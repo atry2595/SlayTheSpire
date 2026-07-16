@@ -266,9 +266,28 @@ PurchaseResult Merchant::buyItem(size_t index)
         item.releasePotion();
     }
 
-    else if (item.getType() == ShopItemType::CardRemoval) {
+    else if (item.getType() == ShopItemType::CardRemoval)
+    {
+        std::vector<abstractCard*> selectable;
+
+        for (auto card : m_player->get_deck())
+        {
+            if (card->can_remove_from_deck())
+                selectable.push_back(card);
+        }
+
+        if (selectable.empty())
+            return PurchaseResult::CreationError;
+
+        abstractCard* selected = ironclad::select_card(selectable);
+
+        if (!selected)
+            return PurchaseResult::CreationError;
+
+        m_player->deck_remove(selected);
+
         m_removalPrice += 25;
-    } // حذف کارت اضافه شود
+    }
 
     m_player->lose_gold(item.getPrice());
     item.setPurchased(true);
