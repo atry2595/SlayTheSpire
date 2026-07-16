@@ -258,5 +258,6 @@
         <file alias="Pleading_Vagrant.jpg">assests/image/events/photo_2026-07-12_19-30-22.jpg</file>
         <file alias="Face_Trader.jpg">assests/image/events/photo_2026-07-16_21-38-12.jpg</file>
         <file alias="The_Colosseum.jpg">assests/image/events/photo_2026-07-16_21-38-14.jpg</file>
+        <file alias="Augmenter.jpg">assests/image/events/photo_2026-07-16_21-38-17.jpg</file>
     </qresource>
 </RCC>
