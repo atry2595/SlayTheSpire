@@ -18,3 +18,7 @@ void ForgotPasswordPage::on_loginButton_clicked()
 
 }
 
+void ForgotPasswordPage::setFileManager(FileManager *manager)
+{
+    fileManager = manager;
+}

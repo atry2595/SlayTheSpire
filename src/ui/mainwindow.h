@@ -23,13 +23,12 @@ public:
     ~MainWindow() override;
 
 private:
-    QStackedWidget* stack;
+    FileManager *fileManager;
     Ui::MainWindow *ui;
     QStackedWidget *stack;
     LoginPage *loginPage;
     RegisterPage *registerPage;
     ForgotPasswordPage *forgotPasswordPage;
 
-    FileManager *fileManager;
 };
 #endif // MAINWINDOW_H
