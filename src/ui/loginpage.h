@@ -2,21 +2,31 @@
 #define LOGINPAGE_H
 
 #include <QMainWindow>
+#include "core/login/filemanager.h"
 
 namespace Ui {
-class loginpage;
+class LoginPage;
 }
 
-class loginpage : public QMainWindow
+class LoginPage : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit loginpage(QWidget *parent = nullptr);
-    ~loginpage();
+    explicit LoginPage(QWidget *parent = nullptr);
+    ~LoginPage();
+
+private slots:
+    void on_registerButton_clicked();
+
+    void on_signUpButton_clicked();
 
 private:
-    Ui::loginpage *ui;
+    Ui::LoginPage *ui;
+
+signals:
+    void openRegisterPage();
+
 };
 
 #endif // LOGINPAGE_H

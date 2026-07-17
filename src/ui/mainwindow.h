@@ -1,10 +1,11 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 #include <QStackedWidget>
-#include "LoginPage.h"
+#include "loginpage.h"
 #include <QMainWindow>
 #include <QStackedWidget>
 
+#include "registerpage.h"
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -24,5 +25,8 @@ private:
     Ui::MainWindow *ui;
     QStackedWidget *stack;
     LoginPage *loginPage;
+    RegisterPage *registerPage;
+
+    FileManager *fileManager;
 };
 #endif // MAINWINDOW_H

@@ -313,7 +313,7 @@ add_executable(SlayTheSpire
     src/core/login/leaderboard.h src/core/login/leaderboard.cpp
     src/core/login/filemanager.h src/core/login/filemanager.cpp
     src/ui/loginpage.h src/ui/loginpage.cpp src/ui/loginpage.ui
-    src/ui/registerpage.h src/ui/registerpage.cpp src/ui/register_page.ui
+    src/ui/registerpage.h src/ui/registerpage.cpp src/ui/registerpage.ui
 
 
     # Core
