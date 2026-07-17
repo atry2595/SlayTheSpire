@@ -13,70 +13,139 @@
   <property name="windowTitle">
    <string>Login</string>
   </property>
+  <property name="layoutDirection">
+   <enum>Qt::LayoutDirection::RightToLeft</enum>
+  </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(30,30,30);</string>
+   <string notr="true">background-color: #e6eaf3;</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="">
+   <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>70</y>
-      <width>311</width>
-      <height>391</height>
+      <x>380</x>
+      <y>20</y>
+      <width>351</width>
+      <height>501</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="styleSheet">
+     <string notr="true">QFrame {
+    background-color: #2b2b2b;
+    border-radius: 25px;
+    border: none;
+}
+
+QLineEdit {
+    background-color: #3d3d3d;
+    border: 1px solid #555;
+    border-radius: 8px;
+    padding: 8px;
+    color: white;
+}
+
+QPushButton {
+    background-color: #4a4a4a;
+    color: white;
+    border-radius: 8px;
+    padding: 10px;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #5d5d5d;
+}
+
+QLabel {
+    color: #e0e0e0;
+    font-size: 14px;
+}</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Shape::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Shadow::Raised</enum>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
      <item>
-      <widget class="QLabel" name="titleLabel">
-       <property name="font">
-        <font>
-         <pointsize>28</pointsize>
-         <bold>true</bold>
-        </font>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <property name="spacing">
+        <number>10</number>
        </property>
-       <property name="styleSheet">
-        <string notr="true">color:white;</string>
+       <property name="leftMargin">
+        <number>30</number>
        </property>
-       <property name="text">
-        <string>Slay The Spire</string>
+       <property name="rightMargin">
+        <number>30</number>
        </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="username">
-       <property name="styleSheet">
-        <string notr="true">    color:white;</string>
-       </property>
-       <property name="text">
-        <string>Username</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="usernameLineEdit"/>
-     </item>
-     <item>
-      <widget class="QLabel" name="Password">
-       <property name="styleSheet">
-        <string notr="true">    color:white;</string>
-       </property>
-       <property name="text">
-        <string>Password</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="passwordLineEdit">
-       <property name="echoMode">
-        <enum>QLineEdit::EchoMode::Password</enum>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="forgotPasswordButton">
-       <property name="styleSheet">
-        <string notr="true">QPushButton{
+       <item>
+        <widget class="QLabel" name="titleLabel">
+         <property name="font">
+          <font>
+           <pointsize>24</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font-size: 24pt;
+font-weight: bold;
+color: white;</string>
+         </property>
+         <property name="text">
+          <string>Slay The Spire</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="username">
+         <property name="styleSheet">
+          <string notr="true">    color:white;</string>
+         </property>
+         <property name="text">
+          <string>Username</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignBottom|Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="usernameLineEdit"/>
+       </item>
+       <item>
+        <widget class="QLabel" name="Password">
+         <property name="styleSheet">
+          <string notr="true">    color:white;</string>
+         </property>
+         <property name="text">
+          <string>Password</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignBottom|Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="passwordLineEdit">
+         <property name="echoMode">
+          <enum>QLineEdit::EchoMode::Password</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="forgotPasswordButton">
+         <property name="font">
+          <font>
+           <pointsize>8</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
     border:none;
     color:white;
     background:transparent;
@@ -85,25 +154,27 @@
 QPushButton:hover{
     color:#4FC3F7;
 }</string>
-       </property>
-       <property name="text">
-        <string>Forgot Password</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="loginButton">
-       <property name="text">
-        <string>Login</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="signUpButton">
-       <property name="text">
-        <string>Sign up</string>
-       </property>
-      </widget>
+         </property>
+         <property name="text">
+          <string>Forgot Password</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="loginButton">
+         <property name="text">
+          <string>Login</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="signUpButton">
+         <property name="text">
+          <string>Sign up</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
     </layout>
    </widget>

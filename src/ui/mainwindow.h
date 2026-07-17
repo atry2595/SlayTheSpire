@@ -6,6 +6,8 @@
 #include <QStackedWidget>
 
 #include "registerpage.h"
+#include "forgotpasswordpage.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -26,6 +28,7 @@ private:
     QStackedWidget *stack;
     LoginPage *loginPage;
     RegisterPage *registerPage;
+    ForgotPasswordPage *forgotPasswordPage;
 
     FileManager *fileManager;
 };

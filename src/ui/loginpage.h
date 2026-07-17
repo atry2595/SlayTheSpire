@@ -21,12 +21,14 @@ private slots:
 
     void on_signUpButton_clicked();
 
+    void on_forgotPasswordButton_clicked();
+
 private:
     Ui::LoginPage *ui;
 
 signals:
     void openRegisterPage();
-
+    void openForgotPasswordPage();
 };
 
 #endif // LOGINPAGE_H
