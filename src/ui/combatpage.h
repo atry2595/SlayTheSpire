@@ -1,4 +1,3 @@
-// combatpage.h
 #ifndef COMBATPAGE_H
 #define COMBATPAGE_H
 
@@ -10,6 +9,7 @@
 #include "ui/entities/ironcladitem.h"
 #include "ui/cards/abstractcardtemplate.h"
 #include "ui/effects/entitycornersframe.h"
+#include <queue>
 
 class CombatPage : public QWidget
 {
@@ -53,6 +53,11 @@ private:
     std::unordered_map<abstractCard*, abstractCardTemplate*> created_cards;
 
     std::unordered_map<abstractEntity*, entityCornersFrame*> entity_corner_effect;
+
+    std::queue<std::function<void()>> action_queue;
+    bool queue_busy = false;
+    void enqueue(std::function<void()> fnc);
+    void playNext();
 
 private slots:
     void card_pressed(CardParent*) {};

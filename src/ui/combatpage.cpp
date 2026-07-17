@@ -116,7 +116,10 @@ void CombatPage::resizeEvent(QResizeEvent *event)
 void CombatPage::start_combat() {
     if (!manager) return;
 
-    initialize_layout();
+    enqueue([this](){
+        initialize_layout();
+        QTimer::singleShot(50, [this](){playNext();});
+    });
 }
 
 
@@ -196,75 +199,85 @@ void CombatPage::reset_layout() {
 }
 
 //=================================================================================
+//====================queue and enqueue managment==================================
+//=================================================================================
+
+void CombatPage::enqueue(std::function<void()> fnc) {
+    action_queue.push(fnc);
+
+    if (queue_busy == false) {
+        playNext();
+    }
+}
+
+
+void CombatPage::playNext() {
+    if (action_queue.empty()){
+        queue_busy = false;
+    }
+    else {
+        queue_busy = true;
+        auto fnc = action_queue.front();
+        action_queue.pop();
+        fnc();
+    }
+}
+
+//=================================================================================
 //====================characters functions & animations============================
 //=================================================================================
 
-
 void CombatPage::escape_entity(abstractEntity* entity) {
+
+    //---------------------------------------------------------------------
     for (int i = 0; i < players.size(); i++) {
         if (entity == players[i]->getSource()) {
-            players[i]->escapeAnim();
+
+            enqueue([=](){
+                players[i]->escapeAnim();
+                QTimer::singleShot(100, [this](){playNext();});
+            });
         }
     }
+    //----------------------------------------------------------------------
     for (int i = 0; i < enemies.size(); i++) {
         if (entity == enemies[i]->getSource()) {
-            enemies[i]->escapeAnim();
+
+            enqueue([=](){
+                enemies[i]->escapeAnim();
+                QTimer::singleShot(100, [this](){playNext();});
+            });
+
         }
     }
-
-    QTimer* t = new QTimer;
-    t->start(1000);
-    connect(t, &QTimer::timeout, this, [=](){
-        t->stop();
-        for (int i = 0; i < players.size(); i++) {
-            if (entity == players[i]->getSource()) {
-                delete players[i];
-                players.erase(players.begin() + i);
-            }
-        }
-        for (int i = 0; i < enemies.size(); i++) {
-            if (entity == enemies[i]->getSource()) {
-                delete enemies[i];
-                enemies.erase(enemies.begin() + i);
-            }
-        }
-        delete entity_corner_effect[entity];
-        entity_corner_effect.erase(entity);
-    });
+    //----------------------------------------------------------------------
 
 }
 
 void CombatPage::died_entity(abstractEntity* entity) {
+
+    //---------------------------------------------------------------------
     for (int i = 0; i < players.size(); i++) {
         if (entity == players[i]->getSource()) {
-            players[i]->dieAnim();
+
+            enqueue([=](){
+                players[i]->dieAnim();
+                QTimer::singleShot(100, [this](){playNext();});
+            });
+
         }
     }
+    //----------------------------------------------------------------------
     for (int i = 0; i < enemies.size(); i++) {
         if (entity == enemies[i]->getSource()) {
-            enemies[i]->dieAnim();
+
+            enqueue([=](){
+                enemies[i]->dieAnim();
+                QTimer::singleShot(100, [this](){playNext();});
+            });
         }
     }
-
-    QTimer* t = new QTimer;
-    t->start(1000);
-    connect(t, &QTimer::timeout, this, [=](){
-        t->stop();
-        for (int i = 0; i < players.size(); i++) {
-            if (entity == players[i]->getSource()) {
-                delete players[i];
-                players.erase(players.begin() + i);
-            }
-        }
-        for (int i = 0; i < enemies.size(); i++) {
-            if (entity == enemies[i]->getSource()) {
-                delete enemies[i];
-                enemies.erase(enemies.begin() + i);
-            }
-        }
-        delete entity_corner_effect[entity];
-        entity_corner_effect.erase(entity);
-    });
+    //----------------------------------------------------------------------
 }
 
 //=================================================================================
@@ -295,11 +308,14 @@ void CombatPage::cardAdd(abstractCard* card, qreal z) {
 
 
 void CombatPage::setHandCardPoint(abstractCard* card, bool enter) {
+
     int hand_count = player->get_hand_pile().size();
+
     int i;
     for (i = 0; i < hand_count; i++) {
         if (player->get_hand_pile()[i] == card) break;
     }
+
     created_cards[card]->getParent()->setZValue(4401 + 10 * i);
     QPointF orig = created_cards[card]->getCardpos();
 
@@ -437,7 +453,8 @@ void CombatPage::cardMovePile(abstractCard* card, PileType from, PileType to) {
         });
     }
 //------------------------------------------------------------------------------------
-    created_cards[card]->updateCard();
+    if (created_cards.find(card) != created_cards.end())
+        created_cards[card]->updateCard();
 
 }
 
@@ -455,6 +472,7 @@ void CombatPage::card_moved(CardParent* card, const QPointF& pos) {
     case TargetType::single_target: {
 
         for (auto item : enemies) {
+            if (item->getSource()->get_hp() <= 0) continue;
 
 
             if (entity_corner_effect.find(item->getSource()) == entity_corner_effect.end()){
@@ -477,6 +495,7 @@ void CombatPage::card_moved(CardParent* card, const QPointF& pos) {
     case TargetType::enemies: {
         if (pos.y() < 650) {
             for (auto item : enemies) {
+            if (item->getSource()->get_hp() <= 0) continue;
 
 
                 if (entity_corner_effect.find(item->getSource()) == entity_corner_effect.end()){
@@ -507,9 +526,12 @@ void CombatPage::card_moved(CardParent* card, const QPointF& pos) {
     }
     //--------------------------------------------------------------------------------------------
     case TargetType::self: {
+        if (player->get_hp() <= 0) break;
+
         if (pos.y() < 650) {
             for (auto item : players) {
                 if (item->getSource() != player) continue;
+                if (item->getSource()->get_hp() <= 0) continue;
 
                 if (entity_corner_effect.find(item->getSource()) == entity_corner_effect.end()){
                     auto img = item->getImage();
@@ -524,6 +546,7 @@ void CombatPage::card_moved(CardParent* card, const QPointF& pos) {
         else {
             for (auto item : players) {
                 if (item->getSource() != player) continue;
+                if (item->getSource()->get_hp() <= 0) continue;
 
                 if (entity_corner_effect.find(item->getSource()) == entity_corner_effect.end()){
                     auto img = item->getImage();
@@ -562,6 +585,7 @@ void CombatPage::card_released(CardParent* card, const QPointF& pos) {
     //-----------------------------------------------------------------------------------------------
     case TargetType::single_target: {
         for (auto item : enemies) {
+            if (item->getSource()->get_hp() <= 0) continue;
             if (item->getParent()->contains(item->getParent()->mapFromScene(pos))) {
                 playCardInfo inf;
                 inf.card = card->getSource();
@@ -585,6 +609,7 @@ void CombatPage::card_released(CardParent* card, const QPointF& pos) {
         inf.card = card->getSource();
         inf.owner = player;
         for (auto item : enemies) {
+            if (item->getSource()->get_hp() <= 0) continue;
             inf.target_list.push_back(item->getSource());
         }
         game_action acts(eve);
@@ -602,8 +627,14 @@ void CombatPage::card_released(CardParent* card, const QPointF& pos) {
 
         game_action acts(eve);
         player->play_card(inf);
-        for (auto item : players) item->updateEntity();
-        for (auto item : enemies) item->updateEntity();
+        for (auto item : players) {
+            if (item->getSource()->get_hp() <= 0) continue;
+            item->updateEntity();
+        }
+        for (auto item : enemies) {
+            if (item->getSource()->get_hp() <= 0) continue;
+            item->updateEntity();
+        }
         return;
     }
     default:
@@ -631,25 +662,45 @@ void CombatPage::entity_update(abstractEntity* entity) {
 
 void CombatPage::attack(attackInfo& inf) {
 
+    for (auto enmy : enemies){
+        if (enmy->getSource() == inf.attacker){
+            enqueue([=]{
+                enmy->getParent()->activeAttackAnimation();
+                QTimer::singleShot(200, [this](){playNext();});
+            });
+        }
+    }
+    for (auto plyr : players){
+        if (plyr->getSource() == inf.attacker){
+            enqueue([=]{
+                plyr->getParent()->activeAttackAnimation();
+                QTimer::singleShot(200, [this](){playNext();});
+            });
+        }
+    }
+
     for (auto item : inf.target_list) {
         //----------------------------------------------------------------------------------------
         for (auto enmy : enemies){
 
+
             if (item == enmy->getSource()) {
+                if (item->get_hp() == 0) continue;
+
                 auto img = enmy->getImage();
                 auto eff = new damageEffect(inf.card_id, img->scenePos(), img->size());
                 combatScene->addItem(eff->getParent());
-                eff->EntranceEffect();
 
                 qreal prt_x = img->scenePos().x() + img->size().width()/2;
                 qreal prt_y = img->scenePos().y() + img->size().height()/2;
-                DamageParticleManager::spawn(combatScene, QPointF(prt_x, prt_y));
 
-                QTimer* t = new QTimer();
-                t->start(5000);
-                connect(t, &QTimer::timeout, this, [=](){
-                    t->stop();
-                    delete eff;
+                enqueue([=](){
+                    eff->EntranceEffect();
+                    DamageParticleManager::spawn(combatScene, QPointF(prt_x, prt_y));
+                    QTimer::singleShot(1, [this](){playNext();});
+                    QTimer::singleShot(5000, [=](){
+                        delete eff;
+                    });
                 });
             }
 
@@ -657,23 +708,34 @@ void CombatPage::attack(attackInfo& inf) {
         //----------------------------------------------------------------------------------------
         for (auto plyr : players){
 
+
             if (item == plyr->getSource()) {
+                if (item->get_hp() == 0) continue;
+
                 auto img = plyr->getImage();
                 auto atckr = entityID::NULLENTITY;
                 if (inf.attacker) atckr = inf.attacker->get_ID();
 
                 auto eff = new damageEffect(atckr, img->scenePos(), img->size());
                 combatScene->addItem(eff->getParent());
-                eff->EntranceEffect();
 
-                QTimer* t = new QTimer();
-                t->start(5000);
-                connect(t, &QTimer::timeout, this, [=](){
-                    t->stop();
-                    delete eff;
+                qreal prt_x = img->scenePos().x() + img->size().width()/2;
+                qreal prt_y = img->scenePos().y() + img->size().height()/2;
+
+                enqueue([=](){
+                    eff->EntranceEffect();
+                    DamageParticleManager::spawn(combatScene, QPointF(prt_x, prt_y));
+                    QTimer::singleShot(1, [this](){playNext();});
+                    QTimer::singleShot(5000, [=](){
+                        delete eff;
+                    });
                 });
+
             }
         }
         //----------------------------------------------------------------------------------------
+        enqueue([=](){
+            QTimer::singleShot(100, [this](){playNext();});
+        });
     }
 }

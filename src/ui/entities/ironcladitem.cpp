@@ -42,7 +42,7 @@ IroncladItem::IroncladItem(abstractEntity* source, QPointF pos, qreal zValue)
     //=======anim=========
     auto& anim = entity_parent->attack_animation;
     anim = new QSequentialAnimationGroup(entity_parent);
-    anim->addAnimation(entity_parent->createMoveAnimation({pos.x() + IroncladItem::width/2, pos.y()}, 321, QEasingCurve::InQuart));
+    anim->addAnimation(entity_parent->createMoveAnimation({pos.x() + IroncladItem::width/2, pos.y()}, 70, QEasingCurve::InQuart));
     anim->addAnimation(entity_parent->createMoveAnimation({pos.x(), pos.y()}, 321, QEasingCurve::OutQuart));
 
     //=======corners=========

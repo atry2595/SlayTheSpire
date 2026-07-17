@@ -19,10 +19,17 @@ MainWindow::MainWindow(QWidget *parent)
     game_action acts(eve);
 
     auto pl = new ironclad(eve);
-    auto en1 = spheric_guardian::create(acts);
-    auto en2 = green_louse::create(acts);
+    auto en1 = small_slime::create(acts);
+    auto en2 = small_slime::create(acts);
     auto en3 = small_slime::create(acts);
-    combat_manager* com = new combat_manager({pl}, {en1, en2, en3}, entityType::monster, eve);
+    auto en4 = small_slime::create(acts);
+    auto en5 = small_slime::create(acts);
+    auto en6 = small_slime::create(acts);
+    auto en7 = small_slime::create(acts);
+    auto en8 = small_slime::create(acts);
+    auto en9 = small_slime::create(acts);
+    auto en0 = small_slime::create(acts);
+    combat_manager* com = new combat_manager({pl}, {en1, en2, en3, en4, en5 , en6, en7, en8, en9, en0}, entityType::monster, eve);
     auto cp = new CombatPage(nullptr, com, pl);
 
 
