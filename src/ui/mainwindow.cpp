@@ -7,6 +7,7 @@
 #include "entity/green_louse.h"
 #include "combat/combat_event.h"
 #include "combat/game_action.h"
+#include "items/potions/potionfactory.h"
 #include "combat/manageCombat/combat_manager.h"
 #include <QTimer>
 
@@ -19,17 +20,11 @@ MainWindow::MainWindow(QWidget *parent)
     game_action acts(eve);
 
     auto pl = new ironclad(eve);
+    pl->potion_list_add(PotionFactory::createPotion(potionID::block_potion, pl));
     auto en1 = small_slime::create(acts);
     auto en2 = small_slime::create(acts);
     auto en3 = small_slime::create(acts);
-    auto en4 = small_slime::create(acts);
-    auto en5 = small_slime::create(acts);
-    auto en6 = small_slime::create(acts);
-    auto en7 = small_slime::create(acts);
-    auto en8 = small_slime::create(acts);
-    auto en9 = small_slime::create(acts);
-    auto en0 = small_slime::create(acts);
-    combat_manager* com = new combat_manager({pl}, {en1, en2, en3, en4, en5 , en6, en7, en8, en9, en0}, entityType::monster, eve);
+    combat_manager* com = new combat_manager({pl}, {en1, en2, en3}, entityType::monster, eve);
     auto cp = new CombatPage(nullptr, com, pl);
 
 

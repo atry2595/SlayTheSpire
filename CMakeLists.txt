@@ -571,6 +571,7 @@ add_executable(SlayTheSpire
     src/ui/effects/getDamageEffect.h
     src/ui/effects/damageeffect.h src/ui/effects/damageeffect.cpp
     src/ui/effects/DamageParticleManager.h src/ui/effects/DamageParticleManager.cpp
+    src/ui/topbar/combattopbar.h src/ui/topbar/combattopbar.cpp
 )
 
 target_include_directories(SlayTheSpire PRIVATE

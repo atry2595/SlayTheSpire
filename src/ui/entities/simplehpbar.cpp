@@ -36,13 +36,13 @@ void SimpleHpBar::setMaxHp(int maxHp)
 void SimpleHpBar::setHp(int hp)
 {
     int oldHp = m_hp;
-    m_hp = qBound(0, hp, m_maxHp);
+    m_hp = hp;
 
-    float newPercent = (float)m_hp / m_maxHp;
+    float newPercent = std::min((float)m_hp / m_maxHp, 1.0f);
 
     // اگر آسیب خورده
     if (m_hp < oldHp) {
-        float oldPercent = (float)oldHp / m_maxHp;
+        float oldPercent = std::min((float)oldHp / m_maxHp, 1.0f);
 
         m_animation->stop();
         m_animation->setStartValue(oldPercent);
@@ -138,7 +138,7 @@ void SimpleHpBar::paintEvent(QPaintEvent *event)
     painter.setPen(Qt::white);
     QFont fn;
     fn.setFamily(Fonts::Cascadia);
-    fn.setPixelSize(12);
+    fn.setPixelSize((int)height() * 2 / 5);
     fn.setBold(true);
 
     painter.setFont(fn);

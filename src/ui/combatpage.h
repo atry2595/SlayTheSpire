@@ -9,6 +9,7 @@
 #include "ui/entities/ironcladitem.h"
 #include "ui/cards/abstractcardtemplate.h"
 #include "ui/effects/entitycornersframe.h"
+#include "ui/topbar/combattopbar.h"
 #include <queue>
 
 class CombatPage : public QWidget
@@ -44,6 +45,8 @@ private:
 
     TextItem* discard_pile = nullptr;
     TextItem* draw_pile = nullptr;
+
+    CombatTopBar* bar;
 
     int enemies_scene_width = 0;
     int players_scene_width = 0;

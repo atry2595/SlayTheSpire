@@ -76,9 +76,12 @@ CombatPage::CombatPage(QWidget *parent, combat_manager* m, ironclad* plyr)
     discard_pile->setBorder(true);
     discard_pile->setZValue(5500);
 
+    bar = new CombatTopBar(eve, player);
+
     combatScene->addItem(bg);
     combatScene->addItem(draw_pile);
     combatScene->addItem(discard_pile);
+    combatScene->addItem(bar->getParent());
 
     draw_pile->setText(QString::number(player->get_deck().size()));
     discard_pile->setText(QString::number(player->get_discard_pile().size()));
@@ -341,8 +344,7 @@ void CombatPage::setHandCardPoint(abstractCard* card, bool enter) {
 
 
 void CombatPage::cardMovePile(abstractCard* card, PileType from, PileType to) {
-    draw_pile->setText(QString::number(player->get_draw_pile().size()));
-    discard_pile->setText(QString::number(player->get_discard_pile().size()));
+
 
     //------------------------------------------------------------------------------------
     if (from == PileType::hand){
@@ -455,6 +457,9 @@ void CombatPage::cardMovePile(abstractCard* card, PileType from, PileType to) {
 //------------------------------------------------------------------------------------
     if (created_cards.find(card) != created_cards.end())
         created_cards[card]->updateCard();
+    draw_pile->setText(QString::number(player->get_draw_pile().size()));
+    discard_pile->setText(QString::number(player->get_discard_pile().size()));
+    bar->updateBar();
 
 }
 
@@ -738,4 +743,6 @@ void CombatPage::attack(attackInfo& inf) {
             QTimer::singleShot(100, [this](){playNext();});
         });
     }
+
+    bar->updateBar();
 }

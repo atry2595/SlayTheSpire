@@ -33,6 +33,11 @@ void BaseItem::paint(QPainter *painter,
                      const QStyleOptionGraphicsItem *,
                      QWidget *)
 {
+    if (has_bg){
+        painter->setPen(Qt::NoPen);
+        painter->setBrush(bg_col);
+        painter->drawRect(boundingRect());
+    }
 }
 
 void BaseItem::mousePressEvent(QGraphicsSceneMouseEvent *event)

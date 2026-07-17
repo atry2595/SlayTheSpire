@@ -32,6 +32,7 @@ protected:
 protected:
     // Current State
     QSizeF m_size;
+    QColor bg_col;
 
     // Home State
     QPointF home_pos;
@@ -41,7 +42,7 @@ protected:
     qreal home_opacity = 1.0;
     qreal home_z = 0.0;
 
-
+    bool has_bg = false;
 public:
     // Current Property
     QSizeF size() const { return m_size; }
@@ -73,6 +74,8 @@ public:
 
     void setHomeOpacity(qreal o) { home_opacity = o;}
     qreal homeOpacity() const { return home_opacity; }
+
+    void setBackColor(QColor color) { bg_col = color; has_bg = true; };
 
     void setHomeZ(qreal z) { home_z = z;}
     qreal homeZ() const { return home_z; }

@@ -303,5 +303,8 @@
     <qresource prefix="/icon">
         <file alias="shield.ico">assests/image/icon/shield.png</file>
         <file alias="corner.ico">assests/image/icon/corner.png</file>
+        <file alias="coin.ico">assests/image/icon/coin.png</file>
+        <file alias="heart.png">assests/image/icon/heart.png</file>
+        <file alias="setting.png">assests/image/icon/setting.png</file>
     </qresource>
 </RCC>

@@ -8,7 +8,7 @@
 
 const std::vector<cardID> ironclad::starting_deck =
     {cardID::whirlwind,
-     cardID::defend, cardID::strike, cardID::whirlwind, cardID::defend, cardID::bash};
+     cardID::offering, cardID::strike, cardID::whirlwind, cardID::pommel_strike, cardID::bash};
 
 abstractCard* ironclad::select_card(
     const std::vector<abstractCard*>& cards
@@ -292,8 +292,9 @@ void ironclad::play_card(playCardInfo& info) {
         playCardInfo c_info;
         c_info.card = info.card;
         c_info.owner = this;
-        emit event->card_moved(c_info, PileType::hand, PileType::exhaust);
+        emit event->card_moved(c_info, PileType::hand, PileType::none);
         exhaust_pile_add(info.card);
+        emit event->card_moved(c_info, PileType::none, PileType::exhaust);
     }
     else if (info.card->get_card_type() == CardType::power){
         playCardInfo c_info;
@@ -305,8 +306,9 @@ void ironclad::play_card(playCardInfo& info) {
         playCardInfo c_info;
         c_info.card = info.card;
         c_info.owner = this;
-        emit event->card_moved(c_info, PileType::hand, PileType::discard);
+        emit event->card_moved(c_info, PileType::hand, PileType::none);
         discard_pile_add(info.card);
+        emit event->card_moved(c_info, PileType::none, PileType::discard);
     }
 
     game_action actions(event);
