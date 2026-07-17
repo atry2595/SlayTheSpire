@@ -1,5 +1,6 @@
 #ifndef FORGOTPASSWORDPAGE_H
 #define FORGOTPASSWORDPAGE_H
+#include "core/login/filemanager.h"
 
 #include <QMainWindow>
 
@@ -14,9 +15,11 @@ class ForgotPasswordPage : public QMainWindow
 public:
     explicit ForgotPasswordPage(QWidget *parent = nullptr);
     ~ForgotPasswordPage();
+    void setFileManager(FileManager *manager);
 
 private:
     Ui::ForgotPasswordPage *ui;
+    FileManager *fileManager = nullptr;
 
 signals:
     void openLoginPage();

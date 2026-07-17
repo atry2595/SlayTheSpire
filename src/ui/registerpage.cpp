@@ -1,5 +1,6 @@
 #include "registerpage.h"
 #include "ui_registerpage.h"
+#include <QMessageBox>
 
 RegisterPage::RegisterPage(QWidget *parent)
     : QMainWindow(parent)
@@ -15,6 +16,28 @@ RegisterPage::~RegisterPage()
 
 void RegisterPage::on_loginButton_clicked()
 {
-    emit openLoginPage();
+    QString username = ui->usernameLineEdit->text().trimmed();
+    QString email = ui->emailLineEdit->text().trimmed();
+    QString password = ui->passwordLineEdit->text();
+    QString confirmPassword = ui->confirmPasswordLineEdit->text();
+
+    QString errorMessage;
+
+    bool success = fileManager->registerPlayer(username,email,password,confirmPassword,errorMessage);
+
+    if(success)
+    {
+        QMessageBox::information(this,"Register","Registration successful!");
+
+        emit openLoginPage();
+    }
+    else
+    {
+        QMessageBox::warning(this,"Register",errorMessage);
+    }
 }
 
+void RegisterPage::setFileManager(FileManager *manager)
+{
+    fileManager = manager;
+}
