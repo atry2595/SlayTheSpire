@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
+#include <QStackedWidget>
+#include "LoginPage.h"
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
@@ -19,5 +20,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    QStackedWidget *stack;
+    LoginPage *loginPage;
 };
 #endif // MAINWINDOW_H

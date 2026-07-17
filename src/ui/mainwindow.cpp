@@ -6,6 +6,16 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    stack = new QStackedWidget(this);
+
+    loginPage = new LoginPage();
+
+    stack->addWidget(loginPage);
+
+    setCentralWidget(stack);
+
+    showFullScreen();
 }
 
 MainWindow::~MainWindow()
