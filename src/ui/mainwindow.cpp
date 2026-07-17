@@ -8,13 +8,16 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    Map map;
 
-    map.generate();
+    stack = new QStackedWidget(this);
 
-    std::cout << map.debugMap().toStdString() << std::endl;
+    loginPage = new LoginPage();
 
-    qDebug().noquote() << map.debugMap();
+    stack->addWidget(loginPage);
+
+    setCentralWidget(stack);
+
+    showFullScreen();
 }
 
 MainWindow::~MainWindow()
