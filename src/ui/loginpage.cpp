@@ -19,3 +19,9 @@ void LoginPage::on_signUpButton_clicked()
 
 }
 
+
+void LoginPage::on_forgotPasswordButton_clicked()
+{
+    emit openForgotPasswordPage();
+}
+

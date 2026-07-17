@@ -34,6 +34,22 @@ MainWindow::MainWindow(QWidget *parent)
                 stack->setCurrentWidget(loginPage);
             });
 
+    connect(loginPage,
+            &LoginPage::openForgotPasswordPage,
+            this,
+            [this]()
+            {
+                stack->setCurrentWidget(forgotPasswordPage);
+            });
+
+    connect(forgotPasswordPage,
+            &ForgotPasswordPage::openLoginPage,
+            this,
+            [this]()
+            {
+                stack->setCurrentWidget(loginPage);
+            });
+
     showFullScreen();
 }
 
