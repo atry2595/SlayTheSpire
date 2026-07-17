@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
+#include <QStackedWidget>
+#include "LoginPage.h"
 #include <QMainWindow>
 #include <QStackedWidget>
 
@@ -21,5 +22,7 @@ public:
 private:
     QStackedWidget* stack;
     Ui::MainWindow *ui;
+    QStackedWidget *stack;
+    LoginPage *loginPage;
 };
 #endif // MAINWINDOW_H
