@@ -7,14 +7,21 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    stack = new QStackedWidget(this);
+    fileManager = new FileManager();
 
     loginPage = new LoginPage();
     registerPage = new RegisterPage();
+    forgotPasswordPage = new ForgotPasswordPage();
+
+    loginPage->setFileManager(fileManager);
+    registerPage->setFileManager(fileManager);
+    forgotPasswordPage->setFileManager(fileManager);
+
+    stack = new QStackedWidget(this);
 
     stack->addWidget(loginPage);
     stack->addWidget(registerPage);
-
+    stack->addWidget(forgotPasswordPage);
 
     setCentralWidget(stack);
 
@@ -49,6 +56,8 @@ MainWindow::MainWindow(QWidget *parent)
             {
                 stack->setCurrentWidget(loginPage);
             });
+
+    stack->setCurrentWidget(loginPage);
 
     showFullScreen();
 }
