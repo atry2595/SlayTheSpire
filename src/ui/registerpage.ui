@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>LoginPage</class>
- <widget class="QMainWindow" name="LoginPage">
+ <class>RegisterPage</class>
+ <widget class="QMainWindow" name="RegisterPage">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,43 +11,28 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Login</string>
-  </property>
-  <property name="styleSheet">
-   <string notr="true">background-color: rgb(30,30,30);</string>
+   <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>70</y>
-      <width>311</width>
-      <height>391</height>
+      <x>230</x>
+      <y>40</y>
+      <width>241</width>
+      <height>334</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
       <widget class="QLabel" name="titleLabel">
-       <property name="font">
-        <font>
-         <pointsize>28</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color:white;</string>
-       </property>
        <property name="text">
         <string>Slay The Spire</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="username">
-       <property name="styleSheet">
-        <string notr="true">    color:white;</string>
-       </property>
+      <widget class="QLabel" name="usernameLabel">
        <property name="text">
         <string>Username</string>
        </property>
@@ -57,10 +42,17 @@
       <widget class="QLineEdit" name="usernameLineEdit"/>
      </item>
      <item>
-      <widget class="QLabel" name="Password">
-       <property name="styleSheet">
-        <string notr="true">    color:white;</string>
+      <widget class="QLabel" name="emailLabel">
+       <property name="text">
+        <string>Email</string>
        </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="emailLineEdit"/>
+     </item>
+     <item>
+      <widget class="QLabel" name="passwordLabel">
        <property name="text">
         <string>Password</string>
        </property>
@@ -74,20 +66,23 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="forgotPasswordButton">
-       <property name="styleSheet">
-        <string notr="true">QPushButton{
-    border:none;
-    color:white;
-    background:transparent;
-}
-
-QPushButton:hover{
-    color:#4FC3F7;
-}</string>
-       </property>
+      <widget class="QLabel" name="confirmPasswordLabel">
        <property name="text">
-        <string>Forgot Password</string>
+        <string>Confirm Password</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="confirmPasswordLineEdit">
+       <property name="echoMode">
+        <enum>QLineEdit::EchoMode::Password</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="signUpButton">
+       <property name="text">
+        <string>Sign Up</string>
        </property>
       </widget>
      </item>
@@ -95,13 +90,6 @@ QPushButton:hover{
       <widget class="QPushButton" name="loginButton">
        <property name="text">
         <string>Login</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="signUpButton">
-       <property name="text">
-        <string>Sign up</string>
        </property>
       </widget>
      </item>

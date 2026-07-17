@@ -1,14 +1,21 @@
 #include "loginpage.h"
 #include "ui_loginpage.h"
 
-loginPage::loginPage(QWidget *parent)
+LoginPage::LoginPage(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::loginPage)
+    , ui(new Ui::LoginPage)
 {
     ui->setupUi(this);
 }
 
-loginPage::~loginPage()
+LoginPage::~LoginPage()
 {
     delete ui;
 }
+
+void LoginPage::on_signUpButton_clicked()
+{
+    emit openRegisterPage();
+
+}
+

@@ -1,5 +1,5 @@
 #include "registerpage.h"
-#include "ui_register_page.h"
+#include "ui_registerpage.h"
 
 RegisterPage::RegisterPage(QWidget *parent)
     : QMainWindow(parent)
@@ -12,3 +12,9 @@ RegisterPage::~RegisterPage()
 {
     delete ui;
 }
+
+void RegisterPage::on_loginButton_clicked()
+{
+    emit openLoginPage();
+}
+
