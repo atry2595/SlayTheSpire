@@ -364,7 +364,7 @@ void ironclad::at_turn_end(game_action& info) {
         item->turn_reset();
     }
 
-    for (int i = hand_pile.size() - 1; i >= 0; i++){
+    for (int i = hand_pile.size() - 1; i >= 0; i--){
 
 
         if (hand_pile[i]->get_ethereal()){

@@ -1,6 +1,4 @@
 #include "cardparent.h"
-#include <QParallelAnimationGroup>
-#include <QGraphicsSceneMouseEvent>
 
 
 CardParent::CardParent(combatEvent* eve,
@@ -25,7 +23,12 @@ CardParent::CardParent(combatEvent* eve,
     else {
         setFlag(QGraphicsItem::ItemIsSelectable, false);
     }
-    animGroup = new QSequentialAnimationGroup();
+    moveAnim = createMoveAnimation(pos(), 150, final_easing);
+    scaleAnim = createScaleAnimation(1.0, 150, final_easing);
+
+    animGroup = new QParallelAnimationGroup(this);
+    animGroup->addAnimation(moveAnim);
+    animGroup->addAnimation(scaleAnim);
 }
 
 //-----------------------------------------------------------------
@@ -116,28 +119,47 @@ void CardParent::refreshTargetPos() {
 
 //-----------------------------------------------------------------
 
-void CardParent::updateVisualState(QPointF targetPos){
+// void CardParent::updateVisualState(QPointF targetPos){
+//     animGroup->stop();
+
+//     while(animGroup->animationCount())
+//     {
+//         delete animGroup->animationAt(0);
+//     }
+
+//     int time = 150;
+//     qreal scl = 1;
+
+//     if (hovered) {
+//         time = hover_time;
+//         scl = hover_scale;
+//     }
+
+//     auto* anim = new QParallelAnimationGroup(animGroup);
+//     anim->addAnimation(this->createScaleAnimation(scl, time, final_easing));
+//     anim->addAnimation(this->createMoveAnimation(targetPos, time, final_easing));
+//     animGroup->addAnimation(anim);
+
+//     animGroup->setCurrentTime(0);
+//     animGroup->start();
+
+// }
+
+void CardParent::updateVisualState(QPointF targetPos)
+{
+    int time = hovered ? hover_time : 150;
+    qreal scl = hovered ? hover_scale : 1.0;
+
     animGroup->stop();
 
-    while(animGroup->animationCount())
-    {
-        delete animGroup->animationAt(0);
-    }
+    moveAnim->setStartValue(pos());
+    moveAnim->setEndValue(targetPos);
+    moveAnim->setDuration(time);
 
-    int time = 150;
-    qreal scl = 1;
+    scaleAnim->setStartValue(scale());
+    scaleAnim->setEndValue(scl);
+    scaleAnim->setDuration(time);
 
-    if (hovered) {
-        time = hover_time;
-        scl = hover_scale;
-    }
-
-    auto* anim = new QParallelAnimationGroup(animGroup);
-    anim->addAnimation(this->createScaleAnimation(scl, time, final_easing));
-    anim->addAnimation(this->createMoveAnimation(targetPos, time, final_easing));
-    animGroup->addAnimation(anim);
-
-    animGroup->setCurrentTime(0);
     animGroup->start();
 
 }

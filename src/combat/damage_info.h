@@ -21,6 +21,8 @@ struct damageInfo{
 };
 
 struct damageResult {
+    abstractEntity* attacker = nullptr;
+    abstractEntity* target = nullptr;
     int final_damage = 0;
     int blocked = 0;
     bool killed = false;

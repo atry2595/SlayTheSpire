@@ -21,7 +21,9 @@ attackResult game_action::attack(attackInfo& info) {
         dmg.target = target;
         dmg.damage = info.damage;
         dmg.attack_type = info.attack_type;
-        res.results.push_back(this->apply_damage(dmg));
+        auto r = this->apply_damage(dmg);
+        res.results.push_back(r);
+        emit event->damageReceived(r);
     }
 
     return res;
@@ -32,6 +34,9 @@ damageResult game_action::apply_damage(damageInfo& info) {
     damageResult res;
 
     auto target = info.target;
+
+    res.target = target;
+    res.attacker = info.attacker;
 
     target->modify_incoming_damage(info);
     emit event->damage_before_blocking(info);

@@ -4,6 +4,8 @@
 #include "ui/baseitem.h"
 #include <QSequentialAnimationGroup>
 #include "cards/abstractcard.h"
+#include <QParallelAnimationGroup>
+#include <QGraphicsSceneMouseEvent>
 
 class CardParent : public BaseItem
 {
@@ -31,14 +33,18 @@ private:
     //==========update place & size==========
     void refreshTargetPos();
     void updateVisualState(QPointF targetPos);
-
-    QSequentialAnimationGroup* animGroup = nullptr;
     //==========update place & size==========
 
     //=============data========
     abstractCard* source = nullptr;
     combatEvent* event;
     //=============data========
+
+    //=============help========
+    QPropertyAnimation* moveAnim;
+    QPropertyAnimation* scaleAnim;
+    QParallelAnimationGroup* animGroup;
+    //=============help========
 
 
 protected:

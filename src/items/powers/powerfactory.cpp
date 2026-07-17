@@ -11,7 +11,7 @@
 #include "entangledpower.h"
 #include "feelnopainpower.h"
 #include "frailpower.h"
-#include "metallicizePower.h"
+#include "metallicizepower.h"
 #include "painfulstabpower.h"
 #include "ragepower.h"
 #include "ritualpower.h"

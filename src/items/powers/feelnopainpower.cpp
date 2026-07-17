@@ -1,4 +1,4 @@
-#include "feelNoPainpower.h"
+#include "feelnopainpower.h"
 #include "cards/abstractcard.h"
 #include "combat/blocking_info.h"
 

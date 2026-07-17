@@ -70,6 +70,8 @@ inline QPixmap getCardPixmap(cardID id)
     case cardID::shame:                 return QPixmap(":/image/cards/curse/shame.png");
     case cardID::doubt:                 return QPixmap(":/image/cards/curse/doubt.png");
     case cardID::injury:                 return QPixmap(":/image/cards/curse/injury.png");
+
+    default: return QPixmap();
     }
 
     return QPixmap();

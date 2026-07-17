@@ -4,10 +4,11 @@
 #include "items/potions/potionfactory.h"
 #include "items/relics/relicfactory.h"
 #include "cards/cardfactory.h"
+#include <QTimer>
 
 combat_manager::combat_manager(std::vector<ironclad*> players_init,
-               std::vector<abstractEnemy*> enemies_init,
-                entityType type, combatEvent* eve)
+                               std::vector<abstractEnemy*> enemies_init,
+                               entityType type, combatEvent* eve)
     :players(players_init),
     enemies(enemies_init),
     combat_type(type),
@@ -21,44 +22,49 @@ combat_manager::combat_manager(std::vector<ironclad*> players_init,
     for (int i = 0; i < enemies.size(); i++) enemy_is_alive.push_back(true);
 
     remove_connection = connect(event, &combatEvent::entity_removed, this,
-        [this](abstractEntity* entity){
-            for (int i = 0; i < players.size(); i++){
-                if (players[i] == entity){
-                    player_is_alive[i] = false;
-                }
-            }
+                                [this](abstractEntity* entity){
+                                    for (int i = 0; i < players.size(); i++){
+                                        if (players[i] == entity){
+                                            player_is_alive[i] = false;
+                                        }
+                                    }
 
-            for (int i = 0; i < enemies.size(); i++){
-                if (enemies[i] == entity){
-                    enemy_is_alive[i] = false;
-                }
-            }
-    });
+                                    for (int i = 0; i < enemies.size(); i++){
+                                        if (enemies[i] == entity){
+                                            enemy_is_alive[i] = false;
+                                        }
+                                    }
+                                });
 
     add_after_connection = connect(event, &combatEvent::entity_add_after, this,
-        [this](abstractEntity* entity, abstractEntity* after){
-        abstractEnemy* after_as_enemy = dynamic_cast<abstractEnemy*>(after);
-        abstractEnemy* entity_as_enemy = dynamic_cast<abstractEnemy*>(entity);
-        if (after_as_enemy == nullptr || entity_as_enemy == nullptr) return;
+                                   [this](abstractEntity* entity, abstractEntity* after){
+                                       abstractEnemy* after_as_enemy = dynamic_cast<abstractEnemy*>(after);
+                                       abstractEnemy* entity_as_enemy = dynamic_cast<abstractEnemy*>(entity);
+                                       if (after_as_enemy == nullptr || entity_as_enemy == nullptr) return;
 
-        int ind = get_enemy_index(after_as_enemy);
-        if (ind == -1) return;
+                                       int ind = get_enemy_index(after_as_enemy);
+                                       if (ind == -1) return;
 
-        add_enemy(entity_as_enemy, ind+1);
+                                       add_enemy(entity_as_enemy, ind+1);
 
-    });
+                                   });
 
     add_before_connection = connect(event, &combatEvent::entity_add_before, this,
-        [this](abstractEntity* entity, abstractEntity* before){
-            abstractEnemy* before_as_enemy = dynamic_cast<abstractEnemy*>(before);
-            abstractEnemy* entity_as_enemy = dynamic_cast<abstractEnemy*>(entity);
-            if (before_as_enemy == nullptr || entity_as_enemy == nullptr) return;
+                                    [this](abstractEntity* entity, abstractEntity* before){
+                                        abstractEnemy* before_as_enemy = dynamic_cast<abstractEnemy*>(before);
+                                        abstractEnemy* entity_as_enemy = dynamic_cast<abstractEnemy*>(entity);
+                                        if (before_as_enemy == nullptr || entity_as_enemy == nullptr) return;
 
-            int ind = get_enemy_index(before_as_enemy);
-            if (ind == -1) return;
+                                        int ind = get_enemy_index(before_as_enemy);
+                                        if (ind == -1) return;
 
-            add_enemy(entity_as_enemy, ind);
+                                        add_enemy(entity_as_enemy, ind);
 
+                                    });
+
+
+    connect(event, &combatEvent::turn_ended, this, [=](abstractEntity*){
+        next_turn();
     });
 
 }
@@ -96,9 +102,10 @@ void combat_manager::turn_start() {
                 return;
             }
 
+            players[current_player]->at_turn_start(actions);
+
             emit event->turn_started(players[current_player]);
 
-            players[current_player]->at_turn_start(actions);
             // play + trun end
             // timer
             return;
@@ -107,31 +114,32 @@ void combat_manager::turn_start() {
 
     else {
         for (int i = 0; i<enemies.size(); i++) {
-
             if (!enemy_is_alive[i]){
                 continue;
             }
 
-            emit event->turn_started(enemies[i]);
+            QTimer::singleShot(500, [=](){
+
+                emit event->turn_started(enemies[i]);
 
 
-            enemies[i]->at_turn_start(actions);
+                enemies[i]->at_turn_start(actions);
 
 
-            std::vector<abstractEntity*> trg;
-            for (auto item : players) trg.push_back(item);
+                std::vector<abstractEntity*> trg;
+                for (auto item : players) trg.push_back(item);
 
-            playInfo info(actions);
-            info.attacker = enemies[i];
-            info.target_list = trg;
+                playInfo info(actions);
+                info.attacker = enemies[i];
+                info.target_list = trg;
 
-            enemies[i]->play_turn(info);
+                enemies[i]->play_turn(info);
+            });
+
         }
-
-        turn_end();
+        QTimer::singleShot(enemies.size()*1000, [this](){turn_end();});
     }
 }
-
 
 
 void combat_manager::turn_end() {
@@ -150,12 +158,6 @@ void combat_manager::turn_end() {
                 return;
             }
 
-
-            players[current_player]->at_turn_end(actions);
-
-            emit event->turn_ended(players[current_player]);
-
-            players[current_player]->turn_reset();
         }
     }
 
@@ -170,13 +172,12 @@ void combat_manager::turn_end() {
 
             enemies_copy[i]->at_turn_end(actions);
 
-            emit event->turn_ended(enemies_copy[i]);
 
             enemies_copy[i]->turn_reset();
         }
     }
 
-    next_turn();
+    emit event->turn_ended(enemies[0]);
 
 }
 
@@ -204,6 +205,11 @@ void combat_manager::combat_end() {
 
 
 void combat_manager::next_turn() {
+
+    if (current_phase == TurnPhase::player) {
+        players[current_player]->at_turn_end(actions);
+        players[current_player]->turn_reset();
+    }
 
     if (current_phase == TurnPhase::player && current_player + 1 < players.size()) current_player++;
 

@@ -81,8 +81,8 @@ add_executable(SlayTheSpire
     src/items/powers/dexteritypower.h
     src/items/powers/dexteritypower.cpp
 
-    src/items/powers/metallicizePower.h
-    src/items/powers/metallicizePower.cpp
+    src/items/powers/metallicizepower.h
+    src/items/powers/metallicizepower.cpp
 
     src/items/powers/vulnerablePower.h
     src/items/powers/vulnerablePower.cpp
@@ -445,8 +445,8 @@ add_executable(SlayTheSpire
     src/items/powers/feelnopainpower.h
     src/items/powers/frailpower.cpp
     src/items/powers/frailpower.h
-    src/items/powers/metallicizePower.cpp
-    src/items/powers/metallicizePower.h
+    src/items/powers/metallicizepower.cpp
+    src/items/powers/metallicizepower.h
     src/items/powers/painfulstabpower.cpp
     src/items/powers/painfulstabpower.h
     src/items/powers/powerfactory.cpp

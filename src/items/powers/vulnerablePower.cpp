@@ -1,4 +1,4 @@
-#include "vulnerablepower.h"
+#include "vulnerablePower.h"
 
 vulnerablePower::vulnerablePower(abstractEntity* owner_init, int x)
     : abstractPower(tr("Vulnerable"), owner_init, x, 999, 0, false, 2)

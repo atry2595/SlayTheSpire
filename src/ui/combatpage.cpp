@@ -208,7 +208,7 @@ void CombatPage::reset_layout() {
 void CombatPage::enqueue(std::function<void()> fnc) {
     action_queue.push(fnc);
 
-    if (queue_busy == false) {
+    if (queue_busy == false || action_queue.empty()) {
         playNext();
     }
 }
@@ -311,33 +311,32 @@ void CombatPage::cardAdd(abstractCard* card, qreal z) {
 
 
 void CombatPage::setHandCardPoint(abstractCard* card, bool enter) {
+    enqueue([=](){
+        int hand_count = player->get_hand_pile().size();
 
-    int hand_count = player->get_hand_pile().size();
+        int i;
+        for (i = 0; i < hand_count; i++) {
+            if (player->get_hand_pile()[i] == card) break;
+        }
 
-    int i;
-    for (i = 0; i < hand_count; i++) {
-        if (player->get_hand_pile()[i] == card) break;
-    }
+        created_cards[card]->getParent()->setZValue(4401 + 10 * i);
+        QPointF orig = created_cards[card]->getCardpos();
 
-    created_cards[card]->getParent()->setZValue(4401 + 10 * i);
-    QPointF orig = created_cards[card]->getCardpos();
+        if (i == hand_count) {
+            created_cards[card]->setCardpos({orig.x(), 950});
+        }
 
-    if (i == hand_count) {
-        created_cards[card]->setCardpos({orig.x(), 950});
-        return;
-    }
+        else {
+            qreal x = 770 - 70 * hand_count + 140 * i;
+            if (enter) {
+                created_cards[card]->setCardpos({x, 950});
+            }
 
-    qreal x = 770 - 70 * hand_count + 140 * i;
-    if (enter) {
-        created_cards[card]->setCardpos({x, 950});
-    }
+            QTimer::singleShot(500, [=](){created_cards[card]->setCardpos({x, 700});});
+        }
 
-    QTimer* t = new QTimer();
-    t->start(500);
+        QTimer::singleShot(50, [this](){playNext();});
 
-    connect(t, &QTimer::timeout, this, [=](){
-        t->stop();
-        created_cards[card]->setCardpos({x, 700});
     });
 
 }

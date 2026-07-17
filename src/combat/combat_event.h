@@ -15,6 +15,7 @@ struct damageInfo;
 struct blockingInfo;
 struct enemy_intent;
 struct playCardInfo;
+struct damageResult;
 enum class PileType;
 
 class combatEvent : public QObject{
@@ -65,6 +66,7 @@ signals:
     void cardReleased(CardParent*, const QPointF&);
     void cardUpdated(abstractCard*);
     void entityUpdate(abstractEntity*);
+    void damageReceived(damageResult&);
 
 };
 
