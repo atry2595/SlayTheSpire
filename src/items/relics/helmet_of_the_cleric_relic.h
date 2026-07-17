@@ -10,7 +10,7 @@ class helmet_of_cleric_relic : public abstractRelic
 public:
     helmet_of_cleric_relic(abstractEntity* owner_init);
     QString generate_description() override;
-    relicID get_id() override { return relicID::helmet_of_cleric; }
+    relicID get_id() override { return relicID::helmet_of_the_cleric; }
     relicRarity get_rarity() override { return relicRarity::event; }
 
     void at_combat_end(game_action&) override;
