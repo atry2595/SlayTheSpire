@@ -1,5 +1,7 @@
 #include "damageeffect.h"
 #include <QSequentialAnimationGroup>
+#include <QGraphicsColorizeEffect>
+#include <QPainter>
 
 damageEffect::damageEffect(cardID id, QPointF pos, QSizeF size)
 {
@@ -16,6 +18,31 @@ damageEffect::damageEffect(cardID id, QPointF pos, QSizeF size)
 
     image = new ImageItem(parent, QSizeF(eff_width, eff_height), QPointF(0,0));
     image->setPixmap(inf.image);
+
+
+    QImage img = inf.image.toImage();
+
+    QPainter painter(&img);
+    painter.setCompositionMode(QPainter::CompositionMode_SourceIn);
+    painter.fillRect(img.rect(), QColor(60,60,60));
+    painter.end();
+
+    QPixmap darkPixmap = QPixmap::fromImage(img);
+
+    for (int i = 0; i < 4; i++)
+    {
+        auto* item = new ImageItem(parent, QSizeF(eff_width, eff_height));
+
+        item->setPixmap(darkPixmap);
+
+        qreal x = 0.02 * eff_width  * (i % 2) * ((((i + 1) / 2) % 2) ? 1 : -1);
+        qreal y = 0.02 * eff_height * ((i + 1) % 2) * (( i / 2 % 2) ? 1 : -1);
+
+        item->setPos(x, y);
+        item->setZValue(-10);
+
+        borders.push_back(item);
+    }
 
 }
 
@@ -47,7 +74,7 @@ void damageEffect::EntranceEffect() {
     QSequentialAnimationGroup* gr = new QSequentialAnimationGroup(parent);
 
     gr->addAnimation(parent->createOpacityAnimation(1, 50));
-    gr->addPause(300);
+    gr->addPause(250);
     gr->addAnimation(parent->createOpacityAnimation(0, 300));
 
     gr->start();

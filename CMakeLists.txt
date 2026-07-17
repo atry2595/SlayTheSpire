@@ -570,6 +570,7 @@ add_executable(SlayTheSpire
     src/ui/effects/entitycornersframe.h src/ui/effects/entitycornersframe.cpp
     src/ui/effects/getDamageEffect.h
     src/ui/effects/damageeffect.h src/ui/effects/damageeffect.cpp
+    src/ui/effects/DamageParticleManager.h src/ui/effects/DamageParticleManager.cpp
 )
 
 target_include_directories(SlayTheSpire PRIVATE

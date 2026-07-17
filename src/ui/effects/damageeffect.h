@@ -10,6 +10,7 @@ class damageEffect : public abstractEffect
 private:
     BaseItem* parent;
     ImageItem* image = nullptr;
+    std::vector<ImageItem*> borders;
 
 public:
     damageEffect(cardID, QPointF pos, QSizeF size);

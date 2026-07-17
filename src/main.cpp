@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
         Fonts::lotrance = lotranceFamilies.first();
 
     int f7 = QFontDatabase::addApplicationFont(":/fonts/forte");
-    const QStringList forteFamilies = QFontDatabase::applicationFontFamilies(f6);
+    const QStringList forteFamilies = QFontDatabase::applicationFontFamilies(f7);
     if (!forteFamilies.isEmpty())
         Fonts::forte = forteFamilies.first();
 

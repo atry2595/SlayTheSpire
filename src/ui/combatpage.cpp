@@ -10,6 +10,7 @@
 #include "ui/cards/getCardPixmap.h"
 #include "core/setting.h"
 #include "ui/effects/damageeffect.h"
+#include "ui/effects/DamageParticleManager.h"
 
 //=================================================================================
 //=====================contructur and intializer functions=========================
@@ -635,16 +636,20 @@ void CombatPage::attack(attackInfo& inf) {
         for (auto enmy : enemies){
 
             if (item == enmy->getSource()) {
-                qDebug() << "va";
                 auto img = enmy->getImage();
                 auto eff = new damageEffect(inf.card_id, img->scenePos(), img->size());
                 combatScene->addItem(eff->getParent());
                 eff->EntranceEffect();
 
+                qreal prt_x = img->scenePos().x() + img->size().width()/2;
+                qreal prt_y = img->scenePos().y() + img->size().height()/2;
+                DamageParticleManager::spawn(combatScene, QPointF(prt_x, prt_y));
+
                 QTimer* t = new QTimer();
                 t->start(5000);
                 connect(t, &QTimer::timeout, this, [=](){
                     t->stop();
+                    delete eff;
                 });
             }
 
