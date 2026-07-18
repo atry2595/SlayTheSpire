@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "map/map.h"
-#include <iostream>
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -57,6 +56,15 @@ MainWindow::MainWindow(QWidget *parent)
             [this]()
             {
                 stack->setCurrentWidget(loginPage);
+            });
+    connect(loginPage,
+            &LoginPage::loginSuccessful,
+            this,
+            [this]()
+            {
+                QMessageBox::information(this,
+                                         "Game",
+                                         "Main Menu will open here.");
             });
 
     stack->setCurrentWidget(loginPage);
