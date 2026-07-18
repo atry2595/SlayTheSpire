@@ -7,6 +7,15 @@ LoginPage::LoginPage(QWidget *parent)
     , ui(new Ui::LoginPage)
 {
     ui->setupUi(this);
+    connect(ui->usernameLineEdit,
+            &QLineEdit::returnPressed,
+            ui->loginButton,
+            &QPushButton::click);
+
+    connect(ui->passwordLineEdit,
+            &QLineEdit::returnPressed,
+            ui->loginButton,
+            &QPushButton::click);
 }
 
 LoginPage::~LoginPage()
@@ -40,11 +49,19 @@ void LoginPage::on_loginButton_clicked()
 
     if(player)
     {
-        QMessageBox::information(this,"Login","Login successful!");
+        QMessageBox::information(this,
+                                 "Login",
+                                 "Login successful!");
+
+        ui->usernameLineEdit->clear();
+        ui->passwordLineEdit->clear();
+        emit loginSuccessful();
     }
     else
     {
-        QMessageBox::warning(this,"Login","Invalid username or password.");
+        QMessageBox::warning(this,
+                             "Login",
+                             "Invalid username or password.");
     }
 }
 
