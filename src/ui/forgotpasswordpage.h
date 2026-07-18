@@ -25,6 +25,7 @@ signals:
     void openLoginPage();
 private slots:
     void on_loginButton_clicked();
+    void on_changePasswordButton_clicked();
 };
 
 #endif // FORGOTPASSWORDPAGE_H

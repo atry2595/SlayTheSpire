@@ -31,6 +31,7 @@ private:
 signals:
     void openRegisterPage();
     void openForgotPasswordPage();
+    void loginSuccessful();
 
 };
 
