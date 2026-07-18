@@ -16,7 +16,10 @@ struct attackInfo{
 };
 
 struct attackResult {
+    attackInfo& info;
     std::vector<damageResult> results = {};
+
+    inline attackResult(attackInfo& inf) : info(inf){}
 };
 
 #endif // ATTACK_INFO_H

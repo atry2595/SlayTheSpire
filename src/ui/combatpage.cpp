@@ -99,7 +99,8 @@ CombatPage::CombatPage(QWidget *parent, combat_manager* m, ironclad* plyr)
     // connect(eve, &combatEvent::entityUpdate, this, &CombatPage::entity_update);
     connect(eve, &combatEvent::entity_escape, this, &CombatPage::escape_entity);
     connect(eve, &combatEvent::entity_removed, this, &CombatPage::died_entity);
-    connect(eve, &combatEvent::attack_started, this, &CombatPage::attack);
+    connect(eve, &combatEvent::afterAttack, this, &CombatPage::after_attack);
+    connect(eve, &combatEvent::turn_started, this, &CombatPage::turn_start);
     //----------------------------------------------------
 }
 
@@ -664,35 +665,39 @@ void CombatPage::entity_update(abstractEntity* entity) {
 }
 
 
-void CombatPage::attack(attackInfo& inf) {
+void CombatPage::after_attack(attackResult& res) {
 
+    //===========attack effect & anim=================
     for (auto enmy : enemies){
-        if (enmy->getSource() == inf.attacker){
+        if (enmy->getSource() == res.info.attacker) {
             enqueue([=]{
                 enmy->getParent()->activeAttackAnimation();
+                enmy->updateEntity();
                 QTimer::singleShot(200, [this](){playNext();});
             });
         }
     }
     for (auto plyr : players){
-        if (plyr->getSource() == inf.attacker){
+        if (plyr->getSource() == res.info.attacker){
             enqueue([=]{
                 plyr->getParent()->activeAttackAnimation();
+                plyr->updateEntity();
                 QTimer::singleShot(200, [this](){playNext();});
             });
         }
     }
 
-    for (auto item : inf.target_list) {
+    //===========damage effect & anim=================
+    for (auto item : res.results) {
         //----------------------------------------------------------------------------------------
         for (auto enmy : enemies){
 
 
-            if (item == enmy->getSource()) {
-                if (item->get_hp() == 0) continue;
+            if (item.target == enmy->getSource()) {
+                if (item.target->get_hp() == 0) continue;
 
                 auto img = enmy->getImage();
-                auto eff = new damageEffect(inf.card_id, img->scenePos(), img->size());
+                auto eff = new damageEffect(res.info.card_id, img->scenePos(), img->size());
                 combatScene->addItem(eff->getParent());
 
                 qreal prt_x = img->scenePos().x() + img->size().width()/2;
@@ -702,6 +707,7 @@ void CombatPage::attack(attackInfo& inf) {
                     eff->EntranceEffect();
                     DamageParticleManager::spawn(combatScene, QPointF(prt_x, prt_y));
                     QTimer::singleShot(1, [this](){playNext();});
+                    enmy->updateEntity();
                     QTimer::singleShot(5000, [=](){
                         delete eff;
                     });
@@ -713,12 +719,12 @@ void CombatPage::attack(attackInfo& inf) {
         for (auto plyr : players){
 
 
-            if (item == plyr->getSource()) {
-                if (item->get_hp() == 0) continue;
+            if (item.target == plyr->getSource()) {
+                if (item.target->get_hp() == 0) continue;
 
                 auto img = plyr->getImage();
                 auto atckr = entityID::NULLENTITY;
-                if (inf.attacker) atckr = inf.attacker->get_ID();
+                if (res.info.attacker) atckr = res.info.attacker->get_ID();
 
                 auto eff = new damageEffect(atckr, img->scenePos(), img->size());
                 combatScene->addItem(eff->getParent());
@@ -730,6 +736,7 @@ void CombatPage::attack(attackInfo& inf) {
                     eff->EntranceEffect();
                     DamageParticleManager::spawn(combatScene, QPointF(prt_x, prt_y));
                     QTimer::singleShot(1, [this](){playNext();});
+                    plyr->updateEntity();
                     QTimer::singleShot(5000, [=](){
                         delete eff;
                     });
@@ -744,4 +751,10 @@ void CombatPage::attack(attackInfo& inf) {
     }
 
     bar->updateBar();
+}
+
+
+void CombatPage::turn_start(abstractEntity*) {
+    for (auto item : players) item->updateEntity();
+    for (auto item : enemies) item->updateEntity();
 }

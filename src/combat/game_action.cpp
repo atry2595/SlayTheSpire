@@ -13,7 +13,7 @@ attackResult game_action::attack(attackInfo& info) {
         emit event->attack_started(info);
     }
 
-    attackResult res;
+    attackResult res(info);
 
     for (abstractEntity* target : info.target_list){
         damageInfo dmg;
@@ -23,9 +23,9 @@ attackResult game_action::attack(attackInfo& info) {
         dmg.attack_type = info.attack_type;
         auto r = this->apply_damage(dmg);
         res.results.push_back(r);
-        emit event->damageReceived(r);
     }
 
+    emit event->afterAttack(res);
     return res;
 }
 
