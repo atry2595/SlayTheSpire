@@ -16,6 +16,7 @@ public:
     explicit ForgotPasswordPage(QWidget *parent = nullptr);
     ~ForgotPasswordPage();
     void setFileManager(FileManager *manager);
+    void clearFields();
 
 private:
     Ui::ForgotPasswordPage *ui;
