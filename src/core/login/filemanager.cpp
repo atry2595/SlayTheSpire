@@ -225,3 +225,7 @@ QList<Player>& FileManager::getPlayers()
 {
     return players;
 }
+QStringList FileManager::getUsernameSuggestions(const QString &username)
+{
+    return Player::suggestUsername(username, players);
+}

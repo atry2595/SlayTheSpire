@@ -62,6 +62,12 @@ void LoginPage::setFileManager(FileManager *manager)
     fileManager = manager;
 }
 
+void LoginPage::clearFields()
+{
+    ui->usernameLineEdit->clear();
+    ui->passwordLineEdit->clear();
+}
+
 void LoginPage::on_loginButton_clicked()
 {
     QString username = ui->usernameLineEdit->text().trimmed();

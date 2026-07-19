@@ -26,6 +26,7 @@ public:
     bool resetPassword(const QString &email,const QString &newPassword,const QString &confirmPassword,QString &errorMessage);
     Player* findPlayer(const QString &username);
     QList<Player>& getPlayers();
+    QStringList getUsernameSuggestions(const QString &username);
 };
 
 #endif

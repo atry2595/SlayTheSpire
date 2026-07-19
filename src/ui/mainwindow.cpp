@@ -31,6 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
             this,
             [this]()
             {
+                registerPage->clearFields();
                 stack->setCurrentWidget(registerPage);
             });
 
@@ -39,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent)
             this,
             [this]()
             {
+                loginPage->clearFields();
                 stack->setCurrentWidget(loginPage);
             });
 
@@ -47,6 +49,7 @@ MainWindow::MainWindow(QWidget *parent)
             this,
             [this]()
             {
+                forgotPasswordPage->clearFields();
                 stack->setCurrentWidget(forgotPasswordPage);
             });
 
@@ -55,8 +58,10 @@ MainWindow::MainWindow(QWidget *parent)
             this,
             [this]()
             {
+                loginPage->clearFields();
                 stack->setCurrentWidget(loginPage);
             });
+
     connect(loginPage,
             &LoginPage::loginSuccessful,
             this,
