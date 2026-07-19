@@ -16,6 +16,7 @@ public:
     explicit RegisterPage(QWidget *parent = nullptr);
     ~RegisterPage();
     void setFileManager(FileManager *manager);
+    void clearFields();
 
 private slots:
     void on_loginButton_clicked();

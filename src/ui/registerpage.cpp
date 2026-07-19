@@ -10,6 +10,7 @@ RegisterPage::RegisterPage(QWidget *parent)
     , ui(new Ui::RegisterPage)
 {
     ui->setupUi(this);
+    ui->usernameSuggestionLabel->hide();
 
     QAction *passwordEyeAction = ui->passwordLineEdit->addAction(
         QIcon(":/icon/login/eye_off.svg"),
@@ -67,6 +68,13 @@ void RegisterPage::setFileManager(FileManager *manager)
     fileManager = manager;
 }
 
+void RegisterPage::clearFields()
+{
+    ui->usernameLineEdit->clear();
+    ui->emailLineEdit->clear();
+    ui->passwordLineEdit->clear();
+    ui->confirmPasswordLineEdit->clear();
+}
 
 void RegisterPage::on_signUpButton_clicked()
 {
@@ -100,10 +108,33 @@ void RegisterPage::on_signUpButton_clicked()
     }
     else
     {
-        QMessageBox::warning(
-            this,
-            "Register",
-            errorMessage
-            );
+        if(errorMessage == "Username already exists.")
+        {
+            QStringList suggestions =
+                fileManager->getUsernameSuggestions(username);
+
+            QString message = errorMessage;
+            message += "\n\nSuggested usernames:\n";
+
+            for(const QString &name : suggestions)
+            {
+                message += "• " + name + "\n";
+            }
+
+            QMessageBox::warning(
+                this,
+                "Register",
+                message
+                );
+        }
+        else
+        {
+            QMessageBox::warning(
+                this,
+                "Register",
+                errorMessage
+                );
+        }
     }
+
 }

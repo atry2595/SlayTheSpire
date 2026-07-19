@@ -68,6 +68,13 @@ void ForgotPasswordPage::setFileManager(FileManager *manager)
     fileManager = manager;
 }
 
+void ForgotPasswordPage::clearFields()
+{
+    ui->emailLineEdit->clear();
+    ui->newPasswordLineEdit->clear();
+    ui->confirmPasswordLineEdit->clear();
+}
+
 void ForgotPasswordPage::on_changePasswordButton_clicked()
 {
     QString email = ui->emailLineEdit->text().trimmed();

@@ -16,6 +16,7 @@ public:
     explicit LoginPage(QWidget *parent = nullptr);
     ~LoginPage();
     void setFileManager(FileManager *manager);
+    void clearFields();
 
 private slots:
     void on_signUpButton_clicked();
