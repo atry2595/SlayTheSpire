@@ -1,12 +1,34 @@
 #include "loginpage.h"
 #include "ui_loginpage.h"
 #include <QMessageBox>
+#include <QAction>
+#include <QIcon>
+#include <QLineEdit>
 
 LoginPage::LoginPage(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::LoginPage)
 {
     ui->setupUi(this);
+    QAction *eyeAction = ui->passwordLineEdit->addAction(
+        QIcon(":/icon/login/eye_off.svg"),
+        QLineEdit::TrailingPosition);
+
+    connect(eyeAction, &QAction::triggered, this,
+            [this, eyeAction]()
+            {
+                if (ui->passwordLineEdit->echoMode() == QLineEdit::Password)
+                {
+                    ui->passwordLineEdit->setEchoMode(QLineEdit::Normal);
+                    eyeAction->setIcon(QIcon(":/icon/login/eye.svg"));
+                }
+                else
+                {
+                    ui->passwordLineEdit->setEchoMode(QLineEdit::Password);
+                    eyeAction->setIcon(QIcon(":/icon/login/eye_off.svg"));
+                }
+            });
+
     connect(ui->usernameLineEdit,
             &QLineEdit::returnPressed,
             ui->loginButton,

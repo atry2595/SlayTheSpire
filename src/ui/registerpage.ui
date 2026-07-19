@@ -129,7 +129,7 @@ color: white;</string>
        <item>
         <widget class="QLineEdit" name="emailLineEdit">
          <property name="echoMode">
-          <enum>QLineEdit::EchoMode::Password</enum>
+          <enum>QLineEdit::EchoMode::Normal</enum>
          </property>
         </widget>
        </item>
