@@ -11,6 +11,9 @@ RegisterPage::RegisterPage(QWidget *parent)
 {
     ui->setupUi(this);
     ui->usernameSuggestionLabel->hide();
+    ui->usernameSuggestionLabel->setTextFormat(Qt::RichText);
+    ui->usernameSuggestionLabel->setTextInteractionFlags(Qt::TextBrowserInteraction);
+    ui->usernameSuggestionLabel->setOpenExternalLinks(false);
 
     QAction *passwordEyeAction = ui->passwordLineEdit->addAction(
         QIcon(":/icon/login/eye_off.svg"),
@@ -29,6 +32,31 @@ RegisterPage::RegisterPage(QWidget *parent)
                     ui->passwordLineEdit->setEchoMode(QLineEdit::Password);
                     passwordEyeAction->setIcon(QIcon(":/icon/login/eye_off.svg"));
                 }
+            });
+    connect(ui->usernameLineEdit,
+            &QLineEdit::textChanged,
+            this,
+            [this]()
+            {
+                ui->usernameLineEdit->setStyleSheet("");
+
+                ui->usernameLabel->setStyleSheet("");
+
+                ui->usernameSuggestionLabel->hide();
+            });
+
+    connect(ui->usernameSuggestionLabel,
+            &QLabel::linkActivated,
+            this,
+            [this](const QString &link)
+            {
+                ui->usernameLineEdit->setText(link);
+
+                ui->usernameSuggestionLabel->hide();
+
+                ui->usernameLineEdit->setStyleSheet("");
+
+                ui->usernameLabel->setStyleSheet("");
             });
 
 
@@ -51,6 +79,7 @@ RegisterPage::RegisterPage(QWidget *parent)
                     confirmEyeAction->setIcon(QIcon(":/icon/login/eye_off.svg"));
                 }
             });
+
 
 }
 
@@ -85,6 +114,12 @@ void RegisterPage::on_signUpButton_clicked()
 
     QString errorMessage;
 
+    ui->usernameLineEdit->setStyleSheet("");
+
+    ui->usernameLabel->setStyleSheet("");
+
+    ui->usernameSuggestionLabel->hide();
+
     bool success = fileManager->registerPlayer(
         username,
         email,
@@ -113,19 +148,26 @@ void RegisterPage::on_signUpButton_clicked()
             QStringList suggestions =
                 fileManager->getUsernameSuggestions(username);
 
-            QString message = errorMessage;
-            message += "\n\nSuggested usernames:\n";
+            QString message;
+
+            message += "<font color='red'><b>Username already exists.</b></font><br><br>";
+
+            message += "You can use:<br>";
 
             for(const QString &name : suggestions)
             {
-                message += "• " + name + "\n";
+                message += "<a href=\"" + name + "\">" + name + "</a><br>";
             }
 
-            QMessageBox::warning(
-                this,
-                "Register",
-                message
-                );
+            ui->usernameSuggestionLabel->setText(message);
+
+            ui->usernameSuggestionLabel->show();
+
+            ui->usernameLineEdit->setStyleSheet(
+                "border:2px solid red;");
+
+            ui->usernameLabel->setStyleSheet(
+                "color:red;");
         }
         else
         {
@@ -136,5 +178,4 @@ void RegisterPage::on_signUpButton_clicked()
                 );
         }
     }
-
 }
