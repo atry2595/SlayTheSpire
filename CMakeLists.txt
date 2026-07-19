@@ -575,6 +575,7 @@ add_executable(SlayTheSpire
     src/items/relics/spirit_poop_relic.cpp src/items/relics/spirit_poop_relic.h
     src/ui/relicbar/relicbar.h src/ui/relicbar/relicbar.cpp
     src/ui/relicbar/getRelicImage.h
+    src/ui/entities/potionparent.h src/ui/entities/potionparent.cpp
 )
 
 target_include_directories(SlayTheSpire PRIVATE

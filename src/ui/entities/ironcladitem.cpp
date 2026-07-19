@@ -4,11 +4,13 @@
 #include "ui/entities/getPotionIcon.h"
 #include <QSequentialAnimationGroup>
 
-IroncladItem::IroncladItem(abstractEntity* source, QPointF pos, qreal zValue)
+IroncladItem::IroncladItem(combatEvent* event, abstractEntity* source, QPointF pos, qreal zValue)
     :abstractEntityItem(source, pos, {IroncladItem::width, IroncladItem::height + 110}, zValue)
+    ,eve(event)
 {
     //=======parent=========
     entity_parent = new EntityParent(nullptr, entity_size, entity_pos);
+    entity_parent->setZValue(0 + zValue);
 
 
 
@@ -114,8 +116,15 @@ void IroncladItem::updateEntity() {
 
     ironclad* player = dynamic_cast<ironclad*>(entity_source);
 
+    for (auto item : potion_parents){
+        delete item;
+    }
+    potion_parents.clear();
+
     for (int i = 0; i < std::min(3, (int)player->get_potion_list().size()); i++) {
-        ImageItem* p = new ImageItem(entity_parent, {58, 58}, QPointF(-60, 50 * (i+1) + 28 * i));
+        auto p_p = new PotionParent(eve, player->get_potion_list()[i], entity_parent, {58, 58}, QPointF(-60, 50 * (i+1) + 28 * i), 10);
+        potion_parents.push_back(p_p);
+        ImageItem* p = new ImageItem(potion_parents[i], {58, 58}, {0, 0});
         auto pot = player->get_potion_list()[i];
         p->setPixmap(getPotionIcon(pot->get_ID()));
         potions.push_back(p);

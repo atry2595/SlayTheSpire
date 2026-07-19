@@ -12,7 +12,7 @@ EnemyItem::EnemyItem(abstractEntity* source, QPointF pos, qreal zValue)
 
     //=======parent=========
     entity_parent = new EntityParent(nullptr, entity_size, entity_pos);
-
+    entity_parent->setZValue(0 + zValue);
 
 
     //=======image========

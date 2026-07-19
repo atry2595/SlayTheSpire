@@ -21,6 +21,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     auto pl = new ironclad(eve);
     pl->potion_list_add(PotionFactory::createPotion(potionID::block_potion, pl));
+    pl->potion_list_add(PotionFactory::createPotion(potionID::fire_potion, pl));
+    pl->potion_list_add(PotionFactory::createPotion(potionID::explosive_potion, pl));
     pl->add_relic(acts, RelicFactory::createRelic(relicID::blood_vial, pl));
     auto en1 = the_champ::create(acts);
     auto en2 = small_slime::create(acts);

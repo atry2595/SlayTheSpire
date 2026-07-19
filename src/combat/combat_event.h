@@ -10,6 +10,7 @@ class abstractPower;
 class abstractPotion;
 class combat_manager;
 class CardParent;
+class PotionParent;
 struct attackInfo;
 struct damageInfo;
 struct blockingInfo;
@@ -64,6 +65,9 @@ signals:
     void cardPressed(CardParent*);
     void cardMoved(CardParent*, const QPointF&);
     void cardReleased(CardParent*, const QPointF&);
+    void potionPressed(PotionParent*);
+    void potionMoved(PotionParent*, const QPointF&);
+    void potionReleased(PotionParent*, const QPointF&);
     void cardUpdated(abstractCard*);
     void entityUpdate(abstractEntity*);
     void afterAttack(attackResult&);

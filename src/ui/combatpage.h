@@ -69,6 +69,8 @@ private slots:
     void card_pressed(CardParent*) {};
     void card_moved(CardParent*, const QPointF&);
     void card_released(CardParent*, const QPointF&);
+    void potion_moved(PotionParent*, const QPointF&);
+    void potion_released(PotionParent*, const QPointF&);
     void card_updated(abstractCard*);
     void entity_update(abstractEntity*);
     void after_attack(attackResult&);

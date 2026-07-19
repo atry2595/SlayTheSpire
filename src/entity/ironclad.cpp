@@ -455,7 +455,7 @@ void ironclad::potion_list_remove(abstractPotion* pot){
 }
 
 
-void ironclad::draw_potion(drinkPotionInfo& pot) {
+void ironclad::drink_potion(drinkPotionInfo& pot) {
     if (abstractPotion::lock) return;
     if (pot.potion->playable() == false) return;
 

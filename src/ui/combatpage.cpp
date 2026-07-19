@@ -22,7 +22,7 @@ CombatPage::CombatPage(QWidget *parent, combat_manager* m, ironclad* plyr)
     , player(plyr)
     , eve(m->get_event())
 {
-    tmpl = cardTemplate::legend;
+    tmpl = cardTemplate::common;
 
     //----------------------------------------------------
     combatView = new QGraphicsView(this);
@@ -98,6 +98,8 @@ CombatPage::CombatPage(QWidget *parent, combat_manager* m, ironclad* plyr)
     connect(eve, &combatEvent::cardPressed, this, &CombatPage::card_pressed);
     connect(eve, &combatEvent::cardMoved, this, &CombatPage::card_moved);
     connect(eve, &combatEvent::cardReleased, this, &CombatPage::card_released);
+    connect(eve, &combatEvent::potionMoved, this, &CombatPage::potion_moved);
+    connect(eve, &combatEvent::potionReleased, this, &CombatPage::potion_released);
     connect(eve, &combatEvent::cardUpdated, this, &CombatPage::card_updated);
     // connect(eve, &combatEvent::entityUpdate, this, &CombatPage::entity_update);
     connect(eve, &combatEvent::entity_escape, this, &CombatPage::escape_entity);
@@ -165,7 +167,7 @@ void CombatPage::initialize_layout() {
 
     qreal x = players_margine_width;
     for (auto item : manager->get_players())  {
-        auto p = new IroncladItem(item, {x, 565 - getEntityVisual(item->get_ID()).size.height()}, 100);
+        auto p = new IroncladItem(eve, item, {x, 565 - getEntityVisual(item->get_ID()).size.height()}, 300);
         players.push_back(p);
         combatScene->addItem(p->getParent());
         x += getEntityVisual(item->get_ID()).size.width() + players_margine_width;
@@ -463,7 +465,7 @@ void CombatPage::cardMovePile(abstractCard* card, PileType from, PileType to) {
             delete img;
         });
     }
-//------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------
     if (created_cards.find(card) != created_cards.end())
         created_cards[card]->updateCard();
     draw_pile->setText(QString::number(player->get_draw_pile().size()));
@@ -499,7 +501,7 @@ void CombatPage::card_moved(CardParent* card, const QPointF& pos) {
                 entity_corner_effect[item->getSource()]->EntranceEffect();
             }
             else if (!item->getParent()->contains(item->getParent()->mapFromScene(pos))
-                && entity_corner_effect[item->getSource()]->getVisisble() == true) {
+                     && entity_corner_effect[item->getSource()]->getVisisble() == true) {
                 entity_corner_effect[item->getSource()]->ExitEffect();
             }
         }
@@ -509,7 +511,7 @@ void CombatPage::card_moved(CardParent* card, const QPointF& pos) {
     case TargetType::enemies: {
         if (pos.y() < 650) {
             for (auto item : enemies) {
-            if (item->getSource()->get_hp() <= 0) continue;
+                if (item->getSource()->get_hp() <= 0) continue;
 
 
                 if (entity_corner_effect.find(item->getSource()) == entity_corner_effect.end()){
@@ -581,6 +583,7 @@ void CombatPage::card_moved(CardParent* card, const QPointF& pos) {
 
 }
 
+//============================================================
 
 void CombatPage::card_released(CardParent* card, const QPointF& pos) {
     for (auto item : entity_corner_effect) {
@@ -658,6 +661,192 @@ void CombatPage::card_released(CardParent* card, const QPointF& pos) {
         return;
     }
 }
+
+//============================================================
+
+void CombatPage::potion_moved(PotionParent* potion, const QPointF& pos) {
+
+    switch (potion->getSource()->get_target_type()) {
+    //--------------------------------------------------------------------------------------------
+    case TargetType::single_target: {
+
+        for (auto item : enemies) {
+            if (item->getSource()->get_hp() <= 0) continue;
+
+
+            if (entity_corner_effect.find(item->getSource()) == entity_corner_effect.end()){
+                auto img = item->getImage();
+                entity_corner_effect[item->getSource()] = new entityCornersFrame(img->scenePos(), img->size());
+                combatScene->addItem(entity_corner_effect[item->getSource()]->getParent());
+            }
+            if (item->getParent()->contains(item->getParent()->mapFromScene(pos))
+                && entity_corner_effect[item->getSource()]->getVisisble() == false) {
+                entity_corner_effect[item->getSource()]->EntranceEffect();
+            }
+            else if (!item->getParent()->contains(item->getParent()->mapFromScene(pos))
+                     && entity_corner_effect[item->getSource()]->getVisisble() == true) {
+                entity_corner_effect[item->getSource()]->ExitEffect();
+            }
+        }
+        break;
+    }
+    //--------------------------------------------------------------------------------------------
+    case TargetType::enemies: {
+        if (pos.x() > 600) {
+            for (auto item : enemies) {
+                if (item->getSource()->get_hp() <= 0) continue;
+
+
+                if (entity_corner_effect.find(item->getSource()) == entity_corner_effect.end()){
+                    auto img = item->getImage();
+                    entity_corner_effect[item->getSource()] = new entityCornersFrame(img->scenePos(), img->size());
+                    combatScene->addItem(entity_corner_effect[item->getSource()]->getParent());
+                }
+                if (entity_corner_effect[item->getSource()]->getVisisble() == false) {
+                    entity_corner_effect[item->getSource()]->EntranceEffect();
+                }
+            }
+        }
+        else {
+            for (auto item : enemies) {
+
+
+                if (entity_corner_effect.find(item->getSource()) == entity_corner_effect.end()){
+                    auto img = item->getImage();
+                    entity_corner_effect[item->getSource()] = new entityCornersFrame(img->scenePos(), img->size());
+                    combatScene->addItem(entity_corner_effect[item->getSource()]->getParent());
+                }
+                if (entity_corner_effect[item->getSource()]->getVisisble() == true) {
+                    entity_corner_effect[item->getSource()]->ExitEffect();
+                }
+            }
+        }
+        break;
+    }
+    //--------------------------------------------------------------------------------------------
+    case TargetType::self: {
+        if (player->get_hp() <= 0) break;
+
+        for (auto item : players) {
+            if (item->getParent()->contains(item->getParent()->mapFromScene(pos))
+                && item->getSource() == player) {
+
+                if (item->getSource()->get_hp() <= 0) continue;
+
+                if (entity_corner_effect.find(item->getSource()) == entity_corner_effect.end()){
+                    auto img = item->getImage();
+                    entity_corner_effect[item->getSource()] = new entityCornersFrame(img->scenePos(), img->size());
+                    combatScene->addItem(entity_corner_effect[item->getSource()]->getParent());
+                }
+                if (entity_corner_effect[item->getSource()]->getVisisble() == false) {
+                    entity_corner_effect[item->getSource()]->EntranceEffect();
+                }
+            }
+
+            else {
+                if (item->getSource() != player) continue;
+                if (item->getSource()->get_hp() <= 0) continue;
+
+                if (entity_corner_effect.find(item->getSource()) == entity_corner_effect.end()){
+                    auto img = item->getImage();
+                    entity_corner_effect[item->getSource()] = new entityCornersFrame(img->scenePos(), img->size());
+                    combatScene->addItem(entity_corner_effect[item->getSource()]->getParent());
+                }
+                if (entity_corner_effect[item->getSource()]->getVisisble() == true) {
+                    entity_corner_effect[item->getSource()]->ExitEffect();
+                }
+            }
+        }
+        break;
+    }
+    //--------------------------------------------------------------------------------------------
+    default:
+        break;
+    }
+
+}
+
+//============================================================
+
+void CombatPage::potion_released(PotionParent* potion, const QPointF& pos) {
+    for (auto item : entity_corner_effect) {
+        if (item.second->getVisisble()) item.second->ExitEffect();
+    }
+
+    if (potion->getSource()->playable() == false)
+    {
+        return;
+    }
+
+    switch (potion->getSource()->get_target_type()) {
+    //-----------------------------------------------------------------------------------------------
+    case TargetType::single_target: {
+        for (auto item : enemies) {
+            if (item->getSource()->get_hp() <= 0) continue;
+            if (item->getParent()->contains(item->getParent()->mapFromScene(pos))) {
+                drinkPotionInfo inf;
+                inf.potion = potion->getSource();
+                inf.owner = player;
+                inf.target_list = {item->getSource()};
+
+                game_action acts(eve);
+                player->drink_potion(inf);
+                bar->updateBar();
+                for (auto item : players) item->updateEntity();
+                for (auto item : enemies) item->updateEntity();
+
+                return;
+            }
+        }
+        break;
+    }
+    //-----------------------------------------------------------------------------------------------
+    case TargetType::enemies: {
+        if (pos.x() <= 600) break;
+        drinkPotionInfo inf;
+        inf.potion = potion->getSource();
+        inf.owner = player;
+        for (auto item : enemies) {
+            if (item->getSource()->get_hp() <= 0) continue;
+            inf.target_list.push_back(item->getSource());
+        }
+        game_action acts(eve);
+        player->drink_potion(inf);
+        bar->updateBar();
+        for (auto item : players) item->updateEntity();
+        for (auto item : enemies) item->updateEntity();
+        return;
+    }
+    //-----------------------------------------------------------------------------------------------
+    case TargetType::self: {
+        for (auto item : players) {
+            if (item->getParent()->contains(item->getParent()->mapFromScene(pos))
+                && item->getSource() == player) {
+                drinkPotionInfo inf;
+                inf.potion = potion->getSource();
+                inf.owner = player;
+
+                game_action acts(eve);
+                player->drink_potion(inf);
+                bar->updateBar();
+                for (auto item : players) {
+                    if (item->getSource()->get_hp() <= 0) continue;
+                    item->updateEntity();
+                }
+                for (auto item : enemies) {
+                    if (item->getSource()->get_hp() <= 0) continue;
+                    item->updateEntity();
+                }
+            }
+        }
+        return;
+    }
+    default:
+        return;
+    }
+}
+
+//============================================================
 
 void CombatPage::card_updated(abstractCard* card) {
     if (created_cards.find(card) != created_cards.end()){
