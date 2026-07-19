@@ -77,14 +77,17 @@ CombatPage::CombatPage(QWidget *parent, combat_manager* m, ironclad* plyr)
     discard_pile->setZValue(5500);
 
     bar = new CombatTopBar(eve, player);
+    relic_bar = new RelicBar(player->get_relic_list());
 
     combatScene->addItem(bg);
     combatScene->addItem(draw_pile);
     combatScene->addItem(discard_pile);
     combatScene->addItem(bar->getParent());
+    combatScene->addItem(relic_bar->getParent());
 
     draw_pile->setText(QString::number(player->get_deck().size()));
     discard_pile->setText(QString::number(player->get_discard_pile().size()));
+
     //----------------------------------------------------
 
     start_combat();
@@ -605,6 +608,7 @@ void CombatPage::card_released(CardParent* card, const QPointF& pos) {
 
                 game_action acts(eve);
                 player->play_card(inf);
+                bar->updateBar();
                 for (auto item : players) item->updateEntity();
                 for (auto item : enemies) item->updateEntity();
 
@@ -625,6 +629,7 @@ void CombatPage::card_released(CardParent* card, const QPointF& pos) {
         }
         game_action acts(eve);
         player->play_card(inf);
+        bar->updateBar();
         for (auto item : players) item->updateEntity();
         for (auto item : enemies) item->updateEntity();
         return;
@@ -638,6 +643,7 @@ void CombatPage::card_released(CardParent* card, const QPointF& pos) {
 
         game_action acts(eve);
         player->play_card(inf);
+        bar->updateBar();
         for (auto item : players) {
             if (item->getSource()->get_hp() <= 0) continue;
             item->updateEntity();
@@ -662,6 +668,7 @@ void CombatPage::card_updated(abstractCard* card) {
 
 void CombatPage::entity_update(abstractEntity* entity) {
 
+    bar->updateBar();
     for (auto item : players){
         if (item->getSource() == entity) item->updateEntity();
     }
@@ -678,6 +685,7 @@ void CombatPage::after_attack(attackResult& res) {
         if (enmy->getSource() == res.info.attacker) {
             enqueue([=]{
                 enmy->getParent()->activeAttackAnimation();
+                bar->updateBar();
                 enmy->updateEntity();
                 QTimer::singleShot(200, [this](){playNext();});
             });
@@ -713,6 +721,7 @@ void CombatPage::after_attack(attackResult& res) {
                     eff->EntranceEffect();
                     DamageParticleManager::spawn(combatScene, QPointF(prt_x, prt_y));
                     QTimer::singleShot(1, [this](){playNext();});
+                    bar->updateBar();
                     enmy->updateEntity();
                     QTimer::singleShot(5000, [=](){
                         delete eff;
@@ -742,6 +751,7 @@ void CombatPage::after_attack(attackResult& res) {
                     eff->EntranceEffect();
                     DamageParticleManager::spawn(combatScene, QPointF(prt_x, prt_y));
                     QTimer::singleShot(1, [this](){playNext();});
+                    bar->updateBar();
                     plyr->updateEntity();
                     QTimer::singleShot(5000, [=](){
                         delete eff;
@@ -761,6 +771,8 @@ void CombatPage::after_attack(attackResult& res) {
 
 
 void CombatPage::turn_start(abstractEntity*) {
+    for (auto item : created_cards) item.second->updateCard();
+    bar->updateBar();
     for (auto item : players) item->updateEntity();
     for (auto item : enemies) item->updateEntity();
     enqueue([this](){

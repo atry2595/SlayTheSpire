@@ -134,7 +134,6 @@
         <file alias="blood_vial.ico">assests/image/icon/relic/blood_vial.ico</file>
         <file alias="burning_blood.ico">assests/image/icon/relic/burning_blood.ico</file>
         <file alias="calling_bell.ico">assests/image/icon/relic/calling_bell.ico</file>
-        <file alias="capitans_wheel.ico">assests/image/icon/relic/capitans_wheel.ico</file>
         <file alias="centennial_puzzle.ico">assests/image/icon/relic/centennial_puzzle.ico</file>
         <file alias="cultist_headpiece.ico">assests/image/icon/relic/cultist_headpiece.ico</file>
         <file alias="cursed_key.ico">assests/image/icon/relic/cursed_key.ico</file>
@@ -162,7 +161,10 @@
         <file alias="tungsten_rod.ico">assests/image/icon/relic/tungsten_rod.ico</file>
         <file alias="vajra.ico">assests/image/icon/relic/vajra.ico</file>
         <file alias="velvet_choker.ico">assests/image/icon/relic/velvet_choker.ico</file>
-        <file alias="wraper_tongs.ico">assests/image/icon/relic/wraper_tongs.ico</file>
+        <file alias="captains_wheel.ico">assests/image/icon/relic/captains_wheel.ico</file>
+        <file alias="golden_idol.ico">assests/image/icon/relic/golden_idol.ico</file>
+        <file alias="spirit_poop.ico">assests/image/icon/relic/spirit_poop.ico</file>
+        <file alias="warped_tongs.ico">assests/image/icon/relic/warped_tongs.ico</file>
     </qresource>
     <qresource prefix="/icon/map">
         <file alias="elite.ico">assests/image/icon/map/elite.ico</file>

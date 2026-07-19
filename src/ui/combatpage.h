@@ -11,6 +11,7 @@
 #include "ui/effects/entitycornersframe.h"
 #include "ui/topbar/combattopbar.h"
 #include <queue>
+#include "ui/relicbar/relicbar.h"
 
 class CombatPage : public QWidget
 {
@@ -47,6 +48,7 @@ private:
     TextItem* draw_pile = nullptr;
 
     CombatTopBar* bar;
+    RelicBar* relic_bar;
 
     int enemies_scene_width = 0;
     int players_scene_width = 0;
@@ -61,6 +63,7 @@ private:
     bool queue_busy = false;
     void enqueue(std::function<void()> fnc);
     void playNext();
+
 
 private slots:
     void card_pressed(CardParent*) {};
