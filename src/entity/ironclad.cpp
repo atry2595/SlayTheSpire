@@ -7,8 +7,8 @@
 #include "items/relics/relicfactory.h"
 
 const std::vector<cardID> ironclad::starting_deck =
-    {cardID::whirlwind,
-     cardID::offering, cardID::strike, cardID::whirlwind, cardID::pommel_strike, cardID::bash};
+    {cardID::regret, cardID::shame, cardID::doubt, cardID::injury, cardID::pain,
+     cardID::clash, cardID::twin_strike, cardID::perfected_strike, cardID::defend, cardID::bash};
 
 abstractCard* ironclad::select_card(
     const std::vector<abstractCard*>& cards
@@ -258,8 +258,6 @@ void ironclad::draw_card(){
     c_info.owner = this;
 
     emit event->card_moved(c_info, PileType::draw, PileType::hand);
-
-    if (draw_pile.size() == 0) apply_discard_pile();
 
     draw_count++;
 }

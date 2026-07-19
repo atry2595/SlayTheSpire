@@ -33,6 +33,7 @@ protected:
     qreal zValue;
     qreal z_value_zone = 399;
 
+    bool locked = false;
 
     CardParent* card_parent = nullptr;
     ImageItem* card_frame = nullptr;

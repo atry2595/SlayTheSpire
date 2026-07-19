@@ -101,6 +101,12 @@ CombatPage::CombatPage(QWidget *parent, combat_manager* m, ironclad* plyr)
     connect(eve, &combatEvent::entity_removed, this, &CombatPage::died_entity);
     connect(eve, &combatEvent::afterAttack, this, &CombatPage::after_attack);
     connect(eve, &combatEvent::turn_started, this, &CombatPage::turn_start);
+    connect(eve, &combatEvent::resetLayout, this, [this](){
+        enqueue([this](){
+            reset_layout();
+            QTimer::singleShot(400, [this](){playNext();});
+        });
+    });
     //----------------------------------------------------
 }
 
@@ -757,4 +763,7 @@ void CombatPage::after_attack(attackResult& res) {
 void CombatPage::turn_start(abstractEntity*) {
     for (auto item : players) item->updateEntity();
     for (auto item : enemies) item->updateEntity();
+    enqueue([this](){
+        QTimer::singleShot(600, [this](){playNext();});
+    });
 }

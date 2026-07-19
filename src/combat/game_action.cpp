@@ -8,7 +8,7 @@ game_action::game_action(combatEvent* eve):event(eve) {}
 
 attackResult game_action::attack(attackInfo& info) {
 
-    if (info.attacker && info.attack_type == attackType::card) {
+    if (info.attacker) {
         info.attacker->modify_attack(info);
         emit event->attack_started(info);
     }

@@ -15,3 +15,8 @@ QString vulnerablePower::generate_description(){
     description = tr("Receive 50% more damage from Attacks for %1 turns.").arg(amount);
     return description;
 }
+
+
+void vulnerablePower::at_turn_end(game_action&) {
+    decrease();
+}

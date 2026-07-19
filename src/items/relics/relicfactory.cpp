@@ -35,6 +35,7 @@
 #include "helmet_of_the_cleric_relic.h"
 #include "gremlin_visage_relic.h"
 #include "golden_idol_relic.h"
+#include "spirit_poop_relic.h"
 
 abstractRelic* RelicFactory::createRelic(relicID id, abstractEntity* owner)
 {
@@ -123,9 +124,8 @@ abstractRelic* RelicFactory::createRelic(relicID id, abstractEntity* owner)
         return new gremlin_visage_relic(owner);
     case relicID::golden_idol:
         return new golden_idol_relic(owner);
-
-    default:
-        return nullptr;
+    case relicID::spirit_poop:
+        return new spirit_poop_relic(owner);
 
     }
 }

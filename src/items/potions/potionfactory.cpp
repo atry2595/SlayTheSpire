@@ -53,7 +53,5 @@ abstractPotion* PotionFactory::createPotion(potionID id, abstractEntity* owner)
     case potionID::cultist_potion:
         return new cultistPotion(owner);
 
-    default:
-        return nullptr;
     }
 }

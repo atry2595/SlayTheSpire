@@ -96,6 +96,8 @@ void looter::play_turn(playInfo& info){
 
     case (looter_move::escape):{
         emit info.actions.get_event()->entity_escape(this);
+        hp = 0;
+        gold = 0;
         emit info.actions.get_event()->entity_removed(this);
         return;
     }

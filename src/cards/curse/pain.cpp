@@ -30,7 +30,7 @@ void pain::base_upgrade(){
 
 void pain::hand_turn_start(playInfo& info) {
     play_card_connection = connect(info.actions.get_event(), &combatEvent::card_played, this,
-        [this, &info](playCardInfo& card) {
+        [this, info](playCardInfo& card) {
             if (card.owner == info.attacker){
                 damageInfo dmg;
                 dmg.damage = 1;

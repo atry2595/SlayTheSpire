@@ -63,7 +63,7 @@ void abstractEntityItem::escapeAnim() {
     animGr->addPause(100);
 
     qreal xpnt = 1700 - 2300 * (entity_source->get_ID() == entityID::ironclad);
-    animGr->addAnimation(entity_parent->createMoveAnimation({xpnt, entity_pos.y()}, 1000));
+    animGr->addAnimation(entity_parent->createMoveAnimation({xpnt, entity_pos.y()}, 600));
 
     connect(anim1, &QPropertyAnimation::finished, [this]{
         QTransform t;

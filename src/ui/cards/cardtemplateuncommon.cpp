@@ -106,42 +106,42 @@ CardTemplateUncommon::CardTemplateUncommon(combatEvent* eve, abstractCard* sourc
 void CardTemplateUncommon::updateCard() {
 
     //=================locked==============
-    if (card_source->get_turn_lock()) {
-        card_parent->setCanSelect(false);
-        card_parent->setCanHover(false);
+    // if (card_source->get_turn_lock()) {
+    //     card_parent->setCanSelect(false);
+    //     card_parent->setCanHover(false);
 
-        QParallelAnimationGroup* outAnim = new QParallelAnimationGroup();
-        QParallelAnimationGroup* inAnim = new QParallelAnimationGroup();
-        QSequentialAnimationGroup* gr = new QSequentialAnimationGroup();
+    //     QParallelAnimationGroup* outAnim = new QParallelAnimationGroup();
+    //     QParallelAnimationGroup* inAnim = new QParallelAnimationGroup();
+    //     QSequentialAnimationGroup* gr = new QSequentialAnimationGroup();
 
-        gr->addPause(500);
+    //     gr->addPause(500);
 
-        outAnim->addAnimation(card_parent->createMoveAnimation(
-            {card_pos + QPointF(0, card_size.height())}
-            , 350, QEasingCurve::OutSine));
+    //     outAnim->addAnimation(card_parent->createMoveAnimation(
+    //         {card_pos + QPointF(0, card_size.height())}
+    //         , 350, QEasingCurve::OutSine));
 
-        gr->addAnimation(outAnim);
-        connect(outAnim, &QPropertyAnimation::finished, this, [this]() {
-            card_frame->setPixmap(QPixmap(":/image/cards/back/back1.png"));
-            card_image->clearPixmap();
-            card_cost->clearText();
-            card_category->clearText();
-            card_name->clearText();
-            card_description->clearText();
-            card_parent->setZValue(card_parent->zValue() - z_value_zone);
-        });
+    //     gr->addAnimation(outAnim);
+    //     connect(outAnim, &QPropertyAnimation::finished, this, [this]() {
+    //         card_frame->setPixmap(QPixmap(":/image/cards/back/back1.png"));
+    //         card_image->clearPixmap();
+    //         card_cost->clearText();
+    //         card_category->clearText();
+    //         card_name->clearText();
+    //         card_description->clearText();
+    //         card_parent->setZValue(card_parent->zValue() - z_value_zone);
+    //     });
 
 
 
-        inAnim->addAnimation(card_parent->createMoveAnimation(
-            {card_pos}
-            , 350, QEasingCurve::InSine));
+    //     inAnim->addAnimation(card_parent->createMoveAnimation(
+    //         {card_pos}
+    //         , 350, QEasingCurve::InSine));
 
-        gr->addAnimation(inAnim);
+    //     gr->addAnimation(inAnim);
 
-        gr->start();
+    //     gr->start();
 
-    }
+    // }
     //=================locked==============
 
 
@@ -150,7 +150,11 @@ void CardTemplateUncommon::updateCard() {
     if (card_source->repeat_x_time()){
         card_cost->setText("X");
     }
-    if (card_source->get_available()){
+    if (card_source->get_turn_playable() == false) {
+        card_cost->setColor(Qt::red);
+        card_cost->setText("-");
+    }
+    else if (card_source->get_available() && !card_source->get_turn_lock()){
         if (card_source->get_upgraded()) card_cost->setColor(Qt::green);
         else card_cost->setColor(Qt::white);
     }

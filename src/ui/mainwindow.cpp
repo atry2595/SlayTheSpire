@@ -2,9 +2,8 @@
 #include "ui_mainwindow.h"
 #include "combatpage.h"
 #include "entity/ironclad.h"
-#include "entity/spheric_guardian.h"
-#include "entity/small_slime.h"
-#include "entity/green_louse.h"
+#include "entity/the_champ.h"
+#include  "entity/small_slime.h"
 #include "combat/combat_event.h"
 #include "combat/game_action.h"
 #include "items/potions/potionfactory.h"
@@ -21,10 +20,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     auto pl = new ironclad(eve);
     pl->potion_list_add(PotionFactory::createPotion(potionID::block_potion, pl));
-    auto en1 = small_slime::create(acts);
+    auto en1 = the_champ::create(acts);
     auto en2 = small_slime::create(acts);
-    auto en3 = small_slime::create(acts);
-    combat_manager* com = new combat_manager({pl}, {en1, en2, en3}, entityType::monster, eve);
+    combat_manager* com = new combat_manager({pl}, {en1, en2}, entityType::monster, eve);
     auto cp = new CombatPage(nullptr, com, pl);
 
 

@@ -139,7 +139,9 @@ void large_slime::play_turn(playInfo& info){
 
         info.actions.get_event()->entity_add_before(ms1, this);
         info.actions.get_event()->entity_add_after(ms2, this);
-        info.actions.get_event()->entity_removed(this);
+        hp = 0;
+        emit info.actions.get_event()->entity_removed(this);
+        emit info.actions.get_event()->resetLayout();
         return;
     }
 

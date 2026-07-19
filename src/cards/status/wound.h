@@ -21,7 +21,7 @@ public:
     cardID get_card_id() override { return cardID::wound; }
     bool is_rare() override { return false; }
 
-    TargetType get_target_type() override { return TargetType::self; }
+    TargetType get_target_type() override { return TargetType::none; }
 };
 
 #endif // WOUND_H

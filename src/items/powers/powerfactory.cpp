@@ -18,6 +18,7 @@
 #include "strengthpower.h"
 #include "vulnerablePower.h"
 #include "weakpower.h"
+#include "thieverypower.h"
 
 abstractPower* PowerFactory::createPower(powerID id, abstractEntity* owner, int amount)
 {
@@ -41,8 +42,7 @@ abstractPower* PowerFactory::createPower(powerID id, abstractEntity* owner, int 
     case powerID::strength:       return new strengthPower(owner, amount);
     case powerID::vulnerable:     return new vulnerablePower(owner, amount);
     case powerID::weak:           return new weakPower(owner, amount);
+    case powerID::thievery:       return new thieveryPower(owner, amount);
 
-    default:
-        return nullptr;
     }
 }

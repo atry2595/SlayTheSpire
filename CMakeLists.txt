@@ -572,6 +572,9 @@ add_executable(SlayTheSpire
     src/ui/effects/damageeffect.h src/ui/effects/damageeffect.cpp
     src/ui/effects/DamageParticleManager.h src/ui/effects/DamageParticleManager.cpp
     src/ui/topbar/combattopbar.h src/ui/topbar/combattopbar.cpp
+    src/items/relics/spirit_poop_relic.cpp src/items/relics/spirit_poop_relic.h
+    src/ui/relicbar/relicbar.h src/ui/relicbar/relicbar.cpp
+    src/ui/relicbar/getRelicImage.h
 )
 
 target_include_directories(SlayTheSpire PRIVATE

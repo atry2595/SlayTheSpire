@@ -67,6 +67,7 @@ signals:
     void cardUpdated(abstractCard*);
     void entityUpdate(abstractEntity*);
     void afterAttack(attackResult&);
+    void resetLayout();
 
 };
 

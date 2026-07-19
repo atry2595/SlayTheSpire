@@ -89,7 +89,7 @@ void jaw_worm::play_turn(playInfo& info){
         int effect_number = 3;
         int block_number = 6;
 
-        abstractPower* np = PowerFactory::createPower(powerID::ritual, info.attacker, effect_number);
+        abstractPower* np = PowerFactory::createPower(powerID::strength, info.attacker, effect_number);
         info.attacker->add_power(info.actions, np);
 
         perform_block(info, block_number);

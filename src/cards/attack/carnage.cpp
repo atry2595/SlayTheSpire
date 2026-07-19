@@ -1,7 +1,7 @@
 #include "carnage.h"
 
 carnage::carnage()
-    :abstractAttackCard(tr("carnage"), "", 1, 20, false, false, true, false)
+    :abstractAttackCard(tr("carnage"), "", 2, 20, false, false, true, false)
 {
     QString s;
     s += tr("Deal %1 damage.").arg(damage);
