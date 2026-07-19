@@ -131,6 +131,9 @@ color: white;</string>
        </item>
        <item>
         <widget class="QLineEdit" name="passwordLineEdit">
+         <property name="layoutDirection">
+          <enum>Qt::LayoutDirection::LeftToRight</enum>
+         </property>
          <property name="echoMode">
           <enum>QLineEdit::EchoMode::Password</enum>
          </property>

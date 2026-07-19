@@ -1,26 +1,56 @@
 #include "forgotpasswordpage.h"
 #include "ui_forgotpasswordpage.h"
 #include <QMessageBox>
+#include <QAction>
+#include <QIcon>
+#include <QLineEdit>
 
 ForgotPasswordPage::ForgotPasswordPage(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::ForgotPasswordPage)
 {
     ui->setupUi(this);
-    connect(ui->emailLineEdit,
-            &QLineEdit::returnPressed,
-            ui->changePasswordButton,
-            &QPushButton::click);
 
-    connect(ui->newPasswordLineEdit,
-            &QLineEdit::returnPressed,
-            ui->changePasswordButton,
-            &QPushButton::click);
+    QAction *passwordEyeAction = ui->newPasswordLineEdit->addAction(
+        QIcon(":/icon/login/eye_off.svg"),
+        QLineEdit::TrailingPosition);
 
-    connect(ui->confirmPasswordLineEdit,
-            &QLineEdit::returnPressed,
-            ui->changePasswordButton,
-            &QPushButton::click);
+    connect(passwordEyeAction, &QAction::triggered, this,
+            [this, passwordEyeAction]()
+            {
+                if(ui->newPasswordLineEdit->echoMode() == QLineEdit::Password)
+                {
+                    ui->newPasswordLineEdit->setEchoMode(QLineEdit::Normal);
+                    passwordEyeAction->setIcon(QIcon(":/icon/login/eye.svg"));
+                }
+                else
+                {
+                    ui->newPasswordLineEdit->setEchoMode(QLineEdit::Password);
+                    passwordEyeAction->setIcon(QIcon(":/icon/login/eye_off.svg"));
+                }
+            });
+
+
+
+    QAction *confirmEyeAction = ui->confirmPasswordLineEdit->addAction(
+        QIcon(":/icon/login/eye_off.svg"),
+        QLineEdit::TrailingPosition);
+
+    connect(confirmEyeAction, &QAction::triggered, this,
+            [this, confirmEyeAction]()
+            {
+                if(ui->confirmPasswordLineEdit->echoMode() == QLineEdit::Password)
+                {
+                    ui->confirmPasswordLineEdit->setEchoMode(QLineEdit::Normal);
+                    confirmEyeAction->setIcon(QIcon(":/icon/login/eye.svg"));
+                }
+                else
+                {
+                    ui->confirmPasswordLineEdit->setEchoMode(QLineEdit::Password);
+                    confirmEyeAction->setIcon(QIcon(":/icon/login/eye_off.svg"));
+                }
+            });
+
 }
 
 ForgotPasswordPage::~ForgotPasswordPage()

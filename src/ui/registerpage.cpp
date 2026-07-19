@@ -1,31 +1,56 @@
 #include "registerpage.h"
 #include "ui_registerpage.h"
 #include <QMessageBox>
+#include <QAction>
+#include <QIcon>
+#include <QLineEdit>
 
 RegisterPage::RegisterPage(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::RegisterPage)
 {
     ui->setupUi(this);
-    connect(ui->usernameLineEdit,
-            &QLineEdit::returnPressed,
-            ui->signUpButton,
-            &QPushButton::click);
 
-    connect(ui->emailLineEdit,
-            &QLineEdit::returnPressed,
-            ui->signUpButton,
-            &QPushButton::click);
+    QAction *passwordEyeAction = ui->passwordLineEdit->addAction(
+        QIcon(":/icon/login/eye_off.svg"),
+        QLineEdit::TrailingPosition);
 
-    connect(ui->passwordLineEdit,
-            &QLineEdit::returnPressed,
-            ui->signUpButton,
-            &QPushButton::click);
+    connect(passwordEyeAction, &QAction::triggered, this,
+            [this, passwordEyeAction]()
+            {
+                if(ui->passwordLineEdit->echoMode() == QLineEdit::Password)
+                {
+                    ui->passwordLineEdit->setEchoMode(QLineEdit::Normal);
+                    passwordEyeAction->setIcon(QIcon(":/icon/login/eye.svg"));
+                }
+                else
+                {
+                    ui->passwordLineEdit->setEchoMode(QLineEdit::Password);
+                    passwordEyeAction->setIcon(QIcon(":/icon/login/eye_off.svg"));
+                }
+            });
 
-    connect(ui->confirmPasswordLineEdit,
-            &QLineEdit::returnPressed,
-            ui->signUpButton,
-            &QPushButton::click);
+
+
+    QAction *confirmEyeAction = ui->confirmPasswordLineEdit->addAction(
+        QIcon(":/icon/login/eye_off.svg"),
+        QLineEdit::TrailingPosition);
+
+    connect(confirmEyeAction, &QAction::triggered, this,
+            [this, confirmEyeAction]()
+            {
+                if(ui->confirmPasswordLineEdit->echoMode() == QLineEdit::Password)
+                {
+                    ui->confirmPasswordLineEdit->setEchoMode(QLineEdit::Normal);
+                    confirmEyeAction->setIcon(QIcon(":/icon/login/eye.svg"));
+                }
+                else
+                {
+                    ui->confirmPasswordLineEdit->setEchoMode(QLineEdit::Password);
+                    confirmEyeAction->setIcon(QIcon(":/icon/login/eye_off.svg"));
+                }
+            });
+
 }
 
 RegisterPage::~RegisterPage()
