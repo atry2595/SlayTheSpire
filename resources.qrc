@@ -336,5 +336,8 @@
         <file alias="left_button.png">assests/image/icon/left_button.png</file>
         <file alias="right_button.png">assests/image/icon/right_button.png</file>
         <file alias="error.png">assests/image/icon/error.png</file>
+    <qresource prefix="/icon/login">
+        <file alias="eye.svg">assests/image/icon/login/eye.svg</file>
+        <file alias="eye_off.svg">assests/image/icon/login/eye_off.svg</file>
     </qresource>
 </RCC>
