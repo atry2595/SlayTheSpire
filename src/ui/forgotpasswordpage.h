@@ -22,6 +22,25 @@ private:
     Ui::ForgotPasswordPage *ui;
     FileManager *fileManager = nullptr;
 
+    void showEmailError(const QString &message);
+    void showPasswordError(const QString &message);
+    void showConfirmPasswordError(const QString &message);
+    void showSuccess(const QString &message);
+
+    void clearErrors();
+
+    void setEmailNormalStyle();
+    void setEmailErrorStyle();
+
+    void setPasswordNormalStyle();
+    void setPasswordErrorStyle();
+
+    void setConfirmPasswordNormalStyle();
+    void setConfirmPasswordErrorStyle();
+
+    QAction *passwordEyeAction;
+    QAction *confirmEyeAction;
+
 signals:
     void openLoginPage();
 private slots:
