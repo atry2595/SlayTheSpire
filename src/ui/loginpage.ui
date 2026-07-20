@@ -307,6 +307,13 @@ QPushButton:hover{
        </item>
        <item>
         <widget class="QLabel" name="successLabel">
+         <property name="styleSheet">
+          <string notr="true">QLabel{
+    color: #39d353;
+    font-size: 16px;
+    font-weight: bold;
+}</string>
+         </property>
          <property name="text">
           <string>TextLabel</string>
          </property>

@@ -51,6 +51,21 @@ ForgotPasswordPage::ForgotPasswordPage(QWidget *parent)
                 }
             });
 
+    connect(ui->emailLineEdit,
+            &QLineEdit::returnPressed,
+            ui->changePasswordButton,
+            &QPushButton::click);
+
+    connect(ui->newPasswordLineEdit,
+            &QLineEdit::returnPressed,
+            ui->changePasswordButton,
+            &QPushButton::click);
+
+    connect(ui->confirmPasswordLineEdit,
+            &QLineEdit::returnPressed,
+            ui->changePasswordButton,
+            &QPushButton::click);
+
 }
 
 ForgotPasswordPage::~ForgotPasswordPage()
