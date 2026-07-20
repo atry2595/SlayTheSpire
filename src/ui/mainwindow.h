@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 #include <QStackedWidget>
 #include "loginpage.h"
+#include "core/menu/menu.h"
 #include <QMainWindow>
 #include <QStackedWidget>
 
