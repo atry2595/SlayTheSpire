@@ -1,6 +1,5 @@
 #include "registerpage.h"
 #include "ui_registerpage.h"
-#include <QMessageBox>
 #include <QAction>
 #include <QIcon>
 #include <QLineEdit>
@@ -27,7 +26,7 @@ RegisterPage::RegisterPage(QWidget *parent)
         QLineEdit::TrailingPosition);
 
     connect(passwordEyeAction, &QAction::triggered, this,
-            [this, passwordEyeAction]()
+            [this]()
             {
                 if(ui->passwordLineEdit->echoMode() == QLineEdit::Password)
                 {
@@ -72,7 +71,7 @@ RegisterPage::RegisterPage(QWidget *parent)
         QLineEdit::TrailingPosition);
 
     connect(confirmEyeAction, &QAction::triggered, this,
-            [this, confirmEyeAction]()
+            [this]()
             {
                 if(ui->confirmPasswordLineEdit->echoMode() == QLineEdit::Password)
                 {
@@ -231,7 +230,7 @@ void RegisterPage::on_signUpButton_clicked()
     {
         showSuccess("Registration completed successfully.");
 
-        QTimer::singleShot(1000, this,
+        QTimer::singleShot(2000, this,
                            [this]()
                            {
                                clearFields();

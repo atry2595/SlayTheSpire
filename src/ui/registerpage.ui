@@ -391,6 +391,13 @@ QLineEdit:focus {
         </widget>
        </item>
        <item>
+        <widget class="QPushButton" name="loginButton">
+         <property name="text">
+          <string>Login</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QLabel" name="successLabel">
          <property name="styleSheet">
           <string notr="true">QLabel{
@@ -404,13 +411,6 @@ QLineEdit:focus {
          </property>
          <property name="wordWrap">
           <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="loginButton">
-         <property name="text">
-          <string>Login</string>
          </property>
         </widget>
        </item>
