@@ -113,6 +113,10 @@ void LoginPage::setUsernameNormalStyle()
         "border:2px solid #8c8c8c;"
         "}"
         );
+    ui->username->setStyleSheet(
+        "color:white;"
+        "font-size:16px;"
+        "font-weight:600;");
 }
 
 void LoginPage::setUsernameErrorStyle()
@@ -130,6 +134,10 @@ void LoginPage::setUsernameErrorStyle()
         "border:2px solid red;"
         "}"
         );
+    ui->username->setStyleSheet(
+        "color:red;"
+        "font-size:16px;"
+        "font-weight:600;");
 }
 
 void LoginPage::setPasswordNormalStyle()
@@ -147,6 +155,10 @@ void LoginPage::setPasswordNormalStyle()
         "border:2px solid #8c8c8c;"
         "}"
         );
+    ui->Password->setStyleSheet(
+        "color:white;"
+        "font-size:16px;"
+        "font-weight:600;");
 }
 
 void LoginPage::setPasswordErrorStyle()
@@ -164,6 +176,10 @@ void LoginPage::setPasswordErrorStyle()
         "border:2px solid red;"
         "}"
         );
+    ui->Password->setStyleSheet(
+        "color:red;"
+        "font-size:16px;"
+        "font-weight:600;");
 }
 
 void LoginPage::showUsernameError(const QString &message)
@@ -234,6 +250,7 @@ void LoginPage::on_loginButton_clicked()
         return;
     }
 
-    showPasswordError("Invalid username or password.");
+    ui->passwordErrorLabel->setText("Invalid username or password.");
+    ui->passwordErrorLabel->show();
 }
 

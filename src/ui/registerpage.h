@@ -45,6 +45,15 @@ private:
     void clearPasswordError();
     void clearConfirmPasswordError();
 
+    void setPasswordNormalStyle();
+    void setPasswordErrorStyle();
+
+    void setEmailNormalStyle();
+    void setEmailErrorStyle();
+
+    void setConfirmPasswordNormalStyle();
+    void setConfirmPasswordErrorStyle();
+
     void clearErrors();
 
 
