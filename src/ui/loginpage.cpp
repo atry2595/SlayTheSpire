@@ -220,15 +220,22 @@ void LoginPage::on_loginButton_clicked()
     QString password = ui->passwordLineEdit->text();
     clearErrors();
 
+    bool hasError = false;
+
     if(username.isEmpty())
     {
         showUsernameError("Please enter your username.");
-        return;
+        hasError = true;
     }
 
     if(password.isEmpty())
     {
         showPasswordError("Please enter your password.");
+        hasError = true;
+    }
+
+    if(hasError)
+    {
         return;
     }
 
