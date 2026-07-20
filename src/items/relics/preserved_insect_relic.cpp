@@ -28,3 +28,7 @@ void preserved_insect_relic::added_time(game_action& actions){
         }
     });
 }
+
+QString preserved_insect_relic::get_story() {
+    return (QObject::tr("The Preserved Insect in its amber resin, sucked dry and glistening for centuries, still holds the echo of its wings frozen in crystal.\nEvery time battle peaks, it's unleashed, as if time itself sprouts wings to catch the enemy off guard."));
+}

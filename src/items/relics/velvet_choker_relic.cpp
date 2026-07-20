@@ -35,3 +35,7 @@ void velvet_choker_relic::added_time(game_action& actions){
             }
     });
 }
+
+QString velvet_choker_relic::get_story() {
+    return (QObject::tr("The Velvet Choker wraps soft and seductive around the neck, like a caress that tightens the breath.\nEach time the traveler whispers a spell, the velvet constricts, a reminder that every word of power comes at the suffocation of another."));
+}

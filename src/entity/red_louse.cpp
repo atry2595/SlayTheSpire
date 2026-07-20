@@ -81,3 +81,7 @@ void red_louse::play_turn(playInfo& info){
     enemy_turn++;
     choose_move();
 }
+
+QString red_louse::get_story() {
+    return (QObject::tr("The Red Louse curls into a tight, spiked ball, bristles locking like a shield.\nIn that thorny cocoon it pauses, dreaming of becoming a great beast, unaware it will never grow larger than the Spire's floor."));
+}

@@ -93,6 +93,28 @@
         <file alias="ironclad4.png">assests/image/characters/ironclad4.png</file>
         <file alias="ironclad5.png">assests/image/characters/ironclad5.png</file>
     </qresource>
+    <qresource prefix="/image/characters/1x1">
+        <file alias="blue_slaver.png">assests/image/characters/1x1/blue_slaver.png</file>
+        <file alias="book_of_stabbing.png">assests/image/characters/1x1/book_of_stabbing.png</file>
+        <file alias="cultist.png">assests/image/characters/1x1/cultist.png</file>
+        <file alias="green_louse.png">assests/image/characters/1x1/green_louse.png</file>
+        <file alias="gremlin_nob.png">assests/image/characters/1x1/gremlin_nob.png</file>
+        <file alias="hexaghost.png">assests/image/characters/1x1/hexaghost.png</file>
+        <file alias="jaw_worm.png">assests/image/characters/1x1/jaw_worm.png</file>
+        <file alias="king_slime.png">assests/image/characters/1x1/king_slime.png</file>
+        <file alias="large_slime.png">assests/image/characters/1x1/large_slime.png</file>
+        <file alias="looter.png">assests/image/characters/1x1/looter.png</file>
+        <file alias="medium_slime.png">assests/image/characters/1x1/medium_slime.png</file>
+        <file alias="mugger.png">assests/image/characters/1x1/mugger.png</file>
+        <file alias="red_louse.png">assests/image/characters/1x1/red_louse.png</file>
+        <file alias="red_slaver.png">assests/image/characters/1x1/red_slaver.png</file>
+        <file alias="sentry.png">assests/image/characters/1x1/sentry.png</file>
+        <file alias="small_slime.png">assests/image/characters/1x1/small_slime.png</file>
+        <file alias="spheric_guardian.png">assests/image/characters/1x1/spheric_guardian.png</file>
+        <file alias="taskmaster.png">assests/image/characters/1x1/taskmaster.png</file>
+        <file alias="the_champ.png">assests/image/characters/1x1/the_champ.png</file>
+        <file alias="ironclad1.png">assests/image/characters/1x1/ironclad1.png</file>
+    </qresource>
     <qresource prefix="/icon/buff">
         <file alias="dexterity.ico">assests/image/icon/buff/dexterity.ico</file>
         <file alias="frail.ico">assests/image/icon/buff/frail.ico</file>

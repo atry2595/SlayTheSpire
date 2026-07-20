@@ -14,6 +14,7 @@ public:
     relicRarity get_rarity() override { return relicRarity::boss; }
 
     void added_time(game_action&) override;
+    QString get_story() override;
 };
 
 #endif // SOZU_RELIC_H

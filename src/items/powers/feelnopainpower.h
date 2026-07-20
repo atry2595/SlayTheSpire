@@ -14,6 +14,7 @@ public:
     void added_time(game_action&) override;
     QString generate_description() override;
     powerID get_id() override { return powerID::feel_no_pain; }
+    QString get_story() override;
 };
 
 #endif // FEELNOPAINPOWER_H

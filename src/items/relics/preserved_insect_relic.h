@@ -15,6 +15,7 @@ public:
     relicRarity get_rarity() override { return relicRarity::common; }
 
     void added_time(game_action&) override;
+    QString get_story() override;
 };
 
 #endif // PRESERVED_INSECT_RELIC_H

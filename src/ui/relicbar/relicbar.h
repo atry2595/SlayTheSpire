@@ -4,16 +4,19 @@
 #include <QObject>
 #include "ui/imageitem.h"
 #include "items/relics/abstractrelic.h"
+#include "relicparent.h"
 
 class RelicBar : public QObject
 {
     Q_OBJECT
 
-    std::vector<ImageItem*> rlcs_image;
     BaseItem* parent = nullptr;
 
+    std::vector<RelicParent*> rlcs_parents;
+    std::vector<ImageItem*> rlcs_image;
+
 public:
-    RelicBar(std::vector<abstractRelic*>);
+    RelicBar(combatEvent* event, std::vector<abstractRelic*>);
 
     BaseItem* getParent() { return parent; }
 };

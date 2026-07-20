@@ -40,3 +40,7 @@ void black_star_relic::added_time(game_action& actions){
         }
     });
 }
+
+QString black_star_relic::get_story() {
+    return (QObject::tr("The Black Star, a diamond from the heart of pure night, gives no light—only consumes.\nBut in exchange for this hungry darkness, the Spire's elite graves grow more generous, as if death itself fills its pockets deeper for this gem."));
+}

@@ -77,7 +77,7 @@ CombatPage::CombatPage(QWidget *parent, combat_manager* m, ironclad* plyr)
     discard_pile->setZValue(5500);
 
     bar = new CombatTopBar(eve, player);
-    relic_bar = new RelicBar(player->get_relic_list());
+    relic_bar = new RelicBar(eve, player->get_relic_list());
 
     combatScene->addItem(bg);
     combatScene->addItem(draw_pile);
@@ -112,6 +112,10 @@ CombatPage::CombatPage(QWidget *parent, combat_manager* m, ironclad* plyr)
             QTimer::singleShot(400, [this](){playNext();});
         });
     });
+    connect(eve, &combatEvent::entityRightButton, this, &CombatPage::entity_right_click);
+    connect(eve, &combatEvent::potionRightButton, this, &CombatPage::potion_right_click);
+    connect(eve, &combatEvent::relicRightButton, this, &CombatPage::relic_right_click);
+    connect(eve, &combatEvent::powerRightButton, this, &CombatPage::power_right_click);
     //----------------------------------------------------
 }
 
@@ -175,7 +179,7 @@ void CombatPage::initialize_layout() {
 
     x += enemies_margine_width;
     for (auto item : manager->get_enemies())  {
-        auto p = new EnemyItem(item, {x, 565 - getEntityVisual(item->get_ID()).size.height()}, 200);
+        auto p = new EnemyItem(eve, item, {x, 565 - getEntityVisual(item->get_ID()).size.height()}, 200);
         enemies.push_back(p);
         combatScene->addItem(p->getParent());
         x += getEntityVisual(item->get_ID()).size.width() + enemies_margine_width;
@@ -205,7 +209,7 @@ void CombatPage::reset_layout() {
 
     for (int i = 0; i < manager->get_enemies().size(); i++){
         if (manager->get_enemy_is_alive()[i]){
-            auto p = new EnemyItem(manager->get_enemies()[i], {x, 565 - getEntityVisual(manager->get_enemies()[i]->get_ID()).size.height()}, 200);
+            auto p = new EnemyItem(eve, manager->get_enemies()[i], {x, 565 - getEntityVisual(manager->get_enemies()[i]->get_ID()).size.height()}, 200);
             enemies.push_back(p);
             combatScene->addItem(p->getParent());
             x += getEntityVisual(manager->get_enemies()[i]->get_ID()).size.width() + margine;
@@ -967,4 +971,29 @@ void CombatPage::turn_start(abstractEntity*) {
     enqueue([this](){
         QTimer::singleShot(600, [this](){playNext();});
     });
+}
+//==========================================================
+
+void CombatPage::entity_right_click(abstractEntity* ent) {
+    info_bar = new CombatInfoBar(ent);
+    combatScene->addItem(info_bar->getParent());
+    info_bar->Entrance();
+}
+
+void CombatPage::potion_right_click(abstractPotion* ent) {
+    info_bar = new CombatInfoBar(ent);
+    combatScene->addItem(info_bar->getParent());
+    info_bar->Entrance();
+}
+
+void CombatPage::relic_right_click(abstractRelic* ent) {
+    info_bar = new CombatInfoBar(ent);
+    combatScene->addItem(info_bar->getParent());
+    info_bar->Entrance();
+}
+
+void CombatPage::power_right_click(abstractPower* ent) {
+    info_bar = new CombatInfoBar(ent);
+    combatScene->addItem(info_bar->getParent());
+    info_bar->Entrance();
 }

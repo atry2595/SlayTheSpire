@@ -11,6 +11,8 @@ PotionParent::PotionParent(combatEvent* eve,
     event(eve),
     hover_z(z)
 {
+    setAcceptedMouseButtons(Qt::RightButton | Qt::LeftButton);
+
     if (can_hover || can_select) {
         setFlag(QGraphicsItem::ItemIsMovable, true);
     }
@@ -37,12 +39,15 @@ PotionParent::PotionParent(combatEvent* eve,
 
 void PotionParent::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+    QGraphicsObject::mousePressEvent(event);
     if (can_select && can_hover){
         refreshTargetPos();
         hoverEnterEvent(nullptr);
         emit this->event->potionPressed(this);
     }
-    QGraphicsObject::mousePressEvent(event);
+    if (event->button() == Qt::RightButton){
+        emit PotionParent::event->potionRightButton(source);
+    }
 
 }
 

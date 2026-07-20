@@ -15,6 +15,7 @@ public:
     relicRarity get_rarity() override { return relicRarity::starter; }
 
     void at_combat_end(game_action&) override;
+    QString get_story() override;
 };
 
 #endif // BURNING_BLOOD_RELIC_H

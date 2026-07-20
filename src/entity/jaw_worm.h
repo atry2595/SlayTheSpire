@@ -23,6 +23,7 @@ public:
 
     void choose_move() override;
     void play_turn(playInfo&)  override;
+    QString get_story() override;
 };
 
 #endif // JAW_WORM_H

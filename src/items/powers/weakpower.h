@@ -12,6 +12,7 @@ public:
     void at_turn_end(game_action&) override;
     QString generate_description() override;
     powerID get_id() override { return powerID::weak; }
+    QString get_story() override;
 };
 
 #endif // WEAKPOWER_H

@@ -23,3 +23,7 @@ void darkEmbracePower::added_time(game_action& actions) {
             }
         });
 }
+
+QString darkEmbracePower::get_story() {
+    return (QObject::tr("Dark Embrace, a ring of shadow that draws a new card from its heart each time armor shatters.\nAs if the destruction of defense is a seed planted in a dark field, reaping fresh opportunities."));
+}

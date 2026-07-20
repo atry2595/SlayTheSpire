@@ -19,3 +19,7 @@ QString metallicizePower::generate_description(){
     description = tr("At the end of your/its turn, gain %1 block.").arg(amount);
     return description;
 }
+
+QString metallicizePower::get_story() {
+    return (QObject::tr("Metallicize, a metallic whisper starting deep in the bones, turning skin into living steel.\nThe traveler doesn't need to act—this iron shell grows on its own, as if the body is slowly remembering it was once a mountain."));
+}

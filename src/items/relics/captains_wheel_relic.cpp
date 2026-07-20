@@ -26,3 +26,7 @@ void captains_wheel_relic::at_turn_start(game_action& actions){
 void captains_wheel_relic::at_combat_end(game_action& actions){
     turn = 0;
 }
+
+QString captains_wheel_relic::get_story() {
+    return (QObject::tr("The Captain's Wheel, its wood cracked but still firm, keeps the dream of open seas alive in the Spire's stone prison.\nTurning it, the traveler steers not a ship but their own quickening pulse, as if fate itself is the most steerable of vessels."));
+}

@@ -22,3 +22,7 @@ void golden_idol_relic::added_time(game_action& actions){
         }
     });
 }
+
+QString golden_idol_relic::get_story() {
+    return (QObject::tr("The Golden Idol, a staring statue with a cryptic smile, still smells of a ruined temple.\nThe traveler pockets this tiny god and grows wealthy, but at night a whisper rises from the pocket: \" will never forgive you.\""));
+}

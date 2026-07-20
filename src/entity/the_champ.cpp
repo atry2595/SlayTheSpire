@@ -241,3 +241,7 @@ void the_champ::play_turn(playInfo& info){
     phase_turn++;
     choose_move();
 }
+
+QString the_champ::get_story() {
+    return (QObject::tr("The Champ raises his sword in the Spire's empty arena, eyeing a victory cloak that has never graced his shoulders.\nHis triumphant roar echoes among the crumbled pillars, but the only spectator is the dust gently settling on his rusted armor."));
+}

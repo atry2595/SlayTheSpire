@@ -33,3 +33,7 @@ void kunai_relic::added_time(game_action& actions){
 void kunai_relic::at_turn_start(game_action& actions){
     value = 0;
 }
+
+QString kunai_relic::get_story() {
+    return (QObject::tr("The Kunai, the Shuriken's heavier sister, demands more power with every strike and spins a deeper cut.\nIn the darkness of battle, it whirls and lands like a one-winged bird, a reminder that elegance can be ruthless too."));
+}

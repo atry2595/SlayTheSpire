@@ -20,3 +20,7 @@ QString vulnerablePower::generate_description(){
 void vulnerablePower::at_turn_end(game_action&) {
     decrease();
 }
+
+QString vulnerablePower::get_story() {
+    return (QObject::tr("Vulnerable, invisible cracks in the enemy's armor that the traveler finds with just a glance.\nWhen these fissures are exposed, every strike sinks deeper, as if the wound itself is eager to open."));
+}

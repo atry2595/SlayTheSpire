@@ -27,3 +27,7 @@ void thieveryPower::added_time(game_action& actions) {
     });
 
 }
+
+QString thieveryPower::get_story() {
+    return (QObject::tr("Thievery, the art of snatching power from the enemy's grasp and planting it within oneself.\nLike an invisible shadow, the traveler empties the foe's pockets, stealing not gold but the essence of capability."));
+}

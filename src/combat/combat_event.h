@@ -11,6 +11,7 @@ class abstractPotion;
 class combat_manager;
 class CardParent;
 class PotionParent;
+class abstractRelic;
 struct attackInfo;
 struct damageInfo;
 struct blockingInfo;
@@ -72,6 +73,13 @@ signals:
     void entityUpdate(abstractEntity*);
     void afterAttack(attackResult&);
     void resetLayout();
+
+    void relicRightButton(abstractRelic*);
+    void potionRightButton(abstractPotion*);
+    void powerRightButton(abstractPower*);
+    void entityRightButton(abstractEntity*);
+
+    void barExit();
 
 };
 

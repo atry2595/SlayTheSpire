@@ -11,6 +11,7 @@
 #include "ui/effects/entitycornersframe.h"
 #include "ui/topbar/combattopbar.h"
 #include <queue>
+#include "ui/infobar/combatinfobar.h"
 #include "ui/relicbar/relicbar.h"
 
 class CombatPage : public QWidget
@@ -49,6 +50,7 @@ private:
 
     CombatTopBar* bar;
     RelicBar* relic_bar;
+    CombatInfoBar* info_bar = nullptr;
 
     int enemies_scene_width = 0;
     int players_scene_width = 0;
@@ -75,6 +77,11 @@ private slots:
     void entity_update(abstractEntity*);
     void after_attack(attackResult&);
     void turn_start(abstractEntity*);
+
+    void entity_right_click(abstractEntity*);
+    void potion_right_click(abstractPotion*);
+    void relic_right_click(abstractRelic*);
+    void power_right_click(abstractPower*);
 };
 
 #endif // COMBATPAGE_H

@@ -107,3 +107,7 @@ void looter::play_turn(playInfo& info){
     enemy_turn++;
     choose_move();
 }
+
+QString looter::get_story() {
+    return (QObject::tr("The Looter lurks in the corridor's dark, snatching the pouch of gold with trembling fingers and fleeing.\nHis entire fortune lives only in that escape, never once tasting the spending of a single coin."));
+}

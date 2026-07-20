@@ -11,6 +11,7 @@ public:
     void added_time(game_action&) override;
     QString generate_description() override;
     powerID get_id() override { return powerID::barricade; }
+    QString get_story() override;
 };
 
 #endif // BARRICADEPOWER_H

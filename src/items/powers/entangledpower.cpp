@@ -37,3 +37,7 @@ void entangledPower::at_turn_end(game_action&) {
     disconnect(add_card_connection);
     decrease(amount);
 }
+
+QString entangledPower::get_story() {
+    return (QObject::tr("Entangled, nightmare vines coiling around the enemy's legs, turning every struggle into a prison.\nThe enemy still breathes, but their movement is knotted in the Spire's fist, as if the ground has sworn never to release them."));
+}

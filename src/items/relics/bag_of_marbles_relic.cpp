@@ -24,3 +24,7 @@ void bag_of_marbles_relic::added_time(game_action& actions){
             }
     });
 }
+
+QString bag_of_marbles_relic::get_story() {
+    return (QObject::tr("The Bag of Marbles rattles with a childish, glassy whisper—a relic of games that now end in war.\nThe traveler scatters them across the floor, and the enemy, unsuspecting, slips on the fragile memories of a lost childhood."));
+}

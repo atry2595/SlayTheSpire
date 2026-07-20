@@ -11,6 +11,7 @@ public:
     void at_turn_end(game_action&) override;
     QString generate_description() override;
     powerID get_id() override { return powerID::metallicize; }
+    QString get_story() override;
 };
 
 #endif // METALLICIZEPOWER_H

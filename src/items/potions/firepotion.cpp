@@ -15,3 +15,7 @@ void firePotion::play(playInfo& info){
 
     info.actions.attack(a);
 }
+
+QString firePotion::get_story() {
+    return (QObject::tr("The Fire Potion dances in its bottle, its flames restless and furious, as if it cannot bear imprisonment.\nThe moment it's thrown, all that caged fury is released, embracing the enemy in a blaze that has been waiting for this moment."));
+}

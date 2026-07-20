@@ -33,3 +33,7 @@ void shuriken_relic::added_time(game_action& actions){
 void shuriken_relic::at_turn_start(game_action& actions){
     value = 0;
 }
+
+QString shuriken_relic::get_story() {
+    return (QObject::tr("The Shuriken materializes from nowhere in the moment of attack, a metal star whose path only knows forward.\nA memento of a forgotten ninja, still silently and lethally grazing the enemy's back after all these centuries."));
+}

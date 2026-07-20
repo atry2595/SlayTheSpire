@@ -37,3 +37,7 @@ void slavers_collar_relic::at_turn_start(game_action& actions){
 void slavers_collar_relic::at_combat_end(game_action& actions){
     available = false;
 }
+
+QString slavers_collar_relic::get_story() {
+    return (QObject::tr("The Slavers Collar, rough leather still reeking of former captives' sweat, locks around the traveler's neck.\nYet this very ring of humiliation becomes an inverted weapon against the Spire's elites, as if the slave's chain is only heavy in the eyes of the master."));
+}

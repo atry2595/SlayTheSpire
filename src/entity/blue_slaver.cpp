@@ -85,3 +85,7 @@ void blue_slaver::play_turn(playInfo& info){
     enemy_turn++;
     choose_move();
 }
+
+QString blue_slaver::get_story() {
+    return (QObject::tr("The Blue Slaver cracks his whip against the Spire's cold stone, staring down a path that has seen no captives for years.\nHe never realizes that he, too, is a prisoner of this endless corridor, bound by a duty his masters abandoned centuries ago."));
+}

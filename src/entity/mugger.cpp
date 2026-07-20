@@ -107,3 +107,7 @@ void mugger::play_turn(playInfo& info){
     enemy_turn++;
     choose_move();
 }
+
+QString mugger::get_story() {
+    return (QObject::tr("The Mugger crouches behind a pillar in the wounded city, his knife gleaming in the dark.\nIn his hideout, he's piled a mountain of stolen coins, yet each one is a mirror reflecting a stranger's face he no longer recognizes."));
+}

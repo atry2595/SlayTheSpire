@@ -3,6 +3,7 @@
 #include "entity/abstractentity.h"
 #include "cards/abstractcard.h"
 #include "items/potions/abstractpotion.h"
+#include "entity/ironclad.h"
 
 game_action::game_action(combatEvent* eve):event(eve) {}
 
@@ -91,6 +92,19 @@ damageResult game_action::apply_damage(damageInfo& info) {
         emit event->hp_changed(info.target, hp, 0);
         emit event->entityUpdate(info.target);
         emit event->entity_killed(target);
+        if (target->get_ID() == entityID::ironclad){
+            auto plyr = dynamic_cast<ironclad*>(target);
+            for (auto item : plyr->get_potion_list()){
+                if (item->get_ID() == potionID::fairy_in_a_bottle){
+                    drinkPotionInfo pot_inf;
+                    pot_inf.potion = item;
+                    pot_inf.owner = plyr;
+                    pot_inf.target_list = {};
+
+                    plyr->drink_potion(pot_inf);
+                }
+            }
+        }
         if (target->get_hp() <= 0){
             emit event->entity_removed(target);
         }

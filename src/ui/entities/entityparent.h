@@ -3,16 +3,21 @@
 
 #include "ui/baseitem.h"
 #include <QSequentialAnimationGroup>
+#include "combat/combat_event.h"
 
 class EntityParent : public BaseItem
 {
     Q_OBJECT
 
 private:
-
+    void mousePressEvent(QGraphicsSceneMouseEvent* event) override;
+    abstractEntity* source;
+    combatEvent* eve;
 
 public:
-    EntityParent(QGraphicsItem* parent = nullptr,
+    EntityParent(combatEvent*,
+                 abstractEntity*,
+                 QGraphicsItem* parent = nullptr,
                  QSizeF home_size = {0,0},
                  QPointF home_pos = {0,0});
 

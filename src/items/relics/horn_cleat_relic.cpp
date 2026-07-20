@@ -26,3 +26,7 @@ void horn_cleat_relic::at_turn_start(game_action& actions){
 void horn_cleat_relic::at_combat_end(game_action& actions){
     turn = 0;
 }
+
+QString horn_cleat_relic::get_story() {
+    return (QObject::tr("The Horn Cleat, its worn ropes still smelling of salt and ship decks, a memento of a sailor who laughed at storms.\nWith every step in the Spire, the traveler grips this horn tighter, as if the only way through the maelstrom of battle is clinging to something that once saved ships from sinking."));
+}

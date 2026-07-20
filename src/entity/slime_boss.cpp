@@ -132,3 +132,7 @@ void slime_boss::play_turn(playInfo& info){
     enemy_turn++;
     choose_move();
 }
+
+QString slime_boss::get_story() {
+    return (QObject::tr("The colossal slime sprawls upon a sticky throne of bones and ooze, crownless king of the pits.\nYet deep within, it knows that the moment of triumph will split its singular body into two smaller halves.\nIt will lose the \"self\" forever among its children."));
+}

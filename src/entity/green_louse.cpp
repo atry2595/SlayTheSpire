@@ -84,3 +84,7 @@ void green_louse::play_turn(playInfo& info){
     enemy_turn++;
     choose_move();
 }
+
+QString green_louse::get_story() {
+    return (QObject::tr("The Green Louse puffs a cloud of weakening spores and lurks within its own sickly mist.\nIn that sickening veil, it dreams of becoming a world-eating plague, never knowing it will never crawl beyond a single stone's shadow in the Spire."));
+}

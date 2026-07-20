@@ -14,6 +14,7 @@ public:
     relicRarity get_rarity() override { return relicRarity::common; }
 
     void at_combat_start(game_action&) override;
+    QString get_story() override;
 };
 
 #endif // VAJRA_RELIC_H

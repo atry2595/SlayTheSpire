@@ -14,3 +14,7 @@ void fearPotion::play(playInfo& info){
     }
 
 }
+
+QString fearPotion::get_story() {
+    return (QObject::tr("The Fear Potion, dark purple with whispers leaking from the glass—whispers of things that shouldn't exist.\nThe enemy inhales its vapor and sees nameless shadows even in broad daylight, then turns and runs."));
+}

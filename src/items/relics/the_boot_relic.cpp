@@ -23,3 +23,7 @@ void the_boot_relic::added_time(game_action& actions){
         });
 
 }
+
+QString the_boot_relic::get_story() {
+    return (QObject::tr("The Boot, worn and mud-caked, reeks of roads traveled and enemies laid flat.\nWhen the foe is down, this boot has the final say: one extra stomp, just to make sure you're staying down."));
+}

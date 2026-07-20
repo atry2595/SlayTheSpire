@@ -576,6 +576,11 @@ add_executable(SlayTheSpire
     src/ui/relicbar/relicbar.h src/ui/relicbar/relicbar.cpp
     src/ui/relicbar/getRelicImage.h
     src/ui/entities/potionparent.h src/ui/entities/potionparent.cpp
+    src/ui/infobar/abstractinfobar.h
+    src/ui/infobar/infobarparent.h src/ui/infobar/infobarparent.cpp
+    src/ui/infobar/combatinfobar.h src/ui/infobar/combatinfobar.cpp
+    src/ui/relicbar/relicparent.cpp src/ui/relicbar/relicparent.h
+    src/ui/entities/powerparent.cpp src/ui/entities/powerparent.h
 )
 
 target_include_directories(SlayTheSpire PRIVATE

@@ -24,3 +24,7 @@ void enragePower::added_time(game_action& actions) {
             }
         });
 }
+
+QString enragePower::get_story() {
+    return (QObject::tr("Enrage, a flame that grows from wounds, turning pain into power.\nEvery blow the traveler takes is not an injury but an invitation to a louder roar, as if spilled blood becomes the fuel of an inner fire."));
+}

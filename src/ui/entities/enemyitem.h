@@ -10,8 +10,9 @@ class EnemyItem : public abstractEntityItem
     qreal width;
     qreal height;
     EntityAnimType anim_type;
+    combatEvent* eve;
 public:
-    EnemyItem(abstractEntity* source, QPointF pos, qreal zValue);
+    EnemyItem(combatEvent*, abstractEntity* source, QPointF pos, qreal zValue);
 
     void updateEntity();
 };

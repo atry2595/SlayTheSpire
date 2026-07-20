@@ -4,14 +4,15 @@
 #include "entity/abstractenemy.h"
 #include <QSequentialAnimationGroup>
 
-EnemyItem::EnemyItem(abstractEntity* source, QPointF pos, qreal zValue)
+EnemyItem::EnemyItem(combatEvent* event, abstractEntity* source, QPointF pos, qreal zValue)
     : width(getEntityVisual(source->get_ID()).size.width())
     , height(getEntityVisual(source->get_ID()).size.height())
     , anim_type(getEntityVisual(source->get_ID()).anim)
+    , eve(event)
     , abstractEntityItem(source, pos, QSizeF(getEntityVisual(source->get_ID()).size.width(), getEntityVisual(source->get_ID()).size.height() + 120), zValue) {
 
     //=======parent=========
-    entity_parent = new EntityParent(nullptr, entity_size, entity_pos);
+    entity_parent = new EntityParent(eve, entity_source, nullptr, entity_size, entity_pos);
     entity_parent->setZValue(0 + zValue);
 
 
@@ -130,14 +131,23 @@ void EnemyItem::updateEntity() {
 
 
     //======powers=======
+    for (auto item: powers_prnt) {
+        delete item;
+    }
+    powers_prnt.clear();
+
     for (auto item: powers) {
         delete item;
     }
     powers.clear();
 
     for (int i = 0; i < entity_source->get_power_list().size(); i++){
-        TextItem* p = new TextItem(entity_parent, {35, 35}, QPointF(35*i, height + 60 + 30));
         auto pwr = entity_source->get_power_list()[i];
+
+        PowerParent* pp =  new PowerParent(eve, pwr, entity_parent, {35, 35}, QPointF(35*i, height + 60 + 30));
+        powers_prnt.push_back(pp);
+
+        TextItem* p = new TextItem(entity_parent, {35, 35}, QPointF(35*i, height + 60 + 30));
         p->setBackground(getPowerIcon(pwr->get_id()));
 
         if (pwr->get_amount() != 1){

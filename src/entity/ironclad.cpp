@@ -457,10 +457,13 @@ void ironclad::potion_list_remove(abstractPotion* pot){
 
 void ironclad::drink_potion(drinkPotionInfo& pot) {
     if (abstractPotion::lock) return;
-    if (pot.potion->playable() == false) return;
 
     game_action actions(event);
     pot.owner = this;
     actions.drink_potion(pot);
     potion_list_remove(pot.potion);
+}
+
+QString ironclad::get_story() {
+    return (QObject::tr("The Ironclad, last of his clan, sold his blood to the fire demon for the strength to stand—never knowing the steepest price of standing is to stand alone.\nEvery time a flame licks from his being in the Spire, an old wound reopens, reviving faces long gone.\nHe climbs each floor not to save the world, but to find a place where his fire finally runs out of things to burn."));
 }

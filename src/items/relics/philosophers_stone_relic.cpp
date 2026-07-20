@@ -29,3 +29,7 @@ void philosophers_stone_relic::added_time(game_action& actions){
             }
     });
 }
+
+QString philosophers_stone_relic::get_story() {
+    return (QObject::tr("The Philosopher's Stone scatters gold, but every coin smells of ash.\nThe traveler emerges richer than ever from battle, but their wounds scream that this gold was mined from the quarry of their own flesh."));
+}

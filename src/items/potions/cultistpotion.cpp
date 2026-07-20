@@ -12,3 +12,7 @@ void cultistPotion::play(playInfo& info){
     info.attacker->add_power(info.actions, np);
 
 }
+
+QString cultistPotion::get_story() {
+    return (QObject::tr("The Cultist Potion, a blue liquid that whispers \"Caw!\" with every shake.\nThe traveler drinks and suddenly the duck-like voice of power awakens in their throat, as if they've momentarily become a worshipper of the Spire, ripe for ascension."));
+}

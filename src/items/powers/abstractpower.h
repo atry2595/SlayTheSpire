@@ -35,6 +35,7 @@ public:
     QString get_name() { return name; }
     abstractEntity* get_owner() { return owner; }
     QString get_description() { return description; }
+    virtual QString get_story() = 0;
     int get_amount() { return amount; }
     int get_order() { return priority_order;}
     bool get_is_buff() { return is_buff; }

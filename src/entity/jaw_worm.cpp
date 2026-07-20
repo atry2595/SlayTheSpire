@@ -114,3 +114,7 @@ void jaw_worm::play_turn(playInfo& info){
     enemy_turn++;
     choose_move();
 }
+
+QString jaw_worm::get_story() {
+    return (QObject::tr("The Jaw Worm hears only the footsteps of prey and erupts from the Spire’s damp earth.\nIts mandibles clack with an ancient, empty hunger, never once having tasted the dream of being full."));
+}

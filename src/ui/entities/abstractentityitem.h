@@ -10,6 +10,7 @@
 #include "ui/entities/getPowerIcon.h"
 #include "items/powers/abstractpower.h"
 #include "core/setting.h"
+#include "powerparent.h"
 #include <QObject>
 #include <QGraphicsProxyWidget>
 
@@ -32,8 +33,8 @@ protected:
     TextItem* intent = nullptr;
     SimpleHpBar* hp_bar = nullptr;
     QGraphicsProxyWidget* hp_proxy = nullptr;
+    std::vector<PowerParent*> powers_prnt = {};
     std::vector<TextItem*> powers = {};
-
 
 
 

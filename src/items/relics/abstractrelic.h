@@ -28,6 +28,7 @@ public:
     QString get_name() { return name; }
     abstractEntity* get_owner() { return owner; }
     QString get_description() { return description; }
+    virtual QString get_story() = 0;
     virtual relicID get_id() = 0;
     virtual relicRarity get_rarity() = 0;
 

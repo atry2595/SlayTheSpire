@@ -71,3 +71,7 @@ void calling_bell_relic::added_time(game_action& actions){
         owner->add_relic(actions, nr);
     }
 }
+
+QString calling_bell_relic::get_story() {
+    return (QObject::tr("The Calling Bell, a tiny chime whose sound strangely echoes through nothing.\nBut when the traveler rings it, the answer comes from a depth that shouldn't exist, and something ancient remembers a pact that was never meant to be made."));
+}

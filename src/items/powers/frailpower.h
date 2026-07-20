@@ -13,6 +13,7 @@ public:
     QString generate_description() override;
 
     powerID get_id() override { return powerID::frail; }
+    QString get_story() override;
 };
 
 #endif // FRAILPOWER_H
