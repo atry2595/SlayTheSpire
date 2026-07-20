@@ -24,9 +24,9 @@
     <property name="geometry">
      <rect>
       <x>575</x>
-      <y>100</y>
+      <y>125</y>
       <width>450</width>
-      <height>700</height>
+      <height>650</height>
      </rect>
     </property>
     <property name="styleSheet">

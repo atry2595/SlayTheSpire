@@ -121,17 +121,18 @@ bool FileManager::registerPlayer(const QString &username,const QString &email,co
         return false;
     }
 
-    if(!Player::passwordsMatch(password,confirmPassword))
-    {
-        errorMessage ="Passwords do not match.";
-        return false;
-    }
-
     QString passwordError = Player::validatePassword(password);
 
     if(!passwordError.isEmpty())
     {
         errorMessage =passwordError;
+        return false;
+    }
+
+
+    if(!Player::passwordsMatch(password,confirmPassword))
+    {
+        errorMessage ="Passwords do not match.";
         return false;
     }
 
