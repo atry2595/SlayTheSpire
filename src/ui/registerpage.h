@@ -35,6 +35,16 @@ private:
     void showPasswordError(const QString &message);
     void showConfirmPasswordError(const QString &message);
 
+    void showSuccess(const QString &message);
+
+    QAction *passwordEyeAction;
+    QAction *confirmEyeAction;
+
+    void clearUsernameError();
+    void clearEmailError();
+    void clearPasswordError();
+    void clearConfirmPasswordError();
+
     void clearErrors();
 
 
