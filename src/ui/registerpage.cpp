@@ -4,6 +4,7 @@
 #include <QAction>
 #include <QIcon>
 #include <QLineEdit>
+#include <QTimer>
 
 RegisterPage::RegisterPage(QWidget *parent)
     : QMainWindow(parent)
@@ -19,8 +20,9 @@ RegisterPage::RegisterPage(QWidget *parent)
     ui->emailErrorLabel->hide();
     ui->passwordErrorLabel->hide();
     ui->confirmPasswordErrorLabel->hide();
+    ui->successLabel->hide();
 
-    QAction *passwordEyeAction = ui->passwordLineEdit->addAction(
+    passwordEyeAction = ui->passwordLineEdit->addAction(
         QIcon(":/icon/login/eye_off.svg"),
         QLineEdit::TrailingPosition);
 
@@ -60,14 +62,12 @@ RegisterPage::RegisterPage(QWidget *parent)
 
                 ui->usernameSuggestionLabel->hide();
 
-                ui->usernameLineEdit->setStyleSheet("");
-
-                ui->usernameLabel->setStyleSheet("");
+                setUsernameNormalStyle();
             });
 
 
 
-    QAction *confirmEyeAction = ui->confirmPasswordLineEdit->addAction(
+    confirmEyeAction = ui->confirmPasswordLineEdit->addAction(
         QIcon(":/icon/login/eye_off.svg"),
         QLineEdit::TrailingPosition);
 
@@ -93,6 +93,7 @@ RegisterPage::~RegisterPage()
 {
     delete ui;
 }
+
 void RegisterPage::on_loginButton_clicked()
 {
     emit openLoginPage();
@@ -112,8 +113,10 @@ void RegisterPage::clearFields()
     clearErrors();
 
     ui->usernameSuggestionLabel->hide();
-    ui->usernameSuggestionLabel->hide();
-
+    ui->passwordLineEdit->setEchoMode(QLineEdit::Password);
+    ui->confirmPasswordLineEdit->setEchoMode(QLineEdit::Password);
+    passwordEyeAction->setIcon(QIcon(":/icon/login/eye_off.svg"));
+    confirmEyeAction->setIcon(QIcon(":/icon/login/eye_off.svg"));
     setUsernameNormalStyle();
 }
 
@@ -193,8 +196,15 @@ void RegisterPage::clearErrors()
     ui->emailErrorLabel->hide();
     ui->passwordErrorLabel->hide();
     ui->confirmPasswordErrorLabel->hide();
+    ui->successLabel->hide();
 
     setUsernameNormalStyle();
+}
+
+void RegisterPage::showSuccess(const QString &message)
+{
+    ui->successLabel->setText(message);
+    ui->successLabel->show();
 }
 
 void RegisterPage::on_signUpButton_clicked()
@@ -219,17 +229,15 @@ void RegisterPage::on_signUpButton_clicked()
 
     if(success)
     {
-        QMessageBox::information(
-            this,
-            "Register",
-            "Registration successful!"
-            );
-        ui->usernameLineEdit->clear();
-        ui->emailLineEdit->clear();
-        ui->passwordLineEdit->clear();
-        ui->confirmPasswordLineEdit->clear();
+        showSuccess("Registration completed successfully.");
 
-        emit openLoginPage();
+        QTimer::singleShot(1000, this,
+                           [this]()
+                           {
+                               clearFields();
+
+                               emit openLoginPage();
+                           });
     }
     else
     {
