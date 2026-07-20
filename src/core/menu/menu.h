@@ -2,12 +2,22 @@
 #define MENU_H
 
 #include <QObject>
+#include <QMainWindow>
 
-class menu
+namespace Ui {
+class Menu;
+}
+
+class Menu : public QMainWindow
 {
     Q_OBJECT
+
 public:
-    menu();
+    explicit Menu(QWidget *parent = nullptr);
+    ~Menu();
+
+private:
+    Ui::Menu *ui;
 };
 
 #endif // MENU_H
