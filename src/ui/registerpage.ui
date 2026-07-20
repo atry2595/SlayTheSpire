@@ -118,16 +118,27 @@ color: white;</string>
         <widget class="QLineEdit" name="usernameLineEdit">
          <property name="styleSheet">
           <string notr="true">QLineEdit {
-    background-color: #404040;
+
+    background-color: #4A4A4A;
+
     border: 1px solid #666666;
+
     border-radius: 10px;
-    padding: 13px;
+
+    padding: 15px;
+
     color: white;
+
     min-height: 28px;
+
 }
 
+
+
 QLineEdit:focus {
+
     border: 2px solid #8c8c8c;
+
 }</string>
          </property>
         </widget>
@@ -179,16 +190,27 @@ QLineEdit:focus {
         <widget class="QLineEdit" name="emailLineEdit">
          <property name="styleSheet">
           <string notr="true">QLineEdit {
-    background-color: #404040;
+
+    background-color: #4A4A4A;
+
     border: 1px solid #666666;
+
     border-radius: 10px;
-    padding: 13px;
+
+    padding: 15px;
+
     color: white;
+
     min-height: 28px;
+
 }
 
+
+
 QLineEdit:focus {
+
     border: 2px solid #8c8c8c;
+
 }</string>
          </property>
          <property name="echoMode">
@@ -243,16 +265,27 @@ QLineEdit:focus {
         <widget class="QLineEdit" name="passwordLineEdit">
          <property name="styleSheet">
           <string notr="true">QLineEdit {
-    background-color: #404040;
+
+    background-color: #4A4A4A;
+
     border: 1px solid #666666;
+
     border-radius: 10px;
-    padding: 13px;
+
+    padding: 15px;
+
     color: white;
+
     min-height: 28px;
+
 }
 
+
+
 QLineEdit:focus {
+
     border: 2px solid #8c8c8c;
+
 }</string>
          </property>
          <property name="echoMode">
@@ -307,16 +340,27 @@ QLineEdit:focus {
         <widget class="QLineEdit" name="confirmPasswordLineEdit">
          <property name="styleSheet">
           <string notr="true">QLineEdit {
-    background-color: #404040;
+
+    background-color: #4A4A4A;
+
     border: 1px solid #666666;
+
     border-radius: 10px;
-    padding: 13px;
+
+    padding: 15px;
+
     color: white;
+
     min-height: 28px;
+
 }
 
+
+
 QLineEdit:focus {
+
     border: 2px solid #8c8c8c;
+
 }</string>
          </property>
          <property name="echoMode">

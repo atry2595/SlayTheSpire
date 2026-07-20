@@ -178,9 +178,20 @@ bool FileManager::resetPassword(const QString &email,
                                 const QString &confirmPassword,
                                 QString &errorMessage)
 {
-    if(newPassword != confirmPassword)
+    Player *foundPlayer = nullptr;
+
+    for(Player &player : players)
     {
-        errorMessage = "Passwords do not match.";
+        if(player.getEmail().toLower() == email.toLower())
+        {
+            foundPlayer = &player;
+            break;
+        }
+    }
+
+    if(foundPlayer == nullptr)
+    {
+        errorMessage = "Email not found.";
         return false;
     }
 
@@ -192,21 +203,19 @@ bool FileManager::resetPassword(const QString &email,
         return false;
     }
 
-    for(Player &player : players)
+    if(newPassword != confirmPassword)
     {
-        if(player.getEmail() == email)
-        {
-            player.setPassword(newPassword);
-
-            saveToFile();
-
-            return true;
-        }
+        errorMessage = "Passwords do not match.";
+        return false;
     }
 
-    errorMessage = "Email not found.";
+    foundPlayer->setPassword(newPassword);
 
-    return false;
+    saveToFile();
+
+    errorMessage = "";
+
+    return true;
 }
 
 Player* FileManager::findPlayer(const QString &username)
