@@ -33,16 +33,17 @@ RegisterPage::RegisterPage(QWidget *parent)
                     passwordEyeAction->setIcon(QIcon(":/icon/login/eye_off.svg"));
                 }
             });
+
     connect(ui->usernameLineEdit,
             &QLineEdit::textChanged,
             this,
             [this]()
             {
-                ui->usernameLineEdit->setStyleSheet("");
-
-                ui->usernameLabel->setStyleSheet("");
-
-                ui->usernameSuggestionLabel->hide();
+                if(ui->usernameSuggestionLabel->isVisible())
+                {
+                    ui->usernameSuggestionLabel->hide();
+                    setUsernameNormalStyle();
+                }
             });
 
     connect(ui->usernameSuggestionLabel,
@@ -103,6 +104,54 @@ void RegisterPage::clearFields()
     ui->emailLineEdit->clear();
     ui->passwordLineEdit->clear();
     ui->confirmPasswordLineEdit->clear();
+
+    ui->usernameSuggestionLabel->hide();
+
+    setUsernameNormalStyle();
+}
+
+void RegisterPage::setUsernameNormalStyle()
+{
+    ui->usernameLineEdit->setStyleSheet(
+        "QLineEdit {"
+        "background-color: #404040;"
+        "border: 1px solid #666666;"
+        "border-radius: 10px;"
+        "padding: 13px;"
+        "color: white;"
+        "min-height: 28px;"
+        "}"
+        "QLineEdit:focus {"
+        "border: 2px solid #8c8c8c;"
+        "}"
+        );
+
+    ui->usernameLabel->setStyleSheet(
+        "color:white;"
+        "font-size:16px;"
+        "font-weight:600;");
+}
+
+void RegisterPage::setUsernameErrorStyle()
+{
+    ui->usernameLineEdit->setStyleSheet(
+        "QLineEdit {"
+        "background-color: #404040;"
+        "border:2px solid red;"
+        "border-radius:10px;"
+        "padding:13px;"
+        "color:white;"
+        "min-height:28px;"
+        "}"
+        "QLineEdit:focus {"
+        "border:2px solid red;"
+        "}"
+        );
+
+    ui->usernameLabel->setStyleSheet(
+        "color:red;"
+        "font-size:16px;"
+        "font-weight:600;");
 }
 
 void RegisterPage::on_signUpButton_clicked()
@@ -114,9 +163,7 @@ void RegisterPage::on_signUpButton_clicked()
 
     QString errorMessage;
 
-    ui->usernameLineEdit->setStyleSheet("");
-
-    ui->usernameLabel->setStyleSheet("");
+    setUsernameNormalStyle();
 
     ui->usernameSuggestionLabel->hide();
 
@@ -163,12 +210,9 @@ void RegisterPage::on_signUpButton_clicked()
 
             ui->usernameSuggestionLabel->show();
 
-            ui->usernameLineEdit->setStyleSheet(
-                "border:2px solid red;");
-
-            ui->usernameLabel->setStyleSheet(
-                "color:red;");
+            setUsernameErrorStyle();
         }
+
         else
         {
             QMessageBox::warning(

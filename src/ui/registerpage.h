@@ -27,6 +27,9 @@ private:
     Ui::RegisterPage *ui;
     FileManager *fileManager = nullptr;
 
+    void setUsernameNormalStyle();
+    void setUsernameErrorStyle();
+
 
 signals:
     void openLoginPage();
