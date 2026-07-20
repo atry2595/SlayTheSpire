@@ -1,31 +1,37 @@
 #include "loginpage.h"
 #include "ui_loginpage.h"
-#include <QMessageBox>
 #include <QAction>
 #include <QIcon>
 #include <QLineEdit>
+#include <QTimer>
 
 LoginPage::LoginPage(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::LoginPage)
 {
     ui->setupUi(this);
-    QAction *eyeAction = ui->passwordLineEdit->addAction(
+    ui->usernameErrorLabel->hide();
+    ui->passwordErrorLabel->hide();
+    ui->successLabel->hide();
+
+    passwordEyeAction = ui->passwordLineEdit->addAction(
         QIcon(":/icon/login/eye_off.svg"),
         QLineEdit::TrailingPosition);
 
-    connect(eyeAction, &QAction::triggered, this,
-            [this, eyeAction]()
+    connect(passwordEyeAction,
+            &QAction::triggered,
+            this,
+            [this]()
             {
-                if (ui->passwordLineEdit->echoMode() == QLineEdit::Password)
+                if(ui->passwordLineEdit->echoMode() == QLineEdit::Password)
                 {
                     ui->passwordLineEdit->setEchoMode(QLineEdit::Normal);
-                    eyeAction->setIcon(QIcon(":/icon/login/eye.svg"));
+                    passwordEyeAction->setIcon(QIcon(":/icon/login/eye.svg"));
                 }
                 else
                 {
                     ui->passwordLineEdit->setEchoMode(QLineEdit::Password);
-                    eyeAction->setIcon(QIcon(":/icon/login/eye_off.svg"));
+                    passwordEyeAction->setIcon(QIcon(":/icon/login/eye_off.svg"));
                 }
             });
 
@@ -38,6 +44,23 @@ LoginPage::LoginPage(QWidget *parent)
             &QLineEdit::returnPressed,
             ui->loginButton,
             &QPushButton::click);
+
+    connect(ui->usernameLineEdit,
+            &QLineEdit::textChanged,
+            this,
+            [this]()
+            {
+                clearErrors();
+            });
+
+    connect(ui->passwordLineEdit,
+            &QLineEdit::textChanged,
+            this,
+            [this]()
+            {
+                clearErrors();
+            });
+
 }
 
 LoginPage::~LoginPage()
@@ -66,30 +89,151 @@ void LoginPage::clearFields()
 {
     ui->usernameLineEdit->clear();
     ui->passwordLineEdit->clear();
+
+    clearErrors();
+
+    ui->passwordLineEdit->setEchoMode(QLineEdit::Password);
+
+    passwordEyeAction->setIcon(
+        QIcon(":/icon/login/eye_off.svg"));
+}
+
+void LoginPage::setUsernameNormalStyle()
+{
+    ui->usernameLineEdit->setStyleSheet(
+        "QLineEdit {"
+        "background-color:#404040;"
+        "border:1px solid #666666;"
+        "border-radius:10px;"
+        "padding:13px;"
+        "color:white;"
+        "min-height:28px;"
+        "}"
+        "QLineEdit:focus {"
+        "border:2px solid #8c8c8c;"
+        "}"
+        );
+}
+
+void LoginPage::setUsernameErrorStyle()
+{
+    ui->usernameLineEdit->setStyleSheet(
+        "QLineEdit {"
+        "background-color:#404040;"
+        "border:2px solid red;"
+        "border-radius:10px;"
+        "padding:13px;"
+        "color:white;"
+        "min-height:28px;"
+        "}"
+        "QLineEdit:focus {"
+        "border:2px solid red;"
+        "}"
+        );
+}
+
+void LoginPage::setPasswordNormalStyle()
+{
+    ui->passwordLineEdit->setStyleSheet(
+        "QLineEdit {"
+        "background-color:#404040;"
+        "border:1px solid #666666;"
+        "border-radius:10px;"
+        "padding:13px;"
+        "color:white;"
+        "min-height:28px;"
+        "}"
+        "QLineEdit:focus {"
+        "border:2px solid #8c8c8c;"
+        "}"
+        );
+}
+
+void LoginPage::setPasswordErrorStyle()
+{
+    ui->passwordLineEdit->setStyleSheet(
+        "QLineEdit {"
+        "background-color:#404040;"
+        "border:2px solid red;"
+        "border-radius:10px;"
+        "padding:13px;"
+        "color:white;"
+        "min-height:28px;"
+        "}"
+        "QLineEdit:focus {"
+        "border:2px solid red;"
+        "}"
+        );
+}
+
+void LoginPage::showUsernameError(const QString &message)
+{
+    ui->usernameErrorLabel->setText(message);
+    ui->usernameErrorLabel->show();
+    setUsernameErrorStyle();
+
+}
+
+void LoginPage::showPasswordError(const QString &message)
+{
+    ui->passwordErrorLabel->setText(message);
+    ui->passwordErrorLabel->show();
+    setPasswordErrorStyle();
+
+}
+
+void LoginPage::showSuccess(const QString &message)
+{
+    ui->successLabel->setText(message);
+    ui->successLabel->show();
+}
+
+void LoginPage::clearErrors()
+{
+    ui->usernameErrorLabel->hide();
+    ui->passwordErrorLabel->hide();
+    ui->successLabel->hide();
+
+    setUsernameNormalStyle();
+    setPasswordNormalStyle();
 }
 
 void LoginPage::on_loginButton_clicked()
 {
     QString username = ui->usernameLineEdit->text().trimmed();
     QString password = ui->passwordLineEdit->text();
+    clearErrors();
+
+    if(username.isEmpty())
+    {
+        showUsernameError("Please enter your username.");
+        return;
+    }
+
+    if(password.isEmpty())
+    {
+        showPasswordError("Please enter your password.");
+        return;
+    }
 
     Player *player = fileManager->login(username, password);
 
     if(player)
     {
-        QMessageBox::information(this,
-                                 "Login",
-                                 "Login successful!");
+        showSuccess("Login successful!");
 
-        ui->usernameLineEdit->clear();
-        ui->passwordLineEdit->clear();
-        emit loginSuccessful();
+        QTimer::singleShot(2000,
+                           this,
+                           [this]()
+                           {
+                               clearFields();
+
+                               emit loginSuccessful();
+                           });
+
+        return;
     }
-    else
-    {
-        QMessageBox::warning(this,
-                             "Login",
-                             "Invalid username or password.");
-    }
+
+    showPasswordError("Invalid username or password.");
 }
 

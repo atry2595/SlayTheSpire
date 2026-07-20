@@ -83,12 +83,12 @@ QLabel {
         <widget class="QLabel" name="titleLabel">
          <property name="font">
           <font>
-           <pointsize>24</pointsize>
+           <pointsize>30</pointsize>
            <bold>true</bold>
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font-size: 24pt;
+          <string notr="true">font-size: 30pt;
 font-weight: bold;
 color: white;</string>
          </property>
@@ -155,7 +155,27 @@ QLineEdit:focus {
         </widget>
        </item>
        <item>
+        <widget class="QLabel" name="usernameErrorLabel">
+         <property name="styleSheet">
+          <string notr="true">QLabel{
+    color:#ff4d4d;
+    font-size:13px;
+    font-weight:600;
+}</string>
+         </property>
+         <property name="text">
+          <string>TextLabel</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QLabel" name="Password">
+         <property name="font">
+          <font>
+           <pointsize>-1</pointsize>
+           <fontweight>DemiBold</fontweight>
+          </font>
+         </property>
          <property name="styleSheet">
           <string notr="true">QLabel {
     color: white;
@@ -192,6 +212,20 @@ QLineEdit:focus {
          </property>
          <property name="echoMode">
           <enum>QLineEdit::EchoMode::Password</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="passwordErrorLabel">
+         <property name="styleSheet">
+          <string notr="true">QLabel{
+    color:#ff4d4d;
+    font-size:13px;
+    font-weight:600;
+}</string>
+         </property>
+         <property name="text">
+          <string>TextLabel</string>
          </property>
         </widget>
        </item>
@@ -247,6 +281,12 @@ QPushButton:hover{
        </item>
        <item>
         <widget class="QPushButton" name="loginButton">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="text">
           <string>Login</string>
          </property>
@@ -254,8 +294,21 @@ QPushButton:hover{
        </item>
        <item>
         <widget class="QPushButton" name="signUpButton">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="text">
           <string>Sign up</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="successLabel">
+         <property name="text">
+          <string>TextLabel</string>
          </property>
         </widget>
        </item>
