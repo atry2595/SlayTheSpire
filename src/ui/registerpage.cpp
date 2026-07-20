@@ -15,6 +15,11 @@ RegisterPage::RegisterPage(QWidget *parent)
     ui->usernameSuggestionLabel->setTextInteractionFlags(Qt::TextBrowserInteraction);
     ui->usernameSuggestionLabel->setOpenExternalLinks(false);
 
+    ui->usernameErrorLabel->hide();
+    ui->emailErrorLabel->hide();
+    ui->passwordErrorLabel->hide();
+    ui->confirmPasswordErrorLabel->hide();
+
     QAction *passwordEyeAction = ui->passwordLineEdit->addAction(
         QIcon(":/icon/login/eye_off.svg"),
         QLineEdit::TrailingPosition);
@@ -104,7 +109,9 @@ void RegisterPage::clearFields()
     ui->emailLineEdit->clear();
     ui->passwordLineEdit->clear();
     ui->confirmPasswordLineEdit->clear();
+    clearErrors();
 
+    ui->usernameSuggestionLabel->hide();
     ui->usernameSuggestionLabel->hide();
 
     setUsernameNormalStyle();
@@ -154,6 +161,42 @@ void RegisterPage::setUsernameErrorStyle()
         "font-weight:600;");
 }
 
+void RegisterPage::showUsernameError(const QString &message)
+{
+    ui->usernameErrorLabel->setText(message);
+    ui->usernameErrorLabel->show();
+
+    setUsernameErrorStyle();
+}
+
+void RegisterPage::showEmailError(const QString &message)
+{
+    ui->emailErrorLabel->setText(message);
+    ui->emailErrorLabel->show();
+}
+
+void RegisterPage::showPasswordError(const QString &message)
+{
+    ui->passwordErrorLabel->setText(message);
+    ui->passwordErrorLabel->show();
+}
+
+void RegisterPage::showConfirmPasswordError(const QString &message)
+{
+    ui->confirmPasswordErrorLabel->setText(message);
+    ui->confirmPasswordErrorLabel->show();
+}
+
+void RegisterPage::clearErrors()
+{
+    ui->usernameErrorLabel->hide();
+    ui->emailErrorLabel->hide();
+    ui->passwordErrorLabel->hide();
+    ui->confirmPasswordErrorLabel->hide();
+
+    setUsernameNormalStyle();
+}
+
 void RegisterPage::on_signUpButton_clicked()
 {
     QString username = ui->usernameLineEdit->text().trimmed();
@@ -163,7 +206,7 @@ void RegisterPage::on_signUpButton_clicked()
 
     QString errorMessage;
 
-    setUsernameNormalStyle();
+    clearErrors();
 
     ui->usernameSuggestionLabel->hide();
 
@@ -197,8 +240,6 @@ void RegisterPage::on_signUpButton_clicked()
 
             QString message;
 
-            message += "<font color='red'><b>Username already exists.</b></font><br><br>";
-
             message += "You can use:<br>";
 
             for(const QString &name : suggestions)
@@ -206,20 +247,32 @@ void RegisterPage::on_signUpButton_clicked()
                 message += "<a href=\"" + name + "\">" + name + "</a><br>";
             }
 
+            showUsernameError("Username already exists.");
+
             ui->usernameSuggestionLabel->setText(message);
 
             ui->usernameSuggestionLabel->show();
 
-            setUsernameErrorStyle();
+            return;
         }
 
-        else
+        if(errorMessage == "Email already exists."
+            || errorMessage == "Invalid email.")
         {
-            QMessageBox::warning(
-                this,
-                "Register",
-                errorMessage
-                );
+            showEmailError(errorMessage);
+            return;
+        }
+
+        if(errorMessage == "Passwords do not match.")
+        {
+            showConfirmPasswordError(errorMessage);
+            return;
+        }
+
+        if(errorMessage.contains("Password"))
+        {
+            showPasswordError(errorMessage);
+            return;
         }
     }
 }

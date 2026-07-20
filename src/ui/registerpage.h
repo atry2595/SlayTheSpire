@@ -30,6 +30,13 @@ private:
     void setUsernameNormalStyle();
     void setUsernameErrorStyle();
 
+    void showUsernameError(const QString &message);
+    void showEmailError(const QString &message);
+    void showPasswordError(const QString &message);
+    void showConfirmPasswordError(const QString &message);
+
+    void clearErrors();
+
 
 signals:
     void openLoginPage();
