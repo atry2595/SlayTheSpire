@@ -110,7 +110,8 @@ RegisterPage::RegisterPage(QWidget *parent)
             this,
             [this]()
             {
-                clearErrors();
+                ui->emailErrorLabel->hide();
+                setEmailNormalStyle();
             });
 
     connect(ui->passwordLineEdit,
@@ -118,7 +119,8 @@ RegisterPage::RegisterPage(QWidget *parent)
             this,
             [this]()
             {
-                clearErrors();
+                ui->passwordErrorLabel->hide();
+                setPasswordNormalStyle();
             });
 
     connect(ui->confirmPasswordLineEdit,
@@ -126,7 +128,8 @@ RegisterPage::RegisterPage(QWidget *parent)
             this,
             [this]()
             {
-                clearErrors();
+                ui->confirmPasswordErrorLabel->hide();
+                setConfirmPasswordNormalStyle();
             });
 
 }
@@ -159,7 +162,6 @@ void RegisterPage::clearFields()
     ui->confirmPasswordLineEdit->setEchoMode(QLineEdit::Password);
     passwordEyeAction->setIcon(QIcon(":/icon/login/eye_off.svg"));
     confirmEyeAction->setIcon(QIcon(":/icon/login/eye_off.svg"));
-    setUsernameNormalStyle();
 }
 
 void RegisterPage::setUsernameNormalStyle()
