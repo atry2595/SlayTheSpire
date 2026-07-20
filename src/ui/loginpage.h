@@ -28,6 +28,22 @@ private slots:
 private:
     Ui::LoginPage *ui;
     FileManager *fileManager = nullptr;
+    QAction *passwordEyeAction;
+
+    void showUsernameError(const QString &message);
+    void showPasswordError(const QString &message);
+
+    void setUsernameNormalStyle();
+    void setUsernameErrorStyle();
+
+    void setPasswordNormalStyle();
+    void setPasswordErrorStyle();
+
+    void showSuccess(const QString &message);
+
+    void clearErrors();
+
+    void clearFields();
 
 signals:
     void openRegisterPage();
