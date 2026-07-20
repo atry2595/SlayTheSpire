@@ -43,8 +43,6 @@ private:
 
     void clearErrors();
 
-    void clearFields();
-
 signals:
     void openRegisterPage();
     void openForgotPasswordPage();
