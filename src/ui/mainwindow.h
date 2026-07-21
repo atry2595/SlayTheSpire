@@ -30,6 +30,7 @@ private:
     LoginPage *loginPage;
     RegisterPage *registerPage;
     ForgotPasswordPage *forgotPasswordPage;
+    Menu *menuPage;
 
 };
 #endif // MAINWINDOW_H

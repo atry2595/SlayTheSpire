@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
     loginPage = new LoginPage();
     registerPage = new RegisterPage();
     forgotPasswordPage = new ForgotPasswordPage();
+    menuPage = new Menu();
 
     loginPage->setFileManager(fileManager);
     registerPage->setFileManager(fileManager);
@@ -22,8 +23,14 @@ MainWindow::MainWindow(QWidget *parent)
     stack->addWidget(loginPage);
     stack->addWidget(registerPage);
     stack->addWidget(forgotPasswordPage);
+    stack->addWidget(menuPage);
 
     setCentralWidget(stack);
+
+    connect(menuPage,
+            &Menu::exitGame,
+            this,
+            &QMainWindow::close);
 
     connect(loginPage,
             &LoginPage::openRegisterPage,
@@ -66,9 +73,7 @@ MainWindow::MainWindow(QWidget *parent)
             this,
             [this]()
             {
-                QMessageBox::information(this,
-                                         "Game",
-                                         "Main Menu will open here.");
+                stack->setCurrentWidget(menuPage);
             });
 
     stack->setCurrentWidget(loginPage);
