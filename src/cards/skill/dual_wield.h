@@ -11,6 +11,8 @@ protected:
     int base_count = 1;
     int count = 1;
 
+    QMetaObject::Connection cnt;
+
 public:
 
     dual_wield();

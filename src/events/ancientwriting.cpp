@@ -29,7 +29,7 @@ AncientWriting::AncientWriting(game_action& actions, ironclad* player)
         "The answer was elegance.\n"
         "Of course.");
 
-    elegance.actions = [player]()
+    elegance.actions = [=, &actions]()
     {
         std::vector<abstractCard*> selectable;
 
@@ -42,10 +42,16 @@ AncientWriting::AncientWriting(game_action& actions, ironclad* player)
         if (selectable.empty())
             return;
 
-        abstractCard* selected =ironclad::select_card(selectable);
+        emit actions.get_event()->selectCard(selectable);
+        connect(actions.get_event(), &combatEvent::cardSelected, this, [=](abstractCard* card){
 
-        player->deck_remove(selected);
-        delete selected;
+            if (card){
+                player->deck_remove(card);
+                delete card;
+            }
+
+        });
+
     };
 
     elegance.canUse = [](){ return true; };

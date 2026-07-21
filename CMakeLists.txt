@@ -581,6 +581,8 @@ add_executable(SlayTheSpire
     src/ui/infobar/combatinfobar.h src/ui/infobar/combatinfobar.cpp
     src/ui/relicbar/relicparent.cpp src/ui/relicbar/relicparent.h
     src/ui/entities/powerparent.cpp src/ui/entities/powerparent.h
+    src/ui/selectItem/selectcard.h src/ui/selectItem/selectcard.cpp
+    src/ui/selectItem/selectcard.h src/ui/selectItem/selectcard.cpp
 )
 
 target_include_directories(SlayTheSpire PRIVATE

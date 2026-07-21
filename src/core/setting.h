@@ -8,8 +8,29 @@ enum class language{
     Persian
 };
 
+enum class characters {
+    ironclad,
+    armoured_ironclad,
+    neon_ironclad,
+    ancient_ironclad,
+    cyberpunk_ironclad
+};
+
+enum class cardTemplates {
+    common,
+    ancient,
+    metallic,
+    toxic_blossom
+};
+
 struct setting {
     inline static language game_language = language::English;
+};
+
+struct combat_data {
+    inline static int player_count = 1;
+    inline static characters selected_character = characters::ironclad;
+    inline static cardTemplates selected_card_template = cardTemplates::common;
 };
 
 

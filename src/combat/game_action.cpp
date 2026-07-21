@@ -158,7 +158,3 @@ void game_action::heal(healInfo& info){
     emit event->hp_changed(info.owner, oldHP, newHP);
     emit event->entityUpdate(info.owner);
 }
-
-
-
-

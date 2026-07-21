@@ -43,7 +43,6 @@ protected:
     std::vector<abstractCard*> exhaust_pile;
 
 public:
-    static abstractCard* select_card(const std::vector<abstractCard*>&);
     static abstractCard* transformCard(abstractCard*);
 
     entityType get_type() override { return entityType::player; }

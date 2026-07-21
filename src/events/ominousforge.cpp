@@ -18,7 +18,7 @@ OminousForge::OminousForge(game_action& actions, ironclad* player) {
     UnknownNode forge_node;
     forge_node.title = tr("[Forge] Upgrade a card in your deck.");
     forge_node.description = tr("You decide to put the forge to use and...\nCLANG CLAAANG CLANG!\n...improve your arsenal!");
-    forge_node.actions = [player] () {
+    forge_node.actions = [player, &actions, this] () {
 
         std::vector<abstractCard*> unupgraded_card;
         for (auto item : player->get_deck()){
@@ -27,9 +27,17 @@ OminousForge::OminousForge(game_action& actions, ironclad* player) {
             }
         }
 
-        abstractCard* selected_card = ironclad::select_card(unupgraded_card);
-        selected_card->base_upgrade();
+        if (unupgraded_card.empty()) return;
+        emit actions.get_event()->selectCard(unupgraded_card);
+        connect(actions.get_event(), &combatEvent::cardSelected, this, [=](abstractCard* card){
+
+            if (card){
+                card->base_upgrade();
+            }
+
+        });
     };
+
     forge_node.canUse = [](){ return true; };
     forge_node.next_nodes = {-1};
 

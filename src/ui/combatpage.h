@@ -82,6 +82,8 @@ private slots:
     void potion_right_click(abstractPotion*);
     void relic_right_click(abstractRelic*);
     void power_right_click(abstractPower*);
+
+    void createSelectCard(std::vector<abstractCard*> cards);
 };
 
 #endif // COMBATPAGE_H

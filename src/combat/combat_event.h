@@ -81,6 +81,9 @@ signals:
 
     void barExit();
 
+    void cardSelected(abstractCard*);
+    void selectCard(std::vector<abstractCard*>);
+
 };
 
 #endif // COMBAT_EVENT_H

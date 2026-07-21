@@ -10,6 +10,8 @@ CardParent::CardParent(combatEvent* eve,
     event(eve),
     hover_z(z)
 {
+    setAcceptedMouseButtons(Qt::LeftButton);
+
     if (can_hover || can_select) {
         setFlag(QGraphicsItem::ItemIsMovable, true);
     }
@@ -38,8 +40,8 @@ void CardParent::mousePressEvent(QGraphicsSceneMouseEvent *event)
     if (can_select && can_hover){
         refreshTargetPos();
         hoverEnterEvent(nullptr);
-        emit this->event->cardPressed(this);
     }
+    emit this->event->cardPressed(this);
     QGraphicsObject::mousePressEvent(event);
 
 }

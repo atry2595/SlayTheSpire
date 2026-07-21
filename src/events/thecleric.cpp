@@ -52,7 +52,7 @@ TheCleric::TheCleric(game_action& actions, ironclad* player)
            "The creature grins.\n\n"
            "\"Cleric talented. Have a good day!\"");
 
-    purify.actions = [player]()
+    purify.actions = [player, &actions, this]()
     {
         player->lose_gold(50);
 
@@ -62,14 +62,18 @@ TheCleric::TheCleric(game_action& actions, ironclad* player)
             if (item->can_remove_from_deck()) pool.push_back(item);
         }
 
-        abstractCard* selected =
-            ironclad::select_card(pool);
 
-        if(selected)
-        {
-            player->deck_remove(selected);
-            delete selected;
-        }
+        if (pool.empty()) return;
+        emit actions.get_event()->selectCard(pool);
+        connect(actions.get_event(), &combatEvent::cardSelected, this, [=](abstractCard* card){
+
+            if (card){
+                player->deck_remove(card);
+                delete card;
+            }
+
+        });
+
     };
 
     purify.canUse = [player]()

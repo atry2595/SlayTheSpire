@@ -28,10 +28,18 @@ void warcry::play(playInfo& play_info){
 
     std::vector<abstractCard*> selectable = player->get_hand_pile();
 
-    abstractCard* card = ironclad::select_card(selectable);
 
-    player->hand_pile_remove(card, true);
-    player->draw_pile_add_by_index(card, true, 0);
+    if (selectable.empty()) return;
+    emit play_info.actions.get_event()->selectCard(selectable);
+    connect(play_info.actions.get_event(), &combatEvent::cardSelected, this, [=, &play_info](abstractCard* card){
+
+        if (card){
+            player->hand_pile_remove(card, true);
+            player->draw_pile_add_by_index(card, true, 0);
+            playInfo inf(play_info.actions);
+        }
+
+    });
 }
 
 void warcry::upgrade(){

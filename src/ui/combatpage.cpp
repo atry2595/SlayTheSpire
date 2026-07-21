@@ -11,6 +11,7 @@
 #include "core/setting.h"
 #include "ui/effects/damageeffect.h"
 #include "ui/effects/DamageParticleManager.h"
+#include "ui/selectItem/selectcard.h"
 
 //=================================================================================
 //=====================contructur and intializer functions=========================
@@ -116,6 +117,7 @@ CombatPage::CombatPage(QWidget *parent, combat_manager* m, ironclad* plyr)
     connect(eve, &combatEvent::potionRightButton, this, &CombatPage::potion_right_click);
     connect(eve, &combatEvent::relicRightButton, this, &CombatPage::relic_right_click);
     connect(eve, &combatEvent::powerRightButton, this, &CombatPage::power_right_click);
+    connect(eve, &combatEvent::selectCard, this, &CombatPage::createSelectCard);
     //----------------------------------------------------
 }
 
@@ -996,4 +998,12 @@ void CombatPage::power_right_click(abstractPower* ent) {
     info_bar = new CombatInfoBar(ent);
     combatScene->addItem(info_bar->getParent());
     info_bar->Entrance();
+}
+
+void CombatPage::createSelectCard(std::vector<abstractCard*> cards) {
+    auto sc = new selectCard(eve, cards);
+    combatScene->addItem(sc->getParent());
+    for (auto item : sc->getCards()){
+        combatScene->addItem(item->getParent());
+    }
 }
