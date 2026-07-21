@@ -12,3 +12,23 @@ Menu::~Menu()
 {
     delete ui;
 }
+
+void Menu::on_playButton_clicked()
+{
+    emit openPlayPage();
+}
+
+void Menu::on_statisticsButton_clicked()
+{
+    emit openStatisticsPage();
+}
+
+void Menu::on_settingsButton_clicked()
+{
+    emit openSettingsPage();
+}
+
+void Menu::on_exitButton_clicked()
+{
+    emit exitGame();
+}

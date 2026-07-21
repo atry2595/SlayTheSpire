@@ -18,6 +18,19 @@ public:
 
 private:
     Ui::Menu *ui;
+
+signals:
+    void openPlayPage();
+    void openStatisticsPage();
+    void openSettingsPage();
+    void exitGame();
+
+private slots:
+    void on_playButton_clicked();
+    void on_statisticsButton_clicked();
+    void on_settingsButton_clicked();
+    void on_exitButton_clicked();
+
 };
 
 #endif // MENU_H

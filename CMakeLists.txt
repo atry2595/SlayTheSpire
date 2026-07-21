@@ -295,7 +295,6 @@ add_executable(SlayTheSpire
     src/ui/forgotpasswordpage.h src/ui/forgotpasswordpage.cpp src/ui/forgotpasswordpage.ui
     src/core/setting.h
 
-    src/core/menu/menu.h src/core/menu/menu.cpp
     src/core/menu/menu.h src/core/menu/menu.cpp src/core/menu/menu.ui
 
     # Core
