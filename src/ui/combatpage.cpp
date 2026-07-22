@@ -123,9 +123,95 @@ CombatPage::CombatPage(QWidget *parent, combat_manager* m, ironclad* plyr)
     //----------------------------------------------------
 }
 
-CombatPage::~CombatPage() {
 
+//-------------- writed by Ai------------------
+CombatPage::~CombatPage() {
+    // Clean up entity corner effects
+    for (auto& pair : entity_corner_effect) {
+        if (pair.second) {
+            delete pair.second;
+            pair.second = nullptr;
+        }
+    }
+    entity_corner_effect.clear();
+
+    // Clean up created cards
+    for (auto& pair : created_cards) {
+        if (pair.second) {
+            delete pair.second;
+            pair.second = nullptr;
+        }
+    }
+    created_cards.clear();
+
+    // Clean up enemy items
+    for (auto enemy : enemies) {
+        if (enemy) {
+            delete enemy;
+            enemy = nullptr;
+        }
+    }
+    enemies.clear();
+
+    // Clean up player items
+    for (auto player : players) {
+        if (player) {
+            delete player;
+            player = nullptr;
+        }
+    }
+    players.clear();
+
+    // Clean up text items
+    if (draw_pile) {
+        delete draw_pile;
+        draw_pile = nullptr;
+    }
+    if (discard_pile) {
+        delete discard_pile;
+        discard_pile = nullptr;
+    }
+
+    // Clean up info bar if it exists
+    if (info_bar) {
+        delete info_bar;
+        info_bar = nullptr;
+    }
+
+    // Clean up top bar and relic bar
+    if (bar) {
+        delete bar;
+        bar = nullptr;
+    }
+    if (relic_bar) {
+        delete relic_bar;
+        relic_bar = nullptr;
+    }
+
+    // Clean up combat view and scene
+    if (combatScene) {
+        // QGraphicsScene will clean up its items when deleted
+        delete combatScene;
+        combatScene = nullptr;
+    }
+    if (combatView) {
+        delete combatView;
+        combatView = nullptr;
+    }
+
+    // Note: manager, player, and eve are likely owned elsewhere
+    // and should NOT be deleted here to avoid double deletion
+    manager = nullptr;
+    player = nullptr;
+    eve = nullptr;
+
+    // Clear the action queue
+    while (!action_queue.empty()) {
+        action_queue.pop();
+    }
+    queue_busy = false;
 }
+//-------------- writed by Ai------------------
 
 
 
