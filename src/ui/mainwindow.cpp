@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     forgotPasswordPage = new ForgotPasswordPage();
     menuPage = new Menu();
     playMenu = new PlayMenu();
+    statisticsMenu = new StatisticsMenu();
 
     loginPage->setFileManager(fileManager);
     registerPage->setFileManager(fileManager);
@@ -26,6 +27,7 @@ MainWindow::MainWindow(QWidget *parent)
     stack->addWidget(forgotPasswordPage);
     stack->addWidget(menuPage);
     stack->addWidget(playMenu);
+    stack->addWidget(statisticsMenu);
 
     setCentralWidget(stack);
 
@@ -78,7 +80,7 @@ MainWindow::MainWindow(QWidget *parent)
                 stack->setCurrentWidget(menuPage);
             });
 
-    connect(menu,
+    connect(menuPage,
             &Menu::openPlayPage,
             this,
             [this]()
@@ -91,7 +93,23 @@ MainWindow::MainWindow(QWidget *parent)
             this,
             [this]()
             {
-                stack->setCurrentWidget(menu);
+                stack->setCurrentWidget(menuPage);
+            });
+
+    connect(menuPage,
+            &Menu::openStatisticsPage,
+            this,
+            [this]()
+            {
+                stack->setCurrentWidget(statisticsMenu);
+            });
+
+    connect(statisticsMenu,
+            &StatisticsMenu::backToMenu,
+            this,
+            [this]()
+            {
+                stack->setCurrentWidget(menuPage);
             });
 
     stack->setCurrentWidget(loginPage);
