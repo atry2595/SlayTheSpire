@@ -7,6 +7,7 @@
 #include "registerpage.h"
 #include "forgotpasswordpage.h"
 #include "core/menu/playmenu.h"
+#include "core/menu/statisticsmenu.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -31,6 +32,7 @@ private:
     ForgotPasswordPage *forgotPasswordPage;
     Menu *menuPage;
     PlayMenu *playMenu;
+    StatisticsMenu *statisticsMenu;
 
 };
 #endif // MAINWINDOW_H
