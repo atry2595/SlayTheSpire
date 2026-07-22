@@ -6,20 +6,132 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1600</width>
+    <height>900</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="singlePlayerButton">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>180</y>
+      <width>231</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+    background: transparent;
+    border: none;
+
+    color: rgb(235,220,180);
+
+    font-family: &quot;Samantha&quot;;
+    font-size: 30px;
+    font-weight: bold;
+
+    text-align: left;
+
+    padding-left: 20px;
+}
+
+QPushButton:hover{
+    color: rgb(255,210,60);
+}
+
+QPushButton:pressed{
+    color: rgb(255,180,30);
+}</string>
+    </property>
+    <property name="text">
+     <string>Single Player</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="multiplayerButton">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>250</y>
+      <width>201</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+    background: transparent;
+    border: none;
+
+    color: rgb(235,220,180);
+
+    font-family: &quot;Samantha&quot;;
+    font-size: 30px;
+    font-weight: bold;
+
+    text-align: left;
+
+    padding-left: 20px;
+}
+
+QPushButton:hover{
+    color: rgb(255,210,60);
+}
+
+QPushButton:pressed{
+    color: rgb(255,180,30);
+}</string>
+    </property>
+    <property name="text">
+     <string>Multiplayer</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="backButton">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>330</y>
+      <width>111</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+    background: transparent;
+    border: none;
+
+    color: rgb(235,220,180);
+
+    font-family: &quot;Samantha&quot;;
+    font-size: 30px;
+    font-weight: bold;
+
+    text-align: left;
+
+    padding-left: 20px;
+}
+
+QPushButton:hover{
+    color: rgb(255,210,60);
+}
+
+QPushButton:pressed{
+    color: rgb(255,180,30);
+}</string>
+    </property>
+    <property name="text">
+     <string>Back</string>
+    </property>
+   </widget>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1600</width>
      <height>26</height>
     </rect>
    </property>

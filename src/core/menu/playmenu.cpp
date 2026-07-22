@@ -1,14 +1,14 @@
 #include "playmenu.h"
 #include "ui_playmenu.h"
 
-playmenu::playmenu(QWidget *parent)
+PlayMenu::PlayMenu(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::playmenu)
+    , ui(new Ui::PlayMenu)
 {
     ui->setupUi(this);
 }
 
-playmenu::~playmenu()
+PlayMenu::~PlayMenu()
 {
     delete ui;
 }
