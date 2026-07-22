@@ -12,3 +12,8 @@ PlayMenu::~PlayMenu()
 {
     delete ui;
 }
+
+void PlayMenu::on_backButton_clicked()
+{
+    emit backToMenu();
+}
