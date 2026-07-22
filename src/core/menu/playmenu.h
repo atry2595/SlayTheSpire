@@ -4,19 +4,25 @@
 #include <QMainWindow>
 
 namespace Ui {
-class playmenu;
+class PlayMenu;
 }
 
-class playmenu : public QMainWindow
+class PlayMenu : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit playmenu(QWidget *parent = nullptr);
-    ~playmenu();
+    explicit PlayMenu(QWidget *parent = nullptr);
+    ~PlayMenu();
+
+signals:
+    void backToMenu();
+
+private slots:
+    void on_backButton_clicked();
 
 private:
-    Ui::playmenu *ui;
+    Ui::PlayMenu *ui;
 };
 
 #endif // PLAYMENU_H

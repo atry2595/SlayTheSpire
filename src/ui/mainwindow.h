@@ -6,6 +6,7 @@
 #include <QMainWindow>
 #include "registerpage.h"
 #include "forgotpasswordpage.h"
+#include "core/menu/playmenu.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -29,6 +30,7 @@ private:
     RegisterPage *registerPage;
     ForgotPasswordPage *forgotPasswordPage;
     Menu *menuPage;
+    PlayMenu *playMenu;
 
 };
 #endif // MAINWINDOW_H

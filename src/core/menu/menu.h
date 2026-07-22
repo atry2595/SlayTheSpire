@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QMainWindow>
+#include "playmenu.h"
 
 namespace Ui {
 class Menu;
@@ -30,6 +31,7 @@ private slots:
     void on_statisticsButton_clicked();
     void on_settingsButton_clicked();
     void on_exitButton_clicked();
+    نف
 
 };
 
