@@ -10,6 +10,7 @@ ImageItem::ImageItem(QGraphicsItem* parent, QSizeF home_size, QPointF home_pos)
 
 
 void ImageItem::setPixmap(const QPixmap& pix) {
+    if (pix.cacheKey() == pixmap.cacheKey()) return;
     pixmap = pix;
     has_pixmap = true;
     update();

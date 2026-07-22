@@ -283,7 +283,7 @@ add_executable(SlayTheSpire
     src/categories/relics.h
     src/combat/manageCombat/combat_manager.cpp
     src/combat/manageCombat/combat_manager.h
-    src/combat/manageCombat/combatRewards.h
+    src/combat/manageCombat/combatrewards.h
     src/items/relics/black_star_relic.cpp src/items/relics/black_star_relic.h
     src/events/UnknownMap.h
     src/categories/unknowns.h
@@ -583,6 +583,8 @@ add_executable(SlayTheSpire
     src/ui/entities/powerparent.cpp src/ui/entities/powerparent.h
     src/ui/selectItem/selectcard.h src/ui/selectItem/selectcard.cpp
     src/ui/selectItem/selectcard.h src/ui/selectItem/selectcard.cpp
+    src/ui/selectItem/collectreward.cpp src/ui/selectItem/collectreward.h
+
 )
 
 target_include_directories(SlayTheSpire PRIVATE

@@ -12,6 +12,7 @@
 #include "ui/effects/damageeffect.h"
 #include "ui/effects/DamageParticleManager.h"
 #include "ui/selectItem/selectcard.h"
+#include "ui/selectItem/collectreward.h"
 
 //=================================================================================
 //=====================contructur and intializer functions=========================
@@ -35,7 +36,7 @@ CombatPage::CombatPage(QWidget *parent, combat_manager* m, ironclad* plyr)
     combatView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     combatView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     combatView->setFrameShape(QFrame::NoFrame);
-    combatView->setStyleSheet("background: red;");
+    combatView->setStyleSheet("background: black;");
 
     combatView->setRenderHint(QPainter::Antialiasing, true);
     combatView->setRenderHint(QPainter::SmoothPixmapTransform, true);
@@ -118,7 +119,12 @@ CombatPage::CombatPage(QWidget *parent, combat_manager* m, ironclad* plyr)
     connect(eve, &combatEvent::relicRightButton, this, &CombatPage::relic_right_click);
     connect(eve, &combatEvent::powerRightButton, this, &CombatPage::power_right_click);
     connect(eve, &combatEvent::selectCard, this, &CombatPage::createSelectCard);
+    connect(eve, &combatEvent::combat_ended, this, &CombatPage::createCollectReward);
     //----------------------------------------------------
+}
+
+CombatPage::~CombatPage() {
+
 }
 
 
@@ -1005,5 +1011,16 @@ void CombatPage::createSelectCard(std::vector<abstractCard*> cards) {
     combatScene->addItem(sc->getParent());
     for (auto item : sc->getCards()){
         combatScene->addItem(item->getParent());
+    }
+}
+
+void CombatPage::createCollectReward(combat_manager* mngr, bool vic){
+    if (vic && manager->get_rewards().find(player) != manager->get_rewards().end()) {
+        QTimer::singleShot(1000, [=]() {
+            enqueue([=](){
+                auto cr = new collectReward(eve, manager->get_rewards()[player], player);
+                combatScene->addItem(cr->getParent());
+            });
+        });
     }
 }

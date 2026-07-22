@@ -17,8 +17,8 @@ void slavers_collar_relic::added_time(game_action& actions){
 
     combat_start_connection = connect(actions.get_event(), &combatEvent::combat_started, this,
         [this, &actions](combat_manager* info){
-            if (info->get_type() == entityType::boss ||
-               info->get_type() == entityType::elite ){
+            if (info->get_type() == CombatType::boss ||
+               info->get_type() == CombatType::elite ){
                     available = true;
             }
         });

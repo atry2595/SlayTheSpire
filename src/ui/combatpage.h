@@ -19,7 +19,8 @@ class CombatPage : public QWidget
     Q_OBJECT
 
 public:
-    explicit CombatPage(QWidget *parent = nullptr, combat_manager* manager = nullptr, ironclad* plyr = nullptr);
+    CombatPage(QWidget *parent = nullptr, combat_manager* manager = nullptr, ironclad* plyr = nullptr);
+    ~CombatPage() override;
     void reset_layout();
     void escape_entity(abstractEntity*);
     void died_entity(abstractEntity*);
@@ -84,6 +85,7 @@ private slots:
     void power_right_click(abstractPower*);
 
     void createSelectCard(std::vector<abstractCard*> cards);
+    void createCollectReward(combat_manager*, bool);
 };
 
 #endif // COMBATPAGE_H

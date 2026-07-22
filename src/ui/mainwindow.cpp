@@ -2,8 +2,7 @@
 #include "ui_mainwindow.h"
 #include "combatpage.h"
 #include "entity/ironclad.h"
-#include "entity/the_champ.h"
-#include  "entity/small_slime.h"
+#include  "entity/hexaghost.h"
 #include "combat/combat_event.h"
 #include "combat/game_action.h"
 #include "items/potions/potionfactory.h"
@@ -26,9 +25,9 @@ MainWindow::MainWindow(QWidget *parent)
     pl->add_relic(acts, RelicFactory::createRelic(relicID::blood_vial, pl));
     pl->add_relic(acts, RelicFactory::createRelic(relicID::gremlin_horn, pl));
     pl->add_relic(acts, RelicFactory::createRelic(relicID::centennial_puzzle, pl));
-    auto en1 = the_champ::create(acts);
-    auto en2 = small_slime::create(acts);
-    combat_manager* com = new combat_manager({pl}, {en1, en2}, entityType::monster, eve);
+    auto en2 = hexaghost::create(acts);
+    auto en1 = hexaghost::create(acts);
+    combat_manager* com = new combat_manager({pl}, {en2, en1}, CombatType::monster, eve);
     auto cp = new CombatPage(nullptr, com, pl);
 
 

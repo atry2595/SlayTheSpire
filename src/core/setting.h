@@ -28,6 +28,7 @@ struct setting {
 };
 
 struct combat_data {
+    inline static int floor = 0;
     inline static int player_count = 1;
     inline static characters selected_character = characters::ironclad;
     inline static cardTemplates selected_card_template = cardTemplates::common;

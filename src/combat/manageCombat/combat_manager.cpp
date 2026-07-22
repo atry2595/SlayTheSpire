@@ -8,7 +8,7 @@
 
 combat_manager::combat_manager(std::vector<ironclad*> players_init,
                                std::vector<abstractEnemy*> enemies_init,
-                               entityType type, combatEvent* eve)
+                               CombatType type, combatEvent* eve)
     :players(players_init),
     enemies(enemies_init),
     combat_type(type),
@@ -17,7 +17,6 @@ combat_manager::combat_manager(std::vector<ironclad*> players_init,
 {
     for (int i = 0; i < players.size(); i++) {
         player_is_alive.push_back(players[i]->get_hp() > 0);
-        rewards.push_back({});
     }
     for (int i = 0; i < enemies.size(); i++) enemy_is_alive.push_back(true);
 
@@ -64,8 +63,10 @@ combat_manager::combat_manager(std::vector<ironclad*> players_init,
 
 
     connect(event, &combatEvent::turn_ended, this, [=](abstractEntity*){
-        next_turn();
+        if (!combat_finished())next_turn();
     });
+    connect(event, &combatEvent::entity_removed, this, &combat_manager::check_end);
+    connect(event, &combatEvent::entity_escape, this, &combat_manager::check_end);
 
 }
 
@@ -145,10 +146,6 @@ void combat_manager::turn_start() {
 void combat_manager::turn_end() {
 
 
-    if (combat_finished()){
-        combat_end();
-        return;
-    }
 
     if (current_phase == TurnPhase::player) {
         if (current_player < players.size()) {
@@ -254,53 +251,6 @@ void combat_manager::add_enemy(abstractEnemy* enmy, int index){
 }
 
 
-
-void combat_manager::add_returned_coin_reward(abstractEntity* player, int coin) {
-    for (size_t i = 0; i < players.size(); ++i) {
-        if (players[i] == player && player_is_alive[i]) {
-            rewards[i].returned_coin += coin;
-            return;
-        }
-    }
-}
-
-void combat_manager::add_coin_to_reward(abstractEntity* player, int coin) {
-    for (size_t i = 0; i < players.size(); ++i) {
-        if (players[i] == player && player_is_alive[i]) {
-            rewards[i].coin += coin;
-            return;
-        }
-    }
-}
-
-void combat_manager::add_card_to_reward(abstractEntity* player, abstractCard* card) {
-    for (size_t i = 0; i < players.size(); ++i) {
-        if (players[i] == player && player_is_alive[i]) {
-            rewards[i].card.push_back(card);
-            return;
-        }
-    }
-}
-
-void combat_manager::add_relic_to_reward(abstractEntity* player, abstractRelic* relic) {
-    for (size_t i = 0; i < players.size(); ++i) {
-        if (players[i] == player && player_is_alive[i]) {
-            rewards[i].relic.push_back(relic);
-            return;
-        }
-    }
-}
-
-void combat_manager::add_potion_to_reward(abstractEntity* player, abstractPotion* potion) {
-    for (size_t i = 0; i < players.size(); ++i) {
-        if (players[i] == player && player_is_alive[i]) {
-            rewards[i].potion.push_back(potion);
-            return;
-        }
-    }
-}
-
-
 void combat_manager::calculate_rewards() {
     RNG& rng = RNG::instance();
 
@@ -310,118 +260,138 @@ void combat_manager::calculate_rewards() {
     std::vector<relicID> uncommons = uncommon_relic;
     std::vector<relicID> commons = common_relic;
 
-    rng.shuffle(rares);
-    rng.shuffle(uncommons);
-    rng.shuffle(commons);
-
-    std::vector<relicID> selected;
-    auto take_from_pool = [&](std::vector<relicID>& pool, abstractEntity* player) -> bool {
-        for (auto item : pool) {
-
-            if (player->get_spec_relic(item) != nullptr)
-                continue;
-
-            if (std::find(selected.begin(), selected.end(), item) != selected.end())
-                continue;
-
-            selected.push_back(item);
-            return true;
-        }
-        return false;
-    };
-
 
 
     for (int i = 0; i<players.size(); i++){
 
         if (player_is_alive[i] == false) continue;
 
+        combatReward* rew = new combatReward();
+        std::vector<relicID> rlcs;
+        std::vector<cardID> crds;
 
-        switch(combat_type){
+        switch(combat_type) {
 
-        case(entityType::monster):{
-            add_coin_to_reward(players[i], rng.randint(15, 25));
+        case(CombatType::monster):{
+            rew->add_gold(rng.randint(15, 25));
 
             if (rng.chance(0.3)) {
-                auto pot_vec = common_potions;
+                std::vector<potionID> pot_vec;
+                if (rng.chance(0.1)) pot_vec = rare_potions;
+                else if (rng.chance(0.1 + 0.15)) pot_vec = uncommon_potions;
+                else pot_vec = common_potions;
                 potionID np = rng.choice(pot_vec);
-                add_potion_to_reward(players[i], PotionFactory::createPotion(np, players[i]));
+                rew->add_potion(PotionFactory::createPotion(np, players[i]));
             }
 
-            for (int j = 0; j<3; j++){
-                auto card_vec = non_rare_cards;
-                abstractCard* nc = CardFactory::createCard(rng.choice(card_vec));
-                if (rng.chance(0.1)) nc->base_upgrade();
-                add_card_to_reward(players[i], nc);
+            std::vector<double> w;
+            for (auto item : non_rare_cards){
+                crds.push_back(item);
+                w.push_back(1);
             }
+            for (auto item : rare_cards) {
+                crds.push_back(item);
+                w.push_back(7);
+            }
+
+            auto selected = rng.weighted_sample(crds, w, reward_card_count);
+            std::vector<abstractCard*> to_cards;
+
+            for (auto item : selected){
+                abstractCard* created_card = CardFactory::createCard(item);
+                if (rng.chance(combat_data::floor / 75.0)) created_card->base_upgrade();
+                to_cards.push_back(created_card);
+            }
+            rew->add_cards(to_cards);
 
             break;
         }
 
-        case(entityType::elite):{
-            add_coin_to_reward(players[i], rng.randint(30, 40));
+        case(CombatType::elite):{
+            rew->add_gold(rng.randint(15, 25));
+
+            if (rng.chance(0.4)) {
+                std::vector<potionID> pot_vec;
+                if (rng.chance(0.15)) pot_vec = rare_potions;
+                else if (rng.chance(0.15 + 0.18)) pot_vec = uncommon_potions;
+                else pot_vec = common_potions;
+                potionID np = rng.choice(pot_vec);
+                rew->add_potion(PotionFactory::createPotion(np, players[i]));
+            }
+
+            std::vector<double> w;
+            for (auto item : non_rare_cards){
+                crds.push_back(item);
+                w.push_back(1);
+            }
+            for (auto item : rare_cards) {
+                crds.push_back(item);
+                w.push_back(5);
+            }
+
+            auto selected = rng.weighted_sample(crds, w, reward_card_count);
+            std::vector<abstractCard*> to_cards;
+
+            for (auto item : selected){
+                abstractCard* created_card = CardFactory::createCard(item);
+                if (rng.chance(combat_data::floor / 50.0)) created_card->base_upgrade();
+                to_cards.push_back(created_card);
+            }
+            rew->add_cards(to_cards);
+
+
+            std::vector<double> wei;
+            for (auto item : common_relic){
+                if (!players[i]->get_spec_relic(item)) continue;
+                rlcs.push_back(item);
+                wei.push_back(6);
+            }
+            for (auto item : uncommon_relic) {
+                if (!players[i]->get_spec_relic(item)) continue;
+                rlcs.push_back(item);
+                wei.push_back(3);
+            }
+            for (auto item : rare_relic) {
+                if (!players[i]->get_spec_relic(item)) continue;
+                rlcs.push_back(item);
+                wei.push_back(1);
+            }
+
+            auto selected2 = rng.weighted_sample(rlcs, wei, reward_elite_relic_count);;
+
+            for (auto item : selected2){
+                abstractRelic* created_relic = RelicFactory::createRelic(item, players[i]);
+                rew->add_relic(created_relic);
+            }
+
+
+
+            break;
+        }
+
+        case(CombatType::boss):{
+            rew->add_gold(80);
 
             if (rng.chance(0.6)) {
-                auto pot_vec = common_potions;
-                if (rng.chance(0.4)) pot_vec = uncommon_potions;
-                if (rng.chance(0.05)) pot_vec = rare_potions;
-
+                std::vector<potionID> pot_vec;
+                if (rng.chance(0.2)) pot_vec = rare_potions;
+                else if (rng.chance(0.2 + 0.3)) pot_vec = uncommon_potions;
+                else pot_vec = common_potions;
                 potionID np = rng.choice(pot_vec);
-                add_potion_to_reward(players[i], PotionFactory::createPotion(np, players[i]));
+                rew->add_potion(PotionFactory::createPotion(np, players[i]));
             }
 
-            for (int j = 0; j<3; j++){
-                auto card_vec = non_rare_cards;
-                abstractCard* nc = CardFactory::createCard(rng.choice(card_vec));
-                if (rng.chance(0.33)) nc->base_upgrade();
-                add_card_to_reward(players[i], nc);
+            crds = rare_cards;
+
+            auto selected = rng.sample(crds, reward_card_count);
+            std::vector<abstractCard*> to_cards;
+
+            for (auto item : selected){
+                abstractCard* created_card = CardFactory::createCard(item);
+                if (rng.chance(combat_data::floor / 75.0)) created_card->base_upgrade();
+                to_cards.push_back(created_card);
             }
-
-            selected.clear();
-            {
-                if (rng.chance(0.4)) {
-                    if (!take_from_pool(uncommons, players[i]))
-                        take_from_pool(commons, players[i]);
-                }
-
-                else {
-                    take_from_pool(commons, players[i]);
-                }
-
-                add_relic_to_reward(players[i], RelicFactory::createRelic(selected[0], players[i]));
-            }
-
-            break;
-        }
-
-        case(entityType::boss):{
-            add_coin_to_reward(players[i], 80);
-
-            if (rng.chance(0.8)) {
-                auto pot_vec = common_potions;
-                if (rng.chance(0.4)) pot_vec = uncommon_potions;
-                if (rng.chance(0.15)) pot_vec = rare_potions;
-
-                potionID np = rng.choice(pot_vec);
-                add_potion_to_reward(players[i], PotionFactory::createPotion(np, players[i]));
-            }
-
-            for (int j = 0; j<3; j++){
-                auto card_vec = rare_cards;
-                abstractCard* nc = CardFactory::createCard(rng.choice(card_vec));
-                if (rng.chance(0.15)) nc->base_upgrade();
-                add_card_to_reward(players[i], nc);
-            }
-
-
-            selected.clear();
-            for (int j = 0; j<3; j++){
-                if (!take_from_pool(rares, players[i]))
-                    if (!take_from_pool(uncommons, players[i]))
-                        take_from_pool(commons, players[i]);
-
-                add_relic_to_reward(players[i], RelicFactory::createRelic(selected[j], players[i]));
-            }
+            rew->add_cards(to_cards);
 
             break;
         }
@@ -429,9 +399,15 @@ void combat_manager::calculate_rewards() {
         default:
             break;
         }
+
+        rewards[players[i]] = rew;
     }
 }
 
 
-
+void combat_manager::check_end() {
+    if (combat_finished()) {
+        combat_end();
+    }
+}
 

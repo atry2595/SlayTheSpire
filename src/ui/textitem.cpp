@@ -18,6 +18,7 @@ TextItem::TextItem(QGraphicsItem* parent,
 
 void TextItem::setText(const QString& t)
 {
+    if (has_text && text == t) return;
     has_text = true;
     text = t;
     renderText();
@@ -33,6 +34,7 @@ void TextItem::setFont(const QFont& f)
 
 void TextItem::setColor(const QColor& c)
 {
+    if (color == c) return;
     color = c;
     renderText();
     update();

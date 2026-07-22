@@ -84,6 +84,8 @@ signals:
     void cardSelected(abstractCard*);
     void selectCard(std::vector<abstractCard*>);
 
+    void nextAction();
+
 };
 
 #endif // COMBAT_EVENT_H

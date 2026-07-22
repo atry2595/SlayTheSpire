@@ -17,11 +17,10 @@ QString preserved_insect_relic::generate_description(){
 void preserved_insect_relic::added_time(game_action& actions){
     start_combat_connection = connect(actions.get_event(), &combatEvent::combat_started, this,
         [this, &actions](combat_manager* combat){
-        if (combat->get_type() == entityType::elite){
+        if (combat->get_type() == CombatType::elite){
 
             for (auto item : combat->get_enemies()){
                 int newHP = item->get_max_hp() * 0.75;
-                item->set_max_hp(newHP);
                 item->set_hp(newHP);
             }
 
