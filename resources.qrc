@@ -260,4 +260,7 @@
         <file alias="eye.svg">assests/image/icon/login/eye.svg</file>
         <file alias="eye_off.svg">assests/image/icon/login/eye_off.svg</file>
     </qresource>
+    <qresource prefix="/image/back">
+        <file alias="back1">assests/image/back/IMG_6654.jpg</file>
+    </qresource>
 </RCC>

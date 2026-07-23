@@ -1,10 +1,15 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-#include <QStackedWidget>
-#include "loginpage.h"
+
 #include <QMainWindow>
+#include <QStackedWidget>
+#include <QTableWidget>
+#include <QHeaderView>
+#include "loginpage.h"
 #include "registerpage.h"
 #include "forgotpasswordpage.h"
+#include "core/login/leaderboard.h"
+#include "core/login/leaderboard.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -21,26 +26,25 @@ public:
     ~MainWindow();
 
 private slots:
-
     void on_playButton_clicked();
     void on_statisticsButton_clicked();
     void on_settingsButton_clicked();
     void on_exitButton_clicked();
 
     void on_backButton_clicked();
-
     void on_backButton_2_clicked();
     void on_leaderBoardButton_clicked();
-
     void on_backButton_3_clicked();
+
+    void updateLeaderboardUI();
 
 private:
     Ui::MainWindow *ui;
 
     FileManager *fileManager;
+    Leaderboard *leaderboard;
 
     QStackedWidget *authStack;
-
     QStackedWidget *mainStack;
 
     LoginPage *loginPage;
@@ -48,7 +52,7 @@ private:
     ForgotPasswordPage *forgotPasswordPage;
 
     void showMainMenu();
+    void setupLeaderboardTable();
 };
-
 
 #endif // MAINWINDOW_H
