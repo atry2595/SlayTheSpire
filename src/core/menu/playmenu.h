@@ -1,4 +1,4 @@
-#ifndef PLAYMENU_H
+/* #ifndef PLAYMENU_H
 #define PLAYMENU_H
 
 #include <QMainWindow>
@@ -25,4 +25,4 @@ private slots:
     void on_backButton_clicked();
 };
 
-#endif
+#endif  */

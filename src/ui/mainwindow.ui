@@ -6,21 +6,695 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1600</width>
+    <height>900</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="backgroundLabel">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1600</width>
+      <height>900</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+    <widget class="QFrame" name="menuFrame">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>1600</width>
+       <height>900</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Shape::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Shadow::Raised</enum>
+     </property>
+     <widget class="QPushButton" name="exitButton">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>184</y>
+        <width>219</width>
+        <height>60</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>60</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>500</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::FocusPolicy::NoFocus</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+    background: transparent;
+    border: none;
+
+    color: rgb(235,220,180);
+
+    font-family: &quot;Samantha&quot;;
+    font-size: 30px;
+    font-weight: bold;
+
+    text-align: left;
+
+    padding-left: 20px;
+}
+
+QPushButton:hover{
+    color: rgb(255,210,60);
+}
+
+QPushButton:pressed{
+    color: rgb(255,180,30);
+}</string>
+      </property>
+      <property name="text">
+       <string>Exit</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="settingsButton">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>117</y>
+        <width>219</width>
+        <height>60</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>60</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>500</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::FocusPolicy::NoFocus</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+    background: transparent;
+    border: none;
+
+    color: rgb(235,220,180);
+
+    font-family: &quot;Samantha&quot;;
+    font-size: 30px;
+    font-weight: bold;
+
+    text-align: left;
+
+    padding-left: 20px;
+}
+
+QPushButton:hover{
+    color: rgb(255,210,60);
+}
+
+QPushButton:pressed{
+    color: rgb(255,180,30);
+}</string>
+      </property>
+      <property name="text">
+       <string>Settings</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="statisticsButton">
+      <property name="geometry">
+       <rect>
+        <x>78</x>
+        <y>50</y>
+        <width>211</width>
+        <height>60</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>60</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>500</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::FocusPolicy::NoFocus</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+    background: transparent;
+    border: none;
+
+    color: rgb(235,220,180);
+
+    font-family: &quot;Samantha&quot;;
+    font-size: 30px;
+    font-weight: bold;
+
+    text-align: left;
+
+    padding-left: 20px;
+}
+
+QPushButton:hover{
+    color: rgb(255,210,60);
+}
+
+QPushButton:pressed{
+    color: rgb(255,180,30);
+}</string>
+      </property>
+      <property name="text">
+       <string>Statistics</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="playButton">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>251</y>
+        <width>219</width>
+        <height>60</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>60</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>500</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::FocusPolicy::NoFocus</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+    background: transparent;
+    border: none;
+
+    color: rgb(235,220,180);
+
+    font-family: &quot;Samantha&quot;;
+    font-size: 30px;
+    font-weight: bold;
+
+    text-align: left;
+
+    padding-left: 20px;
+}
+
+QPushButton:hover{
+    color: rgb(255,210,60);
+}
+
+QPushButton:pressed{
+    color: rgb(255,180,30);
+}</string>
+      </property>
+      <property name="text">
+       <string>Play</string>
+      </property>
+     </widget>
+    </widget>
+   <widget class="QFrame" name="darkOverlay">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>10</y>
+      <width>1600</width>
+      <height>900</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(0,0,0,140);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Shape::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Shadow::Raised</enum>
+    </property>
+    <widget class="QFrame" name="playFrame">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>1600</width>
+       <height>900</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Shape::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Shadow::Raised</enum>
+     </property>
+     <widget class="QPushButton" name="multiplayerButton">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>73</y>
+        <width>217</width>
+        <height>36</height>
+       </rect>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::FocusPolicy::NoFocus</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+    background: transparent;
+    border: none;
+
+    color: rgb(235,220,180);
+
+    font-family: &quot;Samantha&quot;;
+    font-size: 30px;
+    font-weight: bold;
+
+    text-align: left;
+
+    padding-left: 20px;
+}
+
+QPushButton:hover{
+    color: rgb(255,210,60);
+}
+
+QPushButton:pressed{
+    color: rgb(255,180,30);
+}</string>
+      </property>
+      <property name="text">
+       <string>Multiplayer</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="backButton">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>116</y>
+        <width>217</width>
+        <height>36</height>
+       </rect>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::FocusPolicy::NoFocus</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+    background: transparent;
+    border: none;
+
+    color: rgb(235,220,180);
+
+    font-family: &quot;Samantha&quot;;
+    font-size: 30px;
+    font-weight: bold;
+
+    text-align: left;
+
+    padding-left: 20px;
+}
+
+QPushButton:hover{
+    color: rgb(255,210,60);
+}
+
+QPushButton:pressed{
+    color: rgb(255,180,30);
+}</string>
+      </property>
+      <property name="text">
+       <string>Back</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="singlePlayerButton">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>30</y>
+        <width>217</width>
+        <height>36</height>
+       </rect>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::FocusPolicy::NoFocus</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+    background: transparent;
+    border: none;
+
+    color: rgb(235,220,180);
+
+    font-family: &quot;Samantha&quot;;
+    font-size: 30px;
+    font-weight: bold;
+
+    text-align: left;
+
+    padding-left: 20px;
+}
+
+QPushButton:hover{
+    color: rgb(255,210,60);
+}
+
+QPushButton:pressed{
+    color: rgb(255,180,30);
+}</string>
+      </property>
+      <property name="text">
+       <string>Single Player</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QFrame" name="statisticsFrame">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>1600</width>
+       <height>900</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Shape::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Shadow::Raised</enum>
+     </property>
+     <widget class="QPushButton" name="leaderBoardButton">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>93</y>
+        <width>349</width>
+        <height>36</height>
+       </rect>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::FocusPolicy::NoFocus</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+    background: transparent;
+    border: none;
+
+    color: rgb(235,220,180);
+
+    font-family: &quot;Samantha&quot;;
+    font-size: 30px;
+    font-weight: bold;
+
+    text-align: left;
+
+    padding-left: 20px;
+}
+
+QPushButton:hover{
+    color: rgb(255,210,60);
+}
+
+QPushButton:pressed{
+    color: rgb(255,180,30);
+}</string>
+      </property>
+      <property name="text">
+       <string>Leader Board</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="backButton_2">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>179</y>
+        <width>349</width>
+        <height>36</height>
+       </rect>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::FocusPolicy::NoFocus</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+    background: transparent;
+    border: none;
+
+    color: rgb(235,220,180);
+
+    font-family: &quot;Samantha&quot;;
+    font-size: 30px;
+    font-weight: bold;
+
+    text-align: left;
+
+    padding-left: 20px;
+}
+
+QPushButton:hover{
+    color: rgb(255,210,60);
+}
+
+QPushButton:pressed{
+    color: rgb(255,180,30);
+}</string>
+      </property>
+      <property name="text">
+       <string>Back</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="bookletButton">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>136</y>
+        <width>349</width>
+        <height>36</height>
+       </rect>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::FocusPolicy::NoFocus</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+    background: transparent;
+    border: none;
+
+    color: rgb(235,220,180);
+
+    font-family: &quot;Samantha&quot;;
+    font-size: 30px;
+    font-weight: bold;
+
+    text-align: left;
+
+    padding-left: 20px;
+}
+
+QPushButton:hover{
+    color: rgb(255,210,60);
+}
+
+QPushButton:pressed{
+    color: rgb(255,180,30);
+}</string>
+      </property>
+      <property name="text">
+       <string>Booklet (OP)</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="personalStatisticsButton">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>50</y>
+        <width>349</width>
+        <height>36</height>
+       </rect>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::FocusPolicy::NoFocus</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+    background: transparent;
+    border: none;
+
+    color: rgb(235,220,180);
+
+    font-family: &quot;Samantha&quot;;
+    font-size: 30px;
+    font-weight: bold;
+
+    text-align: left;
+
+    padding-left: 20px;
+}
+
+QPushButton:hover{
+    color: rgb(255,210,60);
+}
+
+QPushButton:pressed{
+    color: rgb(255,180,30);
+}</string>
+      </property>
+      <property name="text">
+       <string>Personal Statistics</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QFrame" name="leaderboardFrame">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>1600</width>
+       <height>900</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Shape::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Shadow::Raised</enum>
+     </property>
+     <widget class="QLabel" name="leaderboardLabel">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>63</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="backButton_3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>40</y>
+        <width>217</width>
+        <height>36</height>
+       </rect>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::FocusPolicy::NoFocus</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+    background: transparent;
+    border: none;
+
+    color: rgb(235,220,180);
+
+    font-family: &quot;Samantha&quot;;
+    font-size: 30px;
+    font-weight: bold;
+
+    text-align: left;
+
+    padding-left: 20px;
+}
+
+QPushButton:hover{
+    color: rgb(255,210,60);
+}
+
+QPushButton:pressed{
+    color: rgb(255,180,30);
+}</string>
+      </property>
+      <property name="text">
+       <string>Back</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
-     <height>27</height>
+     <width>1600</width>
+     <height>26</height>
     </rect>
    </property>
   </widget>
