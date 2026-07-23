@@ -9,7 +9,7 @@
 #include "registerpage.h"
 #include "forgotpasswordpage.h"
 #include "core/login/leaderboard.h"
-#include "core/login/leaderboard.h"
+#include "core/login/filemanager.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
