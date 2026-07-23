@@ -547,7 +547,7 @@ add_executable(SlayTheSpire
 
     src/ui/cards/cardparent.cpp src/ui/cards/cardparent.h
     src/ui/cards/cardtemplatecommon.h src/ui/cards/cardtemplatecommon.cpp
-    src/ui/cards/getCardPixmap.h
+
     src/core/setting.h
     src/ui/cards/cardtemplateuncommon.cpp src/ui/cards/cardtemplateuncommon.h
     src/ui/cards/cardtemplaterare.cpp src/ui/cards/cardtemplaterare.h
@@ -556,15 +556,15 @@ add_executable(SlayTheSpire
     src/ui/entities/entityparent.h src/ui/entities/entityparent.cpp
     src/ui/entities/abstractentityitem.h src/ui/entities/abstractentityitem.cpp
     src/ui/entities/ironcladitem.h src/ui/entities/ironcladitem.cpp
-    src/ui/entities/getCharacterPixmap.h
-    src/ui/entities/getPowerIcon.h
 
-    src/ui/entities/getIntentIcon.h
+
+
+
 
 
     src/ui/entities/getvisualdata.h
     src/ui/entities/enemyitem.cpp src/ui/entities/enemyitem.h
-    src/ui/entities/getPotionIcon.h
+
     src/ui/cards/abstractcardtemplate.h src/ui/cards/abstractcardtemplate.cpp
     src/ui/effects/abstracteffect.h
     src/ui/effects/entitycornersframe.h src/ui/effects/entitycornersframe.cpp
@@ -574,7 +574,7 @@ add_executable(SlayTheSpire
     src/ui/topbar/combattopbar.h src/ui/topbar/combattopbar.cpp
     src/items/relics/spirit_poop_relic.cpp src/items/relics/spirit_poop_relic.h
     src/ui/relicbar/relicbar.h src/ui/relicbar/relicbar.cpp
-    src/ui/relicbar/getRelicImage.h
+
     src/ui/entities/potionparent.h src/ui/entities/potionparent.cpp
     src/ui/infobar/abstractinfobar.h
     src/ui/infobar/infobarparent.h src/ui/infobar/infobarparent.cpp
@@ -584,6 +584,7 @@ add_executable(SlayTheSpire
     src/ui/selectItem/selectcard.h src/ui/selectItem/selectcard.cpp
     src/ui/selectItem/selectcard.h src/ui/selectItem/selectcard.cpp
     src/ui/selectItem/collectreward.cpp src/ui/selectItem/collectreward.h
+    src/assetsManager/imagemanager.h src/assetsManager/imagemanager.cpp
 
 )
 

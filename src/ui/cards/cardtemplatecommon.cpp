@@ -1,23 +1,26 @@
 #include "cardtemplatecommon.h"
-#include "ui/cards/getCardPixmap.h"
 #include "core/setting.h"
+#include "assetsManager/imagemanager.h"
 #include <QParallelAnimationGroup>
 
 CardTemplateCommon::CardTemplateCommon(combatEvent* eve, abstractCard* source, QPointF pos, QSizeF size, qreal z_value)
     : abstractCardTemplate(eve, source, pos, size, z_value)
 {
+
+    auto mng = imageManager::instance();
+
     qreal w = card_size.width();
     qreal h = card_size.height();
 
 
     card_frame = new ImageItem(card_parent, card_size, {0, 0});
-    card_frame->setPixmap(getCardFrame(source->get_card_type()));
+    card_frame->setPixmap(mng.getCardFrame(cardTemplates::common, source->get_card_type()));
     card_frame->setZValue(zValue + 1);
 
 
 
     card_image = new ImageItem(card_parent, {0.931 * w, 0.931 * h}, {0.034 * w, 0.0486 * h});
-    card_image->setPixmap(getCardPixmap(source->get_card_id()));
+    card_image->setPixmap(mng.getCardImage(source->get_card_id()));
     card_image->setZValue(zValue);
 
 

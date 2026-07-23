@@ -1,11 +1,14 @@
 #include "combattopbar.h"
 #include "core/setting.h"
+#include "assetsManager/imagemanager.h"
 #include <QGraphicsProxyWidget>
 
 CombatTopBar::CombatTopBar(combatEvent* event, ironclad* player)
     :eve(event)
     ,player(player)
 {
+    auto mng = imageManager::instance();
+
     QFont f;
     f.setFamily((setting::game_language == language::English) ? (Fonts::Cascadia) : (Fonts::koodak));
     f.setPixelSize(22);
@@ -15,14 +18,14 @@ CombatTopBar::CombatTopBar(combatEvent* event, ironclad* player)
     parent->setZValue(11000);
 
     gold_image = new ImageItem(parent, {45, 45}, {50, 10});
-    gold_image->setPixmap(QPixmap(":/icon/coin.ico"));
+    gold_image->setPixmap(mng.getIcon("gold"));
 
     gold_amount = new TextItem(parent, {100, 45}, {100, 10});
     gold_amount->setFont(f);
 
 
     hp_image = new ImageItem(parent, {45, 45}, {250, 10});
-    hp_image->setPixmap(QPixmap(":/icon/heart.png"));
+    hp_image->setPixmap(mng.getIcon("heart"));
 
     hp_amount = new TextItem(parent, {100, 45}, {300, 10});
     hp_amount->setFont(f);

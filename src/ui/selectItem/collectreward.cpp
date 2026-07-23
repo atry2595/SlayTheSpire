@@ -1,16 +1,18 @@
 #include "collectreward.h"
 #include "core/setting.h"
 #include <QTimer>
-#include "ui/entities/getPotionIcon.h"
-#include "ui/relicbar/getRelicImage.h"
+#include "assetsManager/imagemanager.h"
 #include "items/potions/abstractpotion.h"
 #include "items/relics/abstractrelic.h"
+#include "core/setting.h"
 
 collectReward::collectReward(combatEvent* eve, combatReward* reward, ironclad* plyr)
     :event(eve)
     ,rew(reward)
     ,player(plyr)
 {
+    auto mng = imageManager::instance();
+
     QString blank_css =
         "QPushButton{background:transparent;border:none;padding:0px;margin:0px;}"
         "QPushButton:hover{background:transparent;}"
@@ -44,11 +46,11 @@ collectReward::collectReward(combatEvent* eve, combatReward* reward, ironclad* p
     txt.setPixelSize(20);
 
     if (rew->get_returned_gold()) {
-        auto rgp = new BaseItem(parent, {400, 70}, QPointF(600, 325 + 90 * all_base.size()));
+        auto rgp = new BaseItem(parent, {400, 70}, QPointF(600, 175 + 90 * all_base.size()));
         auto rgi = new ImageItem(rgp, {70, 70}, {0, 0});
-        rgi->setPixmap(QPixmap(":/icon/coin.ico"));
+        rgi->setPixmap(mng.getIcon("coin"));
         auto rgt = new TextItem(rgp, {300, 70}, {100, 0});
-        rgt->setText(QString::number(rew->get_returned_gold()) + tr(" gold (stolen back"));
+        rgt->setText(QString::number(rew->get_returned_gold()) + tr(" gold (stolen back)"));
         rgt->setFont(txt);
         rgt->setAlignment(Qt::AlignVCenter | Qt::AlignLeft);
         all_base.push_back(rgp);
@@ -57,7 +59,7 @@ collectReward::collectReward(combatEvent* eve, combatReward* reward, ironclad* p
     if (rew->get_gold()) {
         auto gp = new BaseItem(parent, {400, 70}, QPointF(600, 175 + 90 * all_base.size()));
         auto gi = new ImageItem(gp, {70, 70}, {0, 0});
-        gi->setPixmap(QPixmap(":/icon/coin.ico"));
+        gi->setPixmap(mng.getIcon("coin"));
         auto gt = new TextItem(gp, {300, 70}, {100, 0});
         gt->setText(QString::number(rew->get_gold()) + tr(" gold"));
         gt->setFont(txt);
@@ -68,7 +70,7 @@ collectReward::collectReward(combatEvent* eve, combatReward* reward, ironclad* p
     for (auto item : rew->get_potion()) {
         auto potp = new BaseItem(parent, {400, 70}, QPointF(600, 175 + 90 * all_base.size()));
         auto poti = new ImageItem(potp, {70, 70}, {0, 0});
-        poti->setPixmap(getPotionIcon(item->get_ID()));
+        poti->setPixmap(mng.getPotionIcon(item->get_ID()));
         auto pott = new TextItem(potp, {300, 70}, {100, 0});
         pott->setText(item->get_name());
         pott->setFont(txt);
@@ -79,7 +81,7 @@ collectReward::collectReward(combatEvent* eve, combatReward* reward, ironclad* p
     for (auto item : rew->get_relic()) {
         auto rlcp = new BaseItem(parent, {400, 70}, QPointF(600, 175 + 90 * all_base.size()));
         auto rlci = new ImageItem(rlcp, {70, 70}, {0, 0});
-        rlci->setPixmap(getRelicImage(item->get_id()));
+        rlci->setPixmap(mng.getRelicIcon(item->get_id()));
         auto rlct = new TextItem(rlcp, {300, 70}, {100, 0});
         rlct->setText(item->get_name());
         rlct->setFont(txt);
@@ -90,7 +92,7 @@ collectReward::collectReward(combatEvent* eve, combatReward* reward, ironclad* p
     for (int i = 0; i < rew->get_cards().size(); i++) {
         auto crdp = new BaseItem(parent, {400, 70}, QPointF(600, 175 + 90 * all_base.size()));
         auto crdi = new ImageItem(crdp, {45, 70}, {12.5, 0});
-        crdi->setPixmap(QPixmap(":/image/cards/back/back.png"));
+        crdi->setPixmap(mng.getCardBack(combat_data::selected_card_template));
         auto crdt = new TextItem(crdp, {300, 70}, {100, 0});
         crdt->setText(tr("Add a card to your deck"));
         crdt->setFont(txt);

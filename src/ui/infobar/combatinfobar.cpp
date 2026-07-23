@@ -1,8 +1,5 @@
 #include "combatinfobar.h"
-#include "ui/relicbar/getRelicImage.h"
-#include "ui/entities/getCharacterPixmap.h"
-#include "ui/entities/getPotionIcon.h"
-#include "ui/entities/getPowerIcon.h"
+#include "assetsManager/imagemanager.h"
 #include "core/setting.h"
 
 void CombatInfoBar::initial() {
@@ -64,7 +61,7 @@ CombatInfoBar::CombatInfoBar(abstractRelic* rlc) {
         item_name->setColor(Qt::cyan);
         item_image->setHighlightColor(Qt::cyan);
     }
-    item_image->setPixmap(getRelicImage(rlc->get_id()));
+    item_image->setPixmap(imageManager::instance().getRelicIcon(rlc->get_id()));
     item_name->setText(rlc->get_name());
     item_description->setText(rlc->get_description());
     item_story->setText(rlc->get_story());
@@ -85,7 +82,7 @@ CombatInfoBar::CombatInfoBar(abstractPotion* pot) {
         item_image->setHighlightColor(Qt::green);
     }
 
-    item_image->setPixmap(getPotionIcon(pot->get_ID()));
+    item_image->setPixmap(imageManager::instance().getPotionIcon(pot->get_ID()));
     item_name->setText(pot->get_name());
     item_description->setText(pot->get_description());
     item_story->setText(pot->get_story());
@@ -103,7 +100,7 @@ CombatInfoBar::CombatInfoBar(abstractPower* pwr) {
         item_image->setHighlightColor(Qt::red);
     }
 
-    item_image->setPixmap(getPowerIcon(pwr->get_id()));
+    item_image->setPixmap(imageManager::instance().getPowerIcon(pwr->get_id()));
     item_name->setText(pwr->get_name());
     item_description->setText(pwr->get_description());
     item_story->setText(pwr->get_story());
@@ -121,7 +118,7 @@ CombatInfoBar::CombatInfoBar(abstractEntity* ent) {
         item_image->setHighlightColor(Qt::red);
     }
 
-    item_image->setPixmap(getCharacter1x1Image(ent->get_ID()));
+    item_image->setPixmap(imageManager::instance().getEntity1x1(ent->get_ID()));
     item_name->setText(ent->get_name());
     item_description->setText("");
     item_story->setText(ent->get_story());

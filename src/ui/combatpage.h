@@ -13,6 +13,8 @@
 #include <queue>
 #include "ui/infobar/combatinfobar.h"
 #include "ui/relicbar/relicbar.h"
+#include <QMediaPlayer>
+#include <QAudioOutput>
 
 class CombatPage : public QWidget
 {
@@ -20,7 +22,6 @@ class CombatPage : public QWidget
 
 public:
     CombatPage(QWidget *parent = nullptr, combat_manager* manager = nullptr, ironclad* plyr = nullptr);
-    ~CombatPage() override;
     void reset_layout();
     void escape_entity(abstractEntity*);
     void died_entity(abstractEntity*);
@@ -28,6 +29,7 @@ public:
 
     void cardAdd(abstractCard*, qreal z = -1);
     void cardMovePile(abstractCard*, PileType from, PileType to);
+    void Delete();
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
@@ -36,13 +38,20 @@ protected:
     void initialize_layout();
     void setHandCardPoint(abstractCard* card, bool enter = false);
 
-    cardTemplate tmpl;
+    cardTemplates tmpl;
 
 private:
+    ~CombatPage() override;
+
     combatEvent* eve;
 
     QGraphicsView *combatView;
     QGraphicsScene *combatScene;
+    BaseItem* black_screen;
+
+    QMediaPlayer* media_player;
+    QAudioOutput* bg_music;
+
     combat_manager* manager;
     ironclad* player;
 

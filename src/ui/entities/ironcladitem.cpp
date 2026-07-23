@@ -1,13 +1,16 @@
 #include "ironcladitem.h"
 #include "entity/ironclad.h"
 #include "items/potions/abstractpotion.h"
-#include "ui/entities/getPotionIcon.h"
+#include "assetsManager/imagemanager.h"
+#include "core/setting.h"
 #include <QSequentialAnimationGroup>
 
 IroncladItem::IroncladItem(combatEvent* event, abstractEntity* source, QPointF pos, qreal zValue)
     :abstractEntityItem(source, pos, {IroncladItem::width, IroncladItem::height + 110}, zValue)
     ,eve(event)
 {
+
+    auto mng = imageManager::instance();
     //=======parent=========
     entity_parent = new EntityParent(eve, entity_source, nullptr, entity_size, entity_pos);
     entity_parent->setZValue(0 + zValue);
@@ -20,7 +23,7 @@ IroncladItem::IroncladItem(combatEvent* event, abstractEntity* source, QPointF p
 
     //=======image========
     entity_image = new ImageItem(entity_parent, {IroncladItem::width, IroncladItem::height}, {0, 50});
-    entity_image->setPixmap(QPixmap(":/image/characters/ironclad1.png")); // switch case
+    entity_image->setPixmap(mng.getIroncladImage(combat_data::selected_character)); // switch case
     QSequentialAnimationGroup* gr = new QSequentialAnimationGroup(entity_image);
 
     QRectF dest = {entity_image->pos() + QPointF(0, -8), entity_image->size() + QSizeF(0, 8)};
@@ -49,21 +52,21 @@ IroncladItem::IroncladItem(combatEvent* event, abstractEntity* source, QPointF p
 
     //=======corners=========
     ImageItem* c1 = new ImageItem(entity_parent, {30, 30});
-    c1->setPixmap(QPixmap(":/icon/corner.ico"));
+    c1->setPixmap(mng.getEffectImage("corner"));
     c1->setOpacity(0);
     c1->setZValue(9999);
     ImageItem* c2 = new ImageItem(entity_parent, {30, 30});
-    c2->setPixmap(QPixmap(":/icon/corner.ico"));
+    c2->setPixmap(mng.getEffectImage("corner"));
     c2->setOpacity(0);
     c2->setRotation(90);
     c1->setZValue(9999);
     ImageItem* c3 = new ImageItem(entity_parent, {30, 30});
-    c3->setPixmap(QPixmap(":/icon/corner.ico"));
+    c3->setPixmap(mng.getEffectImage("corner"));
     c3->setRotation(180);
     c3->setOpacity(0);
     c1->setZValue(9999);
     ImageItem* c4 = new ImageItem(entity_parent, {30, 30});
-    c4->setPixmap(QPixmap(":/icon/corner.ico"));
+    c4->setPixmap(mng.getEffectImage("corner"));
     c4->setRotation(270);
     c4->setOpacity(0);
     c1->setZValue(9999);
@@ -75,6 +78,7 @@ IroncladItem::IroncladItem(combatEvent* event, abstractEntity* source, QPointF p
 
 void IroncladItem::updateEntity() {
 
+    auto mng = imageManager::instance();
 
     //=======hpBar=======
     hp_bar->setMaxHp(entity_source->get_max_hp());
@@ -100,7 +104,7 @@ void IroncladItem::updateEntity() {
         powers_prnt.push_back(pp);
 
         TextItem* p = new TextItem(entity_parent, {35, 35}, QPointF(35*i, IroncladItem::height + 60 + 30));
-        p->setBackground(getPowerIcon(pwr->get_id()));
+        p->setBackground(mng.getPowerIcon(pwr->get_id()));
 
         if (pwr->get_amount() != 1){
             p->setText(QString::number(pwr->get_amount()));
@@ -135,7 +139,7 @@ void IroncladItem::updateEntity() {
         potion_parents.push_back(p_p);
         ImageItem* p = new ImageItem(potion_parents[i], {58, 58}, {0, 0});
         auto pot = player->get_potion_list()[i];
-        p->setPixmap(getPotionIcon(pot->get_ID()));
+        p->setPixmap(mng.getPotionIcon(pot->get_ID()));
         potions.push_back(p);
     }
 

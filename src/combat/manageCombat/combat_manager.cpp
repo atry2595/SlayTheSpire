@@ -261,24 +261,32 @@ void combat_manager::calculate_rewards() {
     std::vector<relicID> commons = common_relic;
 
 
+    int live_player = 0;
+    for (auto item : player_is_alive) live_player += item;
+
+    int r_gold = 0;
+    for (auto item : enemies) r_gold += item->get_gold();
 
     for (int i = 0; i<players.size(); i++){
 
         if (player_is_alive[i] == false) continue;
 
+
         combatReward* rew = new combatReward();
         std::vector<relicID> rlcs;
         std::vector<cardID> crds;
+
+        if (live_player) rew->add_ruterned_gold(r_gold / live_player);
 
         switch(combat_type) {
 
         case(CombatType::monster):{
             rew->add_gold(rng.randint(15, 25));
 
-            if (rng.chance(0.3)) {
+            if (rng.chance(0.25)) {
                 std::vector<potionID> pot_vec;
-                if (rng.chance(0.1)) pot_vec = rare_potions;
-                else if (rng.chance(0.1 + 0.15)) pot_vec = uncommon_potions;
+                if (rng.chance(0.05)) pot_vec = rare_potions;
+                else if (rng.chance(0.05 + 0.08)) pot_vec = uncommon_potions;
                 else pot_vec = common_potions;
                 potionID np = rng.choice(pot_vec);
                 rew->add_potion(PotionFactory::createPotion(np, players[i]));
@@ -287,11 +295,11 @@ void combat_manager::calculate_rewards() {
             std::vector<double> w;
             for (auto item : non_rare_cards){
                 crds.push_back(item);
-                w.push_back(1);
+                w.push_back(97);
             }
             for (auto item : rare_cards) {
                 crds.push_back(item);
-                w.push_back(7);
+                w.push_back(3);
             }
 
             auto selected = rng.weighted_sample(crds, w, reward_card_count);
@@ -308,12 +316,12 @@ void combat_manager::calculate_rewards() {
         }
 
         case(CombatType::elite):{
-            rew->add_gold(rng.randint(15, 25));
+            rew->add_gold(rng.randint(25, 35));
 
             if (rng.chance(0.4)) {
                 std::vector<potionID> pot_vec;
-                if (rng.chance(0.15)) pot_vec = rare_potions;
-                else if (rng.chance(0.15 + 0.18)) pot_vec = uncommon_potions;
+                if (rng.chance(0.1)) pot_vec = rare_potions;
+                else if (rng.chance(0.1 + 0.15)) pot_vec = uncommon_potions;
                 else pot_vec = common_potions;
                 potionID np = rng.choice(pot_vec);
                 rew->add_potion(PotionFactory::createPotion(np, players[i]));
@@ -322,11 +330,11 @@ void combat_manager::calculate_rewards() {
             std::vector<double> w;
             for (auto item : non_rare_cards){
                 crds.push_back(item);
-                w.push_back(1);
+                w.push_back(9);
             }
             for (auto item : rare_cards) {
                 crds.push_back(item);
-                w.push_back(5);
+                w.push_back(1);
             }
 
             auto selected = rng.weighted_sample(crds, w, reward_card_count);
@@ -342,17 +350,17 @@ void combat_manager::calculate_rewards() {
 
             std::vector<double> wei;
             for (auto item : common_relic){
-                if (!players[i]->get_spec_relic(item)) continue;
+                if (players[i]->get_spec_relic(item)) continue;
                 rlcs.push_back(item);
                 wei.push_back(6);
             }
             for (auto item : uncommon_relic) {
-                if (!players[i]->get_spec_relic(item)) continue;
+                if (players[i]->get_spec_relic(item)) continue;
                 rlcs.push_back(item);
                 wei.push_back(3);
             }
             for (auto item : rare_relic) {
-                if (!players[i]->get_spec_relic(item)) continue;
+                if (players[i]->get_spec_relic(item)) continue;
                 rlcs.push_back(item);
                 wei.push_back(1);
             }
@@ -400,8 +408,13 @@ void combat_manager::calculate_rewards() {
             break;
         }
 
+
+
         rewards[players[i]] = rew;
     }
+
+
+
 }
 
 

@@ -332,5 +332,6 @@
         <file alias="setting.png">assests/image/icon/setting.png</file>
         <file alias="left_button.png">assests/image/icon/left_button.png</file>
         <file alias="right_button.png">assests/image/icon/right_button.png</file>
+        <file alias="error.png">assests/image/icon/error.png</file>
     </qresource>
 </RCC>

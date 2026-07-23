@@ -8,13 +8,6 @@
 #include "categories/cards.h"
 #include <QObject>
 
-enum class cardTemplate {
-    common,
-    uncommon,
-    rare,
-    legend
-};
-
 class abstractCardTemplate : public QObject
 {
     Q_OBJECT

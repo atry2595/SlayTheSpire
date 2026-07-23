@@ -2,6 +2,7 @@
 #include <QPainter>
 #include <QPainterPath>
 #include "core/setting.h"
+#include "assetsManager/imagemanager.h"
 
 SimpleHpBar::SimpleHpBar(QWidget *parent)
     : QWidget(parent)
@@ -9,7 +10,7 @@ SimpleHpBar::SimpleHpBar(QWidget *parent)
     , m_maxHp(100)
     , m_shield(0)
     , m_displayPercent(1.0f)
-    , shield_pix(QPixmap(":/icon/shield.ico"))
+    , shield_pix(imageManager::instance().getIcon("shield"))
 {
     m_animation = new QPropertyAnimation(this, "displayPercent");
     m_animation->setDuration(300);

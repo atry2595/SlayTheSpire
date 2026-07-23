@@ -1,11 +1,13 @@
 #include "cardtemplatelegend.h"
-#include "ui/cards/getCardPixmap.h"
+#include "assetsManager/imagemanager.h"
 #include "core/setting.h"
 #include <QParallelAnimationGroup>
 
 CardTemplateLegend::CardTemplateLegend(combatEvent* eve, abstractCard* source, QPointF pos, QSizeF size, qreal z_value)
     :abstractCardTemplate(eve, source, pos, size, z_value)
 {
+    auto mng = imageManager::instance();
+
     qreal w = card_size.width();
     qreal h = card_size.height();
 
@@ -13,13 +15,13 @@ CardTemplateLegend::CardTemplateLegend(combatEvent* eve, abstractCard* source, Q
 
 
     card_frame = new ImageItem(card_parent, card_size, {0, 0});
-    card_frame->setPixmap(QPixmap(":/image/card/frame/frame3.png"));
+    card_frame->setPixmap(mng.getCardFrame(cardTemplates::toxic_blossom, source->get_card_type()));
     card_frame->setZValue(zValue + 1);
 
 
 
     card_image = new ImageItem(card_parent, {0.692 * w, 0.687 * h}, {0.153 * w, 0.146 * h});
-    card_image->setPixmap(getCardPixmap(source->get_card_id()));
+    card_image->setPixmap(mng.getCardImage(source->get_card_id()));
     card_image->setZValue(zValue);
 
 

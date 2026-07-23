@@ -1,6 +1,6 @@
 #include "enemyitem.h"
-#include "ui/entities/getIntentIcon.h"
-#include "ui/entities/getCharacterPixmap.h"
+#include "assetsManager/imagemanager.h"
+#include "entity/abstractenemy.h"
 #include "entity/abstractenemy.h"
 #include <QSequentialAnimationGroup>
 
@@ -11,6 +11,9 @@ EnemyItem::EnemyItem(combatEvent* event, abstractEntity* source, QPointF pos, qr
     , eve(event)
     , abstractEntityItem(source, pos, QSizeF(getEntityVisual(source->get_ID()).size.width(), getEntityVisual(source->get_ID()).size.height() + 120), zValue) {
 
+
+    auto mng = imageManager::instance();
+
     //=======parent=========
     entity_parent = new EntityParent(eve, entity_source, nullptr, entity_size, entity_pos);
     entity_parent->setZValue(0 + zValue);
@@ -18,7 +21,7 @@ EnemyItem::EnemyItem(combatEvent* event, abstractEntity* source, QPointF pos, qr
 
     //=======image========
     entity_image = new ImageItem(entity_parent, {width, height}, {0, 50});
-    entity_image->setPixmap(getCharacterPixmap(source->get_ID()));
+    entity_image->setPixmap(mng.getEntityImage(source->get_ID()));
     QSequentialAnimationGroup* gr = new QSequentialAnimationGroup(entity_image);
 
 
@@ -90,6 +93,7 @@ EnemyItem::EnemyItem(combatEvent* event, abstractEntity* source, QPointF pos, qr
 
 void EnemyItem::updateEntity() {
 
+    auto mng = imageManager::instance();
 
     //=======intent======
     if (intent) delete intent;
@@ -97,7 +101,7 @@ void EnemyItem::updateEntity() {
     abstractEnemy* enmy = dynamic_cast<abstractEnemy*>(entity_source);
     auto intnt = enmy->get_intent_list()[enmy->get_current_move()];
 
-    intent->setBackground(getIntentIcon(intnt));
+    intent->setBackground(mng.getIntentIcon(intnt));
     if (intnt.damage) {
         QString txt = QString::number(intnt.damage);
         if (intnt.repeat > 1) {
@@ -148,7 +152,7 @@ void EnemyItem::updateEntity() {
         powers_prnt.push_back(pp);
 
         TextItem* p = new TextItem(entity_parent, {35, 35}, QPointF(35*i, height + 60 + 30));
-        p->setBackground(getPowerIcon(pwr->get_id()));
+        p->setBackground(mng.getPowerIcon(pwr->get_id()));
 
         if (pwr->get_amount() != 1){
             p->setText(QString::number(pwr->get_amount()));

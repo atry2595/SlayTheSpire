@@ -7,8 +7,13 @@
 #include "items/relics/relicfactory.h"
 
 const std::vector<cardID> ironclad::starting_deck =
-    {cardID::dual_wield, cardID::carnage, cardID::carnage, cardID::carnage, cardID::carnage,
-     cardID::clash, cardID::true_grit, cardID::perfected_strike, cardID::defend, cardID::bash};
+    {cardID::dual_wield, cardID::bludgeon, cardID::rage, cardID::disarm, cardID::uppercut,
+     cardID::clash, cardID::hemokinesis, cardID::spot_weakness, cardID::twin_strike, cardID::bash,
+    cardID::strike, cardID::strike, cardID::strike, cardID::strike, cardID::strike,
+    cardID::defend, cardID::defend, cardID::defend, cardID::defend, cardID::shrug_it_off,
+    cardID::inflame, cardID::metallicize, cardID::defend, cardID::defend, cardID::shrug_it_off
+
+};
 
 
 abstractCard* ironclad::transformCard(abstractCard* selected_card) {

@@ -7,7 +7,6 @@
 #include "entity/abstractentity.h"
 #include "categories/enemies.h"
 #include "ui/entities/simplehpbar.h"
-#include "ui/entities/getPowerIcon.h"
 #include "items/powers/abstractpower.h"
 #include "core/setting.h"
 #include "powerparent.h"
