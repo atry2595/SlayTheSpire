@@ -1,4 +1,4 @@
-#include "statisticsmenu.h"
+/* #include "statisticsmenu.h"
 #include "ui_statisticsmenu.h"
 
 StatisticsMenu::StatisticsMenu(QWidget *parent)
@@ -16,4 +16,4 @@ StatisticsMenu::~StatisticsMenu()
 void StatisticsMenu::on_backButton_clicked()
 {
     emit backToMenu();
-}
+}*/

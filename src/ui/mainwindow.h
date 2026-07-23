@@ -2,14 +2,11 @@
 #define MAINWINDOW_H
 #include <QStackedWidget>
 #include "loginpage.h"
-#include "core/menu/menu.h"
 #include <QMainWindow>
 #include <QStackedWidget>
 
 #include "registerpage.h"
 #include "forgotpasswordpage.h"
-#include "core/menu/playmenu.h"
-#include "core/menu/statisticsmenu.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -22,19 +19,38 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow() override;
+    MainWindow(QWidget *parent = nullptr);
+    ~MainWindow();
+
+private slots:
+
+    void on_playButton_clicked();
+    void on_statisticsButton_clicked();
+    void on_settingsButton_clicked();
+    void on_exitButton_clicked();
+
+    void on_backButton_clicked();
+
+    void on_backButton_2_clicked();
+    void on_leaderBoardButton_clicked();
+
+    void on_backButton_3_clicked();
 
 private:
-    FileManager *fileManager;
     Ui::MainWindow *ui;
-    QStackedWidget *stack;
+
+    FileManager *fileManager;
+
+    QStackedWidget *authStack;
+
+    QStackedWidget *mainStack;
+
     LoginPage *loginPage;
     RegisterPage *registerPage;
     ForgotPasswordPage *forgotPasswordPage;
-    Menu *menuPage;
-    PlayMenu *playMenu;
-    StatisticsMenu *statisticsMenu;
 
+    void showMainMenu();
 };
+
+
 #endif // MAINWINDOW_H

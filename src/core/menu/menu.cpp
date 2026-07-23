@@ -1,4 +1,4 @@
-#include "menu.h"
+/* #include "menu.h"
 #include "ui_menu.h"
 
 Menu::Menu(QWidget *parent)
@@ -31,4 +31,4 @@ void Menu::on_settingsButton_clicked()
 void Menu::on_exitButton_clicked()
 {
     emit exitGame();
-}
+} */

@@ -7,34 +7,40 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    takeCentralWidget();
+
+    ui->darkOverlay->hide();
+
+    ui->menuFrame->show();
+
+    ui->playFrame->hide();
+    ui->statisticsFrame->hide();
+    ui->leaderboardFrame->hide();
+
     fileManager = new FileManager();
 
     loginPage = new LoginPage();
     registerPage = new RegisterPage();
     forgotPasswordPage = new ForgotPasswordPage();
-    menuPage = new Menu();
-    playMenu = new PlayMenu();
-    statisticsMenu = new StatisticsMenu();
 
     loginPage->setFileManager(fileManager);
     registerPage->setFileManager(fileManager);
     forgotPasswordPage->setFileManager(fileManager);
 
-    stack = new QStackedWidget(this);
+    authStack = new QStackedWidget(this);
 
-    stack->addWidget(loginPage);
-    stack->addWidget(registerPage);
-    stack->addWidget(forgotPasswordPage);
-    stack->addWidget(menuPage);
-    stack->addWidget(playMenu);
-    stack->addWidget(statisticsMenu);
+    authStack->addWidget(loginPage);
+    authStack->addWidget(registerPage);
+    authStack->addWidget(forgotPasswordPage);
 
-    setCentralWidget(stack);
+    mainStack = new QStackedWidget(this);
 
-    connect(menuPage,
-            &Menu::exitGame,
-            this,
-            &QMainWindow::close);
+    mainStack->addWidget(authStack);
+    mainStack->addWidget(ui->centralwidget);
+
+    setCentralWidget(mainStack);
+
+    mainStack->setCurrentWidget(authStack);
 
     connect(loginPage,
             &LoginPage::openRegisterPage,
@@ -42,7 +48,7 @@ MainWindow::MainWindow(QWidget *parent)
             [this]()
             {
                 registerPage->clearFields();
-                stack->setCurrentWidget(registerPage);
+                authStack->setCurrentWidget(registerPage);
             });
 
     connect(registerPage,
@@ -51,7 +57,7 @@ MainWindow::MainWindow(QWidget *parent)
             [this]()
             {
                 loginPage->clearFields();
-                stack->setCurrentWidget(loginPage);
+                authStack->setCurrentWidget(loginPage);
             });
 
     connect(loginPage,
@@ -60,7 +66,7 @@ MainWindow::MainWindow(QWidget *parent)
             [this]()
             {
                 forgotPasswordPage->clearFields();
-                stack->setCurrentWidget(forgotPasswordPage);
+                authStack->setCurrentWidget(forgotPasswordPage);
             });
 
     connect(forgotPasswordPage,
@@ -69,7 +75,7 @@ MainWindow::MainWindow(QWidget *parent)
             [this]()
             {
                 loginPage->clearFields();
-                stack->setCurrentWidget(loginPage);
+                authStack->setCurrentWidget(loginPage);
             });
 
     connect(loginPage,
@@ -77,42 +83,9 @@ MainWindow::MainWindow(QWidget *parent)
             this,
             [this]()
             {
-                stack->setCurrentWidget(menuPage);
+                showMainMenu();
+                mainStack->setCurrentWidget(ui->centralwidget);
             });
-
-    connect(menuPage,
-            &Menu::openPlayPage,
-            this,
-            [this]()
-            {
-                stack->setCurrentWidget(playMenu);
-            });
-
-    connect(playMenu,
-            &PlayMenu::backToMenu,
-            this,
-            [this]()
-            {
-                stack->setCurrentWidget(menuPage);
-            });
-
-    connect(menuPage,
-            &Menu::openStatisticsPage,
-            this,
-            [this]()
-            {
-                stack->setCurrentWidget(statisticsMenu);
-            });
-
-    connect(statisticsMenu,
-            &StatisticsMenu::backToMenu,
-            this,
-            [this]()
-            {
-                stack->setCurrentWidget(menuPage);
-            });
-
-    stack->setCurrentWidget(loginPage);
 
     showFullScreen();
 }
@@ -122,3 +95,68 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::showMainMenu()
+{
+    ui->darkOverlay->hide();
+
+    ui->menuFrame->show();
+
+    ui->playFrame->hide();
+    ui->statisticsFrame->hide();
+    ui->leaderboardFrame->hide();
+}
+
+void MainWindow::on_playButton_clicked()
+{
+    ui->menuFrame->hide();
+
+    ui->darkOverlay->show();
+    ui->playFrame->show();
+}
+
+void MainWindow::on_backButton_clicked()
+{
+    ui->playFrame->hide();
+
+    ui->darkOverlay->hide();
+    ui->menuFrame->show();
+}
+
+void MainWindow::on_statisticsButton_clicked()
+{
+    ui->menuFrame->hide();
+
+    ui->darkOverlay->show();
+    ui->statisticsFrame->show();
+}
+
+void MainWindow::on_backButton_2_clicked()
+{
+    ui->statisticsFrame->hide();
+
+    ui->darkOverlay->hide();
+    ui->menuFrame->show();
+}
+
+void MainWindow::on_leaderBoardButton_clicked()
+{
+    ui->statisticsFrame->hide();
+
+    ui->leaderboardFrame->show();
+}
+
+void MainWindow::on_backButton_3_clicked()
+{
+    ui->leaderboardFrame->hide();
+
+    ui->statisticsFrame->show();
+}
+
+void MainWindow::on_exitButton_clicked()
+{
+    close();
+}
+
+void MainWindow::on_settingsButton_clicked()
+{
+}

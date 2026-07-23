@@ -1,4 +1,4 @@
-#ifndef MENU_H
+/* #ifndef MENU_H
 #define MENU_H
 
 #include <QObject>
@@ -35,3 +35,4 @@ private slots:
 };
 
 #endif // MENU_H
+*/
