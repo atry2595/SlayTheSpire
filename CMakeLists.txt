@@ -585,6 +585,9 @@ add_executable(SlayTheSpire
     src/ui/selectItem/selectcard.h src/ui/selectItem/selectcard.cpp
     src/ui/selectItem/collectreward.cpp src/ui/selectItem/collectreward.h
     src/assetsManager/imagemanager.h src/assetsManager/imagemanager.cpp
+    src/assetsManager/soundmanager.h src/assetsManager/soundmanager.cpp
+    src/items/relics/cultist_headpiece_relic.cpp src/items/relics/cultist_headpiece_relic.h
+    src/ui/topbar/combatsetting.cpp src/ui/topbar/combatsetting.h
 
 )
 

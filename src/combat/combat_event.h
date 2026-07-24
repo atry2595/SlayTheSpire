@@ -24,6 +24,8 @@ class combatEvent : public QObject{
     Q_OBJECT
 
 signals:
+    void game_lose();
+
     void combat_started(combat_manager*);
     void combat_ended(combat_manager*, bool victory);
 
@@ -85,6 +87,9 @@ signals:
     void selectCard(std::vector<abstractCard*>);
 
     void nextAction();
+
+    void settingOpen();
+    void settingClose();
 
 };
 

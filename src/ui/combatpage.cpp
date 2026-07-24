@@ -8,11 +8,13 @@
 #include "ui/cards/cardtemplaterare.h"
 #include "ui/cards/cardtemplatelegend.h"
 #include "assetsManager/imagemanager.h"
+#include "assetsManager/soundmanager.h"
 #include "core/setting.h"
 #include "ui/effects/damageeffect.h"
 #include "ui/effects/DamageParticleManager.h"
 #include "ui/selectItem/selectcard.h"
 #include "ui/selectItem/collectreward.h"
+#include "ui/topbar/combatsetting.h"
 
 //=================================================================================
 //=====================contructur and intializer functions=========================
@@ -27,6 +29,7 @@ CombatPage::CombatPage(QWidget *parent, combat_manager* m, ironclad* plyr)
     tmpl = combat_data::selected_card_template;
 
     auto mng = imageManager::instance();
+    auto sound = soundManager::instance();
 
     //----------------------------------------------------
     combatView = new QGraphicsView(this);
@@ -55,16 +58,14 @@ CombatPage::CombatPage(QWidget *parent, combat_manager* m, ironclad* plyr)
     }, Qt::QueuedConnection);
 
     //----------------------------------------------------
-    media_player = new QMediaPlayer(this);
-    bg_music = new QAudioOutput(this);
-
-    media_player->setAudioOutput(bg_music);
-    bg_music->setVolume(0.5);
-    media_player->setSource(QUrl("qrc:/sound/music/music1_normal.ogg"));
-    media_player->setLoops(QMediaPlayer::Infinite);
-    media_player->play();
-
-
+    BgMusic music = BgMusic::act1_general;
+    if (combat_data::act == 1 && combat_data::room_type == RoomType::MONSTER) music = BgMusic::act1_general;
+    if (combat_data::act == 1 && combat_data::room_type == RoomType::ELITE) music = BgMusic::act1_elite;
+    if (combat_data::act == 1 && combat_data::room_type == RoomType::BOSS) music = BgMusic::act1_boss;
+    if (combat_data::act == 2 && combat_data::room_type == RoomType::MONSTER) music = BgMusic::act2_general;
+    if (combat_data::act == 2 && combat_data::room_type == RoomType::ELITE) music = BgMusic::act2_elite;
+    if (combat_data::act == 2 && combat_data::room_type == RoomType::BOSS) music = BgMusic::act2_boss;
+    sound.playBackMusic(music);
     //----------------------------------------------------
     ImageItem* bg = new ImageItem(nullptr, {1632, 918}, {-16, -9});
     bg->setPixmap(mng.getBackroundImage());
@@ -133,6 +134,7 @@ CombatPage::CombatPage(QWidget *parent, combat_manager* m, ironclad* plyr)
     connect(eve, &combatEvent::powerRightButton, this, &CombatPage::power_right_click);
     connect(eve, &combatEvent::selectCard, this, &CombatPage::createSelectCard);
     connect(eve, &combatEvent::combat_ended, this, &CombatPage::createCollectReward);
+    connect(eve, &combatEvent::settingOpen, this, &CombatPage::open_setting);
     //----------------------------------------------------
 }
 
@@ -921,6 +923,8 @@ void CombatPage::potion_released(PotionParent* potion, const QPointF& pos) {
 
                 game_action acts(eve);
                 player->drink_potion(inf);
+
+                soundManager::instance().playSoundEffect(SoundEffect::drinkPotion);
                 bar->updateBar();
                 for (auto item : players) item->updateEntity();
                 for (auto item : enemies) item->updateEntity();
@@ -999,11 +1003,14 @@ void CombatPage::entity_update(abstractEntity* entity) {
 
 void CombatPage::after_attack(attackResult& res) {
 
+    auto sound = soundManager::instance();
+
     //===========attack effect & anim=================
     for (auto enmy : enemies){
         if (enmy->getSource() == res.info.attacker) {
             enqueue([=]{
                 enmy->getParent()->activeAttackAnimation();
+                sound.instance().playSoundEffect(SoundEffect::attack);
                 bar->updateBar();
                 enmy->updateEntity();
                 QTimer::singleShot(200, [this](){playNext();});
@@ -1014,6 +1021,8 @@ void CombatPage::after_attack(attackResult& res) {
         if (plyr->getSource() == res.info.attacker){
             enqueue([=]{
                 plyr->getParent()->activeAttackAnimation();
+                sound.instance().playSoundEffect(SoundEffect::attack);
+                bar->updateBar();
                 plyr->updateEntity();
                 QTimer::singleShot(200, [this](){playNext();});
             });
@@ -1141,4 +1150,9 @@ void CombatPage::createCollectReward(combat_manager* mngr, bool vic){
             });
         });
     }
+}
+
+void CombatPage::open_setting() {
+    auto sc = new combatSetting(eve);
+    combatScene->addItem(sc->getParent());
 }

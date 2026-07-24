@@ -95,6 +95,7 @@ private slots:
 
     void createSelectCard(std::vector<abstractCard*> cards);
     void createCollectReward(combat_manager*, bool);
+    void open_setting();
 };
 
 #endif // COMBATPAGE_H

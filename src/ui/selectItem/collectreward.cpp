@@ -5,6 +5,7 @@
 #include "items/potions/abstractpotion.h"
 #include "items/relics/abstractrelic.h"
 #include "core/setting.h"
+#include "assetsManager/soundmanager.h"
 
 collectReward::collectReward(combatEvent* eve, combatReward* reward, ironclad* plyr)
     :event(eve)
@@ -48,7 +49,7 @@ collectReward::collectReward(combatEvent* eve, combatReward* reward, ironclad* p
     if (rew->get_returned_gold()) {
         auto rgp = new BaseItem(parent, {400, 70}, QPointF(600, 175 + 90 * all_base.size()));
         auto rgi = new ImageItem(rgp, {70, 70}, {0, 0});
-        rgi->setPixmap(mng.getIcon("coin"));
+        rgi->setPixmap(mng.getIcon("gold"));
         auto rgt = new TextItem(rgp, {300, 70}, {100, 0});
         rgt->setText(QString::number(rew->get_returned_gold()) + tr(" gold (stolen back)"));
         rgt->setFont(txt);
@@ -59,7 +60,7 @@ collectReward::collectReward(combatEvent* eve, combatReward* reward, ironclad* p
     if (rew->get_gold()) {
         auto gp = new BaseItem(parent, {400, 70}, QPointF(600, 175 + 90 * all_base.size()));
         auto gi = new ImageItem(gp, {70, 70}, {0, 0});
-        gi->setPixmap(mng.getIcon("coin"));
+        gi->setPixmap(mng.getIcon("gold"));
         auto gt = new TextItem(gp, {300, 70}, {100, 0});
         gt->setText(QString::number(rew->get_gold()) + tr(" gold"));
         gt->setFont(txt);
@@ -104,6 +105,7 @@ collectReward::collectReward(combatEvent* eve, combatReward* reward, ironclad* p
     btn->setFixedSize(200, 100);
     btn->setFont(f);
     btn->setText(tr("Confirm"));
+    btn->installEventFilter(this);
     prxy = new QGraphicsProxyWidget(parent);
     prxy->setWidget(btn);
     prxy->setPos(700, 900 - 150);
@@ -113,7 +115,18 @@ collectReward::collectReward(combatEvent* eve, combatReward* reward, ironclad* p
     connect(btn, &QPushButton::clicked, this, &collectReward::execute);
 }
 
+bool collectReward::eventFilter(QObject* obj, QEvent* eve) {
+    if (obj == btn) {
+        if (eve->type() == QEvent::Enter) {
+            soundManager::instance().playSoundEffect(SoundEffect::menuHover);
+        }
+    }
+    return QObject::eventFilter(obj, eve);
+}
+
 void collectReward::execute() {
+
+    soundManager::instance().playSoundEffect(SoundEffect::menuSelect);
     player->earn_coin(rew->get_gold());
     player->earn_coin(rew->get_returned_gold());
     for (auto item : rew->get_potion()) player->potion_list_add(item);

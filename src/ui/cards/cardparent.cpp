@@ -1,4 +1,5 @@
 #include "cardparent.h"
+#include "assetsManager/soundmanager.h"
 
 
 CardParent::CardParent(combatEvent* eve,
@@ -79,6 +80,7 @@ void CardParent::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
         final_easing = hover_enter_easing;
         refreshTargetPos();
         setZValue(zValue() + hover_z);
+        soundManager::instance().playSoundEffect(SoundEffect::cardHover);
     }
     QGraphicsObject::hoverEnterEvent(event);
 }

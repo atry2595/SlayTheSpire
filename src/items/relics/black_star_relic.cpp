@@ -1,7 +1,6 @@
 #include "black_star_relic.h"
 #include "entity/abstractentity.h"
 #include "combat/manageCombat/combat_manager.h"
-#include "relicfactory.h"
 
 black_star_relic::black_star_relic(abstractEntity* owner_init)
     :abstractRelic(tr("Black Star"), owner_init)

@@ -26,6 +26,12 @@ private:
     QGraphicsProxyWidget* energy_proxy = nullptr;
     QPushButton* end_btn;
     QGraphicsProxyWidget* btn_proxy = nullptr;
+    QPushButton* end_setting;
+    QGraphicsProxyWidget* setting_proxy = nullptr;
+
+
+
+    bool eventFilter(QObject* obj, QEvent* eve) override;
 
 public:
     CombatTopBar(combatEvent* eve, ironclad* player);

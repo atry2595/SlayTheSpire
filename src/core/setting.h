@@ -36,6 +36,8 @@ enum class RoomType{
 
 struct setting {
     inline static language game_language = language::English;
+    inline static qreal bg_volume = 0.5;
+    inline static qreal sfx_volume = 0.5;
 };
 
 struct combat_data {

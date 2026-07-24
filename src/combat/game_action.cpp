@@ -4,6 +4,7 @@
 #include "cards/abstractcard.h"
 #include "items/potions/abstractpotion.h"
 #include "entity/ironclad.h"
+#include "assetsManager/soundmanager.h"
 
 game_action::game_action(combatEvent* eve):event(eve) {}
 
@@ -115,11 +116,14 @@ damageResult game_action::apply_damage(damageInfo& info) {
 
 void game_action::apply_block(blockingInfo& info){
 
+    auto sound = soundManager::instance();
+
     if (info.affected_by_other){
         info.owner->modify_blocking(info);
         emit event->before_block_set(info);
     }
 
+    if (info.owner->get_block() == 0) sound.playSoundEffect(SoundEffect::setShield);
     int new_block = info.owner->get_block() + info.block;
     info.owner->set_block(new_block);
     info.block = new_block;

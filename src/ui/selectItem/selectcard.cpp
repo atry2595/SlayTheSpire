@@ -1,6 +1,7 @@
 #include "selectcard.h"
 #include "core/setting.h"
 #include <QTimer>
+#include "assetsManager/soundmanager.h"
 
 selectCard::selectCard(combatEvent* eve, std::vector<abstractCard*> card_source)
     :event(eve)
@@ -149,7 +150,7 @@ void selectCard::preCards() {
 
 void selectCard::cardSelected(CardParent* card) {
 
-    qDebug() << "salam";
+    soundManager::instance().playSoundEffect(SoundEffect::menuSelect);
 
     emit event->cardSelected(card->getSource());
     for (auto item : cards){

@@ -234,7 +234,7 @@
         <file alias="attack1_block.ico">assests/image/icon/intent/attack1_block.ico</file>
     </qresource>
     <qresource prefix="/sound/music">
-        <file alias="music_epic2.ogg">assests/sound/music/music_epic2.ogg</file>
+        <file alias="music2_epic.ogg">assests/sound/music/music_epic2.ogg</file>
         <file alias="music_space.ogg">assests/sound/music/music_space.ogg</file>
         <file alias="music0.ogg">assests/sound/music/music0.ogg</file>
         <file alias="music1_dark.ogg">assests/sound/music/music1_dark.ogg</file>
@@ -260,6 +260,9 @@
         <file alias="rolling_map.wav">assests/sound/effect/rolling_map.wav</file>
         <file alias="select.wav">assests/sound/effect/select.wav</file>
         <file alias="smith.wav">assests/sound/effect/smith.wav</file>
+        <file alias="drink_potion.wav">assests/sound/effect/drink_potion.wav</file>
+        <file alias="menu_hover.wav">assests/sound/effect/menu_hover.wav</file>
+        <file alias="menu_select.wav">assests/sound/effect/menu_select.wav</file>
     </qresource>
     <qresource prefix="/image/effect">
         <file alias="bite.png">assests/image/damage_effect/bite.png</file>

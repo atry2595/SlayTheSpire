@@ -23,8 +23,8 @@ MainWindow::MainWindow(QWidget *parent)
     pl->potion_list_add(PotionFactory::createPotion(potionID::fear_potion, pl));
     pl->potion_list_add(PotionFactory::createPotion(potionID::fairy_in_a_bottle, pl));
     pl->add_relic(acts, RelicFactory::createRelic(relicID::blood_vial, pl));
-    pl->add_relic(acts, RelicFactory::createRelic(relicID::shuriken, pl));
-    pl->add_relic(acts, RelicFactory::createRelic(relicID::horn_cleat, pl));
+    pl->add_relic(acts, RelicFactory::createRelic(relicID::cultist_headpiece, pl));
+    pl->add_relic(acts, RelicFactory::createRelic(relicID::black_star, pl));
     auto en2 = book_of_stabbing::create(acts);
     combat_manager* com = new combat_manager({pl}, {en2}, CombatType::elite, eve);
     auto cp = new CombatPage(nullptr, com, pl);

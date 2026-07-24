@@ -1,5 +1,6 @@
 #include "cultist.h"
 #include "items/powers/powerfactory.h"
+#include "assetsManager/soundmanager.h"
 
 cultist::cultist(QString name_init, int base_max_hp_init)
     :abstractEnemy(name_init, base_max_hp_init)
@@ -46,6 +47,8 @@ void cultist::play_turn(playInfo& info){
 
 
     case (cultist_move::incantation):{
+
+        soundManager::instance().playSoundEffect(SoundEffect::cawCaw);
         int effect_number = 3;
 
         abstractPower* np = PowerFactory::createPower(powerID::ritual, info.attacker, effect_number);

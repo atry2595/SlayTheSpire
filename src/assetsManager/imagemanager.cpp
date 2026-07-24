@@ -115,7 +115,7 @@ imageManager::imageManager() {
     relic_table[relicID::vajra] = QPixmap(":/icon/relic/vajra.ico");
     relic_table[relicID::velvet_choker] = QPixmap(":/icon/relic/velvet_choker.ico");
     relic_table[relicID::warped_tongs] = QPixmap(":/icon/relic/warped_tongs.ico");
-    relic_table[relicID::cultist_headpiece] = QPixmap(":/icon/relic/warped_tongs.ico");
+    relic_table[relicID::cultist_headpiece] = QPixmap(":/icon/relic/cultist_headpiece.ico");
     relic_table[relicID::lively_plant] = QPixmap(":/icon/relic/lively_plant.ico");
     relic_table[relicID::cursed_key] = QPixmap(":/icon/relic/cursed_key.ico");
     frame_table["0at"] = QPixmap(":/image/card/frame/frame_red.png");
