@@ -5,13 +5,14 @@
 #include <QGraphicsOpacityEffect>
 #include <QPropertyAnimation>
 #include "core/setting.h"
-
+#include <QPushButton>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
+    setupButtonHoverEffects();
 
     takeCentralWidget();
 
@@ -83,6 +84,35 @@ MainWindow::~MainWindow()
     delete fileManager;
     delete leaderboard;
     delete ui;
+}
+
+void MainWindow::setupButtonHoverEffects()
+{
+    QList<QPushButton*> buttons = this->findChildren<QPushButton*>();
+
+    for (QPushButton* btn : buttons) {
+        btn->setAttribute(Qt::WA_Hover, true);
+        btn->installEventFilter(this);
+    }
+}
+
+bool MainWindow::eventFilter(QObject *watched, QEvent *event)
+{
+    if (event->type() == QEvent::Enter) {
+        QPushButton *button = qobject_cast<QPushButton*>(watched);
+        if (button) {
+            onButtonHovered();
+        }
+    }
+
+    return QMainWindow::eventFilter(watched, event);
+}
+
+void MainWindow::onButtonHovered()
+{
+    qDebug() << "Button Hovered! Ready for sound effect.";
+
+    // hoverSound->play(); در اینده برای ساند افکت
 }
 
 void MainWindow::showMainMenu()

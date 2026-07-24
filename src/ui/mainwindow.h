@@ -11,6 +11,7 @@
 #include "core/login/leaderboard.h"
 #include "core/login/filemanager.h"
 #include "core/login/stats.h"
+#include <QEvent>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -25,6 +26,9 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+protected:
+    bool eventFilter(QObject *watched, QEvent *event) override;
 
 private slots:
     void on_playButton_clicked();
@@ -41,6 +45,8 @@ private slots:
 
     void on_personalStatisticsButton_clicked();
     void on_backFromStatsButton_clicked();
+
+    void onButtonHovered();
 
 private:
     Ui::MainWindow *ui;
@@ -59,6 +65,8 @@ private:
     void setupLeaderboardTable();
 
     void updatePersonalStatsUI();
+
+    void setupButtonHoverEffects();
 };
 
 #endif // MAINWINDOW_H
