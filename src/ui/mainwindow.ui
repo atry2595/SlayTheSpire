@@ -693,7 +693,7 @@ QPushButton:pressed {
          <string notr="true">background-color: rgba(25, 25, 35, 0.7); border: 1px solid #333344; border-radius: 8px; padding: 12px; color: #EBE0B4; font-size: 13px;</string>
         </property>
         <property name="text">
-         <string>Loading statistics...</string>
+         <string>??</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
