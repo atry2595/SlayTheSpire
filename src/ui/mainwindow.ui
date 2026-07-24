@@ -509,9 +509,9 @@ QPushButton:pressed {
      <widget class="QLabel" name="leaderboardTitleLabel">
       <property name="geometry">
        <rect>
-        <x>80</x>
+        <x>600</x>
         <y>40</y>
-        <width>241</width>
+        <width>400</width>
         <height>50</height>
        </rect>
       </property>
@@ -519,38 +519,45 @@ QPushButton:pressed {
        <string notr="true">color: rgb(255, 210, 60);
 font-family: &quot;Samantha&quot;;
 font-size: 38px;
-font-weight: bold;</string>
+font-weight: bold;
+background: transparent;
+border: none;</string>
       </property>
       <property name="text">
        <string>Leaderboard</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignmentFlag::AlignCenter</set>
       </property>
      </widget>
      <widget class="QTableWidget" name="leaderboardTable">
       <property name="geometry">
        <rect>
-        <x>80</x>
+        <x>300</x>
         <y>110</y>
-        <width>1100</width>
+        <width>1000</width>
         <height>630</height>
        </rect>
       </property>
       <property name="styleSheet">
        <string notr="true">QTableWidget {
-    background-color: rgba(10, 15, 25, 190);
-    border: 2px solid rgb(235, 220, 180);
-    border-radius: 16px;
-    gridline-color: rgba(235, 220, 180, 60);
+    background-color: transparent;
+    border: none;
+    gridline-color: transparent;
     color: rgb(235, 220, 180);
     font-size: 19px;
     font-weight: bold;
 }
+QHeaderView {
+    background-color: transparent;
+}
 QHeaderView::section {
-    background-color: rgba(5, 10, 20, 220);
+    background-color: transparent;
     color: rgb(255, 210, 60);
     font-size: 20px;
     font-weight: bold;
     border: none;
-    border-bottom: 2px solid rgb(235, 220, 180);
+    border-bottom: 2px solid rgba(235, 220, 180, 0.3);
     padding: 12px;
 }</string>
       </property>
@@ -558,7 +565,7 @@ QHeaderView::section {
      <widget class="QPushButton" name="backButton_3">
       <property name="geometry">
        <rect>
-        <x>80</x>
+        <x>300</x>
         <y>765</y>
         <width>220</width>
         <height>55</height>
@@ -592,6 +599,133 @@ QPushButton:pressed {
        <string>Back</string>
       </property>
      </widget>
+    </widget>
+    <widget class="QFrame" name="personalStatsFrame">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>100</y>
+       <width>800</width>
+       <height>700</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QFrame#personalStatsFrame {
+    background-color: rgba(18, 18, 26, 0.95);
+    border: 2px solid #FFD700;
+    border-radius: 12px;
+}</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_stats">
+      <property name="spacing">
+       <number>12</number>
+      </property>
+      <property name="leftMargin">
+       <number>20</number>
+      </property>
+      <property name="topMargin">
+       <number>20</number>
+      </property>
+      <property name="rightMargin">
+       <number>20</number>
+      </property>
+      <property name="bottomMargin">
+       <number>20</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="statsTitleLabel">
+        <property name="styleSheet">
+         <string notr="true">color: #FFD700; font-size: 22px; font-weight: bold; letter-spacing: 2px;</string>
+        </property>
+        <property name="text">
+         <string>— PERSONAL STATISTICS —</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="profileCard">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgba(30, 30, 45, 0.8); border: 1px solid #555577; border-radius: 8px; padding: 6px;</string>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_profile">
+         <item>
+          <widget class="QLabel" name="statsUserLabel">
+           <property name="styleSheet">
+            <string notr="true">color: #FFFFFF; font-size: 14px; border: none;</string>
+           </property>
+           <property name="text">
+            <string>👤 Player: -</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_profile">
+           <property name="orientation">
+            <enum>Qt::Orientation::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLabel" name="statsEmailLabel">
+           <property name="styleSheet">
+            <string notr="true">color: #AAAAAA; font-size: 14px; border: none;</string>
+           </property>
+           <property name="text">
+            <string>✉ Email: -</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="statsDetailsLabel">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgba(25, 25, 35, 0.7); border: 1px solid #333344; border-radius: 8px; padding: 12px; color: #EBE0B4; font-size: 13px;</string>
+        </property>
+        <property name="text">
+         <string>Loading statistics...</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="backFromStatsButton">
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #331111;
+    color: #FF5555;
+    border: 1px solid #FF5555;
+    border-radius: 6px;
+    padding: 8px;
+    font-size: 14px;
+    font-weight: bold;
+}
+QPushButton:hover {
+    background-color: #551111;
+    color: #FFFFFF;
+}</string>
+        </property>
+        <property name="text">
+         <string>Back to Menu</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </widget>
   </widget>

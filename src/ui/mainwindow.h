@@ -10,6 +10,7 @@
 #include "forgotpasswordpage.h"
 #include "core/login/leaderboard.h"
 #include "core/login/filemanager.h"
+#include "core/login/stats.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -38,6 +39,9 @@ private slots:
 
     void updateLeaderboardUI();
 
+    void on_personalStatisticsButton_clicked();
+    void on_backFromStatsButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -53,6 +57,8 @@ private:
 
     void showMainMenu();
     void setupLeaderboardTable();
+
+    void updatePersonalStatsUI();
 };
 
 #endif // MAINWINDOW_H
