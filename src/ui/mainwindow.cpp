@@ -4,12 +4,14 @@
 #include <QTableWidgetItem>
 #include <QGraphicsOpacityEffect>
 #include <QPropertyAnimation>
+#include "core/setting.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
 
     takeCentralWidget();
 
@@ -227,7 +229,8 @@ void MainWindow::updatePersonalStatsUI()
     ui->statsUserLabel->setText(tr("Player: <span style='color: #FFD700; font-size: 18px;'>%1</span>").arg(currentPlayer->getUsername()));
     ui->statsEmailLabel->setText(tr("Email: <span style='color: #FFD700; font-size: 18px;'>%1</span>").arg(currentPlayer->getEmail()));
 
-    QString statsText = QString("<div style='font-size: 18px;'>") + tr(
+    QString statsText = QString("<div style='font-family: \"%1\"; font-size: 18px;'>")
+                            .arg(Fonts::Cascadia) + tr(
                             "<table width='100%' cellpadding='8' cellspacing='0'>"
                             "<tr>"
 
@@ -264,6 +267,7 @@ void MainWindow::updatePersonalStatsUI()
                     .arg(stats.getTotalEnemiesKilled());
 
     ui->statsDetailsLabel->setText(statsText);
+
 }
 
 static void fadeWidget(QWidget *targetWidget, bool show, int durationMs = 300)
