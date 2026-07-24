@@ -65,7 +65,6 @@
     background: transparent;
     border: none;
     color: rgb(235, 220, 180);
-    font-family: &quot;Samantha&quot;;
     font-size: 38px;
     font-weight: bold;
     text-align: left;
@@ -102,7 +101,6 @@ QPushButton:pressed {
     background: transparent;
     border: none;
     color: rgb(235, 220, 180);
-    font-family: &quot;Samantha&quot;;
     font-size: 38px;
     font-weight: bold;
     text-align: left;
@@ -139,7 +137,6 @@ QPushButton:pressed {
     background: transparent;
     border: none;
     color: rgb(235, 220, 180);
-    font-family: &quot;Samantha&quot;;
     font-size: 38px;
     font-weight: bold;
     text-align: left;
@@ -176,7 +173,6 @@ QPushButton:pressed {
     background: transparent;
     border: none;
     color: rgb(235, 220, 180);
-    font-family: &quot;Samantha&quot;;
     font-size: 38px;
     font-weight: bold;
     text-align: left;
@@ -241,7 +237,6 @@ QPushButton:pressed {
     background: transparent;
     border: none;
     color: rgb(235, 220, 180);
-    font-family: &quot;Samantha&quot;;
     font-size: 36px;
     font-weight: bold;
     text-align: left;
@@ -278,7 +273,6 @@ QPushButton:pressed {
     background: transparent;
     border: none;
     color: rgb(235, 220, 180);
-    font-family: &quot;Samantha&quot;;
     font-size: 36px;
     font-weight: bold;
     text-align: left;
@@ -315,7 +309,6 @@ QPushButton:pressed {
     background: transparent;
     border: none;
     color: rgb(235, 220, 180);
-    font-family: &quot;Samantha&quot;;
     font-size: 36px;
     font-weight: bold;
     text-align: left;
@@ -365,7 +358,6 @@ QPushButton:pressed {
     background: transparent;
     border: none;
     color: rgb(235, 220, 180);
-    font-family: &quot;Samantha&quot;;
     font-size: 36px;
     font-weight: bold;
     text-align: left;
@@ -402,7 +394,6 @@ QPushButton:pressed {
     background: transparent;
     border: none;
     color: rgb(235, 220, 180);
-    font-family: &quot;Samantha&quot;;
     font-size: 36px;
     font-weight: bold;
     text-align: left;
@@ -439,7 +430,6 @@ QPushButton:pressed {
     background: transparent;
     border: none;
     color: rgb(235, 220, 180);
-    font-family: &quot;Samantha&quot;;
     font-size: 36px;
     font-weight: bold;
     text-align: left;
@@ -476,7 +466,6 @@ QPushButton:pressed {
     background: transparent;
     border: none;
     color: rgb(235, 220, 180);
-    font-family: &quot;Samantha&quot;;
     font-size: 36px;
     font-weight: bold;
     text-align: left;
@@ -517,7 +506,6 @@ QPushButton:pressed {
       </property>
       <property name="styleSheet">
        <string notr="true">color: rgb(255, 210, 60);
-font-family: &quot;Samantha&quot;;
 font-size: 38px;
 font-weight: bold;
 background: transparent;
@@ -582,7 +570,6 @@ QHeaderView::section {
     background: transparent;
     border: none;
     color: rgb(235, 220, 180);
-    font-family: &quot;Samantha&quot;;
     font-size: 32px;
     font-weight: bold;
     text-align: left;
