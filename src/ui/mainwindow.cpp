@@ -203,59 +203,67 @@ void MainWindow::updatePersonalStatsUI()
     Player* currentPlayer = fileManager->getLoggedInPlayer();
 
     if (!currentPlayer) {
-        ui->statsUserLabel->setText("👤 <b>Player:</b> Not Logged In");
-        ui->statsEmailLabel->setText("✉ <b>Email:</b> N/A");
-        ui->statsDetailsLabel->setText("<h3 style='color: #FF5555; text-align: center;'>Please login first to view your statistics!</h3>");
+        ui->statsUserLabel->setText(tr("Player: Not Logged In"));
+        ui->statsEmailLabel->setText(tr("Email: N/A"));
+        ui->statsDetailsLabel->setText(tr("Please login first to view your statistics!"));
         return;
     }
 
+    ui->statsUserLabel->setAutoFillBackground(false);
+    ui->statsEmailLabel->setAutoFillBackground(false);
+    ui->statsDetailsLabel->setAutoFillBackground(false);
+
+    ui->statsUserLabel->setAttribute(Qt::WA_TranslucentBackground, true);
+    ui->statsEmailLabel->setAttribute(Qt::WA_TranslucentBackground, true);
+    ui->statsDetailsLabel->setAttribute(Qt::WA_TranslucentBackground, true);
+
+    QString labelStyle = "background-color: transparent; background: none; border: none; color: #EBE0B4; font-size: 16px; font-weight: bold;";
+    ui->statsUserLabel->setStyleSheet(labelStyle);
+    ui->statsEmailLabel->setStyleSheet(labelStyle);
+    ui->statsDetailsLabel->setStyleSheet(labelStyle);
+
     const Stats &stats = currentPlayer->getStats();
 
-    ui->statsUserLabel->setText(QString("👤 <b>Player:</b> <span style='color: #FFD700;'>%1</span>").arg(currentPlayer->getUsername()));
-    ui->statsEmailLabel->setText(QString("✉ <b>Email:</b> %1").arg(currentPlayer->getEmail()));
+    ui->statsUserLabel->setText(tr("Player: <span style='color: #FFD700; font-size: 18px;'>%1</span>").arg(currentPlayer->getUsername()));
+    ui->statsEmailLabel->setText(tr("Email: <span style='color: #FFD700; font-size: 18px;'>%1</span>").arg(currentPlayer->getEmail()));
 
-    QString statsHtml = QString(R"(
-        <table width='100%' cellspacing='8' cellpadding='4' style='color: #EBE0B4; font-size: 14px;'>
-            <tr>
-                <td><b>🏆 Highest Score:</b> <span style='color: #00FF7F; font-size: 16px;'><b>%1</b></span></td>
-                <td><b>🧗 Highest Floor Reached:</b> <span style='color: #00E5FF;'><b>%2</b></span></td>
-            </tr>
-            <tr>
-                <td colspan='2'><b>🎮 Games Played:</b> %3</td>
-            </tr>
-            <tr>
-                <td><b>🥇 Victories:</b> <span style='color: #55FF55;'>%4</span></td>
-                <td><b>💀 Losses:</b> <span style='color: #FF5555;'>%5</span></td>
-            </tr>
-            <tr>
-                <td colspan='2'><b>📊 Win Rate:</b> <span style='color: #E040FB;'><b>%6%</b></span></td>
-            </tr>
-        </table>
-        <hr style='border: 0.5px solid #444455; margin-top: 10px; margin-bottom: 10px;' />
-        <h3 style='color: #FFD700; text-align: center;'>⚔ COMBAT RECORDS</h3>
-        <table width='100%' cellspacing='6' style='color: #CCCCCC; font-size: 13px;'>
-            <tr>
-                <td>• Monsters Defeated: <b>%7</b></td>
-                <td>• Elites Defeated: <b>%8</b></td>
-            </tr>
-            <tr>
-                <td>• Bosses Defeated: <b>%9</b></td>
-                <td>• Total Kills: <b style='color: #FFD700;'>%10</b></td>
-            </tr>
-        </table>
-    )")
-                            .arg(stats.getHighestScore())
-                            .arg(stats.getHighestFloorReached())
-                            .arg(stats.getTimesPlayed())
-                            .arg(stats.getTimesWon())
-                            .arg(stats.getTimesLost())
-                            .arg(QString::number(stats.getWinRate(), 'f', 1))
-                            .arg(stats.getMonstersKilled())
-                            .arg(stats.getElitesKilled())
-                            .arg(stats.getBossesKilled())
-                            .arg(stats.getTotalEnemiesKilled());
+    QString statsText = QString("<div style='font-size: 18px;'>") + tr(
+                            "<table width='100%' cellpadding='8' cellspacing='0'>"
+                            "<tr>"
 
-    ui->statsDetailsLabel->setText(statsHtml);
+                            "<td valign='top' width='50%'>"
+                            "Highest Score: <span style='color: #FFD700;'>%1</span><br>"
+                            "Highest Floor Reached: <span style='color: #FFD700;'>%2</span><br>"
+                            "Games Played: <span style='color: #FFD700;'>%3</span><br>"
+                            "Victories: <span style='color: #FFD700;'>%4</span><br>"
+                            "Losses: <span style='color: #FFD700;'>%5</span><br>"
+                            "Win Rate: <span style='color: #FFD700;'>%6%</span>"
+                            "</td>"
+
+                            "<td valign='top' width='50%'>"
+                            "Monsters Defeated: <span style='color: #FFD700;'>%7</span><br>"
+                            "Elites Defeated: <span style='color: #FFD700;'>%8</span><br>"
+                            "Bosses Defeated: <span style='color: #FFD700;'>%9</span><br>"
+                            "Total Kills: <span style='color: #FFD700;'>%10</span>"
+                            "</td>"
+
+                            "</tr>"
+                            "</table>"
+                            ) + "</div>";
+
+    statsText = statsText
+                    .arg(stats.getHighestScore())
+                    .arg(stats.getHighestFloorReached())
+                    .arg(stats.getTimesPlayed())
+                    .arg(stats.getTimesWon())
+                    .arg(stats.getTimesLost())
+                    .arg(QString::number(stats.getWinRate(), 'f', 1))
+                    .arg(stats.getMonstersKilled())
+                    .arg(stats.getElitesKilled())
+                    .arg(stats.getBossesKilled())
+                    .arg(stats.getTotalEnemiesKilled());
+
+    ui->statsDetailsLabel->setText(statsText);
 }
 
 static void fadeWidget(QWidget *targetWidget, bool show, int durationMs = 300)
@@ -309,14 +317,25 @@ void MainWindow::on_statisticsButton_clicked()
 void MainWindow::on_personalStatisticsButton_clicked()
 {
     updatePersonalStatsUI();
+
     fadeWidget(ui->statisticsFrame, false, 200);
+
+    fadeWidget(ui->darkOverlay, true, 300);
+    ui->darkOverlay->raise();
+
     fadeWidget(ui->personalStatsFrame, true, 300);
+    ui->personalStatsFrame->raise();
 }
 
 void MainWindow::on_backFromStatsButton_clicked()
 {
     fadeWidget(ui->personalStatsFrame, false, 200);
+
+    fadeWidget(ui->darkOverlay, true, 300);
+    ui->darkOverlay->raise();
+
     fadeWidget(ui->statisticsFrame, true, 300);
+    ui->statisticsFrame->raise();
 }
 
 void MainWindow::on_backButton_2_clicked()

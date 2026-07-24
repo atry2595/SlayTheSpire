@@ -654,10 +654,14 @@ QPushButton:pressed {
          <item>
           <widget class="QLabel" name="statsUserLabel">
            <property name="styleSheet">
-            <string notr="true">color: #FFFFFF; font-size: 14px; border: none;</string>
+            <string notr="true">color: #AAAAAA; font-size: 20px; border: none;
+QFrame#personalStatsFrame, QLabel {
+    background-color: transparent;
+    border: none;
+}</string>
            </property>
            <property name="text">
-            <string>👤 Player: -</string>
+            <string> Player: -</string>
            </property>
           </widget>
          </item>
@@ -677,7 +681,11 @@ QPushButton:pressed {
          <item>
           <widget class="QLabel" name="statsEmailLabel">
            <property name="styleSheet">
-            <string notr="true">color: #AAAAAA; font-size: 14px; border: none;</string>
+            <string notr="true">color: #AAAAAA; font-size: 20px; border: none;
+QFrame#personalStatsFrame, QLabel {
+    background-color: transparent;
+    border: none;
+}</string>
            </property>
            <property name="text">
             <string>✉ Email: -</string>
@@ -690,7 +698,7 @@ QPushButton:pressed {
       <item>
        <widget class="QLabel" name="statsDetailsLabel">
         <property name="styleSheet">
-         <string notr="true">background-color: rgba(25, 25, 35, 0.7); border: 1px solid #333344; border-radius: 8px; padding: 12px; color: #EBE0B4; font-size: 13px;</string>
+         <string notr="true">background-color: rgba(25, 25, 35, 0.7); border: 1px solid #333344; border-radius: 8px; padding: 12px; color: #EBE0B4; font-size: 22px;</string>
         </property>
         <property name="text">
          <string>??</string>
