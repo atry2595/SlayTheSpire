@@ -264,7 +264,7 @@ imageManager::imageManager() {
     legend_table[RoomType::ELITE] = QPixmap(":/icon/map/elite.ico");
     legend_table[RoomType::UNKNOWN] = QPixmap(":/icon/map/event.ico");
     legend_table[RoomType::MERCHANT] = QPixmap(":/icon/map/merch.ico");
-    legend_table[RoomType::REST] = QPixmap(":/icon/map/rest.ico");
+    legend_table[RoomType::REST] = QPixmap(":/icon/map/rest.png");
     legend_table[RoomType::TREASURE] = QPixmap(":/icon/map/treasure.ico");
     legend_table[RoomType::BOSS] = QPixmap(":/icon/map/boss.ico");
 }

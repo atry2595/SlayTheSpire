@@ -379,4 +379,10 @@
         <file alias="legend.png">assests/image/legend.png</file>
         <file alias="map_back.png">assests/image/map_back.png</file>
     </qresource>
+    <qresource prefix="/image/chest">
+        <file alias="oathchest.png">assests/image/oath_chest.png</file>
+        <file alias="veilchest.png">assests/image/veil_chest.png</file>
+        <file alias="oath_dialogbox.png">assests/image/oath_dialogbox.png</file>
+        <file alias="veil_dialogbox.png">assests/image/veil_dialogbox.png</file>
+    </qresource>
 </RCC>
