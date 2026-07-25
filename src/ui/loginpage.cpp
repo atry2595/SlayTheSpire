@@ -245,7 +245,7 @@ void LoginPage::on_loginButton_clicked()
     {
         showSuccess("Login successful!");
 
-        QTimer::singleShot(2000,
+        QTimer::singleShot(1000,
                            this,
                            [this]()
                            {

@@ -7,6 +7,7 @@
 #include "core/setting.h"
 #include <QPushButton>
 #include <QTimer>
+#include "assetsManager/soundmanager.h"
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -132,14 +133,13 @@ bool MainWindow::eventFilter(QObject *watched, QEvent *event)
     return QMainWindow::eventFilter(watched, event);
 }
 
-void MainWindow::onButtonHovered()
-{
-
-    // hoverSound->play(); در اینده برای ساند افکت
+void MainWindow::onButtonHovered() {
+    soundManager::instance().playSoundEffect(SoundEffect::menuHover);
 }
 
 void MainWindow::showMainMenu()
 {
+    soundManager::instance().playBackMusic(BgMusic::main);
     ui->darkOverlay->hide();
     ui->menuFrame->show();
     ui->playFrame->hide();
@@ -352,6 +352,8 @@ static void fadeWidget(QWidget *targetWidget, bool show, int durationMs = 300)
 
 void MainWindow::on_playButton_clicked()
 {
+
+    soundManager::instance().playSoundEffect(SoundEffect::menuSelect);
     fadeWidget(ui->menuFrame, false, 200);
     fadeWidget(ui->darkOverlay, true, 300);
    // ui->darkOverlay->hide();
@@ -360,6 +362,8 @@ void MainWindow::on_playButton_clicked()
 
 void MainWindow::on_backButton_clicked()
 {
+
+    soundManager::instance().playSoundEffect(SoundEffect::menuSelect);
     fadeWidget(ui->playFrame, false, 200);
     fadeWidget(ui->darkOverlay, false, 300);
   //  ui->darkOverlay->hide();
@@ -368,6 +372,8 @@ void MainWindow::on_backButton_clicked()
 
 void MainWindow::on_statisticsButton_clicked()
 {
+
+    soundManager::instance().playSoundEffect(SoundEffect::menuSelect);
     fadeWidget(ui->menuFrame, false, 200);
     fadeWidget(ui->darkOverlay, true, 300);
    // ui->darkOverlay->hide();
@@ -376,6 +382,8 @@ void MainWindow::on_statisticsButton_clicked()
 
 void MainWindow::on_personalStatisticsButton_clicked()
 {
+
+    soundManager::instance().playSoundEffect(SoundEffect::menuSelect);
     updatePersonalStatsUI();
 
     fadeWidget(ui->statisticsFrame, false, 200);
@@ -389,6 +397,8 @@ void MainWindow::on_personalStatisticsButton_clicked()
 
 void MainWindow::on_backFromStatsButton_clicked()
 {
+
+    soundManager::instance().playSoundEffect(SoundEffect::menuSelect);
     fadeWidget(ui->personalStatsFrame, false, 200);
 
     fadeWidget(ui->darkOverlay, true, 300);
@@ -400,6 +410,8 @@ void MainWindow::on_backFromStatsButton_clicked()
 
 void MainWindow::on_backButton_2_clicked()
 {
+
+    soundManager::instance().playSoundEffect(SoundEffect::menuSelect);
     fadeWidget(ui->statisticsFrame, false, 200);
     fadeWidget(ui->darkOverlay, false, 300);
    // ui->darkOverlay->hide();
@@ -408,6 +420,8 @@ void MainWindow::on_backButton_2_clicked()
 
 void MainWindow::on_leaderBoardButton_clicked()
 {
+
+    soundManager::instance().playSoundEffect(SoundEffect::menuSelect);
     fadeWidget(ui->statisticsFrame, false, 200);
     updateLeaderboardUI();
     fadeWidget(ui->leaderboardFrame, true, 300);
@@ -415,15 +429,20 @@ void MainWindow::on_leaderBoardButton_clicked()
 
 void MainWindow::on_backButton_3_clicked()
 {
+
+    soundManager::instance().playSoundEffect(SoundEffect::menuSelect);
     fadeWidget(ui->leaderboardFrame, false, 200);
     fadeWidget(ui->statisticsFrame, true, 300);
 }
 
 void MainWindow::on_settingsButton_clicked()
 {
+    soundManager::instance().playSoundEffect(SoundEffect::menuSelect);
 }
 
 void MainWindow::on_exitButton_clicked()
 {
-    close();
+
+    soundManager::instance().playSoundEffect(SoundEffect::skinSelect);
+    QTimer::singleShot(500, [=](){close();});
 }
