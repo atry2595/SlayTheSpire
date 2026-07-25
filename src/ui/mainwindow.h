@@ -49,6 +49,7 @@ private slots:
     void onButtonHovered();
 
 private:
+
     Ui::MainWindow *ui;
 
     FileManager *fileManager;

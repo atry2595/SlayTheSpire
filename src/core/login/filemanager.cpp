@@ -81,7 +81,7 @@ bool FileManager::isUsernameTaken(const QString &username)
 {
     for(const Player &p: players)
     {
-        if(p.getUsername().toLower() == username.toLower())
+        if(p.getUsername() == username)
         {
             return true;
         }
@@ -93,7 +93,7 @@ bool FileManager::isEmailTaken(const QString &email)
 {
     for(const Player &p: players)
     {
-        if(p.getEmail().toLower() == email.toLower())
+        if(p.getEmail() == email)
         {
             return true;
         }
@@ -147,20 +147,23 @@ bool FileManager::registerPlayer(const QString &username,const QString &email,co
     return true;
 }
 
-Player* FileManager::login(const QString &username,const QString &password)
+Player* FileManager::login(const QString &username, const QString &password)
 {
-    for(int i = 0;i < players.size();i++)
+    for (int i = 0; i < players.size(); i++)
     {
-        if(players[i].getUsername().toLower() == username.toLower())
+        if (players[i].getUsername() == username ||
+            players[i].getEmail() == username)
         {
-            if(players[i].checkPassword(password))
+            if (players[i].checkPassword(password))
             {
                 loggedInPlayerIndex = i;
                 return &players[i];
             }
+
             return nullptr;
         }
     }
+
     return nullptr;
 }
 
@@ -182,7 +185,7 @@ bool FileManager::resetPassword(const QString &email,
 
     for(Player &player : players)
     {
-        if(player.getEmail().toLower() == email.toLower())
+        if(player.getEmail() == email)
         {
             foundPlayer = &player;
             break;
@@ -222,7 +225,7 @@ Player* FileManager::findPlayer(const QString &username)
 {
     for(Player &p : players)
     {
-        if(p.getUsername().toLower()==username.toLower())
+        if(p.getUsername()==username)
         {
             return &p;
         }
