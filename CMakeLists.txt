@@ -322,6 +322,7 @@ add_executable(SlayTheSpire
     src/core/menu/menu.h src/core/menu/menu.cpp
     src/core/menu/menu.h src/core/menu/menu.cpp src/core/menu/menu.ui
     src/core/menu/statisticsmenu.h src/core/menu/statisticsmenu.cpp src/core/menu/statisticsmenu.ui
+    src/places/shop/merchant.cpp src/places/shop/merchant.h src/places/shop/shopitem.cpp src/places/shop/shopitem.h
 
 
     # Core
