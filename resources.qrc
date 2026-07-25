@@ -343,4 +343,14 @@
     <qresource prefix="/image/back">
         <file alias="back1">assests/image/back/IMG_6654.jpg</file>
     </qresource>
+    <qresource prefix="/fonts">
+        <file alias="koodak">assests/font/B Koodak Bold.ttf</file>
+        <file alias="cascadia">assests/font/CascadiaMono.ttf</file>
+        <file alias="cinema">assests/font/Cinema Font.ttf</file>
+        <file alias="ebhaar">assests/font/Ebhaar.otf</file>
+        <file alias="forte">assests/font/FORTE.TTF</file>
+        <file alias="lotrance">assests/font/Lotrance-Regular.otf</file>
+        <file alias="titrZ">assests/font/Titr Zebr.ttf</file>
+        <file alias="rock">assests/font/Typoster ROCK-ON Demo.otf</file>
+    </qresource>
 </RCC>

@@ -6,6 +6,7 @@
 #include <QPropertyAnimation>
 #include "core/setting.h"
 #include <QPushButton>
+#include <QTimer>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -76,6 +77,29 @@ MainWindow::MainWindow(QWidget *parent)
         mainStack->setCurrentWidget(ui->centralwidget);
     });
 
+    QFont fnt;
+    fnt.setFamily((setting::game_language == language::English)?(Fonts::Cascadia):(Fonts::koodak));
+
+    ui->backButton_3->setFont(fnt);
+    ui->leaderboardTitleLabel->setFont(fnt);
+    ui->personalStatsFrame->setFont(fnt);
+    ui->backFromStatsButton->setFont(fnt);
+    ui->statsEmailLabel->setFont(fnt);
+    ui->statsUserLabel->setFont(fnt);
+    ui->statsDetailsLabel->setFont(fnt);
+    ui->statsTitleLabel->setFont(fnt);
+    ui->backButton->setFont(fnt);
+    ui->multiplayerButton->setFont(fnt);
+    ui->singlePlayerButton->setFont(fnt);
+    ui->backButton_2->setFont(fnt);
+    ui->bookletButton->setFont(fnt);
+    ui->leaderBoardButton->setFont(fnt);
+    ui->personalStatisticsButton->setFont(fnt);
+    ui->exitButton->setFont(fnt);
+    ui->playButton->setFont(fnt);
+    ui->settingsButton->setFont(fnt);
+    ui->statisticsButton->setFont(fnt);
+
     showFullScreen();
 }
 
@@ -110,7 +134,6 @@ bool MainWindow::eventFilter(QObject *watched, QEvent *event)
 
 void MainWindow::onButtonHovered()
 {
-    qDebug() << "Button Hovered! Ready for sound effect.";
 
     // hoverSound->play(); در اینده برای ساند افکت
 }
@@ -331,6 +354,7 @@ void MainWindow::on_playButton_clicked()
 {
     fadeWidget(ui->menuFrame, false, 200);
     fadeWidget(ui->darkOverlay, true, 300);
+   // ui->darkOverlay->hide();
     fadeWidget(ui->playFrame, true, 300);
 }
 
@@ -338,6 +362,7 @@ void MainWindow::on_backButton_clicked()
 {
     fadeWidget(ui->playFrame, false, 200);
     fadeWidget(ui->darkOverlay, false, 300);
+  //  ui->darkOverlay->hide();
     fadeWidget(ui->menuFrame, true, 300);
 }
 
@@ -345,6 +370,7 @@ void MainWindow::on_statisticsButton_clicked()
 {
     fadeWidget(ui->menuFrame, false, 200);
     fadeWidget(ui->darkOverlay, true, 300);
+   // ui->darkOverlay->hide();
     fadeWidget(ui->statisticsFrame, true, 300);
 }
 
@@ -376,6 +402,7 @@ void MainWindow::on_backButton_2_clicked()
 {
     fadeWidget(ui->statisticsFrame, false, 200);
     fadeWidget(ui->darkOverlay, false, 300);
+   // ui->darkOverlay->hide();
     fadeWidget(ui->menuFrame, true, 300);
 }
 
