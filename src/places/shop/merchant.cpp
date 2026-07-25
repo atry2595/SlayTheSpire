@@ -290,7 +290,7 @@ PurchaseResult Merchant::buyItem(size_t index)
     }
 
     m_player->lose_gold(item.getPrice());
-    item.setPurchased(true);
+    item.setPurchased(true);0
 
     return PurchaseResult::Success;
 }

@@ -107,12 +107,12 @@ QPushButton:pressed {
 }
 QPushButton:hover {
     color: rgb(255, 215, 80);
-	outline: none;
+        outline: none;
     padding-left: 16px;
 }
 QPushButton:pressed {
     color: rgb(255, 180, 30);
-	outline: none;
+        outline: none;
 }</string>
      </property>
      <property name="text">
@@ -605,13 +605,13 @@ QPushButton:pressed {
     text-align: left;
 }
 QPushButton:hover {
-	background: transparent;
+        background: transparent;
     color: rgb(255, 215, 80);
     padding-left: 16px;
 }
 QPushButton:pressed {
     color: rgb(255, 180, 30);
-	background: transparent;
+        background: transparent;
 }</string>
      </property>
      <property name="text">
@@ -726,6 +726,26 @@ QPushButton:pressed {
       <string>Back</string>
      </property>
     </widget>
+   </widget>
+   <widget class="QLabel" name="logoLabel">
+    <property name="geometry">
+     <rect>
+      <x>550</x>
+      <y>100</y>
+      <width>500</width>
+      <height>404</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/image/back/logo) 0 0 0 0 stretch stretch;
+background: transparent;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

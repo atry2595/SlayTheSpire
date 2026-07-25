@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     ui->darkOverlay->hide();
+    ui->logoLabel->show();
     ui->menuFrame->show();
     ui->playFrame->hide();
     ui->statisticsFrame->hide();
@@ -145,6 +146,7 @@ void MainWindow::showMainMenu()
     soundManager::instance().playBackMusic(BgMusic::main);
     ui->darkOverlay->hide();
     ui->menuFrame->show();
+    ui->logoLabel->show();
     ui->playFrame->hide();
     ui->statisticsFrame->hide();
     ui->leaderboardFrame->hide();
@@ -394,6 +396,7 @@ void MainWindow::on_personalStatisticsButton_clicked()
 
     ui->personalStatsFrame->show();
     ui->personalStatsFrame->raise();
+    ui->logoLabel->hide();
 
     fadeWidget(ui->statisticsFrame, false, 200);
 
@@ -414,6 +417,7 @@ void MainWindow::on_backFromStatsButton_clicked()
 
     fadeWidget(ui->statisticsFrame, true, 250);
 
+    ui->logoLabel->show();
     ui->personalStatsFrame->hide();
 }
 
@@ -422,6 +426,7 @@ void MainWindow::on_backButton_2_clicked()
     soundManager::instance().playSoundEffect(SoundEffect::menuSelect);
 
     ui->darkOverlay->hide();
+    ui->logoLabel->show();
 
     fadeWidget(ui->statisticsFrame, false, 200);
     fadeWidget(ui->menuFrame, true, 300);
@@ -434,6 +439,7 @@ void MainWindow::on_leaderBoardButton_clicked()
     soundManager::instance().playSoundEffect(SoundEffect::menuSelect);
 
     fadeWidget(ui->statisticsFrame, false, 200);
+    ui->logoLabel->hide();
 
     ui->darkOverlay->show();
     ui->darkOverlay->raise();
@@ -453,6 +459,8 @@ void MainWindow::on_backButton_3_clicked()
     fadeWidget(ui->leaderboardFrame, false, 200);
 
     ui->darkOverlay->hide();
+    ui->logoLabel->show();
+
 
     ui->statisticsFrame->show();
     ui->statisticsFrame->raise();
