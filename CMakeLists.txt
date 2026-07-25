@@ -601,6 +601,7 @@ add_executable(SlayTheSpire
     src/ui/topbar/combatsetting.cpp src/ui/topbar/combatsetting.h
     src/ui/treasure/treasurepage.h src/ui/treasure/treasurepage.cpp
     src/ui/selectItem/selectrelic.cpp src/ui/selectItem/selectrelic.h
+    src/ui/store/storepage.cpp src/ui/store/storepage.h
 
 )
 
