@@ -92,6 +92,8 @@
         <file alias="ironclad3.png">assests/image/characters/ironclad3.png</file>
         <file alias="ironclad4.png">assests/image/characters/ironclad4.png</file>
         <file alias="ironclad5.png">assests/image/characters/ironclad5.png</file>
+        <file alias="oathclad.png">assests/image/characters/oathclad.png</file>
+        <file alias="veilclad.png">assests/image/characters/veilclad.png</file>
     </qresource>
     <qresource prefix="/image/characters/1x1">
         <file alias="blue_slaver.png">assests/image/characters/1x1/blue_slaver.png</file>
@@ -358,5 +360,10 @@
     <qresource prefix="/image/back">
         <file alias="back1">assests/image/back/IMG_6654.jpg</file>
         <file alias="logo">assests/image/back/Slay_the_Spire_Logo.png</file>
+    <qresource prefix="/image/chest">
+        <file alias="oathchest.png">assests/image/oath_chest.png</file>
+        <file alias="veilchest.png">assests/image/veil_chest.png</file>
+        <file alias="oath_dialogbox.png">assests/image/oath_dialogbox.png</file>
+        <file alias="veil_dialogbox.png">assests/image/veil_dialogbox.png</file>
     </qresource>
 </RCC>

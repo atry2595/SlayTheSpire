@@ -29,12 +29,14 @@ private:
     QPushButton* end_setting;
     QGraphicsProxyWidget* setting_proxy = nullptr;
 
+    bool simple = false;
+
 
 
     bool eventFilter(QObject* obj, QEvent* eve) override;
 
 public:
-    CombatTopBar(combatEvent* eve, ironclad* player);
+    CombatTopBar(combatEvent* eve, ironclad* player, bool is_simple = false);
 
     auto getParent() { return parent; }
 

@@ -10,6 +10,7 @@
 #include "categories/potions.h"
 #include "categories/powers.h"
 #include "categories/relics.h"
+#include "categories/general.h"
 #include "items/enemyIntent.h"
 
 class imageManager
@@ -34,6 +35,9 @@ class imageManager
 
     QHash<QString, QPixmap> background_table;
 
+    QHash<ChestType, QPixmap> chest_table;
+    QHash<ChestType, QPixmap> dialogbox_table;
+
 public:
     static imageManager& instance();
 
@@ -54,6 +58,9 @@ public:
     QPixmap& getEffectImage(QString name);
 
     QPixmap& getBackroundImage();
+
+    QPixmap& getChestImage(ChestType type);
+    QPixmap& getDialogImage(ChestType type);
 };
 
 #endif // IMAGEMANAGER_H
