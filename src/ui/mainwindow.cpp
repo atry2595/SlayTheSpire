@@ -28,6 +28,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->statisticsFrame->hide();
     ui->leaderboardFrame->hide();
 
+
     fileManager = new FileManager();
     leaderboard = new Leaderboard();
 
@@ -117,6 +118,8 @@ void MainWindow::setupButtonHoverEffects()
 
     for (QPushButton* btn : buttons) {
         btn->setAttribute(Qt::WA_Hover, true);
+        btn->setAutoDefault(false);
+        btn->setDefault(false);
         btn->installEventFilter(this);
     }
 }
@@ -325,114 +328,134 @@ void MainWindow::updatePersonalStatsUI()
 
 static void fadeWidget(QWidget *targetWidget, bool show, int durationMs = 300)
 {
-    if (!targetWidget) return;
+    Q_UNUSED(durationMs);
 
-    if (show) {
-        targetWidget->show();
+    if (!targetWidget)
+        return;
+
+    if (targetWidget->objectName() == "leaderboardFrame" ||
+        targetWidget->objectName() == "personalStatsFrame")
+    {
+        if (show)
+            targetWidget->show();
+        else
+            targetWidget->hide();
+
+        return;
     }
 
-    QGraphicsOpacityEffect *effect = new QGraphicsOpacityEffect(targetWidget);
-    targetWidget->setGraphicsEffect(effect);
+    if (show)
+        targetWidget->show();
+    else
+        targetWidget->hide();
 
-    QPropertyAnimation *animation = new QPropertyAnimation(effect, "opacity");
-    animation->setDuration(durationMs);
-    animation->setStartValue(show ? 0.0 : 1.0);
-    animation->setEndValue(show ? 1.0 : 0.0);
-
-    QObject::connect(animation, &QPropertyAnimation::finished, [targetWidget, show]() {
-        if (!show) {
-            targetWidget->hide();
-        }
-        targetWidget->setGraphicsEffect(nullptr);
-    });
-
-    animation->start(QAbstractAnimation::DeleteWhenStopped);
 }
-
 
 void MainWindow::on_playButton_clicked()
 {
-
     soundManager::instance().playSoundEffect(SoundEffect::menuSelect);
+
+    ui->darkOverlay->hide();
+
     fadeWidget(ui->menuFrame, false, 200);
-    fadeWidget(ui->darkOverlay, true, 300);
-   // ui->darkOverlay->hide();
     fadeWidget(ui->playFrame, true, 300);
+
+    ui->playFrame->raise();
 }
 
 void MainWindow::on_backButton_clicked()
 {
-
     soundManager::instance().playSoundEffect(SoundEffect::menuSelect);
+
+    ui->darkOverlay->hide();
+
     fadeWidget(ui->playFrame, false, 200);
-    fadeWidget(ui->darkOverlay, false, 300);
-  //  ui->darkOverlay->hide();
     fadeWidget(ui->menuFrame, true, 300);
+
+    ui->menuFrame->raise();
 }
 
 void MainWindow::on_statisticsButton_clicked()
 {
-
     soundManager::instance().playSoundEffect(SoundEffect::menuSelect);
-    fadeWidget(ui->menuFrame, false, 200);
-    fadeWidget(ui->darkOverlay, true, 300);
-   // ui->darkOverlay->hide();
-    fadeWidget(ui->statisticsFrame, true, 300);
-}
 
+    ui->darkOverlay->hide();
+
+    fadeWidget(ui->menuFrame, false, 200);
+    fadeWidget(ui->statisticsFrame, true, 300);
+
+    ui->statisticsFrame->raise();
+}
 void MainWindow::on_personalStatisticsButton_clicked()
 {
-
     soundManager::instance().playSoundEffect(SoundEffect::menuSelect);
+
     updatePersonalStatsUI();
+
+    ui->personalStatsFrame->show();
+    ui->personalStatsFrame->raise();
 
     fadeWidget(ui->statisticsFrame, false, 200);
 
-    fadeWidget(ui->darkOverlay, true, 300);
+    fadeWidget(ui->darkOverlay, true, 250);
     ui->darkOverlay->raise();
 
-    fadeWidget(ui->personalStatsFrame, true, 300);
     ui->personalStatsFrame->raise();
 }
 
 void MainWindow::on_backFromStatsButton_clicked()
 {
-
     soundManager::instance().playSoundEffect(SoundEffect::menuSelect);
-    fadeWidget(ui->personalStatsFrame, false, 200);
 
-    fadeWidget(ui->darkOverlay, true, 300);
-    ui->darkOverlay->raise();
+    fadeWidget(ui->darkOverlay, false, 250);
 
-    fadeWidget(ui->statisticsFrame, true, 300);
+    ui->statisticsFrame->show();
     ui->statisticsFrame->raise();
+
+    fadeWidget(ui->statisticsFrame, true, 250);
+
+    ui->personalStatsFrame->hide();
 }
 
 void MainWindow::on_backButton_2_clicked()
 {
-
     soundManager::instance().playSoundEffect(SoundEffect::menuSelect);
+
+    ui->darkOverlay->hide();
+
     fadeWidget(ui->statisticsFrame, false, 200);
-    fadeWidget(ui->darkOverlay, false, 300);
-   // ui->darkOverlay->hide();
     fadeWidget(ui->menuFrame, true, 300);
+
+    ui->menuFrame->raise();
 }
 
 void MainWindow::on_leaderBoardButton_clicked()
 {
-
     soundManager::instance().playSoundEffect(SoundEffect::menuSelect);
+
     fadeWidget(ui->statisticsFrame, false, 200);
+
+    ui->darkOverlay->show();
+    ui->darkOverlay->raise();
+
+    ui->leaderboardFrame->show();
+    ui->leaderboardFrame->raise();
+
     updateLeaderboardUI();
+
     fadeWidget(ui->leaderboardFrame, true, 300);
 }
 
 void MainWindow::on_backButton_3_clicked()
 {
-
     soundManager::instance().playSoundEffect(SoundEffect::menuSelect);
+
     fadeWidget(ui->leaderboardFrame, false, 200);
-    fadeWidget(ui->statisticsFrame, true, 300);
+
+    ui->darkOverlay->hide();
+
+    ui->statisticsFrame->show();
+    ui->statisticsFrame->raise();
 }
 
 void MainWindow::on_settingsButton_clicked()
