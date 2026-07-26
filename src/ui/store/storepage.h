@@ -24,7 +24,7 @@ class StorePage : public QWidget
     Q_OBJECT
 public:
 
-    StorePage(QWidget *parent = nullptr, ChestType type = ChestType::regular, ironclad* plyr = nullptr, combatEvent* eve = nullptr);
+    StorePage(QWidget *parent = nullptr, ironclad* plyr = nullptr, combatEvent* eve = nullptr);
 
     void initialSet();
     void Delete();
@@ -34,11 +34,19 @@ protected:
     void resizeEvent(QResizeEvent *event) override;
 
 private:
+    abstractCardTemplate* createCardUI(abstractCard* card,
+                                       QPointF pos,
+                                       qreal z = 10);
 
-    inline static int non_rare_card_number =5;
-    inline static int rare_card_number =1;
-    inline static int mystery_card_number =1;
-    inline static int potion_number =3;
+    void createCardPrice(abstractCardTemplate* cardUI,
+                         int price);
+
+    std::vector<QGraphicsSimpleTextItem*> cardPriceTexts;
+    std::vector<QGraphicsSimpleTextItem*> potionPriceTexts;
+
+    inline static constexpr int non_rare_card_number = 5;
+    inline static constexpr int rare_card_count = 2;
+    inline static constexpr int potion_number = 3;
     inline static int remove_card_price =75;
     combatEvent* eve;
 
@@ -52,9 +60,13 @@ private:
     std::vector<abstractCardTemplate*> cards ;
     std::unordered_map<abstractCard* , int> cardprice;
 
+    std::vector<ImageItem*> potionImages;
     std::vector<PotionParent*> potions ;
     std::unordered_map<abstractPotion* , int> potionprice;
 
+    std::unordered_map<abstractCardTemplate*, abstractCard*> cardSources;
+
+    std::unordered_set<abstractCardTemplate*> purchasedCards;
 
     QPushButton* remove_btn ;
     QGraphicsProxyWidget* remove_prxy ;
@@ -68,11 +80,36 @@ private:
     CombatTopBar* bar;
     RelicBar* relic_bar;
 
+    void createCards();
+
+    void createPotions();
+
+    void createButtons();
+
+    void buyCard(abstractCard* card);
+
+    void buyPotion(abstractPotion* potion);
+
+    void refreshGold();
+
+    void createRemoveCard();
+
+    void createBackButton();
+
+    void createCardPrices();
+
+    void createPotionPrices();
+
+ //   void connectCardSignals();
+
+
     std::vector<QString> veilcladLines;
     std::vector<QString> oathcladLines;
 private slots:
-    void createCollectReward(combatReward* reward);
+  //  void createCollectReward(combatReward* reward);
     void open_setting();
+    void potion_right_click(abstractPotion* potion);
+    void relic_right_click(abstractRelic* relic);
 };
 
 #endif // STOREPAGE_H
