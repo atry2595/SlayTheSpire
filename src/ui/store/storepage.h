@@ -17,10 +17,13 @@
 #include "ui/cards/cardtemplaterare.h"
 #include "ui/entities/potionparent.h"
 
+
+
 class StorePage : public QWidget
 {
     Q_OBJECT
 public:
+
     StorePage(QWidget *parent = nullptr, ChestType type = ChestType::regular, ironclad* plyr = nullptr, combatEvent* eve = nullptr);
 
     void initialSet();
@@ -44,9 +47,15 @@ private:
     BaseItem* black_screen;
 
     BaseItem* parent;
+    BaseItem* board;
 
     std::vector<abstractCardTemplate*> cards ;
+    std::unordered_map<abstractCard* , int> cardprice;
+
     std::vector<PotionParent*> potions ;
+    std::unordered_map<abstractPotion* , int> potionprice;
+
+
     QPushButton* remove_btn ;
     QGraphicsProxyWidget* remove_prxy ;
 
