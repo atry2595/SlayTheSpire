@@ -398,4 +398,8 @@
         <file alias="oath_dialogbox.png">assests/image/oath_dialogbox.png</file>
         <file alias="veil_dialogbox.png">assests/image/veil_dialogbox.png</file>
     </qresource>
+    <qresource prefix="/image/map">
+        <file alias="legend.png">assests/image/legend.png</file>
+        <file alias="map_back.png">assests/image/map_back.png</file>
+    </qresource>
 </RCC>
