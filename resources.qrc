@@ -198,6 +198,7 @@
         <file alias="mons.ico">assests/image/icon/map/mons.ico</file>
         <file alias="rest.ico">assests/image/icon/map/rest.ico</file>
         <file alias="treasure.ico">assests/image/icon/map/treasure.ico</file>
+        <file alias="boss.ico">assests/image/icon/map/boss.png</file>
     </qresource>
     <qresource prefix="/icon/intent">
         <file alias="attack1.ico">assests/image/icon/intent/attack1.ico</file>
@@ -373,5 +374,9 @@
         <file alias="veilchest.png">assests/image/veil_chest.png</file>
         <file alias="oath_dialogbox.png">assests/image/oath_dialogbox.png</file>
         <file alias="veil_dialogbox.png">assests/image/veil_dialogbox.png</file>
+    </qresource>
+    <qresource prefix="/image/map">
+        <file alias="legend.png">assests/image/legend.png</file>
+        <file alias="map_back.png">assests/image/map_back.png</file>
     </qresource>
 </RCC>

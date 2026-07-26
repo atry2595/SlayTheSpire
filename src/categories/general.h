@@ -30,4 +30,15 @@ enum class ChestType{
     boss
 };
 
+
+enum class RoomType{
+    MONSTER,
+    ELITE,
+    REST,
+    MERCHANT,
+    TREASURE,
+    UNKNOWN,
+    BOSS
+};
+
 #endif // GENERAL_H

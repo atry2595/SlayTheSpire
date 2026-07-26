@@ -5,7 +5,7 @@
 #include <QList>
 #include <QString>
 #include "utils/RNG.h"
-#include "core/setting.h"
+#include "categories/general.h"
 
 struct Room
 {
@@ -18,6 +18,11 @@ struct Room
     QList<int> parentCols;
 
     Room(): type(RoomType::MONSTER),floor(-1),col(-1),visited(false), active(false){}
+
+    inline bool operator<(const Room& other) const {
+        if (floor != other.floor) return floor < other.floor;
+        return col < other.col;
+    }
 };
 
 class Map{

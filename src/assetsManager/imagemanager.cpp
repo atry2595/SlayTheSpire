@@ -258,6 +258,15 @@ imageManager::imageManager() {
     chest_table[ChestType::boss] = QPixmap(":/image/chest/oathchest.png");
     dialogbox_table[ChestType::regular] = QPixmap(":/image/chest/veil_dialogbox.png");
     dialogbox_table[ChestType::boss] = QPixmap(":/image/chest/oath_dialogbox.png");
+    other_table["map"] = QPixmap(":/image/map/map_back.png");
+    other_table["legend"] = QPixmap(":/image/map/legend.png");
+    legend_table[RoomType::MONSTER] = QPixmap(":/icon/map/mons.ico");
+    legend_table[RoomType::ELITE] = QPixmap(":/icon/map/elite.ico");
+    legend_table[RoomType::UNKNOWN] = QPixmap(":/icon/map/event.ico");
+    legend_table[RoomType::MERCHANT] = QPixmap(":/icon/map/merch.ico");
+    legend_table[RoomType::REST] = QPixmap(":/icon/map/rest.ico");
+    legend_table[RoomType::TREASURE] = QPixmap(":/icon/map/treasure.ico");
+    legend_table[RoomType::BOSS] = QPixmap(":/icon/map/boss.ico");
 }
 
 QPixmap& imageManager::getIcon(QString name) {
@@ -418,6 +427,20 @@ QPixmap& imageManager::getChestImage(ChestType type) {
 QPixmap& imageManager::getDialogImage(ChestType type) {
     if (dialogbox_table.contains(type)){
         return dialogbox_table[type];
+    }
+    return icon_table["error"];
+}
+
+QPixmap& imageManager::getMapImage(QString name){
+    if (other_table.contains(name)){
+        return other_table[name];
+    }
+    return icon_table["error"];
+}
+
+QPixmap& imageManager::getMapImage(RoomType room){
+    if (legend_table.contains(room)){
+        return legend_table[room];
     }
     return icon_table["error"];
 }

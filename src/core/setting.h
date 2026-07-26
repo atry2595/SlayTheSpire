@@ -2,7 +2,10 @@
 #define SETTING_H
 
 #include <QString>
+#include <map>
 #include "core/login/player.h"
+#include "ui/mappage/mapItems.h"
+#include "categories/general.h"
 
 enum class language{
     English,
@@ -25,15 +28,6 @@ enum class cardTemplates {
 };
 
 
-enum class RoomType{
-    MONSTER,
-    ELITE,
-    REST,
-    MERCHANT,
-    TREASURE,
-    UNKNOWN,
-    BOSS
-};
 
 struct setting {
     inline static language game_language = language::English;
@@ -42,13 +36,23 @@ struct setting {
     inline static Player* current_player = nullptr;
 };
 
+struct combatMap {
+    Map* map = nullptr;
+    std::map<Room, RoomItem> rooms = {};
+    std::vector<LineItem> lines = {};
+
+    int currentFloor = -1;
+    int currentCol = -1;
+};
+
 struct combat_data {
     inline static int act = 1;
     inline static int floor = 1;
     inline static int player_count = 1;
     inline static skins selected_character = skins::ironclad;
-    inline static cardTemplates selected_card_template = cardTemplates::metallic;
-    inline static RoomType room_type = RoomType::MERCHANT;
+    inline static cardTemplates selected_card_template = cardTemplates::common;
+    inline static RoomType room_type = RoomType::MONSTER;
+    inline static combatMap combat_map;
 };
 
 
