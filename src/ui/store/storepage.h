@@ -38,8 +38,8 @@ private:
                                        QPointF pos,
                                        qreal z = 10);
 
-    void createCardPrice(abstractCardTemplate* cardUI,
-                         int price);
+
+    void createCardPrices();
 
     std::vector<QGraphicsSimpleTextItem*> cardPriceTexts;
     std::map<QGraphicsSimpleTextItem*, int> cardPriceValues;
@@ -92,34 +92,17 @@ private:
 
     void createPotions();
 
-    void createButtons();
-
     void buyCard(abstractCard* card);
 
     void buyPotion(abstractPotion* potion);
 
     void buyRemoveCard();
 
-    void refreshGold();
-
-    void createRemoveCard();
-
-    void createBackButton();
-
-    void createCardPrices();
-
     void createPotionPrices();
 
     void createRemoveButton();
 
-    void removeCard();
     bool removeUsed = false;
-
-    QGraphicsSimpleTextItem* removeCardText = nullptr;
-
-
-    std::vector<QString> veilcladLines;
-    std::vector<QString> oathcladLines;
 
     CardParent* removeCardButton = nullptr;
     ImageItem* removeCardBg = nullptr;
