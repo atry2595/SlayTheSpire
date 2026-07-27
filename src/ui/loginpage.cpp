@@ -6,10 +6,11 @@
 #include <QTimer>
 
 LoginPage::LoginPage(QWidget *parent)
-    : QMainWindow(parent)
+    : QWidget(parent)
     , ui(new Ui::LoginPage)
 {
     ui->setupUi(this);
+
     ui->usernameErrorLabel->hide();
     ui->passwordErrorLabel->hide();
     ui->successLabel->hide();
@@ -60,7 +61,6 @@ LoginPage::LoginPage(QWidget *parent)
             {
                 clearErrors();
             });
-
 }
 
 LoginPage::~LoginPage()
@@ -71,9 +71,7 @@ LoginPage::~LoginPage()
 void LoginPage::on_signUpButton_clicked()
 {
     emit openRegisterPage();
-
 }
-
 
 void LoginPage::on_forgotPasswordButton_clicked()
 {
@@ -89,11 +87,8 @@ void LoginPage::clearFields()
 {
     ui->usernameLineEdit->clear();
     ui->passwordLineEdit->clear();
-
     clearErrors();
-
     ui->passwordLineEdit->setEchoMode(QLineEdit::Password);
-
     passwordEyeAction->setIcon(
         QIcon(":/icon/login/eye_off.svg"));
 }
@@ -187,7 +182,6 @@ void LoginPage::showUsernameError(const QString &message)
     ui->usernameErrorLabel->setText(message);
     ui->usernameErrorLabel->show();
     setUsernameErrorStyle();
-
 }
 
 void LoginPage::showPasswordError(const QString &message)
@@ -195,7 +189,6 @@ void LoginPage::showPasswordError(const QString &message)
     ui->passwordErrorLabel->setText(message);
     ui->passwordErrorLabel->show();
     setPasswordErrorStyle();
-
 }
 
 void LoginPage::showSuccess(const QString &message)
@@ -209,7 +202,6 @@ void LoginPage::clearErrors()
     ui->usernameErrorLabel->hide();
     ui->passwordErrorLabel->hide();
     ui->successLabel->hide();
-
     setUsernameNormalStyle();
     setPasswordNormalStyle();
 }
@@ -218,6 +210,7 @@ void LoginPage::on_loginButton_clicked()
 {
     QString username = ui->usernameLineEdit->text().trimmed();
     QString password = ui->passwordLineEdit->text();
+
     clearErrors();
 
     bool hasError = false;
@@ -244,20 +237,16 @@ void LoginPage::on_loginButton_clicked()
     if(player)
     {
         showSuccess("Login successful!");
-
         QTimer::singleShot(2000,
                            this,
                            [this]()
                            {
                                clearFields();
-
                                emit loginSuccessful();
                            });
-
         return;
     }
 
     ui->passwordErrorLabel->setText("Invalid username or password.");
     ui->passwordErrorLabel->show();
 }
-

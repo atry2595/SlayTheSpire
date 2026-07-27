@@ -6,7 +6,7 @@
 #include <QTimer>
 
 ForgotPasswordPage::ForgotPasswordPage(QWidget *parent)
-    : QMainWindow(parent)
+    : QWidget(parent)
     , ui(new Ui::ForgotPasswordPage)
 {
     ui->setupUi(this);
@@ -34,8 +34,6 @@ ForgotPasswordPage::ForgotPasswordPage(QWidget *parent)
                     passwordEyeAction->setIcon(QIcon(":/icon/login/eye_off.svg"));
                 }
             });
-
-
 
     confirmEyeAction = ui->confirmPasswordLineEdit->addAction(
         QIcon(":/icon/login/eye_off.svg"),
@@ -97,7 +95,6 @@ ForgotPasswordPage::ForgotPasswordPage(QWidget *parent)
                 ui->confirmPasswordErrorLabel->hide();
                 setConfirmPasswordNormalStyle();
             });
-
 }
 
 ForgotPasswordPage::~ForgotPasswordPage()
@@ -108,7 +105,6 @@ ForgotPasswordPage::~ForgotPasswordPage()
 void ForgotPasswordPage::on_loginButton_clicked()
 {
     emit openLoginPage();
-
 }
 
 void ForgotPasswordPage::setFileManager(FileManager *manager)
@@ -370,4 +366,3 @@ void ForgotPasswordPage::on_changePasswordButton_clicked()
 
     showPasswordError(errorMessage);
 }
-

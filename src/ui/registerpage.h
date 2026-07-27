@@ -2,13 +2,13 @@
 #define REGISTERPAGE_H
 
 #include "core/login/filemanager.h"
-#include <QMainWindow>
+#include <QWidget>
 
 namespace Ui {
 class RegisterPage;
 }
 
-class RegisterPage : public QMainWindow
+class RegisterPage : public QWidget
 {
     Q_OBJECT
 
@@ -20,7 +20,6 @@ public:
 
 private slots:
     void on_loginButton_clicked();
-
     void on_signUpButton_clicked();
 
 private:
@@ -55,7 +54,6 @@ private:
     void setConfirmPasswordErrorStyle();
 
     void clearErrors();
-
 
 signals:
     void openLoginPage();

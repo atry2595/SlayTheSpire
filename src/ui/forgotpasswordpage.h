@@ -1,14 +1,14 @@
 #ifndef FORGOTPASSWORDPAGE_H
 #define FORGOTPASSWORDPAGE_H
-#include "core/login/filemanager.h"
 
-#include <QMainWindow>
+#include "core/login/filemanager.h"
+#include <QWidget>
 
 namespace Ui {
 class ForgotPasswordPage;
 }
 
-class ForgotPasswordPage : public QMainWindow
+class ForgotPasswordPage : public QWidget
 {
     Q_OBJECT
 
@@ -43,6 +43,7 @@ private:
 
 signals:
     void openLoginPage();
+
 private slots:
     void on_loginButton_clicked();
     void on_changePasswordButton_clicked();

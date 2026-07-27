@@ -6,7 +6,7 @@
 #include <QTimer>
 
 RegisterPage::RegisterPage(QWidget *parent)
-    : QMainWindow(parent)
+    : QWidget(parent)
     , ui(new Ui::RegisterPage)
 {
     ui->setupUi(this);
@@ -46,9 +46,7 @@ RegisterPage::RegisterPage(QWidget *parent)
             [this]()
             {
                 ui->usernameErrorLabel->hide();
-
                 setUsernameNormalStyle();
-
                 ui->usernameSuggestionLabel->hide();
             });
 
@@ -58,13 +56,9 @@ RegisterPage::RegisterPage(QWidget *parent)
             [this](const QString &link)
             {
                 ui->usernameLineEdit->setText(link);
-
                 ui->usernameSuggestionLabel->hide();
-
                 setUsernameNormalStyle();
             });
-
-
 
     confirmEyeAction = ui->confirmPasswordLineEdit->addAction(
         QIcon(":/icon/login/eye_off.svg"),
@@ -131,14 +125,12 @@ RegisterPage::RegisterPage(QWidget *parent)
                 ui->confirmPasswordErrorLabel->hide();
                 setConfirmPasswordNormalStyle();
             });
-
 }
 
 RegisterPage::~RegisterPage()
 {
     delete ui;
 }
-
 void RegisterPage::on_loginButton_clicked()
 {
     emit openLoginPage();
@@ -344,7 +336,6 @@ void RegisterPage::showUsernameError(const QString &message)
 {
     ui->usernameErrorLabel->setText(message);
     ui->usernameErrorLabel->show();
-
     setUsernameErrorStyle();
 }
 
@@ -360,7 +351,6 @@ void RegisterPage::showPasswordError(const QString &message)
     ui->passwordErrorLabel->setText(message);
     ui->passwordErrorLabel->show();
     setPasswordErrorStyle();
-
 }
 
 void RegisterPage::showConfirmPasswordError(const QString &message)
@@ -368,7 +358,6 @@ void RegisterPage::showConfirmPasswordError(const QString &message)
     ui->confirmPasswordErrorLabel->setText(message);
     ui->confirmPasswordErrorLabel->show();
     setConfirmPasswordErrorStyle();
-
 }
 
 void RegisterPage::clearErrors()
@@ -450,7 +439,6 @@ void RegisterPage::on_signUpButton_clicked()
                            [this]()
                            {
                                clearFields();
-
                                emit openLoginPage();
                            });
     }
@@ -462,7 +450,6 @@ void RegisterPage::on_signUpButton_clicked()
                 fileManager->getUsernameSuggestions(username);
 
             QString message;
-
             message += "You can use:<br>";
 
             for(const QString &name : suggestions)
@@ -471,11 +458,8 @@ void RegisterPage::on_signUpButton_clicked()
             }
 
             showUsernameError("Username already exists.");
-
             ui->usernameSuggestionLabel->setText(message);
-
             ui->usernameSuggestionLabel->show();
-
             return;
         }
 
@@ -499,3 +483,4 @@ void RegisterPage::on_signUpButton_clicked()
         }
     }
 }
+
