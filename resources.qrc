@@ -332,6 +332,14 @@
         <file alias="lotrance">assests/font/Lotrance-Regular.otf</file>
         <file alias="ebhaar">assests/font/Ebhaar.otf</file>
         <file alias="forte">assests/font/FORTE.TTF</file>
+        <file alias="koodak">assests/font/B Koodak Bold.ttf</file>
+        <file alias="cascadia">assests/font/CascadiaMono.ttf</file>
+        <file alias="cinema">assests/font/Cinema Font.ttf</file>
+        <file alias="ebhaar">assests/font/Ebhaar.otf</file>
+        <file alias="forte">assests/font/FORTE.TTF</file>
+        <file alias="lotrance">assests/font/Lotrance-Regular.otf</file>
+        <file alias="titrZ">assests/font/Titr Zebr.ttf</file>
+        <file alias="rock">assests/font/Typoster ROCK-ON Demo.otf</file>
     </qresource>
     <qresource prefix="/icon">
         <file alias="shield.ico">assests/image/icon/shield.png</file>
@@ -342,5 +350,13 @@
         <file alias="left_button.png">assests/image/icon/left_button.png</file>
         <file alias="right_button.png">assests/image/icon/right_button.png</file>
         <file alias="error.png">assests/image/icon/error.png</file>
+    </qresource>
+    <qresource prefix="/icon/login">
+        <file alias="eye.svg">assests/image/icon/login/eye.svg</file>
+        <file alias="eye_off.svg">assests/image/icon/login/eye_off.svg</file>
+    </qresource>
+    <qresource prefix="/image/back">
+        <file alias="back1">assests/image/back/IMG_6654.jpg</file>
+        <file alias="logo">assests/image/back/Slay_the_Spire_Logo.png</file>
     </qresource>
 </RCC>

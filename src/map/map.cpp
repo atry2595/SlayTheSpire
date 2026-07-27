@@ -2,7 +2,7 @@
 #include "map.h"
 #include <QQueue>
 #include <QSet>
-#include <QDebug>
+
 
 Map::Map()
 {
@@ -1169,8 +1169,6 @@ void Map::generate()
 
         if (validateMap() && hasValidFloorLayout(0))
         {
-            qDebug() << "Generated IDEAL map";
-            qDebug() << "Attempts:" << totalAttempts + 1;
             return;
         }
     }
@@ -1186,8 +1184,6 @@ void Map::generate()
 
         if (validateMap() && hasValidFloorLayout(1))
         {
-            qDebug() << "Generated GOOD map";
-            qDebug() << "Attempts:" << totalAttempts + 1;
             return;
         }
     }
@@ -1203,8 +1199,7 @@ void Map::generate()
 
         if (validateMap() && hasValidFloorLayout(2))
         {
-            qDebug() << "Generated ACCEPTABLE map";
-            qDebug() << "Attempts:" << totalAttempts + 1;
+
             return;
         }
     }
@@ -1220,8 +1215,7 @@ void Map::generate()
 
         if (validateMap() && hasValidFloorLayout(3))
         {
-            qDebug() << "Generated NORMAL map";
-            qDebug() << "Attempts:" << totalAttempts + 1;
+
             return;
         }
     }
@@ -1237,8 +1231,7 @@ void Map::generate()
 
         if (validateMap())
         {
-            qDebug() << "Generated map";
-            qDebug() << "Attempts:" << totalAttempts + 1;
+
             return;
         }
     }
@@ -1248,6 +1241,7 @@ void Map::generate()
 
 //---------------------------------------------------------
 //by Ai:
+/*
 QString Map::debugMap() const
 {
     QString out;
@@ -1334,4 +1328,4 @@ QString Map::debugMap() const
     out += "\n=========================================\n";
 
     return out;
-}
+}*/

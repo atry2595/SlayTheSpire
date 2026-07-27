@@ -6,6 +6,8 @@
 #include <QPropertyAnimation>
 #include "core/setting.h"
 #include <QPushButton>
+#include <QTimer>
+#include "assetsManager/soundmanager.h"
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -21,10 +23,12 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     ui->darkOverlay->hide();
+    ui->logoLabel->show();
     ui->menuFrame->show();
     ui->playFrame->hide();
     ui->statisticsFrame->hide();
     ui->leaderboardFrame->hide();
+
 
     fileManager = new FileManager();
     leaderboard = new Leaderboard();
@@ -76,6 +80,29 @@ MainWindow::MainWindow(QWidget *parent)
         mainStack->setCurrentWidget(ui->centralwidget);
     });
 
+    QFont fnt;
+    fnt.setFamily((setting::game_language == language::English)?(Fonts::Cascadia):(Fonts::koodak));
+
+    ui->backButton_3->setFont(fnt);
+    ui->leaderboardTitleLabel->setFont(fnt);
+    ui->personalStatsFrame->setFont(fnt);
+    ui->backFromStatsButton->setFont(fnt);
+    ui->statsEmailLabel->setFont(fnt);
+    ui->statsUserLabel->setFont(fnt);
+    ui->statsDetailsLabel->setFont(fnt);
+    ui->statsTitleLabel->setFont(fnt);
+    ui->backButton->setFont(fnt);
+    ui->multiplayerButton->setFont(fnt);
+    ui->singlePlayerButton->setFont(fnt);
+    ui->backButton_2->setFont(fnt);
+    ui->bookletButton->setFont(fnt);
+    ui->leaderBoardButton->setFont(fnt);
+    ui->personalStatisticsButton->setFont(fnt);
+    ui->exitButton->setFont(fnt);
+    ui->playButton->setFont(fnt);
+    ui->settingsButton->setFont(fnt);
+    ui->statisticsButton->setFont(fnt);
+
     showFullScreen();
 }
 
@@ -92,6 +119,8 @@ void MainWindow::setupButtonHoverEffects()
 
     for (QPushButton* btn : buttons) {
         btn->setAttribute(Qt::WA_Hover, true);
+        btn->setAutoDefault(false);
+        btn->setDefault(false);
         btn->installEventFilter(this);
     }
 }
@@ -108,17 +137,16 @@ bool MainWindow::eventFilter(QObject *watched, QEvent *event)
     return QMainWindow::eventFilter(watched, event);
 }
 
-void MainWindow::onButtonHovered()
-{
-    qDebug() << "Button Hovered! Ready for sound effect.";
-
-    // hoverSound->play(); در اینده برای ساند افکت
+void MainWindow::onButtonHovered() {
+    soundManager::instance().playSoundEffect(SoundEffect::menuHover);
 }
 
 void MainWindow::showMainMenu()
 {
+    soundManager::instance().playBackMusic(BgMusic::main);
     ui->darkOverlay->hide();
     ui->menuFrame->show();
+    ui->logoLabel->show();
     ui->playFrame->hide();
     ui->statisticsFrame->hide();
     ui->leaderboardFrame->hide();
@@ -302,101 +330,150 @@ void MainWindow::updatePersonalStatsUI()
 
 static void fadeWidget(QWidget *targetWidget, bool show, int durationMs = 300)
 {
-    if (!targetWidget) return;
+    Q_UNUSED(durationMs);
 
-    if (show) {
-        targetWidget->show();
+    if (!targetWidget)
+        return;
+
+    if (targetWidget->objectName() == "leaderboardFrame" ||
+        targetWidget->objectName() == "personalStatsFrame")
+    {
+        if (show)
+            targetWidget->show();
+        else
+            targetWidget->hide();
+
+        return;
     }
 
-    QGraphicsOpacityEffect *effect = new QGraphicsOpacityEffect(targetWidget);
-    targetWidget->setGraphicsEffect(effect);
+    if (show)
+        targetWidget->show();
+    else
+        targetWidget->hide();
 
-    QPropertyAnimation *animation = new QPropertyAnimation(effect, "opacity");
-    animation->setDuration(durationMs);
-    animation->setStartValue(show ? 0.0 : 1.0);
-    animation->setEndValue(show ? 1.0 : 0.0);
-
-    QObject::connect(animation, &QPropertyAnimation::finished, [targetWidget, show]() {
-        if (!show) {
-            targetWidget->hide();
-        }
-        targetWidget->setGraphicsEffect(nullptr);
-    });
-
-    animation->start(QAbstractAnimation::DeleteWhenStopped);
 }
-
 
 void MainWindow::on_playButton_clicked()
 {
+    soundManager::instance().playSoundEffect(SoundEffect::menuSelect);
+
+    ui->darkOverlay->hide();
+
     fadeWidget(ui->menuFrame, false, 200);
-    fadeWidget(ui->darkOverlay, true, 300);
     fadeWidget(ui->playFrame, true, 300);
+
+    ui->playFrame->raise();
 }
 
 void MainWindow::on_backButton_clicked()
 {
+    soundManager::instance().playSoundEffect(SoundEffect::menuSelect);
+
+    ui->darkOverlay->hide();
+
     fadeWidget(ui->playFrame, false, 200);
-    fadeWidget(ui->darkOverlay, false, 300);
     fadeWidget(ui->menuFrame, true, 300);
+
+    ui->menuFrame->raise();
 }
 
 void MainWindow::on_statisticsButton_clicked()
 {
-    fadeWidget(ui->menuFrame, false, 200);
-    fadeWidget(ui->darkOverlay, true, 300);
-    fadeWidget(ui->statisticsFrame, true, 300);
-}
+    soundManager::instance().playSoundEffect(SoundEffect::menuSelect);
 
+    ui->darkOverlay->hide();
+
+    fadeWidget(ui->menuFrame, false, 200);
+    fadeWidget(ui->statisticsFrame, true, 300);
+
+    ui->statisticsFrame->raise();
+}
 void MainWindow::on_personalStatisticsButton_clicked()
 {
+    soundManager::instance().playSoundEffect(SoundEffect::menuSelect);
+
     updatePersonalStatsUI();
+
+    ui->personalStatsFrame->show();
+    ui->personalStatsFrame->raise();
+    ui->logoLabel->hide();
 
     fadeWidget(ui->statisticsFrame, false, 200);
 
-    fadeWidget(ui->darkOverlay, true, 300);
+    fadeWidget(ui->darkOverlay, true, 250);
     ui->darkOverlay->raise();
 
-    fadeWidget(ui->personalStatsFrame, true, 300);
     ui->personalStatsFrame->raise();
 }
 
 void MainWindow::on_backFromStatsButton_clicked()
 {
-    fadeWidget(ui->personalStatsFrame, false, 200);
+    soundManager::instance().playSoundEffect(SoundEffect::menuSelect);
 
-    fadeWidget(ui->darkOverlay, true, 300);
-    ui->darkOverlay->raise();
+    fadeWidget(ui->darkOverlay, false, 250);
 
-    fadeWidget(ui->statisticsFrame, true, 300);
+    ui->statisticsFrame->show();
     ui->statisticsFrame->raise();
+
+    fadeWidget(ui->statisticsFrame, true, 250);
+
+    ui->logoLabel->show();
+    ui->personalStatsFrame->hide();
 }
 
 void MainWindow::on_backButton_2_clicked()
 {
+    soundManager::instance().playSoundEffect(SoundEffect::menuSelect);
+
+    ui->darkOverlay->hide();
+    ui->logoLabel->show();
+
     fadeWidget(ui->statisticsFrame, false, 200);
-    fadeWidget(ui->darkOverlay, false, 300);
     fadeWidget(ui->menuFrame, true, 300);
+
+    ui->menuFrame->raise();
 }
 
 void MainWindow::on_leaderBoardButton_clicked()
 {
+    soundManager::instance().playSoundEffect(SoundEffect::menuSelect);
+
     fadeWidget(ui->statisticsFrame, false, 200);
+    ui->logoLabel->hide();
+
+    ui->darkOverlay->show();
+    ui->darkOverlay->raise();
+
+    ui->leaderboardFrame->show();
+    ui->leaderboardFrame->raise();
+
     updateLeaderboardUI();
+
     fadeWidget(ui->leaderboardFrame, true, 300);
 }
 
 void MainWindow::on_backButton_3_clicked()
 {
+    soundManager::instance().playSoundEffect(SoundEffect::menuSelect);
+
     fadeWidget(ui->leaderboardFrame, false, 200);
-    fadeWidget(ui->statisticsFrame, true, 300);
+
+    ui->darkOverlay->hide();
+    ui->logoLabel->show();
+
+
+    ui->statisticsFrame->show();
+    ui->statisticsFrame->raise();
 }
 
 void MainWindow::on_settingsButton_clicked()
 {
+    soundManager::instance().playSoundEffect(SoundEffect::menuSelect);
 }
 
 void MainWindow::on_exitButton_clicked()
 {
-    close();
+
+    soundManager::instance().playSoundEffect(SoundEffect::skinSelect);
+    QTimer::singleShot(500, [=](){close();});
 }
