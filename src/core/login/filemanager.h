@@ -23,9 +23,10 @@ public:
     bool registerPlayer(const QString &username,const QString &email,const QString &password,const QString &confirmPassword,QString &errorMessage);
     Player* login(const QString &username,const QString &password);
     Player* getLoggedInPlayer();
-    bool resetPassword(const QString &username,const QString &email,const QString &newPassword,const QString &confirmPassword);
+    bool resetPassword(const QString &email,const QString &newPassword,const QString &confirmPassword,QString &errorMessage);
     Player* findPlayer(const QString &username);
     QList<Player>& getPlayers();
+    QStringList getUsernameSuggestions(const QString &username);
 };
 
 #endif

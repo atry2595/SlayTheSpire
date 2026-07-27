@@ -121,17 +121,18 @@ bool FileManager::registerPlayer(const QString &username,const QString &email,co
         return false;
     }
 
-    if(!Player::passwordsMatch(password,confirmPassword))
-    {
-        errorMessage ="Passwords do not match.";
-        return false;
-    }
-
     QString passwordError = Player::validatePassword(password);
 
     if(!passwordError.isEmpty())
     {
         errorMessage =passwordError;
+        return false;
+    }
+
+
+    if(!Player::passwordsMatch(password,confirmPassword))
+    {
+        errorMessage ="Passwords do not match.";
         return false;
     }
 
@@ -172,10 +173,25 @@ Player* FileManager::getLoggedInPlayer()
     return nullptr;
 }
 
-bool FileManager::resetPassword(const QString &username,const QString &email,const QString &newPassword,const QString &confirmPassword)
+bool FileManager::resetPassword(const QString &email,
+                                const QString &newPassword,
+                                const QString &confirmPassword,
+                                QString &errorMessage)
 {
-    if(!Player::passwordsMatch(newPassword,confirmPassword))
+    Player *foundPlayer = nullptr;
+
+    for(Player &player : players)
     {
+        if(player.getEmail().toLower() == email.toLower())
+        {
+            foundPlayer = &player;
+            break;
+        }
+    }
+
+    if(foundPlayer == nullptr)
+    {
+        errorMessage = "Email not found.";
         return false;
     }
 
@@ -183,22 +199,23 @@ bool FileManager::resetPassword(const QString &username,const QString &email,con
 
     if(!passwordError.isEmpty())
     {
+        errorMessage = passwordError;
         return false;
     }
 
-    for(Player &p : players)
+    if(newPassword != confirmPassword)
     {
-        if(p.getUsername().toLower() == username.toLower() && p.getEmail().toLower()==email.toLower())
-        {
-            p.setPassword(newPassword);
-
-            saveToFile();
-
-            return true;
-        }
+        errorMessage = "Passwords do not match.";
+        return false;
     }
 
-    return false;
+    foundPlayer->setPassword(newPassword);
+
+    saveToFile();
+
+    errorMessage = "";
+
+    return true;
 }
 
 Player* FileManager::findPlayer(const QString &username)
@@ -217,4 +234,8 @@ Player* FileManager::findPlayer(const QString &username)
 QList<Player>& FileManager::getPlayers()
 {
     return players;
+}
+QStringList FileManager::getUsernameSuggestions(const QString &username)
+{
+    return Player::suggestUsername(username, players);
 }

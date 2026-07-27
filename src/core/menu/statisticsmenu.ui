@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>StatisticsMenu</class>
+ <widget class="QMainWindow" name="StatisticsMenu">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1600</width>
+    <height>900</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>130</y>
+      <width>351</width>
+      <height>167</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QPushButton" name="personalStatisticsButton">
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::FocusPolicy::NoFocus</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+    background: transparent;
+    border: none;
+
+    color: rgb(235,220,180);
+
+    font-family: &quot;Samantha&quot;;
+    font-size: 30px;
+    font-weight: bold;
+
+    text-align: left;
+
+    padding-left: 20px;
+}
+
+QPushButton:hover{
+    color: rgb(255,210,60);
+}
+
+QPushButton:pressed{
+    color: rgb(255,180,30);
+}</string>
+       </property>
+       <property name="text">
+        <string>Personal Statistics</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="leaderBoardButton">
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::FocusPolicy::NoFocus</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+    background: transparent;
+    border: none;
+
+    color: rgb(235,220,180);
+
+    font-family: &quot;Samantha&quot;;
+    font-size: 30px;
+    font-weight: bold;
+
+    text-align: left;
+
+    padding-left: 20px;
+}
+
+QPushButton:hover{
+    color: rgb(255,210,60);
+}
+
+QPushButton:pressed{
+    color: rgb(255,180,30);
+}</string>
+       </property>
+       <property name="text">
+        <string>Leader Board</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="bookletButton">
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::FocusPolicy::NoFocus</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+    background: transparent;
+    border: none;
+
+    color: rgb(235,220,180);
+
+    font-family: &quot;Samantha&quot;;
+    font-size: 30px;
+    font-weight: bold;
+
+    text-align: left;
+
+    padding-left: 20px;
+}
+
+QPushButton:hover{
+    color: rgb(255,210,60);
+}
+
+QPushButton:pressed{
+    color: rgb(255,180,30);
+}</string>
+       </property>
+       <property name="text">
+        <string>Booklet (OP)</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="backButton">
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::FocusPolicy::NoFocus</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+    background: transparent;
+    border: none;
+
+    color: rgb(235,220,180);
+
+    font-family: &quot;Samantha&quot;;
+    font-size: 30px;
+    font-weight: bold;
+
+    text-align: left;
+
+    padding-left: 20px;
+}
+
+QPushButton:hover{
+    color: rgb(255,210,60);
+}
+
+QPushButton:pressed{
+    color: rgb(255,180,30);
+}</string>
+       </property>
+       <property name="text">
+        <string>Back</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1600</width>
+     <height>26</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

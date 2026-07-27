@@ -312,6 +312,16 @@ add_executable(SlayTheSpire
     src/core/login/player.h src/core/login/player.cpp
     src/core/login/leaderboard.h src/core/login/leaderboard.cpp
     src/core/login/filemanager.h src/core/login/filemanager.cpp
+    src/ui/loginpage.h src/ui/loginpage.cpp src/ui/loginpage.ui
+    src/ui/registerpage.h src/ui/registerpage.cpp src/ui/registerpage.ui
+    src/ui/forgotpasswordpage.h src/ui/forgotpasswordpage.cpp src/ui/forgotpasswordpage.ui
+    src/core/setting.h
+
+    src/core/menu/menu.h src/core/menu/menu.cpp src/core/menu/menu.ui
+    src/core/menu/playmenu.h src/core/menu/playmenu.cpp src/core/menu/playmenu.ui
+    src/core/menu/menu.h src/core/menu/menu.cpp
+    src/core/menu/menu.h src/core/menu/menu.cpp src/core/menu/menu.ui
+    src/core/menu/statisticsmenu.h src/core/menu/statisticsmenu.cpp src/core/menu/statisticsmenu.ui
 
 
     # Core
