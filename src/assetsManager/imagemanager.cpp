@@ -252,6 +252,7 @@ imageManager::imageManager() {
     background_table["2m"] = QPixmap(":/image/scene/map2_normal.jpg");
     background_table["2e"] = QPixmap(":/image/scene/map2_dark.jpg");
     background_table["2b"] = QPixmap(":/image/scene/map2_epic.jpg");
+    background_table["mr"] = QPixmap(":/image/scene/shop");
     background_table["r"] = QPixmap(":/image/scene/rest.png");
     chest_table[ChestType::regular] = QPixmap(":/image/chest/veilchest.png");
     chest_table[ChestType::boss] = QPixmap(":/image/chest/oathchest.png");
@@ -402,6 +403,7 @@ QPixmap& imageManager::getBackroundImage() {
     if (combat_data::act == 2 && combat_data::room_type == RoomType::BOSS) return background_table["2b"];
     if (combat_data::act == 1 && combat_data::room_type == RoomType::TREASURE) return background_table["1m"];
     if (combat_data::act == 2 && combat_data::room_type == RoomType::TREASURE) return background_table["2m"];
+    if (combat_data::room_type == RoomType::MERCHANT) return background_table["mr"];
 
     return icon_table["error"];
 }

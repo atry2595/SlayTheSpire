@@ -42,7 +42,10 @@ private:
                          int price);
 
     std::vector<QGraphicsSimpleTextItem*> cardPriceTexts;
+    std::map<QGraphicsSimpleTextItem*, int> cardPriceValues;
+
     std::vector<QGraphicsSimpleTextItem*> potionPriceTexts;
+    std::map<QGraphicsSimpleTextItem*, int> potionPriceValues;
 
     inline static constexpr int non_rare_card_number = 5;
     inline static constexpr int rare_card_count = 2;
@@ -64,9 +67,14 @@ private:
     std::vector<PotionParent*> potions ;
     std::unordered_map<abstractPotion* , int> potionprice;
 
+    std::unordered_map<abstractPotion*, QGraphicsSimpleTextItem*> potionPriceLabels;
+    std::unordered_map<abstractCard*, QGraphicsSimpleTextItem*> cardPriceLabels;
+
     std::unordered_map<abstractCardTemplate*, abstractCard*> cardSources;
 
-    std::unordered_set<abstractCardTemplate*> purchasedCards;
+
+    void updateCardPricesColor();
+    void updatePotionPricesColor();
 
     QPushButton* remove_btn ;
     QGraphicsProxyWidget* remove_prxy ;
@@ -90,6 +98,8 @@ private:
 
     void buyPotion(abstractPotion* potion);
 
+    void buyRemoveCard();
+
     void refreshGold();
 
     void createRemoveCard();
@@ -100,13 +110,25 @@ private:
 
     void createPotionPrices();
 
- //   void connectCardSignals();
+    void createRemoveButton();
+
+    void removeCard();
+    bool removeUsed = false;
+
+    QGraphicsSimpleTextItem* removeCardText = nullptr;
 
 
     std::vector<QString> veilcladLines;
     std::vector<QString> oathcladLines;
+
+    CardParent* removeCardButton = nullptr;
+    ImageItem* removeCardBg = nullptr;
+    TextItem*  removeCardTitle = nullptr;
+    TextItem*  removeCardDesc = nullptr;
+    QGraphicsSimpleTextItem* removeCardPriceLabel = nullptr;
+
 private slots:
-  //  void createCollectReward(combatReward* reward);
+    void createSelectCard(std::vector<abstractCard*> cards);
     void open_setting();
     void potion_right_click(abstractPotion* potion);
     void relic_right_click(abstractRelic* relic);
