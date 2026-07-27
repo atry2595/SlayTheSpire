@@ -47,7 +47,7 @@ struct combat_data {
     inline static int floor = 1;
     inline static int player_count = 1;
     inline static skins selected_character = skins::ironclad;
-    inline static cardTemplates selected_card_template = cardTemplates::common;
+    inline static cardTemplates selected_card_template = cardTemplates::metallic;
     inline static RoomType room_type = RoomType::MERCHANT;
 };
 

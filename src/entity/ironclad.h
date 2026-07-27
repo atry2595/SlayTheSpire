@@ -16,7 +16,7 @@ class ironclad : public abstractEntity
 
     static const std::vector<cardID> starting_deck;
     static constexpr relicID starting_relic = relicID::burning_blood;
-    static constexpr int starting_gold = 99;
+    static constexpr int starting_gold = 990;
 
     combatEvent* event;
 

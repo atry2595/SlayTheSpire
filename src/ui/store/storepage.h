@@ -16,6 +16,7 @@
 #include "ui/cards/cardtemplateuncommon.h"
 #include "ui/cards/cardtemplaterare.h"
 #include "ui/entities/potionparent.h"
+#include <QGraphicsPixmapItem>
 
 
 
@@ -102,6 +103,8 @@ private:
 
     void createRemoveButton();
 
+    void createBackButton();
+
     bool removeUsed = false;
 
     CardParent* removeCardButton = nullptr;
@@ -109,6 +112,10 @@ private:
     TextItem*  removeCardTitle = nullptr;
     TextItem*  removeCardDesc = nullptr;
     QGraphicsSimpleTextItem* removeCardPriceLabel = nullptr;
+
+    std::unordered_map<QGraphicsSimpleTextItem*, QGraphicsPixmapItem*> priceCoinIcons;
+
+    void attachCoinIcon(QGraphicsSimpleTextItem* txt, const QRectF& targetRect);
 
 private slots:
     void createSelectCard(std::vector<abstractCard*> cards);

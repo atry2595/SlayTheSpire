@@ -4,6 +4,7 @@
         <file alias="back1.png">assests/image/cards/back1.png</file>
         <file alias="back2.png">assests/image/cards/back2.png</file>
         <file alias="back3.png">assests/image/cards/back3.png</file>
+        <file alias="remove_card">assests/image/cards/remove_card.PNG</file>
     </qresource>
     <qresource prefix="/image/cards/attack">
         <file alias="bash.png">assests/image/cards/attack/bash.png</file>
@@ -353,6 +354,7 @@
         <file alias="left_button.png">assests/image/icon/left_button.png</file>
         <file alias="right_button.png">assests/image/icon/right_button.png</file>
         <file alias="error.png">assests/image/icon/error.png</file>
+        <file alias="back_icon">assests/image/icon/back_icon.PNG</file>
     </qresource>
     <qresource prefix="/icon/login">
         <file alias="eye.svg">assests/image/icon/login/eye.svg</file>

@@ -19,6 +19,8 @@
 #include "ui/imageitem.h"
 #include "assetsManager/imagemanager.h"
 #include "ui/selectItem/selectcard.h"
+#include <QGraphicsPixmapItem>
+#include <QDebug>
 
 StorePage::StorePage(QWidget *parent, ironclad* plyr, combatEvent* eve)
     : QWidget{parent}
@@ -109,10 +111,47 @@ StorePage::StorePage(QWidget *parent, ironclad* plyr, combatEvent* eve)
 
     connect(eve, &combatEvent::settingOpen, this, &StorePage::open_setting);
 
+
+    black_screen = new BaseItem(nullptr, {1700, 1000}, {-50, -50});
+    black_screen->setBackColor(Qt::black);
+    black_screen->setOpacity(1);
+    black_screen->setZValue(200000);
+    combatScene->addItem(black_screen);
+    black_screen->fadeTo(0, 500);
+
     initialSet();
 }
 
 StorePage::~StorePage() {
+
+    for (auto tmpl : cards) {
+        delete tmpl;
+    }
+    cards.clear();
+
+    for (auto& pair : cardprice) {
+        delete pair.first;
+    }
+    cardprice.clear();
+    cardSources.clear();
+
+    for (auto& pair : potionprice) {
+        delete pair.first;
+    }
+    potionprice.clear();
+    potions.clear();
+
+    potionImages.clear();
+    cardPriceTexts.clear();
+    cardPriceValues.clear();
+    potionPriceTexts.clear();
+    potionPriceValues.clear();
+    cardPriceLabels.clear();
+    potionPriceLabels.clear();
+    priceCoinIcons.clear();
+
+    removeCardButton = nullptr;
+    removeCardPriceLabel = nullptr;
 
     if (bar) {
         delete bar;
@@ -125,9 +164,7 @@ StorePage::~StorePage() {
 
     if (black_screen) delete black_screen;
 
-    // Clean up combat view and scene
     if (combatScene) {
-        // QGraphicsScene will clean up its items when deleted
         delete combatScene;
         combatScene = nullptr;
     }
@@ -141,7 +178,6 @@ StorePage::~StorePage() {
 }
 
 void StorePage::Delete() {
-    black_screen = new BaseItem(nullptr, {1700, 1000}, {-50, -50});
     black_screen->setBackColor(Qt::black);
     black_screen->setOpacity(0);
     black_screen->setZValue(200000);
@@ -161,6 +197,25 @@ void StorePage::resizeEvent(QResizeEvent *event)
     if (combatView && combatScene) {
         combatView->fitInView(combatScene->sceneRect(), Qt::KeepAspectRatioByExpanding);
     }
+}
+
+void StorePage::attachCoinIcon(QGraphicsSimpleTextItem* txt, const QRectF& targetRect)
+{
+    QPixmap coin(":/icon/coin.ico");
+    coin = coin.scaled(22, 22, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
+    auto* icon = combatScene->addPixmap(coin);
+    icon->setZValue(1000);
+
+    qreal gap = 4;
+    qreal totalWidth = coin.width() + gap + txt->boundingRect().width();
+    qreal startX = targetRect.center().x() - totalWidth / 2.0;
+    qreal y = targetRect.bottom() + 2;
+
+    icon->setPos(startX, y + (txt->boundingRect().height() - coin.height()) / 2.0);
+    txt->setPos(startX + coin.width() + gap, y);
+
+    priceCoinIcons[txt] = icon;
 }
 
 abstractCardTemplate* StorePage::createCardUI(abstractCard *card,QPointF pos,qreal z)
@@ -290,13 +345,10 @@ void StorePage::createCardPrices()
         }
 
         QRectF rect = card->getParent()->sceneBoundingRect();
-
-        txt->setPos(
-            rect.center().x() - txt->boundingRect().width()/2,
-            rect.bottom() + 2
-            );
+        attachCoinIcon(txt, rect);
 
         txt->setZValue(1000);
+
 
         cardPriceTexts.push_back(txt);
         cardPriceValues[txt] = price;
@@ -360,15 +412,7 @@ void StorePage::createPotions()
 
         potionprice[potion] = rng.randint(60,120);
 
-        auto* ui = new PotionParent(
-            eve,
-            potion,
-            parent,
-            QSizeF(130,130),
-            QPointF(startPos.x(),
-                    startPos.y()+i*dy),
-            30
-            );
+        auto* ui = new PotionParent(eve,potion,parent,QSizeF(130,130),QPointF(startPos.x(),startPos.y()+i*dy),30);
 
         ui->setCanHover(false);
         ui->setCanSelect(false);
@@ -431,19 +475,22 @@ void StorePage::buyPotion(abstractPotion* potion)
     if(potionUI == nullptr)
         return;
 
-    for(auto item = potionPriceTexts.begin();
-         item != potionPriceTexts.end();
-         ++item)
-    {
-        auto labelIt = potionPriceLabels.find(potion);
-        if (labelIt != potionPriceLabels.end()) {
-            QGraphicsSimpleTextItem* txt = labelIt->second;
-            combatScene->removeItem(txt);
-            potionPriceValues.erase(txt);
-            potionPriceTexts.erase(std::remove(potionPriceTexts.begin(), potionPriceTexts.end(), txt), potionPriceTexts.end());
-            delete txt;
-            potionPriceLabels.erase(labelIt);
+    auto labelIt = potionPriceLabels.find(potion);
+    if (labelIt != potionPriceLabels.end()) {
+        QGraphicsSimpleTextItem* txt = labelIt->second;
+
+        auto iconIt = priceCoinIcons.find(txt);
+        if (iconIt != priceCoinIcons.end()) {
+            combatScene->removeItem(iconIt->second);
+            delete iconIt->second;
+            priceCoinIcons.erase(iconIt);
         }
+
+        combatScene->removeItem(txt);
+        potionPriceValues.erase(txt);
+        potionPriceTexts.erase(std::remove(potionPriceTexts.begin(), potionPriceTexts.end(), txt), potionPriceTexts.end());
+        delete txt;
+        potionPriceLabels.erase(labelIt);
     }
 
     for(auto it = potionImages.begin();
@@ -457,18 +504,20 @@ void StorePage::buyPotion(abstractPotion* potion)
         }
     }
 
-    combatScene->removeItem(potionUI);
-
     potions.erase(
         std::remove(potions.begin(), potions.end(), potionUI),
         potions.end()
         );
-
     potionprice.erase(potion);
 
-    delete potionUI;
+    potionUI->setCanHover(false);
+    potionUI->setCanSelect(false);
+    potionUI->fadeTo(0, 300, QEasingCurve::OutSine);
 
-
+    QTimer::singleShot(300, [this, potionUI](){
+        combatScene->removeItem(potionUI);
+        delete potionUI;
+    });
 
 
 }
@@ -514,11 +563,7 @@ void StorePage::createPotionPrices()
             txt->setBrush(QColor(200,40,40));
 
         QRectF rect = potionParent->sceneBoundingRect();
-
-        txt->setPos(
-            rect.center().x() - txt->boundingRect().width()/2,
-            rect.bottom() + 2
-            );
+        attachCoinIcon(txt, rect);
 
         txt->setZValue(1000);
 
@@ -594,22 +639,34 @@ void StorePage::buyCard(abstractCard *card)
     player->deck_add(card);
 
 
-    for(auto item = cardPriceTexts.begin(); item != cardPriceTexts.end(); ++item)
-    {
-        auto labelIt = cardPriceLabels.find(card);
-        if (labelIt != cardPriceLabels.end()) {
-            QGraphicsSimpleTextItem* txt = labelIt->second;
-            combatScene->removeItem(txt);
-            cardPriceValues.erase(txt);
-            cardPriceTexts.erase(std::remove(cardPriceTexts.begin(), cardPriceTexts.end(), txt), cardPriceTexts.end());
-            delete txt;
-            cardPriceLabels.erase(labelIt);
+    auto labelIt = cardPriceLabels.find(card);
+    if (labelIt != cardPriceLabels.end()) {
+        QGraphicsSimpleTextItem* txt = labelIt->second;
+
+        auto iconIt = priceCoinIcons.find(txt);
+        if (iconIt != priceCoinIcons.end()) {
+            combatScene->removeItem(iconIt->second);
+            delete iconIt->second;
+            priceCoinIcons.erase(iconIt);
         }
+
+        combatScene->removeItem(txt);
+        cardPriceValues.erase(txt);
+        cardPriceTexts.erase(std::remove(cardPriceTexts.begin(), cardPriceTexts.end(), txt), cardPriceTexts.end());
+        delete txt;
+        cardPriceLabels.erase(labelIt);
     }
 
-    combatScene->removeItem(cardUI->getParent());
+    CardParent* tileToDelete = cardUI->getParent();
+    tileToDelete->setCanHover(false);
+    tileToDelete->setCanSelect(false);
+    tileToDelete->fadeTo(0, 300, QEasingCurve::OutSine);
 
-    delete cardUI->getParent();
+    QTimer::singleShot(300, [this, tileToDelete](){
+        combatScene->removeItem(tileToDelete);
+        delete tileToDelete;
+    });
+
 
     cards.erase(
         std::remove(cards.begin(), cards.end(), cardUI),
@@ -655,6 +712,13 @@ void StorePage::buyRemoveCard()
     remove_card_price += 25;
 
     if (removeCardPriceLabel) {
+        auto iconIt = priceCoinIcons.find(removeCardPriceLabel);
+        if (iconIt != priceCoinIcons.end()) {
+            combatScene->removeItem(iconIt->second);
+            delete iconIt->second;
+            priceCoinIcons.erase(iconIt);
+        }
+
         combatScene->removeItem(removeCardPriceLabel);
         cardPriceValues.erase(removeCardPriceLabel);
         cardPriceTexts.erase(std::remove(cardPriceTexts.begin(), cardPriceTexts.end(), removeCardPriceLabel), cardPriceTexts.end());
@@ -696,36 +760,21 @@ void StorePage::createRemoveButton()
     removeCardButton->setCanSelect(false);
     combatScene->addItem(removeCardButton);
 
-    auto* removeCardFill = new BaseItem(removeCardButton, size, {0, 0});
-    removeCardFill->setBackColor(QColor::fromRgb(20, 20, 25));
-    removeCardFill->setZValue(z + 1);
-
     removeCardBg = new ImageItem(removeCardButton, size, {0, 0});
-    removeCardBg->setPixmap(imageManager::instance().getCardFrame(combat_data::selected_card_template, CardType::skill));
-    removeCardBg->setZValue(z + 2);
+    removeCardBg->setPixmap(QPixmap(":/image/cards/back/remove_card"));
+    removeCardBg->setZValue(z + 1);
 
     QFont titleFont;
     titleFont.setFamily(setting::game_language == language::English ? Fonts::Cascadia : Fonts::koodak);
-    titleFont.setPixelSize(18);
+    titleFont.setPixelSize(20);
     titleFont.setBold(true);
 
-    removeCardTitle = new TextItem(removeCardButton, {180, 70}, {10, 45});
+    removeCardTitle = new TextItem(removeCardButton, {180, 90}, {10, 25});
     removeCardTitle->setFont(titleFont);
     removeCardTitle->setColor(Qt::white);
     removeCardTitle->setAlignment(Qt::AlignCenter);
-    removeCardTitle->setText(tr("Remove a Card"));
-    removeCardTitle->setZValue(z + 3);
-
-    QFont descFont;
-    descFont.setFamily(setting::game_language == language::English ? Fonts::Cascadia : Fonts::koodak);
-    descFont.setPixelSize(13);
-
-    removeCardDesc = new TextItem(removeCardButton, {170, 100}, {15, 130});
-    removeCardDesc->setFont(descFont);
-    removeCardDesc->setColor(Qt::white);
-    removeCardDesc->setAlignment(Qt::AlignCenter);
-    removeCardDesc->setText(tr("Remove a card of your choice from your deck."));
-    removeCardDesc->setZValue(z + 3);
+    removeCardTitle->setText(tr("Card Removal\nService!"));
+    removeCardTitle->setZValue(z + 2);
 
     QFont priceFont;
     priceFont.setFamily(setting::game_language == language::English ? Fonts::Cascadia : Fonts::koodak);
@@ -739,14 +788,47 @@ void StorePage::createRemoveButton()
         removeCardPriceLabel->setBrush(QColor(200, 40, 40));
 
     QRectF rect = removeCardButton->sceneBoundingRect();
-    removeCardPriceLabel->setPos(
-        rect.center().x() - removeCardPriceLabel->boundingRect().width() / 2,
-        rect.bottom() + 2
-        );
+    attachCoinIcon(removeCardPriceLabel, rect);
+
     removeCardPriceLabel->setZValue(1000);
 
     cardPriceTexts.push_back(removeCardPriceLabel);
     cardPriceValues[removeCardPriceLabel] = remove_card_price;
+}
+
+void StorePage::createBackButton()
+{
+    QFont f;
+    f.setBold(true);
+    f.setFamily(setting::game_language == language::English ? Fonts::Cascadia : Fonts::koodak);
+    f.setPixelSize(24);
+
+    back_btn = new QPushButton();
+    back_btn->setFixedSize(135, 60);
+    back_btn->setFont(f);
+    back_btn->setText(tr("Back"));
+    back_btn->setCursor(Qt::PointingHandCursor);
+    back_btn->setStyleSheet(
+        "QPushButton{"
+        " border-image: url(:/icon/back_icon) 0 0 0 0 stretch stretch;"
+        " color: white;"
+        " border: none;"
+        " background-color: transparent;"
+        "}"
+        "QPushButton:pressed{"
+        "  color: #dddddd;"
+        "}"
+        );
+
+    back_prxy = new QGraphicsProxyWidget(nullptr);
+    back_prxy->setWidget(back_btn);
+    back_prxy->setPos(-15, 800);
+    back_prxy->setZValue(11500);
+    combatScene->addItem(back_prxy);
+
+    connect(back_btn, &QPushButton::clicked, this, [=](){
+        emit eve->nextAction();
+    });
 }
 
 void StorePage::initialSet()
@@ -762,7 +844,7 @@ void StorePage::initialSet()
     createPotions();
     createPotionPrices();
     createRemoveButton();
-    // createBackButton();
+    createBackButton();
 }
 
 
