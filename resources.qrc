@@ -243,6 +243,7 @@
         <file alias="map2_epic.jpg">assests/image/scene/map2_epic.jpg</file>
         <file alias="map2_normal.jpg">assests/image/scene/map2_normal.jpg</file>
         <file alias="rest.png">assests/image/scene/rest.png</file>
+        <file alias="login_back">assests/image/scene/login_back.PNG</file>
     </qresource>
     <qresource prefix="/icon/login">
         <file alias="eye.svg">assests/image/icon/login/eye.svg</file>
