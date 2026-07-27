@@ -25,4 +25,9 @@ enum class CombatType{
     boss
 };
 
+enum class ChestType{
+    regular,
+    boss
+};
+
 #endif // GENERAL_H

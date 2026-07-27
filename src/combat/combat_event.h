@@ -91,6 +91,8 @@ signals:
     void settingOpen();
     void settingClose();
 
+    void relicSelected(abstractRelic*);
+
 };
 
 #endif // COMBAT_EVENT_H

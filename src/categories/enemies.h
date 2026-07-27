@@ -32,6 +32,8 @@ enum class entityID{
     the_champ,
 
     ironclad,
+    veilclad,
+    oathclad,
 
     NULLENTITY
 };

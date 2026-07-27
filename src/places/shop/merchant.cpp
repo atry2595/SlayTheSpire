@@ -1,3 +1,4 @@
+/*
 #include "Merchant.h"
 #include "cards/cardfactory.h"
 #include "items/potions/potionfactory.h"
@@ -293,4 +294,4 @@ PurchaseResult Merchant::buyItem(size_t index)
     item.setPurchased(true);0
 
     return PurchaseResult::Success;
-}
+} */

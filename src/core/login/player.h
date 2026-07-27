@@ -4,6 +4,7 @@
 #include <QString>
 #include "stats.h"
 #include <QStringList>
+#include <QDataStream>
 
 class Player
 {
@@ -13,6 +14,9 @@ private:
     QString email;
     QString passwordHash;
     Stats stats;
+
+    friend QDataStream &operator<<(QDataStream &out, const Player &p);
+    friend QDataStream &operator>>(QDataStream &in, Player &p);
 
 
 public:
@@ -42,5 +46,8 @@ public:
 
 
 };
+
+QDataStream &operator<<(QDataStream &out, const Player &p);
+QDataStream &operator>>(QDataStream &in, Player &p);
 
 #endif

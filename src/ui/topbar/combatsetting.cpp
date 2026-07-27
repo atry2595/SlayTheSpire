@@ -9,7 +9,7 @@ combatSetting::combatSetting(combatEvent* eve)
 {
     QString sliderStyle = R"(
 QSlider{
-    background: transparet;
+    background: transparent;
     border: none;
 }
 QSlider::groove:horizontal{
@@ -59,7 +59,7 @@ QSlider::handle:horizontal:pressed{
 )";
 
     QString blank_css =
-        "QPushButton{background:transparent;border:none;padding:0px;margin:0px;}"
+        "QPushButton{background:transparent;border:none;padding:0px;margin:0px;color:white;}"
         "QPushButton:hover{background:transparent; color: yellow;}"
         "QPushButton:pressed{background:transparent;}"
         "QPushButton:focus{border:none;outline:none;}"
@@ -94,6 +94,7 @@ QSlider::handle:horizontal:pressed{
     music_txt = new TextItem(parent, {200, 100}, {500, 900 - 650});
     music_txt->setText("Music Volume");
     music_txt->setFont(txt);
+    music_txt->setColor(Qt::white);
     music = new QSlider(Qt::Horizontal, nullptr);
     music->resize({300, 100});
     music->setMinimum(0);
@@ -107,6 +108,7 @@ QSlider::handle:horizontal:pressed{
     sfx_txt = new TextItem(parent, {200, 100}, {500, 900 - 500});
     sfx_txt->setText("SFX Volume");
     sfx_txt->setFont(txt);
+    sfx_txt->setColor(Qt::white);
     sfx = new QSlider(Qt::Horizontal, nullptr);
     sfx->setFixedSize(300, 100);
     sfx->setMinimum(0);

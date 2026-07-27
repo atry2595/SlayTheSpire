@@ -313,3 +313,19 @@ Player Player::fromFileRecord(const QString &record) {
 
     return p;
 }
+
+QDataStream &operator<<(QDataStream &out, const Player &p)
+{
+    out << p.id << p.username << p.email << p.passwordHash;
+    out << p.stats.toFileRecord();
+    return out;
+}
+
+QDataStream &operator>>(QDataStream &in, Player &p)
+{
+    QString statsRecord;
+    in >> p.id >> p.username >> p.email >> p.passwordHash;
+    in >> statsRecord;
+    p.stats = Stats::fromFileRecord(statsRecord);
+    return in;
+}

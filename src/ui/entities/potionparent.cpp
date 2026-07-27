@@ -43,12 +43,13 @@ void PotionParent::mousePressEvent(QGraphicsSceneMouseEvent *event)
     if (can_select && can_hover){
         refreshTargetPos();
         hoverEnterEvent(nullptr);
+    }
+    if (event->button() == Qt::LeftButton) {
         emit this->event->potionPressed(this);
     }
     if (event->button() == Qt::RightButton){
         emit PotionParent::event->potionRightButton(source);
     }
-
 }
 
 //-----------------------------------------------------------------

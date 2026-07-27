@@ -2,6 +2,7 @@
 #define SETTING_H
 
 #include <QString>
+#include "core/login/player.h"
 
 enum class language{
     English,
@@ -38,6 +39,7 @@ struct setting {
     inline static language game_language = language::English;
     inline static qreal bg_volume = 0.5;
     inline static qreal sfx_volume = 0.5;
+    inline static Player* current_player = nullptr;
 };
 
 struct combat_data {
@@ -45,8 +47,8 @@ struct combat_data {
     inline static int floor = 1;
     inline static int player_count = 1;
     inline static skins selected_character = skins::ironclad;
-    inline static cardTemplates selected_card_template = cardTemplates::common;
-    inline static RoomType room_type = RoomType::MONSTER;
+    inline static cardTemplates selected_card_template = cardTemplates::metallic;
+    inline static RoomType room_type = RoomType::MERCHANT;
 };
 
 
