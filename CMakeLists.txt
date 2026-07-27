@@ -606,6 +606,7 @@ add_executable(SlayTheSpire
     src/ui/mappage/scrollsection.h src/ui/mappage/scrollsection.cpp
     src/ui/mappage/mapItems.h
     src/ui/mappage/sketchline.h src/ui/mappage/sketchline.cpp
+    src/ui/unknownpage/unknownpage.cpp src/ui/unknownpage/unknownpage.h
 
 )
 

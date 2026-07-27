@@ -301,17 +301,20 @@
         <file alias="back_login">assests/image/scene/IMG_6908.png</file>
     </qresource>
     <qresource prefix="/image/events">
-        <file alias="Ominous_Forge.jpg">assests/image/events/photo_2026-07-12_19-35-32.jpg</file>
-        <file alias="Bonfire_Spirits.jpg">assests/image/events/photo_2026-07-12_19-30-12.jpg</file>
-        <file alias="Golden_Shrine.jpg">assests/image/events/photo_2026-07-12_19-30-14.jpg</file>
-        <file alias="Lab.jpg">assests/image/events/photo_2026-07-12_19-30-15.jpg</file>
-        <file alias="Golden_Idol.jpg">assests/image/events/photo_2026-07-12_19-30-16.jpg</file>
-        <file alias="The_Cleric.jpg">assests/image/events/photo_2026-07-12_19-54-58.jpg</file>
-        <file alias="Shining_Light.jpg">assests/image/events/photo_2026-07-12_19-30-18 (2).jpg</file>
-        <file alias="The_Ssssserpent.jpg">assests/image/events/photo_2026-07-12_19-30-19.jpg</file>
-        <file alias="Ancient_Writing.jpg">assests/image/events/photo_2026-07-12_19-30-20.jpg</file>
-        <file alias="The_Joust.jpg">assests/image/events/photo_2026-07-12_19-30-21.jpg</file>
-        <file alias="Pleading_Vagrant.jpg">assests/image/events/photo_2026-07-12_19-30-22.jpg</file>
+        <file alias="ancient.jpg">assests/image/events/ancientwriting.jpg</file>
+        <file alias="augmenter.jpg">assests/image/events/augmenter.jpg</file>
+        <file alias="bonefire.jpg">assests/image/events/bonefirespirits.jpg</file>
+        <file alias="colosseum.jpg">assests/image/events/colosseum.jpg</file>
+        <file alias="facetrader.jpg">assests/image/events/facetrader.jpg</file>
+        <file alias="goldenidol.jpg">assests/image/events/goldenidol.jpg</file>
+        <file alias="goldenshirine.jpg">assests/image/events/goldenshirine.jpg</file>
+        <file alias="lab.jpg">assests/image/events/lab.jpg</file>
+        <file alias="ominous.jpg">assests/image/events/ominousforge.jpg</file>
+        <file alias="pleading.jpg">assests/image/events/pleadingvagrant.jpg</file>
+        <file alias="shininglight.jpg">assests/image/events/shininglight.jpg</file>
+        <file alias="cleric.jpg">assests/image/events/thecleric.jpg</file>
+        <file alias="joust.jpg">assests/image/events/thejoust.jpg</file>
+        <file alias="serpent.jpg">assests/image/events/theserpent.jpg</file>
     </qresource>
     <qresource prefix="/icon/login">
         <file alias="eye.svg">assests/image/icon/login/eye.svg</file>

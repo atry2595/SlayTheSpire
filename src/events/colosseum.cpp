@@ -7,7 +7,7 @@ Colosseum::Colosseum(game_action& actions, ironclad* player) {
 
     manager.unknown_ID = unknownID::the_colosseum;
     manager.unknown_name = tr("The Colosseum");
-    manager.isEvent = true;
+    manager.isEvent = false;
 
     UnknownNode root;
     root.title = "";
