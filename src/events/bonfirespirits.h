@@ -1,23 +1,23 @@
-#ifndef BONFIRESPIRITS_H
-#define BONFIRESPIRITS_H
+// #ifndef BONFIRESPIRITS_H
+// #define BONFIRESPIRITS_H
 
-#include <QObject>
+// #include <QObject>
 
-#include "events/UnknownMap.h"
-#include "combat/game_action.h"
-#include "entity/ironclad.h"
+// #include "events/UnknownMap.h"
+// #include "combat/game_action.h"
+// #include "entity/ironclad.h"
 
-class BonfireSpirits : public QObject
-{
-    Q_OBJECT
+// class BonfireSpirits : public QObject
+// {
+//     Q_OBJECT
 
-private:
-    UnknownManager manager;
+// private:
+//     UnknownManager manager;
 
-public:
-    BonfireSpirits(game_action& actions, ironclad* player);
+// public:
+//     BonfireSpirits(game_action& actions, ironclad* player);
 
-    const UnknownManager getManager() const { return manager; }
-};
+//     const UnknownManager getManager() const { return manager; }
+// };
 
-#endif // BONFIRESPIRITS_H
+// #endif // BONFIRESPIRITS_H
