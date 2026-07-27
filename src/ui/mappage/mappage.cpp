@@ -56,6 +56,8 @@ MapPage::MapPage(QWidget *parent, ironclad* plyr, combatEvent* eve)
 
     connect(eve, &combatEvent::settingOpen, this, &MapPage::open_setting);
 
+    connect(eve, &combatEvent::relicRightButton, this, &MapPage::relic_right_click);
+
     generateNewMap();
     initialSet();
 }
@@ -369,4 +371,10 @@ void MapPage::onRoomClicked(QPushButton* btn) {
     cm.currentCol = cm.map->getCurrentColumn();
 
     refreshMapVisuals();
+}
+
+void MapPage::relic_right_click(abstractRelic* ent) {
+    info_bar = new CombatInfoBar(ent);
+    combatScene->addItem(info_bar->getParent());
+    info_bar->Entrance();
 }

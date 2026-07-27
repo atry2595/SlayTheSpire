@@ -15,6 +15,7 @@
 #include <QAudioOutput>
 #include "combat/manageCombat/combatrewards.h"
 #include "ui/mappage/scrollsection.h"
+#include "ui/infobar/combatinfobar.h"
 
 class MapPage : public QWidget
 {
@@ -54,8 +55,10 @@ private:
 
     CombatTopBar* bar;
     RelicBar* relic_bar;
+    CombatInfoBar* info_bar = nullptr;
 
 private slots:
+    void relic_right_click(abstractRelic*);
     void open_setting();
 };
 
