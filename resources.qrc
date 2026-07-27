@@ -310,6 +310,7 @@
         <file alias="Ancient_Writing.jpg">assests/image/events/photo_2026-07-12_19-30-20.jpg</file>
         <file alias="The_Joust.jpg">assests/image/events/photo_2026-07-12_19-30-21.jpg</file>
         <file alias="Pleading_Vagrant.jpg">assests/image/events/photo_2026-07-12_19-30-22.jpg</file>
+    </qresource>
     <qresource prefix="/icon/login">
         <file alias="eye.svg">assests/image/icon/login/eye.svg</file>
         <file alias="eye_off.svg">assests/image/icon/login/eye_off.svg</file>
@@ -363,6 +364,7 @@
     <qresource prefix="/image/back">
         <file alias="back1">assests/image/back/IMG_6654.jpg</file>
         <file alias="logo">assests/image/back/Slay_the_Spire_Logo.png</file>
+    </qresource>
     <qresource prefix="/image/chest">
         <file alias="oathchest.png">assests/image/oath_chest.png</file>
         <file alias="veilchest.png">assests/image/veil_chest.png</file>

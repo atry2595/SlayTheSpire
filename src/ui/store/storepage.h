@@ -77,9 +77,6 @@ private:
     void updateCardPricesColor();
     void updatePotionPricesColor();
 
-    QPushButton* remove_btn ;
-    QGraphicsProxyWidget* remove_prxy ;
-
     QPushButton* back_btn ;
     QGraphicsProxyWidget* back_prxy ;
 

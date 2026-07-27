@@ -808,6 +808,7 @@ void StorePage::createBackButton()
     back_btn->setFont(f);
     back_btn->setText(tr("Back"));
     back_btn->setCursor(Qt::PointingHandCursor);
+    back_btn->installEventFilter(this);
     back_btn->setStyleSheet(
         "QPushButton{"
         " border-image: url(:/icon/back_icon) 0 0 0 0 stretch stretch;"

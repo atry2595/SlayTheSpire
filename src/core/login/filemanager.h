@@ -16,8 +16,8 @@ private:
 
 public:
     FileManager();
-    bool loadFromFile(const QString &filePath = "players_data.txt");
-    bool saveToFile(const QString &filePath ="players_data.txt");
+    bool loadFromFile(const QString &filePath = "players_data.bin");
+    bool saveToFile(const QString &filePath ="players_data.bin");
     bool isUsernameTaken(const QString &username);
     bool isEmailTaken(const QString &email);
     bool registerPlayer(const QString &username,const QString &email,const QString &password,const QString &confirmPassword,QString &errorMessage);

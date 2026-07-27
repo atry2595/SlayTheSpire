@@ -1,6 +1,7 @@
 #include "filemanager.h"
 #include <QFile>
 #include <QTextStream>
+#include <QDataStream>
 
 FileManager::FileManager()
 {
@@ -20,26 +21,21 @@ bool FileManager::loadFromFile(const QString &filePath)
 
     players.clear();
 
-    if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
+    if(!file.open(QIODevice::ReadOnly))
     {
         nextId = 1001;
         return false;
     }
 
-    QTextStream in(&file);
+    QDataStream in(&file);
+    in.setVersion(QDataStream::Qt_6_11);
 
     int maxId = 1000;
 
     while(!in.atEnd())
     {
-        QString line = in.readLine().trimmed();
-
-        if(line.isEmpty())
-        {
-            continue;
-        }
-
-        Player p =Player::fromFileRecord(line);
+        Player p;
+        in >> p;
 
         players.append(p);
 
@@ -60,16 +56,17 @@ bool FileManager::saveToFile(const QString &filePath)
 {
     QFile file(filePath);
 
-    if(!file.open(QIODevice::WriteOnly |QIODevice::Text))
+    if(!file.open(QIODevice::WriteOnly))
     {
         return false;
     }
 
-    QTextStream out(&file);
+    QDataStream out(&file);
+    out.setVersion(QDataStream::Qt_6_11);
 
     for(const Player &p : players)
     {
-        out << p.toFileRecord() << "\n";
+        out << p;
     }
 
     file.close();
