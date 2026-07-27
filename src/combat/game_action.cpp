@@ -3,6 +3,8 @@
 #include "entity/abstractentity.h"
 #include "cards/abstractcard.h"
 #include "items/potions/abstractpotion.h"
+#include "entity/ironclad.h"
+#include "assetsManager/soundmanager.h"
 
 game_action::game_action(combatEvent* eve):event(eve) {}
 
@@ -13,16 +15,19 @@ attackResult game_action::attack(attackInfo& info) {
         emit event->attack_started(info);
     }
 
-    attackResult res;
+    attackResult res(info);
 
     for (abstractEntity* target : info.target_list){
         damageInfo dmg;
         dmg.attacker = info.attacker;
         dmg.target = target;
         dmg.damage = info.damage;
-        res.results.push_back(this->apply_damage(dmg));
+        dmg.attack_type = info.attack_type;
+        auto r = this->apply_damage(dmg);
+        res.results.push_back(r);
     }
 
+    emit event->afterAttack(res);
     return res;
 }
 
@@ -31,6 +36,9 @@ damageResult game_action::apply_damage(damageInfo& info) {
     damageResult res;
 
     auto target = info.target;
+
+    res.target = target;
+    res.attacker = info.attacker;
 
     target->modify_incoming_damage(info);
     emit event->damage_before_blocking(info);
@@ -48,6 +56,7 @@ damageResult game_action::apply_damage(damageInfo& info) {
             bl.owner = target;
             emit event->block_changed(bl);
 
+            emit event->entityUpdate(info.target);
             return res;
         }
         else {
@@ -59,6 +68,7 @@ damageResult game_action::apply_damage(damageInfo& info) {
             emit event->block_break(bl);
 
             dmg -= block;
+            emit event->entityUpdate(info.target);
         }
     }
 
@@ -74,11 +84,28 @@ damageResult game_action::apply_damage(damageInfo& info) {
         info.damage = dmg;
         info.target->damage_applied(*this);
         emit event->damage_applied(info);
+        emit event->hp_changed(info.target, hp, hp - dmg);
+        emit event->entityUpdate(info.target);
     }
     else{
         target->set_hp(0);
         res.killed = true;
+        emit event->hp_changed(info.target, hp, 0);
+        emit event->entityUpdate(info.target);
         emit event->entity_killed(target);
+        if (target->get_ID() == entityID::ironclad){
+            auto plyr = dynamic_cast<ironclad*>(target);
+            for (auto item : plyr->get_potion_list()){
+                if (item->get_ID() == potionID::fairy_in_a_bottle){
+                    drinkPotionInfo pot_inf;
+                    pot_inf.potion = item;
+                    pot_inf.owner = plyr;
+                    pot_inf.target_list = {};
+
+                    plyr->drink_potion(pot_inf);
+                }
+            }
+        }
         if (target->get_hp() <= 0){
             emit event->entity_removed(target);
         }
@@ -89,16 +116,20 @@ damageResult game_action::apply_damage(damageInfo& info) {
 
 void game_action::apply_block(blockingInfo& info){
 
+    auto sound = soundManager::instance();
+
     if (info.affected_by_other){
         info.owner->modify_blocking(info);
         emit event->before_block_set(info);
     }
 
+    if (info.owner->get_block() == 0) sound.playSoundEffect(SoundEffect::setShield);
     int new_block = info.owner->get_block() + info.block;
     info.owner->set_block(new_block);
     info.block = new_block;
 
     emit event->block_changed(info);
+    emit event->entityUpdate(info.owner);
 }
 
 
@@ -129,8 +160,5 @@ void game_action::heal(healInfo& info){
     int newHP = std::min(oldHP + info.value, info.owner->get_max_hp());
     info.owner->set_hp(newHP);
     emit event->hp_changed(info.owner, oldHP, newHP);
+    emit event->entityUpdate(info.owner);
 }
-
-
-
-

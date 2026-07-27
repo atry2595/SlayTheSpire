@@ -16,6 +16,7 @@ public:
 
     void at_combat_start(game_action&) override;
     void at_turn_end(game_action&) override;
+    QString get_story() override;
 };
 
 #endif // MUTAGENI_STRENGTH_RELIC_H

@@ -21,6 +21,7 @@
 #include "gremlin_horn_relic.h"
 #include "tungsten_rod_relic.h"
 #include "captains_wheel_relic.h"
+#include "black_star_relic.h"
 
 #include "calling_bell_relic.h"
 #include "mark_of_pain_relic.h"
@@ -35,6 +36,8 @@
 #include "helmet_of_the_cleric_relic.h"
 #include "gremlin_visage_relic.h"
 #include "golden_idol_relic.h"
+#include "spirit_poop_relic.h"
+#include "cultist_headpiece_relic.h"
 
 abstractRelic* RelicFactory::createRelic(relicID id, abstractEntity* owner)
 {
@@ -90,7 +93,7 @@ abstractRelic* RelicFactory::createRelic(relicID id, abstractEntity* owner)
         return new velvet_choker_relic(owner);
 
     case relicID::black_star:
-        return nullptr;
+        return new black_star_relic(owner);
 
     case relicID::lively_plant:
         return nullptr;
@@ -113,7 +116,7 @@ abstractRelic* RelicFactory::createRelic(relicID id, abstractEntity* owner)
         return new mutagenic_strength_relic(owner);
 
     case relicID::cultist_headpiece:
-        return nullptr;
+        return new cultist_headpiece_relic(owner);
 
     case relicID::red_mask:
         return new red_mask_relic(owner);
@@ -123,9 +126,8 @@ abstractRelic* RelicFactory::createRelic(relicID id, abstractEntity* owner)
         return new gremlin_visage_relic(owner);
     case relicID::golden_idol:
         return new golden_idol_relic(owner);
-
-    default:
-        return nullptr;
+    case relicID::spirit_poop:
+        return new spirit_poop_relic(owner);
 
     }
 }

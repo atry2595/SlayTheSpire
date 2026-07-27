@@ -21,3 +21,7 @@ void curlUpPower::damage_applied(game_action& info){
     info.apply_block(bl);
     decrease();
 }
+
+QString curlUpPower::get_story() {
+    return (QObject::tr("Curl Up, an ancient reflex that rounds the body and hides the wounds.\nThe traveler retreats for a moment like a snail into a defensive cocoon, and emerges with a layer of solidity upon their back."));
+}

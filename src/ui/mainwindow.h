@@ -49,6 +49,7 @@ private slots:
     void onButtonHovered();
 
 private:
+    QStackedWidget* stack;
     Ui::MainWindow *ui;
 
     FileManager *fileManager;

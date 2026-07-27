@@ -31,7 +31,7 @@ mugger* mugger::create(game_action& actions){
 
     enemy_intent intnt4;
     intnt4.name = tr("Escape");
-    intnt4.type = intent_type::special;
+    intnt4.type = intent_type::escape;
 
 
     enemy->intent_list[(int)mugger_move::mug] = intnt1;
@@ -96,6 +96,8 @@ void mugger::play_turn(playInfo& info){
 
     case (mugger_move::escape):{
         emit info.actions.get_event()->entity_escape(this);
+        hp = 0;
+        gold = 0;
         emit info.actions.get_event()->entity_removed(this);
         return;
     }
@@ -104,4 +106,8 @@ void mugger::play_turn(playInfo& info){
 
     enemy_turn++;
     choose_move();
+}
+
+QString mugger::get_story() {
+    return (QObject::tr("The Mugger crouches behind a pillar in the wounded city, his knife gleaming in the dark.\nIn his hideout, he's piled a mountain of stolen coins, yet each one is a mirror reflecting a stranger's face he no longer recognizes."));
 }

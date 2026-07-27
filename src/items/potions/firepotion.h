@@ -17,6 +17,7 @@ public:
     potionID get_ID() override { return potionID::fire_potion; }
     PotionType get_type() override { return PotionType::common; }
     TargetType get_target_type() override { return TargetType::single_target; }
+    QString get_story() override;
 };
 
 #endif // FIREPOTION_H

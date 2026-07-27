@@ -14,6 +14,7 @@ public:
     relicRarity get_rarity() override { return relicRarity::event; }
 
     void at_combat_end(game_action&) override;
+    QString get_story() override;
 };
 
 #endif // HELMET_of_CLERIC_RELIC_H

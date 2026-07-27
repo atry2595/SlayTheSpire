@@ -15,6 +15,7 @@ public:
     relicRarity get_rarity() override { return relicRarity::rare; }
 
     void added_time(game_action&) override;
+    QString get_story() override;
 };
 
 #endif // ICE_CREAM_RELIC_H

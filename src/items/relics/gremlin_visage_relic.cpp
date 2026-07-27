@@ -18,3 +18,7 @@ void gremlin_visage_relic::at_combat_start(game_action& actions){
     abstractPower* np = PowerFactory::createPower(powerID::weak, owner, 1);
     owner->add_power(actions, np);
 }
+
+QString gremlin_visage_relic::get_story() {
+    return (QObject::tr("The Gremlin Visage, an ugly, ridiculous mask with a frozen sneer that even death can't wipe off.\nThe traveler laughs at the absurdity of dying through this grotesque face, and right at the brink of collapse, stands back up—as if mocking mortality is itself a form of survival."));
+}

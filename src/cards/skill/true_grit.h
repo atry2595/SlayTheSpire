@@ -14,6 +14,8 @@ protected:
     bool random_select = true;
     bool base_random_select = true;
 
+    QMetaObject::Connection cnt;
+
 public:
 
     true_grit();

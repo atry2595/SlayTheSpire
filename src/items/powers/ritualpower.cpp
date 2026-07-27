@@ -16,3 +16,7 @@ QString ritualPower::generate_description(){
     description = tr("At the start of your/its turn, gain %1 Strength.").arg(amount);
     return description;
 }
+
+QString ritualPower::get_story() {
+    return (QObject::tr("Ritual, a repetitive chant that with every whisper raises a darker flame within the traveler.\nEach turn that passes, their strength swells further, as if the Spire itself is blessing its worshipper."));
+}

@@ -31,7 +31,9 @@ enum class entityID{
     hexaghost,
     the_champ,
 
-    ironclad
+    ironclad,
+
+    NULLENTITY
 };
 
 #endif // ENEMIES_H

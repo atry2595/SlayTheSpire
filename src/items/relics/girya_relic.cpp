@@ -27,3 +27,7 @@ void girya_relic::added_time(game_action& actions){
         }
     });
 }
+
+QString girya_relic::get_story() {
+    return (QObject::tr("Girya, the seal of silent grief, weighs heavy in the traveler's pocket—soundless but relentless.\nWith every strike landed, more power is drawn from this compressed sorrow, as if sorrow itself knows how to turn into fury."));
+}

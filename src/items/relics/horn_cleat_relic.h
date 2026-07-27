@@ -16,6 +16,7 @@ public:
 
     void at_turn_start(game_action&) override;
     void at_combat_end(game_action&) override;
+    QString get_story() override;
 };
 
 #endif // HORN_CLEAT_RELIC_H

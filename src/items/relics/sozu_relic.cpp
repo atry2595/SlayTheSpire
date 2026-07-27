@@ -22,3 +22,7 @@ void sozu_relic::added_time(game_action& actions){
 
     abstractPotion::lock = true;
 }
+
+QString sozu_relic::get_story() {
+    return (QObject::tr("Sozu, a tiny statue shaped like benevolent spirits, gently waves away every healing potion with a kind smile.\nThe traveler stays thirsty, but in exchange for this thirst, gains a power no elixir can offer—as if some wells must be dried forever for another spring to flow."));
+}

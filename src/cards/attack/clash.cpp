@@ -45,13 +45,14 @@ void clash::combat_reset() {
 
 
 void clash::update(playInfo& info){
-    abstractCard::update(info);
     ironclad* player = dynamic_cast<ironclad*>(info.attacker);
     for (auto item : player->get_hand_pile()) {
         if (item->get_card_type() != CardType::attack){
             available = false;
+            info.actions.get_event()->cardUpdated(this);
             return;
         }
     }
     available = true;
+    info.actions.get_event()->cardUpdated(this);
 }

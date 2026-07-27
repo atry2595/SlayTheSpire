@@ -4,7 +4,7 @@
 #include <QString>
 #include <QList>
 
-#include "Player.h"
+#include "player.h"
 
 class FileManager
 {

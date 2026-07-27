@@ -24,3 +24,7 @@ void red_mask_relic::added_time(game_action& actions){
             }
     });
 }
+
+QString red_mask_relic::get_story() {
+    return (QObject::tr("The Red Mask, a wooden face painted with the blood of enemies in forgotten forests.\nThe traveler puts on this soulless visage, and suddenly a tribe of bandits who were once foes wave them through—as if violence is a universal dialect spoken correctly only with the right mask."));
+}

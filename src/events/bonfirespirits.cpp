@@ -18,42 +18,50 @@ BonfireSpirits::BonfireSpirits(game_action& actions, ironclad* player) {
     UnknownNode offer_node;
     offer_node.title = tr("[Offer] Receive a reward based on the rarity of the card you give.");
     offer_node.canUse = [](){ return true; };
-    offer_node.actions = [player, &actions, &offer_node] () {
+    offer_node.actions = [player, &actions, &offer_node, this] () {
 
         std::vector<abstractCard*> deck = player->get_deck();
         if (deck.empty()) return;
 
-        abstractCard* selected = ironclad::select_card(deck);
-        if (!selected) return;
 
-        player->deck_remove(selected);
 
-        if (selected->get_card_type() == CardType::curse) {
-            auto rlc = RelicFactory::createRelic(relicID::spirit_poop, player);
-            player->add_relic(actions, rlc);
-            offer_node.description = tr("However, the spirits aren't happy you offered a Curse.../nThe card fizzles a meek black smoke. You receive a... something in return.");
-        }
-        else if (selected->is_rare()) {
-            player->set_max_hp(player->get_max_hp() + 10);
-            healInfo inf;
-            inf.value = player->get_max_hp() - player->get_hp();
-            inf.owner = player;
-            actions.heal(inf);
+        emit actions.get_event()->selectCard(deck);
+        connect(actions.get_event(), &combatEvent::cardSelected, this, [=, &actions, &offer_node](abstractCard* selected){
 
-            offer_node.description = tr("The flames burst, nearly knocking you off your feet, as the fire doubles in strength./nThe spirits dance around you excitedly before merging into your form, filling you with warmth and strength./nYour Max HP increases by 10 and you are healed to full HP.");
-        }
-        else if (selected->get_card_id() == cardID::strike || selected->get_card_id() == cardID::defend){
-            offer_node.description = tr("Nothing happens...\nThe spirits seem to be ignoring you now. Disappointing...");
-        }
-        else {
-            healInfo inf;
-            inf.value = 5;
-            inf.owner = player;
-            actions.heal(inf);
+            if (selected){
 
-            offer_node.description = tr("The flames grow slightly brighter./nThe spirits continue dancing. You feel slightly warmer from their presence../nYou heal 5 HP.");
+                if (selected->get_card_type() == CardType::curse) {
+                    auto rlc = RelicFactory::createRelic(relicID::spirit_poop, player);
+                    player->add_relic(actions, rlc);
+                    offer_node.description = tr("However, the spirits aren't happy you offered a Curse.../nThe card fizzles a meek black smoke. You receive a... something in return.");
+                }
+                else if (selected->is_rare()) {
+                    player->set_max_hp(player->get_max_hp() + 10);
+                    healInfo inf;
+                    inf.value = player->get_max_hp() - player->get_hp();
+                    inf.owner = player;
+                    actions.heal(inf);
 
-        }
+                    offer_node.description = tr("The flames burst, nearly knocking you off your feet, as the fire doubles in strength./nThe spirits dance around you excitedly before merging into your form, filling you with warmth and strength./nYour Max HP increases by 10 and you are healed to full HP.");
+                }
+                else if (selected->get_card_id() == cardID::strike || selected->get_card_id() == cardID::defend){
+                    offer_node.description = tr("Nothing happens...\nThe spirits seem to be ignoring you now. Disappointing...");
+                }
+                else {
+                    healInfo inf;
+                    inf.value = 5;
+                    inf.owner = player;
+                    actions.heal(inf);
+
+                    offer_node.description = tr("The flames grow slightly brighter./nThe spirits continue dancing. You feel slightly warmer from their presence../nYou heal 5 HP.");
+
+                }
+
+                player->deck_remove(selected);
+            }
+
+        });
+
 
 
 

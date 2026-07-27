@@ -7,15 +7,13 @@
 #include "items/relics/relicfactory.h"
 
 const std::vector<cardID> ironclad::starting_deck =
-    {cardID::strike, cardID::strike, cardID::strike, cardID::strike, cardID::strike,
-     cardID::defend, cardID::defend, cardID::defend, cardID::defend, cardID::bash};
+    {cardID::dual_wield, cardID::bludgeon, cardID::rage, cardID::disarm, cardID::uppercut,
+     cardID::clash, cardID::hemokinesis, cardID::spot_weakness, cardID::twin_strike, cardID::bash,
+    cardID::strike, cardID::strike, cardID::strike, cardID::strike, cardID::strike,
+    cardID::defend, cardID::defend, cardID::defend, cardID::defend, cardID::shrug_it_off,
+    cardID::inflame, cardID::metallicize, cardID::defend, cardID::defend, cardID::shrug_it_off
 
-abstractCard* ironclad::select_card(
-    const std::vector<abstractCard*>& cards
-    )
-{
-    return nullptr;
-}
+};
 
 
 abstractCard* ironclad::transformCard(abstractCard* selected_card) {
@@ -256,9 +254,8 @@ void ironclad::draw_card(){
     playCardInfo c_info;
     c_info.card = card;
     c_info.owner = this;
-    emit event->card_moved(c_info, PileType::draw, PileType::hand);
 
-    if (draw_pile.size() == 0) apply_discard_pile();
+    emit event->card_moved(c_info, PileType::draw, PileType::hand);
 
     draw_count++;
 }
@@ -283,10 +280,6 @@ void ironclad::play_card(playCardInfo& info) {
     if (info.card->get_turn_playable() == false) return;
     if (energy < info.card->get_energy()) return;
 
-    game_action actions(event);
-    info.owner = this;
-    actions.play_card(info);
-
     energy -= info.card->get_energy();
 
     hand_pile_remove(info.card);
@@ -295,8 +288,9 @@ void ironclad::play_card(playCardInfo& info) {
         playCardInfo c_info;
         c_info.card = info.card;
         c_info.owner = this;
+        emit event->card_moved(c_info, PileType::hand, PileType::none);
         exhaust_pile_add(info.card);
-        emit event->card_moved(c_info, PileType::hand, PileType::exhaust);
+        emit event->card_moved(c_info, PileType::none, PileType::exhaust);
     }
     else if (info.card->get_card_type() == CardType::power){
         playCardInfo c_info;
@@ -308,9 +302,14 @@ void ironclad::play_card(playCardInfo& info) {
         playCardInfo c_info;
         c_info.card = info.card;
         c_info.owner = this;
+        emit event->card_moved(c_info, PileType::hand, PileType::none);
         discard_pile_add(info.card);
-        emit event->card_moved(c_info, PileType::hand, PileType::discard);
+        emit event->card_moved(c_info, PileType::none, PileType::discard);
     }
+
+    game_action actions(event);
+    info.owner = this;
+    actions.play_card(info);
 
     playInfo pl(actions);
     pl.attacker = info.owner;
@@ -328,18 +327,19 @@ void ironclad::consume_all_energy() {
 
 
 void ironclad::at_turn_start(game_action& info) {
+    energy += base_energy;
     abstractEntity::at_turn_start(info);
+
 
     playInfo pl(info);
     pl.attacker = this;
-    energy += base_energy;
+
+    for (int i = 0; i < hand_card_number; i++) draw_card();
 
     for (auto item : hand_pile){
         item->update(pl);
         item->hand_turn_start(pl);
     }
-
-    for (int i = 0; i < hand_card_number; i++) draw_card();
 
     draw_count = 0;
 }
@@ -360,27 +360,27 @@ void ironclad::at_turn_end(game_action& info) {
         item->turn_reset();
     }
 
-    for (int i = hand_pile.size() - 1; i >= 0; i++){
+    for (int i = hand_pile.size() - 1; i >= 0; i--){
 
 
         if (hand_pile[i]->get_ethereal()){
+            hand_pile_remove(hand_pile[i]);
             exhaust_pile_add(hand_pile[i]);
             playCardInfo c_info;
             c_info.card = hand_pile[i];
             c_info.owner = this;
             emit event->card_moved(c_info, PileType::hand, PileType::exhaust);
-            hand_pile_remove(hand_pile[i]);
         }
 
         else if (hand_pile[i]->get_retain())  {}
 
         else {
+            hand_pile_remove(hand_pile[i]);
+            discard_pile_add(hand_pile[i]);
             playCardInfo c_info;
             c_info.card = hand_pile[i];
             c_info.owner = this;
-            discard_pile_add(hand_pile[i]);
             emit event->card_moved(c_info, PileType::hand, PileType::discard);
-            hand_pile_remove(hand_pile[i]);
         }
 
     }
@@ -389,10 +389,12 @@ void ironclad::at_turn_end(game_action& info) {
 
 
 void ironclad::at_combat_start(game_action& info){
+    energy = 0;
+
     abstractEntity::at_combat_start(info);
 
     combat_deck = deck;
-    energy = 0;
+    RNG::instance().shuffle(combat_deck);
 
     for (auto item : combat_deck){
         if (item->get_initial()) {
@@ -436,7 +438,7 @@ void ironclad::damage_applied(game_action& info) {
 void ironclad::potion_list_add(abstractPotion* pot){
     if (potion_list.size() < max_potion_number) {
         potion_list.push_back(pot);
-        emit event->potion_added(pot);
+        // emit event->potion_added(pot);
     }
 }
 void ironclad::potion_list_remove(abstractPotion* pot){
@@ -451,12 +453,15 @@ void ironclad::potion_list_remove(abstractPotion* pot){
 }
 
 
-void ironclad::draw_potion(drinkPotionInfo& pot) {
+void ironclad::drink_potion(drinkPotionInfo& pot) {
     if (abstractPotion::lock) return;
-    if (pot.potion->playable() == false) return;
 
     game_action actions(event);
     pot.owner = this;
     actions.drink_potion(pot);
     potion_list_remove(pot.potion);
+}
+
+QString ironclad::get_story() {
+    return (QObject::tr("The Ironclad, last of his clan, sold his blood to the fire demon for the strength to stand—never knowing the steepest price of standing is to stand alone.\nEvery time a flame licks from his being in the Spire, an old wound reopens, reviving faces long gone.\nHe climbs each floor not to save the world, but to find a place where his fire finally runs out of things to burn."));
 }

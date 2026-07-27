@@ -28,12 +28,19 @@ void exhume::play(playInfo& play_info){
             selectable.push_back(card);
     }
 
-    abstractCard* card = ironclad::select_card(selectable);
+    if (selectable.empty()) return;
+    emit play_info.actions.get_event()->selectCard(selectable);
+    cnt = connect(play_info.actions.get_event(), &combatEvent::cardSelected, this, [=, &play_info](abstractCard* card){
 
-    if (card){
-        player->exhaust_pile_remove(card, true);
-        player->hand_pile_add(card, true);
-    }
+        if (card){
+            card->set_available(player->get_energy() >= card->get_energy());
+            player->exhaust_pile_remove(card, true);
+            player->hand_pile_add(card, true);
+            playInfo inf(play_info.actions);
+        }
+        disconnect(cnt);
+
+    });
 
 }
 

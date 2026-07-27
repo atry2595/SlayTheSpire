@@ -2,23 +2,30 @@
 #define COMBAT_EVENT_H
 
 #include <QObject>
+#include <QPointF>
 
 class abstractEntity;
 class abstractCard;
 class abstractPower;
 class abstractPotion;
 class combat_manager;
+class CardParent;
+class PotionParent;
+class abstractRelic;
 struct attackInfo;
 struct damageInfo;
 struct blockingInfo;
 struct enemy_intent;
 struct playCardInfo;
+struct attackResult;
 enum class PileType;
 
 class combatEvent : public QObject{
     Q_OBJECT
 
 signals:
+    void game_lose();
+
     void combat_started(combat_manager*);
     void combat_ended(combat_manager*, bool victory);
 
@@ -56,6 +63,33 @@ signals:
     void potion_removed(abstractPotion*);
 
     void lift(abstractEntity*);
+
+    //=============ui=========================
+    void cardPressed(CardParent*);
+    void cardMoved(CardParent*, const QPointF&);
+    void cardReleased(CardParent*, const QPointF&);
+    void potionPressed(PotionParent*);
+    void potionMoved(PotionParent*, const QPointF&);
+    void potionReleased(PotionParent*, const QPointF&);
+    void cardUpdated(abstractCard*);
+    void entityUpdate(abstractEntity*);
+    void afterAttack(attackResult&);
+    void resetLayout();
+
+    void relicRightButton(abstractRelic*);
+    void potionRightButton(abstractPotion*);
+    void powerRightButton(abstractPower*);
+    void entityRightButton(abstractEntity*);
+
+    void barExit();
+
+    void cardSelected(abstractCard*);
+    void selectCard(std::vector<abstractCard*>);
+
+    void nextAction();
+
+    void settingOpen();
+    void settingClose();
 
 };
 

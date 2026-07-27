@@ -12,3 +12,7 @@ void swiftPotion::play(playInfo& info){
     for (int i = 0; i < amount; i++) player->draw_card();
 
 }
+
+QString swiftPotion::get_story() {
+    return (QObject::tr("The Swift Potion, silver and fluid as mercury, slides restlessly in its bottle.\nThree sips of this liquid metal, and suddenly the traveler's feet turn to wind—dancing and elusive."));
+}

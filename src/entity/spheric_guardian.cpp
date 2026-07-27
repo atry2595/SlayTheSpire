@@ -127,3 +127,7 @@ void spheric_guardian::play_turn(playInfo& info){
     enemy_turn++;
     choose_move();
 }
+
+QString spheric_guardian::get_story() {
+    return (QObject::tr("The Spheric Guardian hovers in the forgotten corridor, its armor contracting and expanding with a metallic breath.\nIt guards nothing but a fading memory of an order that will never arrive, forever wandering between attack and defense."));
+}

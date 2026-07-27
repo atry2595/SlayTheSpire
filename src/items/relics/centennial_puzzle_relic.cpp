@@ -27,3 +27,7 @@ void centennial_puzzle_relic::damage_applied(game_action& actions){
         }
     }
 }
+
+QString centennial_puzzle_relic::get_story() {
+    return (QObject::tr("The Centennial Puzzle, a box unopened for a century, clicks and turns one lock with each battle fought.\nThe traveler doesn't know what happens when all the pieces fall into place, but every click resonates a promise in their bones: something ancient is about to wake up."));
+}

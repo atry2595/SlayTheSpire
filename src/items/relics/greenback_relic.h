@@ -15,6 +15,7 @@ public:
     relicRarity get_rarity() override { return relicRarity::common; }
 
     void at_turn_end(game_action&) override;
+    QString get_story() override;
 };
 
 #endif // GREENBACK_RELIC_H

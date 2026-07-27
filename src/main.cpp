@@ -60,15 +60,6 @@ int main(int argc, char *argv[])
     if (!ebhaarFamilies.isEmpty())
         Fonts::ebhaar = ebhaarFamilies.first();
 
-    if (!Fonts::Cascadia.isEmpty()) {
-        a.setFont(QFont(Fonts::Cascadia, 11));
-
-        QString globalStyle = QString(
-                                  "* { font-family: '%1' !important; }"
-                                  ).arg(Fonts::Cascadia);
-
-        a.setStyleSheet(globalStyle);
-    }
 
 
     MainWindow w;

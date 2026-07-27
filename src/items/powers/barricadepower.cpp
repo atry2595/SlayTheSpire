@@ -15,3 +15,7 @@ QString barricadePower::generate_description(){
 void barricadePower::added_time(game_action&) {
     owner->set_reset_block(false);
 }
+
+QString barricadePower::get_story() {
+    return (QObject::tr("Barricade, an invisible wall the traveler draws around themselves, and their armor never crumbles again.\nThe block they build today remains until tomorrow, as if time no longer has the right to take their defense back."));
+}

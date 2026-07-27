@@ -12,3 +12,7 @@ void dexterityPotion::play(playInfo& info){
     info.attacker->add_power(info.actions, np);
 
 }
+
+QString dexterityPotion::get_story() {
+    return (QObject::tr("The Dexterity Potion, a green liquid with a soft glimmer—two drops of pure slipperiness.\nThe traveler drinks, and for the entire battle, every blow slides off cheaper than before, as if the very concept of \"being hit\" has been diluted for them."));
+}

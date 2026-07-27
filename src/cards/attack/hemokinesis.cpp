@@ -23,6 +23,8 @@ void hemokinesis::play(playInfo& play_info){
     info.damage = dmg;
     info.attacker = nullptr;
     info.target = play_info.attacker;
+    info.block_active = false;
+    info.attack_type = attackType::self;
 
     play_info.actions.apply_damage(info);
 }

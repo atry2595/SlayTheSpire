@@ -31,7 +31,7 @@ looter* looter::create(game_action& actions){
 
     enemy_intent intnt4;
     intnt4.name = tr("Escape");
-    intnt4.type = intent_type::special;
+    intnt4.type = intent_type::escape;
 
 
     enemy->intent_list[(int)looter_move::mug] = intnt1;
@@ -96,6 +96,8 @@ void looter::play_turn(playInfo& info){
 
     case (looter_move::escape):{
         emit info.actions.get_event()->entity_escape(this);
+        hp = 0;
+        gold = 0;
         emit info.actions.get_event()->entity_removed(this);
         return;
     }
@@ -104,4 +106,8 @@ void looter::play_turn(playInfo& info){
 
     enemy_turn++;
     choose_move();
+}
+
+QString looter::get_story() {
+    return (QObject::tr("The Looter lurks in the corridor's dark, snatching the pouch of gold with trembling fingers and fleeing.\nHis entire fortune lives only in that escape, never once tasting the spending of a single coin."));
 }

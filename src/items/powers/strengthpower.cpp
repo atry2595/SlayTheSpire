@@ -15,3 +15,7 @@ QString strengthPower::generate_description(){
     description = tr("Increases attack damage by %1").arg(amount);
     return description;
 }
+
+QString strengthPower::get_story() {
+    return (QObject::tr("Strength, a red phantom nesting in the traveler's fists, making each strike heavier than the last.\nIt's not just muscle that grows—it's concentrated fury driving the blade deeper into the enemy's flesh."));
+}

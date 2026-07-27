@@ -18,4 +18,11 @@ enum class PileType{
     none //for powers cards
 };
 
+
+enum class CombatType{
+    monster,
+    elite,
+    boss
+};
+
 #endif // GENERAL_H

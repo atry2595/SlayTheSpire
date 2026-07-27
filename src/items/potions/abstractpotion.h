@@ -32,6 +32,7 @@ public:
 
     QString get_name() { return name; }
     QString get_description() { return description; }
+    virtual QString get_story() = 0;
     abstractEntity* get_owner() { return owner; }
 
 };

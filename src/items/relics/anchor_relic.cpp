@@ -21,3 +21,7 @@ void anchor_relic::at_combat_start(game_action& actions){
     inf.owner = owner;
     actions.apply_block(inf);
 }
+
+QString anchor_relic::get_story() {
+    return (QObject::tr("The Anchor at the bottom of the pocket remembers the sea and the storm, but now it's just a weight to stand firm.\nThe traveler carries it not for a ship, but to block life's incoming blows, because sometimes the heaviest burdens become the safest shields."));
+}

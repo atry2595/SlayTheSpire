@@ -1,6 +1,9 @@
 <RCC>
-    <qresource prefix="/image/cards">
+    <qresource prefix="/image/cards/back">
         <file alias="back.png">assests/image/cards/back.png</file>
+        <file alias="back1.png">assests/image/cards/back1.png</file>
+        <file alias="back2.png">assests/image/cards/back2.png</file>
+        <file alias="back3.png">assests/image/cards/back3.png</file>
     </qresource>
     <qresource prefix="/image/cards/attack">
         <file alias="bash.png">assests/image/cards/attack/bash.png</file>
@@ -29,7 +32,6 @@
         <file alias="entrench.png">assests/image/cards/skill/entrench.png</file>
         <file alias="exhume.png">assests/image/cards/skill/exhume.png</file>
         <file alias="impervious.png">assests/image/cards/skill/impervious.png</file>
-        <file alias="J.A.X.png">assests/image/cards/skill/J.A.X.png</file>
         <file alias="limit_break.png">assests/image/cards/skill/limit_break.png</file>
         <file alias="offering.png">assests/image/cards/skill/offering.png</file>
         <file alias="power_through.png">assests/image/cards/skill/power_through.png</file>
@@ -38,6 +40,7 @@
         <file alias="spot_weakness.png">assests/image/cards/skill/spot_weakness.png</file>
         <file alias="true_grit.png">assests/image/cards/skill/true_grit.png</file>
         <file alias="warcry.png">assests/image/cards/skill/warcry.png</file>
+        <file alias="JAX.png">assests/image/cards/skill/JAX.png</file>
     </qresource>
     <qresource prefix="/image/cards/power">
         <file alias="barricade.png">assests/image/cards/power/barricade.png</file>
@@ -60,6 +63,9 @@
         <file alias="pain.png">assests/image/cards/curse/pain.png</file>
         <file alias="regret.png">assests/image/cards/curse/regret.png</file>
         <file alias="writhe.png">assests/image/cards/curse/writhe.png</file>
+        <file alias="doubt.png">assests/image/cards/curse/doubt.png</file>
+        <file alias="injury.png">assests/image/cards/curse/injury.png</file>
+        <file alias="shame.png">assests/image/cards/curse/shame.png</file>
     </qresource>
     <qresource prefix="/image/characters">
         <file alias="blue_slaver.png">assests/image/characters/blue_slaver.png</file>
@@ -86,6 +92,28 @@
         <file alias="ironclad3.png">assests/image/characters/ironclad3.png</file>
         <file alias="ironclad4.png">assests/image/characters/ironclad4.png</file>
         <file alias="ironclad5.png">assests/image/characters/ironclad5.png</file>
+    </qresource>
+    <qresource prefix="/image/characters/1x1">
+        <file alias="blue_slaver.png">assests/image/characters/1x1/blue_slaver.png</file>
+        <file alias="book_of_stabbing.png">assests/image/characters/1x1/book_of_stabbing.png</file>
+        <file alias="cultist.png">assests/image/characters/1x1/cultist.png</file>
+        <file alias="green_louse.png">assests/image/characters/1x1/green_louse.png</file>
+        <file alias="gremlin_nob.png">assests/image/characters/1x1/gremlin_nob.png</file>
+        <file alias="hexaghost.png">assests/image/characters/1x1/hexaghost.png</file>
+        <file alias="jaw_worm.png">assests/image/characters/1x1/jaw_worm.png</file>
+        <file alias="king_slime.png">assests/image/characters/1x1/king_slime.png</file>
+        <file alias="large_slime.png">assests/image/characters/1x1/large_slime.png</file>
+        <file alias="looter.png">assests/image/characters/1x1/looter.png</file>
+        <file alias="medium_slime.png">assests/image/characters/1x1/medium_slime.png</file>
+        <file alias="mugger.png">assests/image/characters/1x1/mugger.png</file>
+        <file alias="red_louse.png">assests/image/characters/1x1/red_louse.png</file>
+        <file alias="red_slaver.png">assests/image/characters/1x1/red_slaver.png</file>
+        <file alias="sentry.png">assests/image/characters/1x1/sentry.png</file>
+        <file alias="small_slime.png">assests/image/characters/1x1/small_slime.png</file>
+        <file alias="spheric_guardian.png">assests/image/characters/1x1/spheric_guardian.png</file>
+        <file alias="taskmaster.png">assests/image/characters/1x1/taskmaster.png</file>
+        <file alias="the_champ.png">assests/image/characters/1x1/the_champ.png</file>
+        <file alias="ironclad1.png">assests/image/characters/1x1/ironclad1.png</file>
     </qresource>
     <qresource prefix="/icon/buff">
         <file alias="dexterity.ico">assests/image/icon/buff/dexterity.ico</file>
@@ -128,7 +156,6 @@
         <file alias="blood_vial.ico">assests/image/icon/relic/blood_vial.ico</file>
         <file alias="burning_blood.ico">assests/image/icon/relic/burning_blood.ico</file>
         <file alias="calling_bell.ico">assests/image/icon/relic/calling_bell.ico</file>
-        <file alias="capitans_wheel.ico">assests/image/icon/relic/capitans_wheel.ico</file>
         <file alias="centennial_puzzle.ico">assests/image/icon/relic/centennial_puzzle.ico</file>
         <file alias="cultist_headpiece.ico">assests/image/icon/relic/cultist_headpiece.ico</file>
         <file alias="cursed_key.ico">assests/image/icon/relic/cursed_key.ico</file>
@@ -156,7 +183,10 @@
         <file alias="tungsten_rod.ico">assests/image/icon/relic/tungsten_rod.ico</file>
         <file alias="vajra.ico">assests/image/icon/relic/vajra.ico</file>
         <file alias="velvet_choker.ico">assests/image/icon/relic/velvet_choker.ico</file>
-        <file alias="wraper_tongs.ico">assests/image/icon/relic/wraper_tongs.ico</file>
+        <file alias="captains_wheel.ico">assests/image/icon/relic/captains_wheel.ico</file>
+        <file alias="golden_idol.ico">assests/image/icon/relic/golden_idol.ico</file>
+        <file alias="spirit_poop.ico">assests/image/icon/relic/spirit_poop.ico</file>
+        <file alias="warped_tongs.ico">assests/image/icon/relic/warped_tongs.ico</file>
     </qresource>
     <qresource prefix="/icon/map">
         <file alias="elite.ico">assests/image/icon/map/elite.ico</file>
@@ -169,14 +199,9 @@
     <qresource prefix="/icon/intent">
         <file alias="attack1.ico">assests/image/icon/intent/attack1.ico</file>
         <file alias="attack2.ico">assests/image/icon/intent/attack2.ico</file>
-        <file alias="attack2-block.ico">assests/image/icon/intent/attack2-block.ico</file>
-        <file alias="attack2-debuff.ico">assests/image/icon/intent/attack2-debuff.ico</file>
         <file alias="attack3.ico">assests/image/icon/intent/attack3.ico</file>
-        <file alias="attack3-block.ico">assests/image/icon/intent/attack3-block.ico</file>
-        <file alias="attack3-debuff.ico">assests/image/icon/intent/attack3-debuff.ico</file>
         <file alias="attack4.ico">assests/image/icon/intent/attack4.ico</file>
         <file alias="attack5.ico">assests/image/icon/intent/attack5.ico</file>
-        <file alias="attack5-debuff.ico">assests/image/icon/intent/attack5-debuff.ico</file>
         <file alias="attack6.ico">assests/image/icon/intent/attack6.ico</file>
         <file alias="block.ico">assests/image/icon/intent/block.ico</file>
         <file alias="block-buff.ico">assests/image/icon/intent/block-buff.ico</file>
@@ -185,9 +210,31 @@
         <file alias="debuff2.ico">assests/image/icon/intent/debuff2.ico</file>
         <file alias="escape.ico">assests/image/icon/intent/escape.ico</file>
         <file alias="unknown.ico">assests/image/icon/intent/unknown.ico</file>
+        <file alias="attack7_debuff.ico">assests/image/icon/intent/attack7_debuff.ico</file>
+        <file alias="attack7_buff.ico">assests/image/icon/intent/attack7_buff.ico</file>
+        <file alias="attack7_block.ico">assests/image/icon/intent/attack7_block.ico</file>
+        <file alias="attack7.ico">assests/image/icon/intent/attack7.ico</file>
+        <file alias="attack6_debuff.ico">assests/image/icon/intent/attack6_debuff.ico</file>
+        <file alias="attack6_buff.ico">assests/image/icon/intent/attack6_buff.ico</file>
+        <file alias="attack6_block.ico">assests/image/icon/intent/attack6_block.ico</file>
+        <file alias="attack5_debuff.ico">assests/image/icon/intent/attack5_debuff.ico</file>
+        <file alias="attack5_buff.ico">assests/image/icon/intent/attack5_buff.ico</file>
+        <file alias="attack5_block.ico">assests/image/icon/intent/attack5_block.ico</file>
+        <file alias="attack4_debuff.ico">assests/image/icon/intent/attack4_debuff.ico</file>
+        <file alias="attack4_buff.ico">assests/image/icon/intent/attack4_buff.ico</file>
+        <file alias="attack4_block.ico">assests/image/icon/intent/attack4_block.ico</file>
+        <file alias="attack3_debuff.ico">assests/image/icon/intent/attack3_debuff.ico</file>
+        <file alias="attack3_buff.ico">assests/image/icon/intent/attack3_buff.ico</file>
+        <file alias="attack3_block.ico">assests/image/icon/intent/attack3_block.ico</file>
+        <file alias="attack2_debuff.ico">assests/image/icon/intent/attack2_debuff.ico</file>
+        <file alias="attack2_buff.ico">assests/image/icon/intent/attack2_buff.ico</file>
+        <file alias="attack2_block.ico">assests/image/icon/intent/attack2_block.ico</file>
+        <file alias="attack1_debuff.ico">assests/image/icon/intent/attack1_debuff.ico</file>
+        <file alias="attack1_buff.ico">assests/image/icon/intent/attack1_buff.ico</file>
+        <file alias="attack1_block.ico">assests/image/icon/intent/attack1_block.ico</file>
     </qresource>
     <qresource prefix="/sound/music">
-        <file alias="music_epic2.ogg">assests/sound/music/music_epic2.ogg</file>
+        <file alias="music2_epic.ogg">assests/sound/music/music_epic2.ogg</file>
         <file alias="music_space.ogg">assests/sound/music/music_space.ogg</file>
         <file alias="music0.ogg">assests/sound/music/music0.ogg</file>
         <file alias="music1_dark.ogg">assests/sound/music/music1_dark.ogg</file>
@@ -213,8 +260,11 @@
         <file alias="rolling_map.wav">assests/sound/effect/rolling_map.wav</file>
         <file alias="select.wav">assests/sound/effect/select.wav</file>
         <file alias="smith.wav">assests/sound/effect/smith.wav</file>
+        <file alias="drink_potion.wav">assests/sound/effect/drink_potion.wav</file>
+        <file alias="menu_hover.wav">assests/sound/effect/menu_hover.wav</file>
+        <file alias="menu_select.wav">assests/sound/effect/menu_select.wav</file>
     </qresource>
-    <qresource prefix="/image/damage_effect">
+    <qresource prefix="/image/effect">
         <file alias="bite.png">assests/image/damage_effect/bite.png</file>
         <file alias="dmg.png">assests/image/damage_effect/dmg.png</file>
         <file alias="dmg2.png">assests/image/damage_effect/dmg2.png</file>
@@ -262,5 +312,35 @@
     </qresource>
     <qresource prefix="/image/back">
         <file alias="back1">assests/image/back/IMG_6654.jpg</file>
+    </qresource>
+    <qresource prefix="/image/card/frame">
+        <file alias="frame_black.png">assests/image/cards/frame/frame_black.png</file>
+        <file alias="frame_gray.png">assests/image/cards/frame/frame_gray.png</file>
+        <file alias="frame_green.png">assests/image/cards/frame/frame_green.png</file>
+        <file alias="frame_purple.png">assests/image/cards/frame/frame_purple.png</file>
+        <file alias="frame_red.png">assests/image/cards/frame/frame_red.png</file>
+        <file alias="frame2.png">assests/image/cards/frame/frame2.png</file>
+        <file alias="frame1.png">assests/image/cards/frame/frame1.png</file>
+        <file alias="frame3.png">assests/image/cards/frame/frame3.png</file>
+    </qresource>
+    <qresource prefix="/fonts">
+        <file alias="koodak">assests/font/B Koodak Bold.ttf</file>
+        <file alias="cascadia">assests/font/CascadiaMono.ttf</file>
+        <file alias="titrZ">assests/font/Titr Zebr.ttf</file>
+        <file alias="rock">assests/font/Typoster ROCK-ON Demo.otf</file>
+        <file alias="cinema">assests/font/Cinema Font.ttf</file>
+        <file alias="lotrance">assests/font/Lotrance-Regular.otf</file>
+        <file alias="ebhaar">assests/font/Ebhaar.otf</file>
+        <file alias="forte">assests/font/FORTE.TTF</file>
+    </qresource>
+    <qresource prefix="/icon">
+        <file alias="shield.ico">assests/image/icon/shield.png</file>
+        <file alias="corner.ico">assests/image/icon/corner.png</file>
+        <file alias="coin.ico">assests/image/icon/coin.png</file>
+        <file alias="heart.png">assests/image/icon/heart.png</file>
+        <file alias="setting.png">assests/image/icon/setting.png</file>
+        <file alias="left_button.png">assests/image/icon/left_button.png</file>
+        <file alias="right_button.png">assests/image/icon/right_button.png</file>
+        <file alias="error.png">assests/image/icon/error.png</file>
     </qresource>
 </RCC>

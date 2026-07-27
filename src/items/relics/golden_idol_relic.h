@@ -15,6 +15,7 @@ public:
     relicRarity get_rarity() override { return relicRarity::event; }
 
     void added_time(game_action&) override;
+    QString get_story() override;
 };
 
 #endif // GOLDEN_IDOL_RELIC_H

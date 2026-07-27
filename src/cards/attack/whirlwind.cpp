@@ -23,11 +23,11 @@ void whirlwind::play(playInfo& play_info){
     if (player) {
         int repeat = player->get_energy();
 
+        player->consume_all_energy();
+
         for (int i = 0; i<repeat; i++) {
             perform_attack(play_info.attacker, play_info.target_list, play_info.actions);
         }
-
-        player->consume_all_energy();
     }
 }
 

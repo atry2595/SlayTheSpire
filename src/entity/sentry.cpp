@@ -87,3 +87,7 @@ void sentry::play_turn(playInfo& info){
     enemy_turn++;
     choose_move();
 }
+
+QString sentry::get_story() {
+    return (QObject::tr("The Sentry stands among its two kin, its sensor eyes spinning ceaselessly between attack and defense.\nIt never knows that this endless algorithmic dance is merely its escape from the inner void, in the Spire's absolute silence."));
+}

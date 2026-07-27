@@ -61,3 +61,7 @@ void taskmaster::play_turn(playInfo& info){
     enemy_turn++;
     choose_move();
 }
+
+QString taskmaster::get_story() {
+    return (QObject::tr("The Taskmaster cracks his whip over empty chains, bellowing unanswered commands into the deserted streets of the wounded city.\nHis only loyal soldier is the echo off the crumbling walls, saluting him back with his own voice each time."));
+}

@@ -19,11 +19,15 @@ void thieveryPower::added_time(game_action& actions) {
 
     attack_connection = connect(actions.get_event(), &combatEvent::attack_started, this,
         [this](attackInfo& inf){
-        if (inf.attacker == owner){
+        if (inf.attacker == owner && inf.attack_type == attackType::intent){
             for (auto item : inf.target_list){
                 owner->earn_coin(item->lose_gold(amount));
             }
         }
     });
 
+}
+
+QString thieveryPower::get_story() {
+    return (QObject::tr("Thievery, the art of snatching power from the enemy's grasp and planting it within oneself.\nLike an invisible shadow, the traveler empties the foe's pockets, stealing not gold but the essence of capability."));
 }
