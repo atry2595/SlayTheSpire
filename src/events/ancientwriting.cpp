@@ -29,7 +29,7 @@ AncientWriting::AncientWriting(game_action& actions, ironclad* player)
         "The answer was elegance.\n"
         "Of course.");
 
-    elegance.actions = [=, &actions]()
+    elegance.actions = [=, eve = actions.get_event()]()
     {
         std::vector<abstractCard*> selectable;
 
@@ -42,14 +42,14 @@ AncientWriting::AncientWriting(game_action& actions, ironclad* player)
         if (selectable.empty())
             return;
 
-        emit actions.get_event()->selectCard(selectable);
-        connect(actions.get_event(), &combatEvent::cardSelected, this, [=](abstractCard* card){
+        emit eve->selectCard(selectable);
+        auto conn = std::make_shared<QMetaObject::Connection>();
+        *conn = connect(eve, &combatEvent::cardSelected, eve, [=](abstractCard* card){
 
             if (card){
                 player->deck_remove(card);
-                delete card;
             }
-
+            disconnect(*conn);
         });
 
     };

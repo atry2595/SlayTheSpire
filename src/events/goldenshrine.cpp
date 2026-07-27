@@ -37,7 +37,8 @@ GoldenShrine::GoldenShrine(game_action& actions, ironclad* player)
 
     UnknownNode desecrate;
 
-    desecrate.title =tr("[Desecrate] Gain 275 Gold. Become Cursed - Regret.");
+    desecrate.title =tr("[Desecrate] Gain 275 Gold.\n"
+                         "           Become Cursed - Regret.");
 
     desecrate.description =tr(
         "Each time you strike the shrine, gold pours forth again and again!\n\n"

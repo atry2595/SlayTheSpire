@@ -14,14 +14,14 @@
 #include <QMediaPlayer>
 #include <QAudioOutput>
 #include "combat/manageCombat/combatrewards.h"
-#include "ui/mappage/scrollsection.h"
 #include "ui/infobar/combatinfobar.h"
+#include "events/UnknownMap.h"
 
 class UnknownPage : public QWidget
 {
     Q_OBJECT
 public:
-    UnknownPage(QWidget *parent = nullptr, ironclad* plyr = nullptr, combatEvent* eve = nullptr);
+    UnknownPage(UnknownManager manag, QWidget *parent = nullptr, ironclad* plyr = nullptr, combatEvent* eve = nullptr);
 
     void initialSet();
     void Delete();
@@ -35,12 +35,6 @@ protected:
 private:
     bool eventFilter(QObject* obj, QEvent* eve) override;
 
-    void refreshMapVisuals();
-
-    QHash<QPushButton*, QGraphicsProxyWidget*> btns;
-    QMap<QPushButton*, Room> btnToRoom;
-    void onRoomClicked(QPushButton* btn);
-
     combatEvent* eve;
 
     QGraphicsView *combatView;
@@ -48,18 +42,25 @@ private:
     BaseItem* black_screen;
 
     BaseItem* parent;
+    TextItem* title;
+    TextItem* desc;
+    ImageItem* image;
+    std::vector<QPushButton*> btns;
+    std::vector<QGraphicsProxyWidget*> prxies;
 
-    ScrollSection* scroll;
-
+    UnknownManager manager;
     ironclad* player;
 
     CombatTopBar* bar;
     RelicBar* relic_bar;
     CombatInfoBar* info_bar = nullptr;
 
+    void eventUpdate();
+
 private slots:
     void relic_right_click(abstractRelic*);
     void open_setting();
+    void createSelectCard(std::vector<abstractCard*> cards);
 };
 
 #endif // UNKNOWNPage_H

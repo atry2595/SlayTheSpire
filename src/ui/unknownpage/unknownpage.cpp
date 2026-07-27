@@ -1,4 +1,4 @@
-#include "MapPage.h"
+#include "unknownpage.h"
 #include "assetsManager/imagemanager.h"
 #include "assetsManager/soundmanager.h"
 #include "core/setting.h"
@@ -6,19 +6,14 @@
 #include <QVBoxLayout>
 #include <QResizeEvent>
 #include "ui/topbar/combatsetting.h"
-#include "utils/RNG.h"
-#include "ui/mappage/mapItems.h"
-#include "ui/mappage/sketchline.h"
+#include "ui/selectItem/selectcard.h"
 
-MapPage::MapPage(QWidget *parent, ironclad* plyr, combatEvent* eve)
+UnknownPage::UnknownPage(UnknownManager manag, QWidget *parent, ironclad* plyr, combatEvent* eve)
     : QWidget{parent}
     , player(plyr)
     , eve(eve)
+    , manager(manag)
 {
-
-    auto mng = imageManager::instance();
-    auto sound = soundManager::instance();
-    int floor = 1;
 
     //----------------------------------------------------
     combatView = new QGraphicsView(this);
@@ -30,7 +25,7 @@ MapPage::MapPage(QWidget *parent, ironclad* plyr, combatEvent* eve)
     combatView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     combatView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     combatView->setFrameShape(QFrame::NoFrame);
-    combatView->setStyleSheet("background: black;");
+    combatView->setStyleSheet("background: #423E32;");
 
     combatView->setRenderHint(QPainter::Antialiasing, true);
     combatView->setRenderHint(QPainter::SmoothPixmapTransform, true);
@@ -54,15 +49,16 @@ MapPage::MapPage(QWidget *parent, ironclad* plyr, combatEvent* eve)
     combatScene->addItem(bar->getParent());
     combatScene->addItem(relic_bar->getParent());
 
-    connect(eve, &combatEvent::settingOpen, this, &MapPage::open_setting);
+    connect(eve, &combatEvent::settingOpen, this, &UnknownPage::open_setting);
 
-    connect(eve, &combatEvent::relicRightButton, this, &MapPage::relic_right_click);
+    connect(eve, &combatEvent::relicRightButton, this, &UnknownPage::relic_right_click);
 
-    generateNewMap();
+    connect(eve, &combatEvent::selectCard, this, &UnknownPage::createSelectCard);
+
     initialSet();
 }
 
-MapPage::~MapPage() {
+UnknownPage::~UnknownPage() {
 
     if (bar) {
         delete bar;
@@ -92,7 +88,7 @@ MapPage::~MapPage() {
     eve = nullptr;
 }
 
-void MapPage::Delete() {
+void UnknownPage::Delete() {
     black_screen = new BaseItem(nullptr, {1700, 1000}, {-50, -50});
     black_screen->setBackColor(Qt::black);
     black_screen->setOpacity(0);
@@ -106,7 +102,7 @@ void MapPage::Delete() {
 }
 
 
-void MapPage::resizeEvent(QResizeEvent *event)
+void UnknownPage::resizeEvent(QResizeEvent *event)
 {
     QWidget::resizeEvent(event);
 
@@ -115,265 +111,170 @@ void MapPage::resizeEvent(QResizeEvent *event)
     }
 }
 
-void MapPage::initialSet() {
-    QString blank_css =
-        "QPushButton{background:transparent;border:none;padding:0px;margin:0px;}"
-        "QPushButton:hover{background:transparent;}"
-        "QPushButton:pressed{background:transparent;}"
-        "QPushButton:focus{border:none;outline:none;}"
-        ;
+void UnknownPage::initialSet() {
 
-    parent = new BaseItem(nullptr);
+    parent = new BaseItem(nullptr, {1200, 600}, {200, 200});
+    parent->setBackColor(Qt::black);
 
-    scroll = new ScrollSection(parent, {1600, 3600}, {0, 0}, 3600 - 1000 , 3600 - 900, 0);
-
-    auto* back = new ImageItem(scroll, {1300, 3375}, {150, 150});
-    back->setPixmap(imageManager::instance().getMapImage("map"));
-
-    for (auto item : combat_data::combat_map.lines) {
-        new SketchLine(item.origin, item.target, scroll);
-    }
-
-    btnToRoom.clear();
-    btns.clear();
-
-    for (auto item : combat_data::combat_map.rooms) {
-        auto* ps = new QPushButton();
-        ps->setFixedSize(50, 50);
-        ps->setStyleSheet(blank_css);
-        ps->setIcon(QIcon(imageManager::instance().getMapImage(item.first.type)));
-        ps->setIconSize({50, 50});
-        ps->installEventFilter(this);
-
-        auto* prx = new QGraphicsProxyWidget(scroll);
-        prx->setWidget(ps);
-        prx->setTransformOriginPoint(25, 25);
-        prx->setPos(item.second.x, item.second.y);
-        prx->setOpacity(0.65);
-
-        btns[ps] = prx;
-        btnToRoom[ps] = item.first;
-
-        connect(ps, &QPushButton::clicked, this, [this, ps]() {
-            onRoomClicked(ps);
-        });
-    }
-
-    auto* legend = new ImageItem(parent, {250, 350}, {1600 - 275, 450 - 150});
-    legend->setPixmap(imageManager::instance().getMapImage("legend"));
-
+    title = new TextItem(parent, {1100, 75}, {50, 10});
+    title->setAlignment(Qt::AlignVCenter | Qt::AlignLeft);
+    title->setText(manager.unknown_name);
     QFont f;
-    f.setFamily((setting::game_language == language::English)?(Fonts::Cascadia):(Fonts::koodak));
-    f.setPixelSize(20);
+    f.setFamily((setting::game_language == language::English) ? (Fonts::lotrance) : (Fonts::cinema));
+    f.setBold(true);
+    f.setPixelSize(45);
+    title->setFont(f);
+    title->setColor(Qt::yellow);
 
-    TextItem* monster = new TextItem(legend, {250, 50}, {0, 60 - 10});
-    monster->setText(tr("Monster"));
-    monster->setFont(f);
-    ImageItem* mons_img = new ImageItem(monster, {40, 40}, {20, 5});
-    mons_img->setPixmap(imageManager::instance().getMapImage(RoomType::MONSTER));
+    image = new ImageItem(parent, {500, 500}, {25, 75});
+    image->setPixmap(imageManager::instance().getUnknownImage(manager.unknown_ID));
 
-    TextItem* elite = new TextItem(legend, {250, 50}, {0, 100 - 10});
-    elite->setText(tr("Elite"));
-    elite->setFont(f);
-    ImageItem* elite_img = new ImageItem(elite, {40, 40}, {20, 5});
-    elite_img->setPixmap(imageManager::instance().getMapImage(RoomType::ELITE));
+    desc = new TextItem(parent, {625, 500}, {550, 75});
+    desc->setAlignment(Qt::AlignLeft | Qt::AlignTop);
+    QFont fd;
+    fd.setFamily((setting::game_language == language::English) ? (Fonts::Cascadia) : (Fonts::koodak));
+    fd.setPixelSize(23);
+    desc->setFont(fd);
+    desc->setColor(Qt::white);
 
-    TextItem* unknown = new TextItem(legend, {250, 50}, {0, 140 - 10});
-    unknown->setText(tr("Unknown"));
-    unknown->setFont(f);
-    ImageItem* unk_img = new ImageItem(unknown, {40, 40}, {20, 5});
-    unk_img->setPixmap(imageManager::instance().getMapImage(RoomType::UNKNOWN));
+    combatScene->addItem(parent);
+    parent->setOpacity(0);
+    QTimer::singleShot(500, [=](){parent->fadeTo(1, 500);});
 
-    TextItem* campfire = new TextItem(legend, {250, 50}, {0, 180 - 10});
-    campfire->setText(tr("Rest"));
-    campfire->setFont(f);
-    ImageItem* rest_img = new ImageItem(campfire, {40, 40}, {20, 5});
-    rest_img->setPixmap(imageManager::instance().getMapImage(RoomType::REST));
+    eventUpdate();
 
-    TextItem* treasure = new TextItem(legend, {250, 50}, {0, 220 - 10});
-    treasure->setText(tr("Treasure"));
-    treasure->setFont(f);
-    ImageItem* tre_img = new ImageItem(treasure, {40, 40}, {20, 5});
-    tre_img->setPixmap(imageManager::instance().getMapImage(RoomType::TREASURE));
-
-    TextItem* merchant = new TextItem(legend, {250, 50}, {0, 260 - 10});
-    merchant->setText(tr("Shop"));
-    merchant->setFont(f);
-    ImageItem* mer_img = new ImageItem(merchant, {40, 40}, {20, 5});
-    mer_img->setPixmap(imageManager::instance().getMapImage(RoomType::MERCHANT));
-
-    TextItem* legend_title = new TextItem(legend, {250, 50}, {0, 0});
-    legend_title->setText(tr("Legend"));
-    legend_title->setFont(f);
-
-
-    combatScene->addItem(scroll);
-    combatScene->addItem(legend);
-
-    refreshMapVisuals();
 }
 
+void UnknownPage::eventUpdate() {
 
-void MapPage::open_setting() {
+    QString btnStyle =
+        "QPushButton{"
+        "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1,"
+        "                               stop:0 #3c3a34,"
+        "                               stop:1 #2a2823);"
+        "   border: 2px solid #6a5a3a;"
+        "   border-radius: 8px;"
+        "   color: white;"
+        "   font-size: 18px;"
+        "   padding: 8px 20px;"
+        "   text-align: left;"
+        "}"
+        "QPushButton:hover{"
+        "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1,"
+        "                               stop:0 #544e3d,"
+        "                               stop:1 #3c3a34);"
+        "   border: 2px solid #c9a84c;"
+        "}"
+        "QPushButton:pressed{"
+        "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1,"
+        "                               stop:0 #2a2823,"
+        "                               stop:1 #3c3a34);"
+        "   border: 2px solid #e5c46b;"
+        "   padding-top: 10px;"
+        "   padding-bottom: 6px;"
+        "}"
+        "QPushButton:disabled{"
+        "   background: #1b1c1f;"
+        "   color: #ccddaa;"
+        "   border: 2px solid #3a3a3a;"
+        "   color: #666666;"
+        "}";
+
+    QFont fd;
+    fd.setFamily((setting::game_language == language::English) ? (Fonts::Cascadia) : (Fonts::koodak));
+    fd.setPixelSize(23);
+
+    if (manager.current_node == -1)  {
+        emit eve->nextAction();
+        return;
+    }
+
+    auto currentNode = manager.nodes[manager.current_node];
+    currentNode.actions();
+    bar->updateBar();
+    combatScene->removeItem(relic_bar->getParent());
+    delete relic_bar;
+    relic_bar = new RelicBar(eve, player->get_relic_list());
+    combatScene->addItem(relic_bar->getParent());
+    desc->setText(currentNode.description);
+
+    for (auto item : prxies) {
+        item->deleteLater();
+    }
+    btns.clear();
+    prxies.clear();
+
+
+    int ln = currentNode.next_nodes.size();
+    int yPos = 600 - 25;
+
+    for (int i = ln - 1; i >= 0; --i) {
+        QString btnText;
+        bool canUse = true;
+        int nxt = currentNode.next_nodes[i];
+
+        if (nxt == -1) {
+            btnText = tr("Leave");
+        } else {
+            btnText = manager.nodes[nxt].title;
+            canUse = manager.nodes[nxt].canUse();
+        }
+
+        int btnHeight = ((int)(btnText.length() / 50 + 1)) * 40;
+
+        yPos -= btnHeight;
+        int currentBtnY = yPos;
+
+        QPushButton* btn = new QPushButton();
+        btn->setFixedSize(625, btnHeight);
+        btn->setStyleSheet(btnStyle);
+        btn->setFont(fd);
+        btn->setText(btnText);
+        btn->setEnabled(canUse);
+        btn->installEventFilter(this);
+
+        QGraphicsProxyWidget* prx = new QGraphicsProxyWidget(parent);
+        prx->setWidget(btn);
+        prx->setPos(550, currentBtnY);
+
+        if (i > 0) {
+            yPos -= 20;
+        }
+
+        btns.push_back(btn);
+        prxies.push_back(prx);
+
+        connect(btn, &QPushButton::clicked, this, [=](){
+            manager.current_node = nxt;
+            eventUpdate();
+        });
+
+    }
+}
+
+void UnknownPage::open_setting() {
     auto sc = new combatSetting(eve);
     combatScene->addItem(sc->getParent());
 }
 
 
-void MapPage::generateNewMap() {
-    auto* mp = new Map();
-    mp->generate();
-
-    std::map<Room, RoomItem> rooms;
-
-    for (int flr = 0; flr < mp->TOTAL_FLOORS; flr++){
-        for (Room item : mp->getRoomsOnFloor(flr)) {
-            qreal x = 150 + 50 + item.col * 150 + RNG::instance().randint(0, 75);
-            qreal y = 3400 - 75 - item.floor * 200 + RNG::instance().randint(0, 70);
-            RoomItem rmi;
-            rmi.source = item;
-            rmi.x = x;
-            rmi.y = y;
-
-            rooms[item] = rmi;
-        }
+void UnknownPage::createSelectCard(std::vector<abstractCard*> cards) {
+    auto sc = new selectCard(eve, cards);
+    combatScene->addItem(sc->getParent());
+    for (auto item : sc->getCards()){
+        combatScene->addItem(item->getParent());
     }
-
-    std::vector<LineItem> lines;
-
-    for (auto item : rooms) {
-        int room_x = item.second.x + 25;
-        int room_y = item.second.y + 7;
-
-        QPointF ori(room_x, room_y);
-
-        int room_col = item.first.col;
-        int room_floor = item.first.floor;
-
-        for (auto child : mp->getNextRooms(room_floor, room_col)) {
-            int child_x = rooms[child].x + 25;
-            int child_y = rooms[child].y + 43;
-            QPointF des(child_x, child_y);
-            LineItem line;
-            line.origin = ori;
-            line.target = des;
-            lines.push_back(line);
-        }
-    }
-
-    combatMap m;
-    m.map = mp;
-    m.rooms = rooms;
-    m.lines = lines;
-    m.currentFloor = -1;
-    m.currentCol = -1;
-
-    combat_data::combat_map = m;
 }
 
-bool MapPage::eventFilter(QObject* obj, QEvent* eve) {
+bool UnknownPage::eventFilter(QObject* obj, QEvent* eve) {
     if (eve->type() == QEvent::Enter){
-        soundManager::instance().playSoundEffect(SoundEffect::mapHover);
-        auto* o = dynamic_cast<QPushButton*>(obj);
-        if (o) {
-            if (btns.contains(o)) {
-                btns[o]->setOpacity(1);
-                btns[o]->setScale(1.5);
-            }
-        }
-    }
-    if (eve->type() == QEvent::Leave){
-        auto* o = dynamic_cast<QPushButton*>(obj);
-        refreshMapVisuals();
+        soundManager::instance().playSoundEffect(SoundEffect::menuHover);
     }
     return QObject::eventFilter(obj, eve);
 }
 
-void MapPage::refreshMapVisuals() {
-    auto& cm = combat_data::combat_map;
 
-    QList<Room> selectableRooms;
-
-    if (cm.currentCol == -1) {
-        for (auto& item : cm.rooms) {
-            if (item.first.floor == 0 && item.first.active) {
-                selectableRooms.append(item.first);
-            }
-        }
-    }
-
-    else if (cm.map->isFinished()) {
-    }
-
-    else {
-        selectableRooms = cm.map->getNextRooms(cm.currentFloor, cm.currentCol);
-    }
-
-    for (auto it = btnToRoom.begin(); it != btnToRoom.end(); ++it) {
-        QPushButton* btn = it.key();
-        Room room = it.value();
-
-        if (!btns.contains(btn)) continue;
-        QGraphicsProxyWidget* prx = btns[btn];
-
-        const Room& realRoom = cm.map->getRoom(room.floor, room.col);
-
-        bool isCurrent = (realRoom.floor == cm.currentFloor && realRoom.col == cm.currentCol);
-
-        bool isSelectable = false;
-        for (const Room& r : selectableRooms) {
-            if (r.floor == realRoom.floor && r.col == realRoom.col) {
-                isSelectable = true;
-                break;
-            }
-        }
-
-        bool isVisited = realRoom.visited;
-
-        if (isSelectable) {
-            prx->setOpacity(1.0);
-            prx->setScale(1.2);
-            btn->setEnabled(true);
-        }
-        else if (isVisited) {
-            prx->setOpacity(0.8);
-            prx->setScale(1.5);
-            btn->setEnabled(false);
-        }
-        else {
-            prx->setOpacity(0.4);
-            prx->setScale(1.0);
-            btn->setEnabled(false);
-        }
-    }
-}
-
-void MapPage::onRoomClicked(QPushButton* btn) {
-    soundManager::instance().playSoundEffect(SoundEffect::mapSelect);
-    if (!btnToRoom.contains(btn)) return;
-
-    Room clickedRoom = btnToRoom[btn];
-    auto& cm = combat_data::combat_map;
-
-    if (cm.currentFloor >= 0 && cm.currentCol >= 0) {
-        cm.map->getRoom(cm.currentFloor, cm.currentCol).visited = true;
-    }
-
-    if (cm.currentCol == -1) {
-        cm.map->enterStartingRoom(clickedRoom.col);
-    }
-
-    else {
-        cm.map->moveTo(clickedRoom.col);
-    }
-
-    cm.currentFloor = cm.map->getCurrentFloor();
-    cm.currentCol = cm.map->getCurrentColumn();
-
-    refreshMapVisuals();
-}
-
-void MapPage::relic_right_click(abstractRelic* ent) {
+void UnknownPage::relic_right_click(abstractRelic* ent) {
     info_bar = new CombatInfoBar(ent);
     combatScene->addItem(info_bar->getParent());
     info_bar->Entrance();

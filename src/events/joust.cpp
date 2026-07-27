@@ -44,8 +44,9 @@ Joust::Joust(game_action& actions, ironclad* player) {
     };
     if (murder_win) {
         bet_murderer.description = tr("You win the bet. Unsure what to think, you grab your winnings and leave.");
-        bet_murderer.actions = [player, &actions] (){
+        bet_murderer.actions = [player, eve = actions.get_event()] (){
             auto rlc = RelicFactory::createRelic(relicID::red_mask, player);
+            game_action actions(eve);
             player->add_relic(actions, rlc);
         };
     }
@@ -66,8 +67,9 @@ Joust::Joust(game_action& actions, ironclad* player) {
     };
     if (!murder_win) {
         bet_owner.description = tr("You win the bet. Unsure what to think, you grab your winnings and leave.");
-        bet_owner.actions = [player, &actions] (){
+        bet_owner.actions = [player, eve = actions.get_event()] (){
             auto rlc = RelicFactory::createRelic(relicID::red_mask, player);
+            game_action actions(eve);
             player->add_relic(actions, rlc);
         };
     }
