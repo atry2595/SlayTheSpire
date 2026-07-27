@@ -42,7 +42,6 @@ void abstractEntity::combat_reset(){
 }
 
 void abstractEntity::turn_reset(){
-    if (block_reset_in_combat) block = 0;
 }
 
 void abstractEntity::add_power(game_action& actions, abstractPower* power){
@@ -96,7 +95,7 @@ abstractPower* abstractEntity::get_spec_power(powerID power){
 
 void abstractEntity::remove_zero_power(){
 
-    for (int i = powers_list.size() - 1; i >= 0 ;i++){
+    for (int i = powers_list.size() - 1; i >= 0 ;i--){
         if (powers_list[i]->get_amount() == 0){
             delete powers_list[i];
             powers_list.erase(powers_list.begin() + i);
@@ -181,6 +180,9 @@ void abstractEntity::modify_blocking(blockingInfo& info) {
     remove_zero_power();
 }
 void abstractEntity::at_turn_start(game_action& info) {
+
+    if (block_reset_in_combat) block = 0;
+
     for (auto item : powers_list){
         item->at_turn_start(info);
     }

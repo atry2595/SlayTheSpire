@@ -14,3 +14,7 @@ void weakPotion::play(playInfo& info){
     }
 
 }
+
+QString weakPotion::get_story() {
+    return (QObject::tr("The Weak Potion, a pink, tasteless liquid whose very light seems hesitant, as if it doubts its own existence.\nBut when splashed on the enemy's face, their strikes grow limp and lifeless, as if all will to fight has been dissolved in this featureless fluid."));
+}

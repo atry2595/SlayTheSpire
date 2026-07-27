@@ -29,3 +29,7 @@ void mark_of_pain_relic::added_time(game_action& actions){
     if (!player) return;
     player->set_base_energy(player->get_base_energy() + 1);
 }
+
+QString mark_of_pain_relic::get_story() {
+    return (QObject::tr("The Mark of Pain is a wound the traveler carved into their own flesh, a signature made of suffering.\nYet from this self-inflicted gash, a fury is born that no blade earns without a blood price—as if some powers are only bought with a piece of yourself."));
+}

@@ -21,6 +21,7 @@ public:
 
     void choose_move() override;
     void play_turn(playInfo&)  override;
+    QString get_story() override;
 };
 
 #endif // SENTRY_H

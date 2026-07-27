@@ -2,7 +2,7 @@
 #define LEADERBOARD_H
 
 #include <QList>
-#include "Player.h"
+#include "player.h"
 
 class Leaderboard
 {

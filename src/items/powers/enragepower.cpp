@@ -18,9 +18,13 @@ QString enragePower::generate_description(){
 void enragePower::added_time(game_action& actions) {
     play_card_connection = connect(actions.get_event(), &combatEvent::card_played, this,
         [this, &actions](playCardInfo& card) {
-            if (card.card->get_card_type() == CardType::skill && card.owner == owner){
+            if (card.card->get_card_type() == CardType::skill){
                 abstractPower* np = PowerFactory::createPower(powerID::strength, owner, amount);
                 owner->add_power(actions, np);
             }
         });
+}
+
+QString enragePower::get_story() {
+    return (QObject::tr("Enrage, a flame that grows from wounds, turning pain into power.\nEvery blow the traveler takes is not an injury but an invitation to a louder roar, as if spilled blood becomes the fuel of an inner fire."));
 }

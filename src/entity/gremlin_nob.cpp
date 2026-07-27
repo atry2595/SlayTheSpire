@@ -106,3 +106,7 @@ void gremlin_nob::play_turn(playInfo& info){
     enemy_turn++;
     choose_move();
 }
+
+QString gremlin_nob::get_story() {
+    return (QObject::tr("Gremlin Nob clenches his fists and lets out a growl from the pit of his scarred throat.\nEvery spell whispered in his presence only swells his rage, as if the Spire itself wants to forge him into a monster that even he is tired of being."));
+}

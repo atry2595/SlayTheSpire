@@ -128,3 +128,7 @@ void red_slaver::play_turn(playInfo& info){
     enemy_turn++;
     choose_move();
 }
+
+QString red_slaver::get_story() {
+    return (QObject::tr("The Red Slaver keeps his brand hot and paces the empty corridor with brutal pride, chains glowing.\nBut his searing links bind nothing but the Spire's cold air, and the embers illuminate only his captiveless solitude."));
+}

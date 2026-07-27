@@ -15,6 +15,7 @@ public:
     relicRarity get_rarity() override { return relicRarity::uncommon; }
 
     void added_time(game_action&) override;
+    QString get_story() override;
 };
 
 #endif // GREMLIN_HORN_RELIC_H

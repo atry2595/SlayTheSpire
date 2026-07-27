@@ -28,3 +28,7 @@ void painfulStabPower::added_time(game_action& actions) {
     });
 
 }
+
+QString painfulStabPower::get_story() {
+    return (QObject::tr("Painful Stabs, repeated sharp shadows piling tiny wounds atop each other.\nEach cut is insignificant, but like a bad memory, they accumulate to devour the flesh from within."));
+}

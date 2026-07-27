@@ -12,3 +12,7 @@ void strengthPotion::play(playInfo& info){
     info.attacker->add_power(info.actions, np);
 
 }
+
+QString strengthPotion::get_story() {
+    return (QObject::tr("The Strength Potion, dark red like old blood, with sediment of concentrated rage at the bottom.\nThe traveler drinks and suddenly their muscles contract with ancestral violence, as if generations of warriors have awakened in their veins."));
+}

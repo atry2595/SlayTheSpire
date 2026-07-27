@@ -53,23 +53,35 @@ Augmenter::Augmenter(game_action& actions, ironclad* player)
             "You quaff the mysterious substance. Immediately, you are invigorated and feel your muscle fibers twitch."
             );
 
-    transform.actions = [player]()
+    transform.actions = [this, &actions, player]()
     {
 
-        abstractCard* first = ironclad::select_card(player->get_deck());
-        abstractCard* rand1 = ironclad::transformCard(first);
+        if (player->get_deck().empty()) return;
+        emit actions.get_event()->selectCard(player->get_deck());
+        connect(actions.get_event(), &combatEvent::cardSelected, this, [=, &actions](abstractCard* card){
 
-        player->deck_remove(first);
-        delete first;
-        player->deck_add(rand1);
+            if (card){
+                abstractCard* rand1 = ironclad::transformCard(card);
 
+                player->deck_remove(card);
+                delete card;
+                player->deck_add(rand1);
+            }
 
-        abstractCard* second = ironclad::select_card(player->get_deck());
-        abstractCard* rand2 = ironclad::transformCard(second);
+            if (player->get_deck().empty()) return;
+            emit actions.get_event()->selectCard(player->get_deck());
+            connect(actions.get_event(), &combatEvent::cardSelected, this, [=](abstractCard* card){
 
-        player->deck_remove(second);
-        delete second;
-        player->deck_add(rand2);
+                if (card){
+                    abstractCard* rand1 = ironclad::transformCard(card);
+
+                    player->deck_remove(card);
+                    delete card;
+                    player->deck_add(rand1);
+                }
+
+            });
+        });
 
     };
     transform.canUse = [](){ return true; };

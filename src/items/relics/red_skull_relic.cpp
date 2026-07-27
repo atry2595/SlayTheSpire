@@ -32,3 +32,7 @@ void red_skull_relic::added_time(game_action& actions){
         }
     });
 }
+
+QString red_skull_relic::get_story() {
+    return (QObject::tr("The Red Skull's empty eyes ignite only when death draws closest.\nAs if a dormant power awakens in the bone precisely at the brink of collapse, whispering: \"Not yet.\""));
+}

@@ -15,6 +15,7 @@ public:
     relicRarity get_rarity() override { return relicRarity::common; }
 
     void at_combat_start(game_action&) override;
+    QString get_story() override;
 };
 
 #endif // ANCHOR_RELIC_H

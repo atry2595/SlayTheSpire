@@ -10,15 +10,11 @@ class abstractAttackCard : public abstractCard
     Q_OBJECT
 
 protected:
-    attackResult perform_attack(abstractEntity* attacker, std::vector<abstractEntity*>& target_list, game_action& actions) const;
+    attackResult perform_attack(abstractEntity* attacker, std::vector<abstractEntity*>& target_list, game_action& actions);
 
     int base_damage;
 
     int damage;
-
-    // sound effect + damage effect
-
-    // sound effect + damage effect
 
     void initial_set();
 

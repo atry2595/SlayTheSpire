@@ -14,6 +14,7 @@ public:
     relicRarity get_rarity() override { return relicRarity::event; }
 
     void at_turn_start(game_action&) override;
+    QString get_story() override;
 };
 
 #endif // WARPED_TONGS_RELIC_H

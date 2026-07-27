@@ -11,6 +11,7 @@ public:
     void modify_attack(attackInfo&) override;
     QString generate_description() override;
     powerID get_id() override { return powerID::strength; }
+    QString get_story() override;
 };
 
 #endif // STRENGTHPOWER_H

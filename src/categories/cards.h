@@ -68,7 +68,9 @@ enum class cardID{
     pain,
     injury,
     shame,
-    doubt
+    doubt,
+
+    NULLCARD
 };
 
 

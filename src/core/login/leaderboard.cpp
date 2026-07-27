@@ -1,4 +1,4 @@
-#include "Leaderboard.h"
+#include "leaderboard.h"
 
 #include <algorithm>
 

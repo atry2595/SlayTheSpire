@@ -20,3 +20,7 @@ void tungsten_rod_relic::added_time(game_action& actions){
             }
         });
 }
+
+QString tungsten_rod_relic::get_story() {
+    return (QObject::tr("The Tungsten Rod, heavy and cold, holds a dull and unyielding glimmer.\nIt promises the traveler: whatever you lose, some of it stays right here, as if this stubborn cosmic metal has simply never learned how to forget a loss."));
+}

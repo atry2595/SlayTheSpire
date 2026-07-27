@@ -120,7 +120,9 @@ void slime_boss::play_turn(playInfo& info){
 
         info.actions.get_event()->entity_add_before(ms1, this);
         info.actions.get_event()->entity_add_after(ms2, this);
-        info.actions.get_event()->entity_removed(this);
+        hp = 0;
+        emit info.actions.get_event()->entity_removed(this);
+        emit info.actions.get_event()->resetLayout();
         return;
     }
 
@@ -129,4 +131,8 @@ void slime_boss::play_turn(playInfo& info){
 
     enemy_turn++;
     choose_move();
+}
+
+QString slime_boss::get_story() {
+    return (QObject::tr("The colossal slime sprawls upon a sticky throne of bones and ooze, crownless king of the pits.\nYet deep within, it knows that the moment of triumph will split its singular body into two smaller halves.\nIt will lose the \"self\" forever among its children."));
 }

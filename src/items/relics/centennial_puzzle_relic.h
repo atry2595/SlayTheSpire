@@ -16,6 +16,7 @@ public:
 
     void at_combat_start(game_action&) override;
     void damage_applied(game_action&) override;
+    QString get_story() override;
 };
 
 #endif // CENTENNIAL_PUZZLE_RELIC_H

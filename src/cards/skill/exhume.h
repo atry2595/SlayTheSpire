@@ -8,6 +8,7 @@ class exhume : public abstractSkillCard
     Q_OBJECT
 
 
+    QMetaObject::Connection cnt;
 public:
 
     exhume();

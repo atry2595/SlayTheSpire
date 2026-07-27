@@ -115,3 +115,7 @@ void medium_slime::play_turn(playInfo& info){
     enemy_turn++;
     choose_move();
 }
+
+QString medium_slime::get_story() {
+    return (QObject::tr("The medium slime oozes from a wall crack and swallows a broken shard of glass into its core.\nDeep in its transparency, it sees a warped reflection of itself for the first time, and pauses, as if a silent question ripples through its being."));
+}

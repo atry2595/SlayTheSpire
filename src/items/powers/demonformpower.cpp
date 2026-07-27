@@ -16,3 +16,7 @@ QString demonFormPower::generate_description(){
     description = tr("At the start of your turn, gain %1 Strength.").arg(amount);
     return description;
 }
+
+QString demonFormPower::get_story() {
+    return (QObject::tr("Demon Form, a dreadful metamorphosis that transforms the traveler into something beyond human.\nEvery breath injects a century of violence into their veins, as if the Spire itself is sprouting from within."));
+}

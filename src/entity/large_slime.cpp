@@ -139,7 +139,9 @@ void large_slime::play_turn(playInfo& info){
 
         info.actions.get_event()->entity_add_before(ms1, this);
         info.actions.get_event()->entity_add_after(ms2, this);
-        info.actions.get_event()->entity_removed(this);
+        hp = 0;
+        emit info.actions.get_event()->entity_removed(this);
+        emit info.actions.get_event()->resetLayout();
         return;
     }
 
@@ -148,4 +150,8 @@ void large_slime::play_turn(playInfo& info){
 
     enemy_turn++;
     choose_move();
+}
+
+QString large_slime::get_story() {
+    return (QObject::tr("The large slime drifts heavily through the corridor, cradling a spent candle stub and a torn map fragment within its mass.\nWithout knowing it, it has become the last refuge for a forgotten traveler's keepsakes—a silent archive in the heart of the Spire."));
 }

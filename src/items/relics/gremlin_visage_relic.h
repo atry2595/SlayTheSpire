@@ -14,6 +14,7 @@ public:
     relicRarity get_rarity() override { return relicRarity::event; }
 
     void at_combat_start(game_action&) override;
+    QString get_story() override;
 };
 
 #endif // GREMLIN_VISAGE_RELIC_H

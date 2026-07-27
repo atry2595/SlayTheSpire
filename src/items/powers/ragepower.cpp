@@ -32,3 +32,7 @@ void ragePower::at_turn_end(game_action&) {
     disconnect(play_card_connection);
     decrease(amount);
 }
+
+QString ragePower::get_story() {
+    return (QObject::tr("Rage, a brief but ferocious storm that turns fists to iron for a few heartbeats.\nThe traveler feeds on this short-lived flame and spins a block of pure instinct around themselves, as if the purest power is the kind that doesn't linger but shatters."));
+}

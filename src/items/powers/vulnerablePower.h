@@ -9,8 +9,10 @@ class vulnerablePower : public abstractPower
 public:
     vulnerablePower(abstractEntity* owner_init, int x);
     void modify_incoming_damage(damageInfo&) override;
+    void at_turn_end(game_action&) override;
     QString generate_description() override;
     powerID get_id() override { return powerID::vulnerable; }
+    QString get_story() override;
 };
 
 #endif // VULNERABLEPOWER_H

@@ -88,6 +88,8 @@ public:
     virtual void at_combat_end(game_action&);
     virtual void damage_applied(game_action&);
 
+    QString get_name() { return name; }
+    virtual QString get_story() = 0;
 
 
 };

@@ -43,7 +43,6 @@ protected:
     std::vector<abstractCard*> exhaust_pile;
 
 public:
-    static abstractCard* select_card(const std::vector<abstractCard*>&);
     static abstractCard* transformCard(abstractCard*);
 
     entityType get_type() override { return entityType::player; }
@@ -107,7 +106,9 @@ public:
 
     void potion_list_add(abstractPotion*);
     void potion_list_remove(abstractPotion*);
-    void draw_potion(drinkPotionInfo&);
+    void drink_potion(drinkPotionInfo&);
+
+    QString get_story() override;
 };
 
 

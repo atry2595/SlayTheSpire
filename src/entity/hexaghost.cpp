@@ -24,7 +24,7 @@ hexaghost* hexaghost::create(game_action& actions){
     enemy_intent intnt2;
     intnt2.name = tr("Divider");
     intnt2.type = intent_type::attack;
-    intnt2.damage = 0;
+    intnt2.damage = 6;
     intnt2.repeat = 6;
 
 
@@ -162,4 +162,8 @@ void hexaghost::play_turn(playInfo& info){
 
     enemy_turn++;
     choose_move();
+}
+
+QString hexaghost::get_story() {
+    return (QObject::tr("The Hexaghost swirls its six spectral flames around the intruder, lighting the ritual candles one by one.\nAs the final wick ignites, between fire and shadow, it sees a reflection of its own infernal solitude—an endless dance in the heart of the Spire."));
 }

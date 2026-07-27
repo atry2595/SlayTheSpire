@@ -38,11 +38,26 @@ void true_grit::play(playInfo& play_info){
     if (selectable.empty()) return;
 
     abstractCard* card;
-    if (random_select) card = RNG::instance().choice(selectable);
-    else card = ironclad::select_card(selectable);
+    if (random_select) {
+        card = RNG::instance().choice(selectable);
+        player->hand_pile_remove(card, true);
+        player->exhaust_pile_add(card, true);
+    }
+    else {
 
-    player->hand_pile_remove(card, true);
-    player->exhaust_pile_add(card, true);
+        emit play_info.actions.get_event()->selectCard(selectable);
+        cnt = connect(play_info.actions.get_event(), &combatEvent::cardSelected, this, [=, &play_info](abstractCard* card){
+
+            if (card){
+                player->hand_pile_remove(card, true);
+                player->exhaust_pile_add(card, true);
+            }
+
+            disconnect(cnt);
+
+        });
+    }
+
 }
 
 void true_grit::upgrade(){

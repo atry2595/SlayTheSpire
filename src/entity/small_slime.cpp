@@ -82,3 +82,7 @@ void small_slime::play_turn(playInfo& info){
     enemy_turn++;
     choose_move();
 }
+
+QString small_slime::get_story() {
+    return (QObject::tr("The small slime slides across the Spire's cold flagstone and, without eyes or ears, senses the warmth of a fresh footprint.\nWith mute eagerness it presses itself there, just to briefly soak up the fading heat of a stranger it will never know."));
+}

@@ -1,4 +1,4 @@
-#include "feelNoPainpower.h"
+#include "feelnopainpower.h"
 #include "cards/abstractcard.h"
 #include "combat/blocking_info.h"
 
@@ -25,4 +25,8 @@ void feelNoPainPower::added_time(game_action& actions) {
                 actions.apply_block(bl);
             }
         });
+}
+
+QString feelNoPainPower::get_story() {
+    return (QObject::tr("Feel No Pain, a layer of sacred numbness that turns every crumbling piece of armor into a fresh shield.\nThe traveler sees the wound but feels nothing, as if suffering has become just a word in a language they no longer speak."));
 }

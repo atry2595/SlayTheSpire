@@ -1,5 +1,5 @@
 
-#include "Map.h"
+#include "map.h"
 #include <QQueue>
 #include <QSet>
 #include <QDebug>

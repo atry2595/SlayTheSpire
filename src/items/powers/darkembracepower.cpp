@@ -1,4 +1,4 @@
-#include "darkEmbracepower.h"
+#include "darkembracepower.h"
 #include "cards/abstractcard.h"
 #include "entity/ironclad.h"
 
@@ -17,9 +17,13 @@ QString darkEmbracePower::generate_description(){
 void darkEmbracePower::added_time(game_action& actions) {
     exhaust_card_connection = connect(actions.get_event(), &combatEvent::card_moved, this,
         [this, &actions](playCardInfo& card, PileType from, PileType to) {
-            if (to == PileType::exhaust && owner == card.owner){
+            if (to == PileType::exhaust && owner == card.owner && !card.card->get_ethereal()){
                 ironclad* player = dynamic_cast<ironclad*>(owner);
                 player->draw_card();
             }
         });
+}
+
+QString darkEmbracePower::get_story() {
+    return (QObject::tr("Dark Embrace, a ring of shadow that draws a new card from its heart each time armor shatters.\nAs if the destruction of defense is a seed planted in a dark field, reaping fresh opportunities."));
 }

@@ -5,16 +5,7 @@
 #include <QList>
 #include <QString>
 #include "utils/RNG.h"
-
-enum class RoomType{
-    MONSTER,
-    ELITE,
-    REST,
-    MERCHANT,
-    TREASURE,
-    UNKNOWN, // ؟
-    BOSS
-};
+#include "core/setting.h"
 
 struct Room
 {

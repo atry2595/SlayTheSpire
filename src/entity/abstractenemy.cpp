@@ -11,6 +11,7 @@ void abstractEnemy::perform_attack(playInfo& info){
     atck_info.attacker = info.attacker;
     atck_info.target_list = info.target_list;
     atck_info.damage = intnt.damage;
+    atck_info.attack_type = attackType::intent;
 
     for (int i = 0 ; i<intnt.repeat; i++) {
         info.actions.attack(atck_info);

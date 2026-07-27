@@ -16,6 +16,7 @@ public:
     relicRarity get_rarity() override { return relicRarity::common; }
 
     void added_time(game_action&) override;
+    QString get_story() override;
 };
 
 #endif // RED_SKULL_RELIC_H

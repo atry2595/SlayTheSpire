@@ -18,6 +18,7 @@ public:
 
     void added_time(game_action&) override;
     void at_combat_start(game_action&) override;
+    QString get_story() override;
 };
 
 #endif // GIRYA_RELIC_H

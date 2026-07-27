@@ -27,3 +27,7 @@ ice_cream_relic::~ice_cream_relic() {
 
     player->set_reset_energy(true);
 }
+
+QString ice_cream_relic::get_story() {
+    return (QObject::tr("The Ice Cream never melts in the heat of battle, a cold sweetness that restores the soul, indifferent to the Spire's flames.\nAs if a piece of an eternal winter has nestled into a hero's pocket, returning lost energy with the taste of stillness."));
+}

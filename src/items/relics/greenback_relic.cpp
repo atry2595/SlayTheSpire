@@ -23,3 +23,7 @@ void greenback_relic::at_turn_end(game_action& actions){
         actions.apply_block(inf);
     }
 }
+
+QString greenback_relic::get_story() {
+    return (QObject::tr("The Greenback, a crisp and fresh banknote, keeps hope's lantern burning amidst the Spire's smoke and blood.As long as it rests in the traveler's pocket, an invisible armor of confidence wraps around them—as if money truly can be a shield."));
+}

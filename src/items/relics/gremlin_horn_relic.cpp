@@ -27,3 +27,7 @@ void gremlin_horn_relic::added_time(game_action& actions){
         }
     });
 }
+
+QString gremlin_horn_relic::get_story() {
+    return (QObject::tr("The Gremlin Horn, broken and jagged, still carries the echo of its former owner's snarl.\nWhen an enemy falls, this horn sounds without restraint, as if the defeated gremlin celebrates another's downfall from beyond the grave."));
+}

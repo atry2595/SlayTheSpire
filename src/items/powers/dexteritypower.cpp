@@ -14,3 +14,7 @@ QString dexterityPower::generate_description(){
     description = tr("Increases block gained by %1").arg(amount);
     return description;
 }
+
+QString dexterityPower::get_story() {
+    return (QObject::tr("Dexterity, the blue essence of evasion running through veins, making skin slipperier than ice.\nThe traveler sees the blow, but the blow doesn't fully see them back—as if a layer of \"almost\" now separates their flesh from the enemy's blade."));
+}

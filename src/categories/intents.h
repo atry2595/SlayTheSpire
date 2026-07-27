@@ -10,12 +10,12 @@ enum class intent_type{
 
     debuff,
     attack_debuff,
-    block_debuff,
 
     buff,
     attack_buff,
     block_buff,
 
+    escape,
     special
 };
 

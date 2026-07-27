@@ -15,3 +15,7 @@ void whiteBloodPotion::play(playInfo& info){
     info.actions.heal(h_info);
 
 }
+
+QString whiteBloodPotion::get_story() {
+    return (QObject::tr("The White Blood Potion, milky with silver veins, swirls silently in its bottle like a miniature galaxy.\nThe traveler drinks and their blood briefly turns to liquid metal, wounds mending not with flesh but with steel."));
+}

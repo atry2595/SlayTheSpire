@@ -27,6 +27,7 @@ void regret::play(playInfo& play_info){
     inf.damage = dmg;
     inf.attacker = nullptr;
     inf.block_active = false;
+    inf.attack_type = attackType::self;
     inf.target = play_info.attacker;
 
     play_info.actions.apply_damage(inf);

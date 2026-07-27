@@ -2,7 +2,7 @@
 #define PLAYER_H
 
 #include <QString>
-#include "Stats.h"
+#include "stats.h"
 #include <QStringList>
 
 class Player

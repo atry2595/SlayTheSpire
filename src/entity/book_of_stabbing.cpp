@@ -87,3 +87,7 @@ void book_of_stabbing::play_turn(playInfo& info){
     enemy_turn++;
     choose_move();
 }
+
+QString book_of_stabbing::get_story() {
+    return (QObject::tr("The Book of Stabbing hovers in the Spire's heavy air, its pages turning with the relentless rhythm of an angry heartbeat.\nFrom its cursed lines, a blade is born, again and again, as if spelling out an endless legend punctuated only by blood."));
+}

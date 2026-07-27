@@ -1,6 +1,7 @@
 #include "dual_wield.h"
 #include "entity/ironclad.h"
 #include "cards/cardfactory.h"
+#include <QDebug>
 
 dual_wield::dual_wield()
     :abstractSkillCard(tr("Dual Wield"), "", 1, false, false, false, false)
@@ -27,15 +28,22 @@ void dual_wield::play(playInfo& play_info){
             selectable.push_back(card);
     }
 
-    abstractCard* card = ironclad::select_card(selectable);
+    if (selectable.empty()) return;
+    emit play_info.actions.get_event()->selectCard(selectable);
+    cnt = connect(play_info.actions.get_event(), &combatEvent::cardSelected, this, [=, &play_info](abstractCard* card){
 
-    if (card){
-        for (int i = 0; i<count; i++){
-            abstractCard* new_card = CardFactory::createCard(card->get_card_id());
-            if (card->get_upgraded()) new_card->upgrade();
-            player->hand_pile_add(new_card, true);
+        if (card){
+            qDebug() << count;
+            for (int i = 0; i<count; i++){
+                abstractCard* new_card = CardFactory::createCard(card->get_card_id());
+                if (card->get_upgraded()) new_card->upgrade();
+                if (card->get_available()) new_card->set_available(true);
+                player->hand_pile_add(new_card, true);
+            }
         }
-    }
+
+        disconnect(cnt);
+    });
 
 }
 

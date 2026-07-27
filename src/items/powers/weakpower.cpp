@@ -19,3 +19,7 @@ QString weakPower::generate_description(){
     description = tr("Attacks deal 25% less damage for %1 turns.").arg(amount);
     return description;
 }
+
+QString weakPower::get_story() {
+    return (QObject::tr("Weak, a gray mist coiling around the enemy's fists, sucking the force from their blows.\nThe enemy still strikes, but as if their arms have sunk into a soft dough of futility—a portion of their violence stolen."));
+}

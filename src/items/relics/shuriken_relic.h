@@ -17,6 +17,7 @@ public:
 
     void added_time(game_action&) override;
     void at_turn_start(game_action&) override;
+    QString get_story() override;
 };
 
 #endif // SHURIKEN_RELIC_H

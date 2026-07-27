@@ -15,6 +15,7 @@ public:
     relicRarity get_rarity() override { return relicRarity::event; }
 
     void added_time(game_action&) override;
+    QString get_story() override;
 };
 
 #endif // RED_MASK_RELIC_H

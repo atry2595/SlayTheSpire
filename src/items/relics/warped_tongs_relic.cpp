@@ -27,3 +27,7 @@ void warped_tongs_relic::at_turn_start(game_action&)
     abstractCard* card = RNG::instance().choice(hand);
     card->upgrade();
 }
+
+QString warped_tongs_relic::get_story() {
+    return (QObject::tr("The Warped Tongs, their metal bearing a rainbow of scars from the heat of a thousand deformations.\nThe traveler entrusts their cards to these tongs and receives them back bent and twisted—yet in this crookedness lies a power never found in straight lines."));
+}
