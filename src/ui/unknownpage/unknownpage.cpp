@@ -198,11 +198,7 @@ void UnknownPage::eventUpdate() {
 
     auto currentNode = manager.nodes[manager.current_node];
     currentNode.actions();
-    bar->updateBar();
-    combatScene->removeItem(relic_bar->getParent());
-    delete relic_bar;
-    relic_bar = new RelicBar(eve, player->get_relic_list());
-    combatScene->addItem(relic_bar->getParent());
+    update_bars();
     desc->setText(currentNode.description);
 
     for (auto item : prxies) {

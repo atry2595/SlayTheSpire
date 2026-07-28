@@ -1,19 +1,19 @@
-// #include "bonfirespirits.h"
-// #include "cards/cardfactory.h"
-// #include "items/relics/relicfactory.h"
+#include "bonfirespirits.h"
+#include "cards/cardfactory.h"
+#include "items/relics/relicfactory.h"
 
-// BonfireSpirits::BonfireSpirits(game_action& actions, ironclad* player) {
-//     manager.unknown_ID = unknownID::bonfire_spirits;
-//     manager.unknown_name = tr("Bonfire Spirits");
-//     manager.isEvent = true;
+BonfireSpirits::BonfireSpirits(game_action& actions, ironclad* player) {
+    manager.unknown_ID = unknownID::bonfire_spirits;
+    manager.unknown_name = tr("Bonfire Spirits");
+    manager.isEvent = true;
 
-//     UnknownNode root;
-//     root.actions = [](){};
-//     root.canUse = [](){ return true; };
-//     root.description = tr("You happen upon what looks like a group of purple fire spirits dancing around a large bonfire.\n\n"
-//                           "The spirits toss small bones and fragments into the fire, which brilliantly erupts each time.\n"
-//                           "As you approach, the spirits all turn to you, expectantly...");
-//     root.title = "";
+    UnknownNode root;
+    root.actions = [](){};
+    root.canUse = [](){ return true; };
+    root.description = tr("You happen upon what looks like a group of purple fire spirits dancing around a large bonfire.\n\n"
+                          "The spirits toss small bones and fragments into the fire, which brilliantly erupts each time.\n"
+                          "As you approach, the spirits all turn to you, expectantly...");
+    root.title = "";
 
     UnknownNode offer_node;
     offer_node.title = tr("[Offer] Receive  a  reward   based   on\n"
@@ -22,8 +22,8 @@
     offer_node.description = tr("The flames come alive with your offering, and the spirits, amidst the smoke and dance of fire, give a mysterious answer.");
     offer_node.actions = [player, eve = actions.get_event(), &offer_node] () {
 
-//         std::vector<abstractCard*> deck = player->get_deck();
-//         if (deck.empty()) return;
+        std::vector<abstractCard*> deck = player->get_deck();
+        if (deck.empty()) return;
 
 
 
@@ -74,14 +74,14 @@
 
 
 
-//     };
-//     offer_node.next_nodes = {-1};
+    };
+    offer_node.next_nodes = {-1};
 
-//     manager.nodes.push_back(root);
-//     int rootIdx = manager.nodes.size() - 1;
+    manager.nodes.push_back(root);
+    int rootIdx = manager.nodes.size() - 1;
 
-//     manager.nodes.push_back(offer_node);
-//     int offerIdx = manager.nodes.size() - 1;
+    manager.nodes.push_back(offer_node);
+    int offerIdx = manager.nodes.size() - 1;
 
-//     manager.nodes[rootIdx].next_nodes = {offerIdx};
-// }
+    manager.nodes[rootIdx].next_nodes = {offerIdx};
+}
