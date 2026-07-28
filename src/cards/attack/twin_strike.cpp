@@ -25,7 +25,7 @@ void twin_strike::upgrade(){
 
 void twin_strike::base_upgrade(){
     base_damage = damage = 7;
-    is_upgraded = true;
+    base_is_upgraded = true;
     base_description = generate_description();
 
     combat_reset();

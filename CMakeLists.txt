@@ -607,6 +607,8 @@ add_executable(SlayTheSpire
     src/ui/mappage/sketchline.h src/ui/mappage/sketchline.cpp
     src/ui/unknownpage/unknownpage.cpp src/ui/unknownpage/unknownpage.h
     src/ui/selectItem/selectpotion.cpp src/ui/selectItem/selectpotion.h
+    src/ui/restpage/restpage.cpp src/ui/restpage/restpage.h
+    src/items/relics/cursed_key_relic.cpp src/items/relics/cursed_key_relic.h src/items/relics/lively_plant_relic.cpp src/items/relics/lively_plant_relic.h
 
 )
 

@@ -16,6 +16,8 @@ class collectReward : public QObject
 
 private:
 
+    bool selected = false;
+
     int x = 0;
 
     BaseItem* parent;

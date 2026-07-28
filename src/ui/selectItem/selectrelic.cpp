@@ -79,6 +79,9 @@ void selectRelic::execute() {
 
 void selectRelic::relicSelected(abstractRelic* rlc) {
 
+    if (selected) return;
+    selected = true;
+
     soundManager::instance().playSoundEffect(SoundEffect::menuSelect);
 
     emit event->relicSelected(rlc);

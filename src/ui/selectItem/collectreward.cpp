@@ -126,6 +126,10 @@ bool collectReward::eventFilter(QObject* obj, QEvent* eve) {
 
 void collectReward::execute() {
 
+
+    if (selected) return;
+    selected = true;
+
     soundManager::instance().playSoundEffect(SoundEffect::menuSelect);
     player->earn_coin(rew->get_gold());
     player->earn_coin(rew->get_returned_gold());

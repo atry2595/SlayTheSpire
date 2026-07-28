@@ -150,6 +150,9 @@ void selectCard::preCards() {
 
 void selectCard::cardSelected(CardParent* card) {
 
+    if (selected) return;
+    selected = true;
+
     soundManager::instance().playSoundEffect(SoundEffect::menuSelect);
 
     emit event->cardSelected(card->getSource());

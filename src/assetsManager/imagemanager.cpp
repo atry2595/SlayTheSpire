@@ -426,6 +426,7 @@ QPixmap& imageManager::getBackroundImage() {
     if (combat_data::act == 1 && combat_data::room_type == RoomType::TREASURE) return background_table["1m"];
     if (combat_data::act == 2 && combat_data::room_type == RoomType::TREASURE) return background_table["2m"];
     if (combat_data::room_type == RoomType::MERCHANT) return background_table["mr"];
+    if (combat_data::room_type == RoomType::REST) return background_table["r"];
 
     return icon_table["error"];
 }

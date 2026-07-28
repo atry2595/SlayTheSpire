@@ -30,6 +30,7 @@ enum class ChestType{
     boss
 };
 
+
 enum class RoomType{
     MONSTER,
     ELITE,

@@ -15,6 +15,8 @@ class selectPotion : public QObject
 
 private:
 
+    bool selected = false;
+
     BaseItem* parent;
     TextItem* header;
     QPushButton* overlay;

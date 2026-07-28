@@ -296,9 +296,9 @@
         <file alias="map2_dark.jpg">assests/image/scene/map2_dark.jpg</file>
         <file alias="map2_epic.jpg">assests/image/scene/map2_epic.jpg</file>
         <file alias="map2_normal.jpg">assests/image/scene/map2_normal.jpg</file>
-        <file alias="rest.png">assests/image/scene/rest.png</file>
         <file alias="shop">assests/image/scene/shop.PNG</file>
         <file alias="back_login">assests/image/scene/IMG_6908.png</file>
+        <file alias="rest.jpg">assests/image/scene/rest.jpg</file>
     </qresource>
     <qresource prefix="/image/events">
         <file alias="ancient.jpg">assests/image/events/ancientwriting.jpg</file>
@@ -371,6 +371,16 @@
         <file alias="veilchest.png">assests/image/veil_chest.png</file>
         <file alias="oath_dialogbox.png">assests/image/oath_dialogbox.png</file>
         <file alias="veil_dialogbox.png">assests/image/veil_dialogbox.png</file>
+    </qresource>
+    <qresource prefix="/image/chest">
+        <file alias="oathchest.png">assests/image/oath_chest.png</file>
+        <file alias="veilchest.png">assests/image/veil_chest.png</file>
+        <file alias="oath_dialogbox.png">assests/image/oath_dialogbox.png</file>
+        <file alias="veil_dialogbox.png">assests/image/veil_dialogbox.png</file>
+    </qresource>
+    <qresource prefix="/image/map">
+        <file alias="legend.png">assests/image/legend.png</file>
+        <file alias="map_back.png">assests/image/map_back.png</file>
     </qresource>
     <qresource prefix="/image/chest">
         <file alias="oathchest.png">assests/image/oath_chest.png</file>
