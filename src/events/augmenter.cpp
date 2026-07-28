@@ -57,7 +57,13 @@ Augmenter::Augmenter(game_action& actions, ironclad* player)
     {
 
         if (player->get_deck().empty()) return;
-        emit eve->selectCard(player->get_deck());
+
+        std::vector<abstractCard*> pool;
+        for (auto item : player->get_deck()){
+            if (item->can_remove_from_deck()) pool.push_back(item);
+        }
+
+        emit eve->selectCard(pool);
         auto conn = std::make_shared<QMetaObject::Connection>();
         *conn = connect(eve, &combatEvent::cardSelected, eve, [=](abstractCard* card){
 
@@ -69,7 +75,12 @@ Augmenter::Augmenter(game_action& actions, ironclad* player)
             }
 
             if (player->get_deck().empty()) return;
-            emit eve->selectCard(player->get_deck());
+
+            std::vector<abstractCard*> pool2;
+            for (auto item : player->get_deck()){
+                if (item->can_remove_from_deck()) pool2.push_back(item);
+            }
+            emit eve->selectCard(pool2);
             auto conn2 = std::make_shared<QMetaObject::Connection>();
             *conn2 = connect(eve, &combatEvent::cardSelected, eve, [=](abstractCard* card){
 

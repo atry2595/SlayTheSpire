@@ -55,6 +55,10 @@ UnknownPage::UnknownPage(UnknownManager manag, QWidget *parent, ironclad* plyr, 
 
     connect(eve, &combatEvent::selectCard, this, &UnknownPage::createSelectCard);
 
+    connect(eve, &combatEvent::barUpdate, this, &UnknownPage::update_bars);
+
+    connect(eve, &combatEvent::card_added, this, &UnknownPage::add_card);
+
     initialSet();
 }
 
@@ -191,11 +195,7 @@ void UnknownPage::eventUpdate() {
 
     auto currentNode = manager.nodes[manager.current_node];
     currentNode.actions();
-    bar->updateBar();
-    combatScene->removeItem(relic_bar->getParent());
-    delete relic_bar;
-    relic_bar = new RelicBar(eve, player->get_relic_list());
-    combatScene->addItem(relic_bar->getParent());
+    update_bars();
     desc->setText(currentNode.description);
 
     for (auto item : prxies) {
@@ -278,4 +278,42 @@ void UnknownPage::relic_right_click(abstractRelic* ent) {
     info_bar = new CombatInfoBar(ent);
     combatScene->addItem(info_bar->getParent());
     info_bar->Entrance();
+}
+
+void UnknownPage::update_bars() {
+    bar->updateBar();
+    combatScene->removeItem(relic_bar->getParent());
+    delete relic_bar;
+    relic_bar = new RelicBar(eve, player->get_relic_list());
+    combatScene->addItem(relic_bar->getParent());
+}
+
+void UnknownPage::add_card(abstractCard* card) {
+    abstractCardTemplate* item;
+
+    switch (combat_data::selected_card_template) {
+    case cardTemplates::ancient: {
+        item = new CardTemplateUncommon(eve, card, {650, 200}, {300, 450}, 10);
+        break;
+    }
+    case cardTemplates::common: {
+        item = new CardTemplateCommon(eve, card, {650, 200}, {300, 450}, 10);
+        break;
+    }
+    case cardTemplates::metallic: {
+        item = new CardTemplateRare(eve, card, {650, 200}, {300, 450}, 10);
+        break;
+    }
+    case cardTemplates::toxic_blossom: {
+        item = new CardTemplateLegend(eve, card, {650, 200}, {300, 450}, 10);
+        break;
+    }
+    }
+    item->getParent()->setZValue(123456);
+    item->getParent()->setCanHover(false);
+    item->getParent()->setCanSelect(false);
+
+    combatScene->addItem(item->getParent());
+    QTimer::singleShot(1000, [=](){item->getParent()->moveTo({650, 1000}, 500, QEasingCurve::OutSine);});
+    QTimer::singleShot(2000, [=](){ item->deleteLater();});
 }

@@ -135,6 +135,7 @@ CombatPage::CombatPage(QWidget *parent, combat_manager* m, ironclad* plyr)
     connect(eve, &combatEvent::selectCard, this, &CombatPage::createSelectCard);
     connect(eve, &combatEvent::combat_ended, this, &CombatPage::createCollectReward);
     connect(eve, &combatEvent::settingOpen, this, &CombatPage::open_setting);
+    connect(eve, &combatEvent::card_added, this, &CombatPage::add_card);
     //----------------------------------------------------
 }
 
@@ -1155,4 +1156,34 @@ void CombatPage::createCollectReward(combat_manager* mngr, bool vic){
 void CombatPage::open_setting() {
     auto sc = new combatSetting(eve);
     combatScene->addItem(sc->getParent());
+}
+
+void CombatPage::add_card(abstractCard* card) {
+    abstractCardTemplate* item;
+
+    switch (combat_data::selected_card_template) {
+    case cardTemplates::ancient: {
+        item = new CardTemplateUncommon(eve, card, {650, 200}, {300, 450}, 10);
+        break;
+    }
+    case cardTemplates::common: {
+        item = new CardTemplateCommon(eve, card, {650, 200}, {300, 450}, 10);
+        break;
+    }
+    case cardTemplates::metallic: {
+        item = new CardTemplateRare(eve, card, {650, 200}, {300, 450}, 10);
+        break;
+    }
+    case cardTemplates::toxic_blossom: {
+        item = new CardTemplateLegend(eve, card, {650, 200}, {300, 450}, 10);
+        break;
+    }
+    }
+    item->getParent()->setZValue(123456);
+    item->getParent()->setCanHover(false);
+    item->getParent()->setCanSelect(false);
+
+    combatScene->addItem(item->getParent());
+    QTimer::singleShot(1000, [=](){item->getParent()->moveTo({650, 1000}, 500, QEasingCurve::OutSine);});
+    QTimer::singleShot(2000, [=](){ item->deleteLater();});
 }

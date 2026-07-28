@@ -61,6 +61,8 @@ private slots:
     void relic_right_click(abstractRelic*);
     void open_setting();
     void createSelectCard(std::vector<abstractCard*> cards);
+    void update_bars();
+    void add_card(abstractCard*);
 };
 
 #endif // UNKNOWNPage_H

@@ -50,6 +50,7 @@ signals:
 
     void card_played(playCardInfo&);
     void card_moved(playCardInfo&, PileType from, PileType to);
+    void card_added(abstractCard*);
     void draw_pile_shuffled();
     void card_locked(playCardInfo&);
     void card_disabled(playCardInfo&);
@@ -73,6 +74,7 @@ signals:
     void potionReleased(PotionParent*, const QPointF&);
     void cardUpdated(abstractCard*);
     void entityUpdate(abstractEntity*);
+    void barUpdate();
     void afterAttack(attackResult&);
     void resetLayout();
 

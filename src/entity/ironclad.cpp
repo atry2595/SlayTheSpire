@@ -7,7 +7,7 @@
 #include "items/relics/relicfactory.h"
 
 const std::vector<cardID> ironclad::starting_deck =
-    {cardID::dual_wield, cardID::bludgeon, cardID::rage, cardID::disarm, cardID::uppercut,
+    {cardID::dual_wield, cardID::bludgeon, cardID::rage, cardID::doubt, cardID::curse_of_the_bell,
      cardID::clash, cardID::hemokinesis, cardID::spot_weakness, cardID::twin_strike, cardID::bash,
     cardID::strike, cardID::strike, cardID::strike, cardID::strike, cardID::strike,
     cardID::defend, cardID::defend, cardID::defend, cardID::defend, cardID::shrug_it_off,
@@ -106,6 +106,7 @@ void ironclad::combat_deck_add(abstractCard* card){
     }
 
     combat_deck.push_back(card);
+    emit event->card_added(card);
 }
 void ironclad::combat_deck_remove(abstractCard* card){
     auto it = std::find(combat_deck.begin(), combat_deck.end(), card);
