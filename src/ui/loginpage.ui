@@ -16,134 +16,158 @@
   <property name="layoutDirection">
    <enum>Qt::LayoutDirection::RightToLeft</enum>
   </property>
-  <property name="styleSheet">
-   <string notr="true">background-color: #e6eaf3;</string>
-  </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QFrame" name="frame">
-    <property name="geometry">
-     <rect>
-      <x>575</x>
-      <y>150</y>
-      <width>450</width>
-      <height>600</height>
-     </rect>
+   <property name="styleSheet">
+    <string notr="true">QWidget#centralwidget {
+    border-image: url(:/image/scene/back_login) 0 0 0 0 stretch stretch;
+}</string>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <property name="leftMargin">
+     <number>0</number>
     </property>
-    <property name="styleSheet">
-     <string notr="true">QFrame {
-    background-color: #2b2b2b;
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item row="0" column="0">
+     <widget class="QFrame" name="frame">
+      <property name="minimumSize">
+       <size>
+        <width>450</width>
+        <height>600</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>450</width>
+        <height>600</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QFrame {
+    background-color: rgba(24, 42, 74, 220);
+    border: 1px solid rgba(95, 145, 210, 120);
     border-radius: 25px;
-    border: none;
 }
 
 QLineEdit {
-    background-color: #3d3d3d;
-    border: 1px solid #555;
-    border-radius: 8px;
-    padding: 8px;
+    background-color: rgba(48, 72, 112, 230);
     color: white;
+    border: 1px solid #6EA8E8;
+    border-radius: 10px;
+    padding: 15px;
+    min-height: 28px;
+}
+
+QLineEdit:hover {
+    background-color: rgba(48, 72, 112, 230);
+}
+
+QLineEdit:focus {
+    background-color: rgba(48, 72, 112, 230);
+    color: white;
+    border: 2px solid #8FD3FF;
 }
 
 QPushButton {
-    background-color: #4a4a4a;
-    color: white;
-    border-radius: 8px;
-    padding: 10px;
-    font-weight: bold;
-}
-
-QPushButton:hover {
-    background-color: #5d5d5d;
-}
-
-QLabel {
-    color: #e0e0e0;
-    font-size: 14px;
+    ...
 }</string>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::Shape::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Shadow::Raised</enum>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout_2">
-     <item>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <property name="spacing">
-        <number>10</number>
-       </property>
-       <property name="leftMargin">
-        <number>30</number>
-       </property>
-       <property name="rightMargin">
-        <number>30</number>
-       </property>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Shape::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Shadow::Raised</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <widget class="QLabel" name="titleLabel">
-         <property name="font">
-          <font>
-           <pointsize>30</pointsize>
-           <bold>true</bold>
-          </font>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <property name="spacing">
+          <number>10</number>
          </property>
-         <property name="styleSheet">
-          <string notr="true">font-size: 30pt;
-font-weight: bold;
-color: white;</string>
+         <property name="leftMargin">
+          <number>30</number>
          </property>
-         <property name="text">
-          <string>Slay The Spire</string>
+         <property name="rightMargin">
+          <number>30</number>
          </property>
-         <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="verticalSpacer_3">
-         <property name="orientation">
-          <enum>Qt::Orientation::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QLabel" name="username">
-         <property name="font">
-          <font>
-           <pointsize>-1</pointsize>
-           <fontweight>DemiBold</fontweight>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLabel {
+         <item>
+          <widget class="QLabel" name="titleLabel">
+           <property name="font">
+            <font>
+             <pointsize>-1</pointsize>
+             <fontweight>DemiBold</fontweight>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 30px;
+    font-weight: 600;
+}</string>
+           </property>
+           <property name="text">
+            <string>Slay The Spire</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Orientation::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLabel" name="username">
+           <property name="font">
+            <font>
+             <pointsize>-1</pointsize>
+             <fontweight>DemiBold</fontweight>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel {
+    background: transparent;
+    border: none;
     color: white;
     font-size: 16px;
     font-weight: 600;
 }</string>
-         </property>
-         <property name="text">
-          <string>Username or Email</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignBottom|Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="usernameLineEdit">
-         <property name="styleSheet">
-          <string notr="true">QLineEdit {
+           </property>
+           <property name="text">
+            <string>Username or Email</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignBottom|Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="usernameLineEdit">
+           <property name="styleSheet">
+            <string notr="true">QLineEdit {
 
-    background-color: #4A4A4A;
+    background-color: rgba(48, 72, 112, 230);
 
-    border: 1px solid #666666;
+    border: 1px solid #6EA8E8;
 
     border-radius: 10px;
 
@@ -153,66 +177,74 @@ color: white;</string>
 
     min-height: 28px;
 
+    selection-background-color: #8FD3FF;
+
+    selection-color: white;
 }
-
-
 
 QLineEdit:focus {
 
-    border: 2px solid #8c8c8c;
+    background-color: rgba(58, 84, 128, 240);
+
+    border: 2px solid #8FD3FF;
 
 }</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="usernameErrorLabel">
-         <property name="styleSheet">
-          <string notr="true">QLabel{
-    color:#ff4d4d;
-    font-size:13px;
-    font-weight:600;
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="usernameErrorLabel">
+           <property name="styleSheet">
+            <string notr="true">QLabel {
+    background: transparent;
+    border: none;
+
+    color: #ff4d4d;
+    font-size: 13px;
+    font-weight: 600;
 }</string>
-         </property>
-         <property name="text">
-          <string>TextLabel</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="Password">
-         <property name="font">
-          <font>
-           <pointsize>-1</pointsize>
-           <fontweight>DemiBold</fontweight>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLabel {
+           </property>
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="Password">
+           <property name="font">
+            <font>
+             <pointsize>-1</pointsize>
+             <fontweight>DemiBold</fontweight>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel {
+    background: transparent;
+    border: none;
     color: white;
     font-size: 16px;
     font-weight: 600;
 }</string>
-         </property>
-         <property name="text">
-          <string>Password</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignBottom|Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="passwordLineEdit">
-         <property name="layoutDirection">
-          <enum>Qt::LayoutDirection::LeftToRight</enum>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLineEdit {
+           </property>
+           <property name="text">
+            <string>Password</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignBottom|Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="passwordLineEdit">
+           <property name="layoutDirection">
+            <enum>Qt::LayoutDirection::LeftToRight</enum>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLineEdit {
 
-    background-color: #4A4A4A;
+    background-color: rgba(48, 72, 112, 230);
 
-    border: 1px solid #666666;
+    border: 1px solid #6EA8E8;
 
     border-radius: 10px;
 
@@ -222,198 +254,233 @@ QLineEdit:focus {
 
     min-height: 28px;
 
+    selection-background-color: #8FD3FF;
+
+    selection-color: white;
 }
-
-
 
 QLineEdit:focus {
 
-    border: 2px solid #8c8c8c;
+    background-color: rgba(58, 84, 128, 240);
+
+    border: 2px solid #8FD3FF;
 
 }</string>
-         </property>
-         <property name="echoMode">
-          <enum>QLineEdit::EchoMode::Password</enum>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="passwordErrorLabel">
-         <property name="styleSheet">
-          <string notr="true">QLabel{
-    color:#ff4d4d;
-    font-size:13px;
-    font-weight:600;
+           </property>
+           <property name="echoMode">
+            <enum>QLineEdit::EchoMode::Password</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="passwordErrorLabel">
+           <property name="styleSheet">
+            <string notr="true">QLabel {
+    background: transparent;
+    border: none;
+
+    color: #ff4d4d;
+    font-size: 13px;
+    font-weight: 600;
 }</string>
-         </property>
-         <property name="text">
-          <string>TextLabel</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="forgotPasswordButton">
-         <property name="font">
-          <font>
-           <pointsize>11</pointsize>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QPushButton{
+           </property>
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="forgotPasswordButton">
+           <property name="font">
+            <font>
+             <pointsize>-1</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton{
     border:none;
     color:white;
     background:transparent;
+    font-size:15px;
+    font-weight:bold;
 }
 
 QPushButton:hover{
     color:#4FC3F7;
 }</string>
-         </property>
-         <property name="text">
-          <string>Forgot Password</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="verticalSpacer_4">
-         <property name="orientation">
-          <enum>Qt::Orientation::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Orientation::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QPushButton" name="loginButton">
-         <property name="font">
-          <font>
-           <pointsize>-1</pointsize>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QPushButton {
-    background-color: #474747;
+           </property>
+           <property name="text">
+            <string>Forgot Password</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_4">
+           <property name="orientation">
+            <enum>Qt::Orientation::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Orientation::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="loginButton">
+           <property name="font">
+            <font>
+             <pointsize>-1</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+
+    background-color: rgba(48, 72, 112, 230);
+
     color: white;
-    border: 1px solid #666666;
+
+    border: 1px solid #6EA8E8;
+
     border-radius: 10px;
 
-    font-size: 18px;  
+    font-size: 18px;
+
     font-weight: bold;
 
     padding: 12px 18px;
 }
 
 QPushButton:hover {
-    background-color: #525252;
-    border: 1px solid #7A7A7A;
+
+    background-color: rgba(68, 96, 145, 240);
+
+    border: 1px solid #8FD3FF;
 }
 
 QPushButton:pressed {
-    background-color: #3F3F3F;
+
+    background-color: rgba(34, 56, 90, 255);
 }
 
 QPushButton:disabled {
-    background-color: #2F2F2F;
-    color: #8A8A8A;
-    border: 1px solid #555555;
+
+    background-color: rgba(40, 55, 80, 180);
+
+    color: #AAB7C8;
+
+    border: 1px solid rgba(95, 145, 210, 80);
 }</string>
-         </property>
-         <property name="text">
-          <string>Login</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="signUpButton">
-         <property name="font">
-          <font>
-           <pointsize>-1</pointsize>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QPushButton {
-    background-color: #474747;
+           </property>
+           <property name="text">
+            <string>Login</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="signUpButton">
+           <property name="font">
+            <font>
+             <pointsize>-1</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+
+    background-color: rgba(48, 72, 112, 230);
+
     color: white;
-    border: 1px solid #666666;
+
+    border: 1px solid #6EA8E8;
+
     border-radius: 10px;
 
-    font-size: 18px;  
+    font-size: 18px;
+
     font-weight: bold;
 
     padding: 12px 18px;
 }
 
 QPushButton:hover {
-    background-color: #525252;
-    border: 1px solid #7A7A7A;
+
+    background-color: rgba(68, 96, 145, 240);
+
+    border: 1px solid #8FD3FF;
 }
 
 QPushButton:pressed {
-    background-color: #3F3F3F;
+
+    background-color: rgba(34, 56, 90, 255);
 }
 
 QPushButton:disabled {
-    background-color: #2F2F2F;
-    color: #8A8A8A;
-    border: 1px solid #555555;
+
+    background-color: rgba(40, 55, 80, 180);
+
+    color: #AAB7C8;
+
+    border: 1px solid rgba(95, 145, 210, 80);
 }</string>
-         </property>
-         <property name="text">
-          <string>Sign up</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="successLabel">
-         <property name="styleSheet">
-          <string notr="true">QLabel{
-    color: #39d353;
-    font-size: 16px;
-    font-weight: bold;
+           </property>
+           <property name="text">
+            <string>Sign up</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="successLabel">
+           <property name="styleSheet">
+            <string notr="true">QLabel {
+    background: transparent;
+    border: none;
+
+    color: #5FD65F;
+    font-size: 14px;
+    font-weight: 600;
 }</string>
-         </property>
-         <property name="text">
-          <string>TextLabel</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="verticalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Orientation::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
+           </property>
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Orientation::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
        </item>
       </layout>
-     </item>
-    </layout>
-   </widget>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -424,8 +491,15 @@ QPushButton:disabled {
      <height>26</height>
     </rect>
    </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QStatusBar" name="statusbar">
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

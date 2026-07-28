@@ -11,6 +11,9 @@ ForgotPasswordPage::ForgotPasswordPage(QWidget *parent)
 {
     ui->setupUi(this);
 
+    menuBar()->setVisible(false);
+    statusBar()->setVisible(false);
+
     ui->emailErrorLabel->hide();
     ui->newPasswordErrorLabel->hide();
     ui->confirmPasswordErrorLabel->hide();
@@ -179,18 +182,29 @@ void ForgotPasswordPage::clearErrors()
 void ForgotPasswordPage::setEmailNormalStyle()
 {
     ui->emailLineEdit->setStyleSheet(
-        "QLineEdit{"
-        "background:#404040;"
-        "border:1px solid #666666;"
+        "QLineEdit {"
+        "background-color: rgba(48,72,112,230);"
+        "border:1px solid #6EA8E8;"
         "border-radius:10px;"
-        "padding:13px;"
+        "padding:15px;"
+        "color:white;"
+        "min-height:28px;"
+        "selection-background-color:#8FD3FF;"
+        "selection-color:white;"
+        "}"
+        "QLineEdit:hover {"
+        "background-color: rgba(48,72,112,230);"
+        "}"
+        "QLineEdit:focus {"
+        "background-color: rgba(58,84,128,240);"
+        "border:2px solid #8FD3FF;"
         "color:white;"
         "}"
-        "QLineEdit:focus{"
-        "border:2px solid #8c8c8c;"
-        "}");
+        );
 
     ui->emailLabel->setStyleSheet(
+        "background:transparent;"
+        "border:none;"
         "color:white;"
         "font-size:16px;"
         "font-weight:600;");
@@ -199,18 +213,29 @@ void ForgotPasswordPage::setEmailNormalStyle()
 void ForgotPasswordPage::setEmailErrorStyle()
 {
     ui->emailLineEdit->setStyleSheet(
-        "QLineEdit{"
-        "background:#404040;"
+        "QLineEdit {"
+        "background-color: rgba(48,72,112,230);"
         "border:2px solid red;"
         "border-radius:10px;"
-        "padding:13px;"
+        "padding:15px;"
+        "color:white;"
+        "min-height:28px;"
+        "selection-background-color:#8FD3FF;"
+        "selection-color:white;"
+        "}"
+        "QLineEdit:hover {"
+        "background-color: rgba(48,72,112,230);"
+        "}"
+        "QLineEdit:focus {"
+        "background-color: rgba(58,84,128,240);"
+        "border:2px solid red;"
         "color:white;"
         "}"
-        "QLineEdit:focus{"
-        "border:2px solid red;"
-        "}");
+        );
 
     ui->emailLabel->setStyleSheet(
+        "background:transparent;"
+        "border:none;"
         "color:red;"
         "font-size:16px;"
         "font-weight:600;");
@@ -219,18 +244,29 @@ void ForgotPasswordPage::setEmailErrorStyle()
 void ForgotPasswordPage::setPasswordNormalStyle()
 {
     ui->newPasswordLineEdit->setStyleSheet(
-        "QLineEdit{"
-        "background:#404040;"
-        "border:1px solid #666666;"
+        "QLineEdit {"
+        "background-color: rgba(48,72,112,230);"
+        "border:1px solid #6EA8E8;"
         "border-radius:10px;"
-        "padding:13px;"
+        "padding:15px;"
+        "color:white;"
+        "min-height:28px;"
+        "selection-background-color:#8FD3FF;"
+        "selection-color:white;"
+        "}"
+        "QLineEdit:hover {"
+        "background-color: rgba(48,72,112,230);"
+        "}"
+        "QLineEdit:focus {"
+        "background-color: rgba(58,84,128,240);"
+        "border:2px solid #8FD3FF;"
         "color:white;"
         "}"
-        "QLineEdit:focus{"
-        "border:2px solid #8c8c8c;"
-        "}");
+        );
 
     ui->newPasswordLabel->setStyleSheet(
+        "background:transparent;"
+        "border:none;"
         "color:white;"
         "font-size:16px;"
         "font-weight:600;");
@@ -239,18 +275,29 @@ void ForgotPasswordPage::setPasswordNormalStyle()
 void ForgotPasswordPage::setPasswordErrorStyle()
 {
     ui->newPasswordLineEdit->setStyleSheet(
-        "QLineEdit{"
-        "background:#404040;"
+        "QLineEdit {"
+        "background-color: rgba(48,72,112,230);"
         "border:2px solid red;"
         "border-radius:10px;"
-        "padding:13px;"
+        "padding:15px;"
+        "color:white;"
+        "min-height:28px;"
+        "selection-background-color:#8FD3FF;"
+        "selection-color:white;"
+        "}"
+        "QLineEdit:hover {"
+        "background-color: rgba(48,72,112,230);"
+        "}"
+        "QLineEdit:focus {"
+        "background-color: rgba(58,84,128,240);"
+        "border:2px solid red;"
         "color:white;"
         "}"
-        "QLineEdit:focus{"
-        "border:2px solid red;"
-        "}");
+        );
 
     ui->newPasswordLabel->setStyleSheet(
+        "background:transparent;"
+        "border:none;"
         "color:red;"
         "font-size:16px;"
         "font-weight:600;");
@@ -259,18 +306,29 @@ void ForgotPasswordPage::setPasswordErrorStyle()
 void ForgotPasswordPage::setConfirmPasswordNormalStyle()
 {
     ui->confirmPasswordLineEdit->setStyleSheet(
-        "QLineEdit{"
-        "background:#404040;"
-        "border:1px solid #666666;"
+        "QLineEdit {"
+        "background-color: rgba(48,72,112,230);"
+        "border:1px solid #6EA8E8;"
         "border-radius:10px;"
-        "padding:13px;"
+        "padding:15px;"
+        "color:white;"
+        "min-height:28px;"
+        "selection-background-color:#8FD3FF;"
+        "selection-color:white;"
+        "}"
+        "QLineEdit:hover {"
+        "background-color: rgba(48,72,112,230);"
+        "}"
+        "QLineEdit:focus {"
+        "background-color: rgba(58,84,128,240);"
+        "border:2px solid #8FD3FF;"
         "color:white;"
         "}"
-        "QLineEdit:focus{"
-        "border:2px solid #8c8c8c;"
-        "}");
+        );
 
     ui->confirmPasswordLabel->setStyleSheet(
+        "background:transparent;"
+        "border:none;"
         "color:white;"
         "font-size:16px;"
         "font-weight:600;");
@@ -279,18 +337,29 @@ void ForgotPasswordPage::setConfirmPasswordNormalStyle()
 void ForgotPasswordPage::setConfirmPasswordErrorStyle()
 {
     ui->confirmPasswordLineEdit->setStyleSheet(
-        "QLineEdit{"
-        "background:#404040;"
+        "QLineEdit {"
+        "background-color: rgba(48,72,112,230);"
         "border:2px solid red;"
         "border-radius:10px;"
-        "padding:13px;"
+        "padding:15px;"
+        "color:white;"
+        "min-height:28px;"
+        "selection-background-color:#8FD3FF;"
+        "selection-color:white;"
+        "}"
+        "QLineEdit:hover {"
+        "background-color: rgba(48,72,112,230);"
+        "}"
+        "QLineEdit:focus {"
+        "background-color: rgba(58,84,128,240);"
+        "border:2px solid red;"
         "color:white;"
         "}"
-        "QLineEdit:focus{"
-        "border:2px solid red;"
-        "}");
+        );
 
     ui->confirmPasswordLabel->setStyleSheet(
+        "background:transparent;"
+        "border:none;"
         "color:red;"
         "font-size:16px;"
         "font-weight:600;");

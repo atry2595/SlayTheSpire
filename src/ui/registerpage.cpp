@@ -10,6 +10,10 @@ RegisterPage::RegisterPage(QWidget *parent)
     , ui(new Ui::RegisterPage)
 {
     ui->setupUi(this);
+
+    menuBar()->setVisible(false);
+    statusBar()->setVisible(false);
+
     ui->usernameSuggestionLabel->hide();
     ui->usernameSuggestionLabel->setTextFormat(Qt::RichText);
     ui->usernameSuggestionLabel->setTextInteractionFlags(Qt::TextBrowserInteraction);
@@ -168,19 +172,28 @@ void RegisterPage::setUsernameNormalStyle()
 {
     ui->usernameLineEdit->setStyleSheet(
         "QLineEdit {"
-        "background-color: #404040;"
-        "border: 1px solid #666666;"
-        "border-radius: 10px;"
-        "padding: 13px;"
-        "color: white;"
-        "min-height: 28px;"
+        "background-color: rgba(48,72,112,230);"
+        "border:1px solid #6EA8E8;"
+        "border-radius:10px;"
+        "padding:15px;"
+        "color:white;"
+        "min-height:28px;"
+        "selection-background-color:#8FD3FF;"
+        "selection-color:white;"
+        "}"
+        "QLineEdit:hover {"
+        "background-color: rgba(48,72,112,230);"
         "}"
         "QLineEdit:focus {"
-        "border: 2px solid #8c8c8c;"
+        "background-color: rgba(58,84,128,240);"
+        "border:2px solid #8FD3FF;"
+        "color:white;"
         "}"
         );
 
     ui->usernameLabel->setStyleSheet(
+        "background: transparent;"
+        "border: none;"
         "color:white;"
         "font-size:16px;"
         "font-weight:600;");
@@ -190,19 +203,28 @@ void RegisterPage::setUsernameErrorStyle()
 {
     ui->usernameLineEdit->setStyleSheet(
         "QLineEdit {"
-        "background-color: #404040;"
+        "background-color: rgba(48,72,112,230);"
         "border:2px solid red;"
         "border-radius:10px;"
-        "padding:13px;"
+        "padding:15px;"
         "color:white;"
         "min-height:28px;"
+        "selection-background-color:#8FD3FF;"
+        "selection-color:white;"
+        "}"
+        "QLineEdit:hover {"
+        "background-color: rgba(48,72,112,230);"
         "}"
         "QLineEdit:focus {"
+        "background-color: rgba(58,84,128,240);"
         "border:2px solid red;"
+        "color:white;"
         "}"
         );
 
     ui->usernameLabel->setStyleSheet(
+        "background: transparent;"
+        "border: none;"
         "color:red;"
         "font-size:16px;"
         "font-weight:600;");
@@ -212,19 +234,28 @@ void RegisterPage::setEmailNormalStyle()
 {
     ui->emailLineEdit->setStyleSheet(
         "QLineEdit {"
-        "background-color:#404040;"
-        "border:1px solid #666666;"
+        "background-color: rgba(48,72,112,230);"
+        "border:1px solid #6EA8E8;"
         "border-radius:10px;"
-        "padding:13px;"
+        "padding:15px;"
         "color:white;"
         "min-height:28px;"
+        "selection-background-color:#8FD3FF;"
+        "selection-color:white;"
         "}"
-        "QLineEdit:focus{"
-        "border:2px solid #8c8c8c;"
+        "QLineEdit:hover {"
+        "background-color: rgba(48,72,112,230);"
+        "}"
+        "QLineEdit:focus {"
+        "background-color: rgba(58,84,128,240);"
+        "border:2px solid #8FD3FF;"
+        "color:white;"
         "}"
         );
 
     ui->emailLabel->setStyleSheet(
+        "background: transparent;"
+        "border: none;"
         "color:white;"
         "font-size:16px;"
         "font-weight:600;");
@@ -234,19 +265,28 @@ void RegisterPage::setEmailErrorStyle()
 {
     ui->emailLineEdit->setStyleSheet(
         "QLineEdit {"
-        "background-color:#404040;"
+        "background-color: rgba(48,72,112,230);"
         "border:2px solid red;"
         "border-radius:10px;"
-        "padding:13px;"
+        "padding:15px;"
         "color:white;"
         "min-height:28px;"
+        "selection-background-color:#8FD3FF;"
+        "selection-color:white;"
         "}"
-        "QLineEdit:focus{"
+        "QLineEdit:hover {"
+        "background-color: rgba(48,72,112,230);"
+        "}"
+        "QLineEdit:focus {"
+        "background-color: rgba(58,84,128,240);"
         "border:2px solid red;"
+        "color:white;"
         "}"
         );
 
     ui->emailLabel->setStyleSheet(
+        "background: transparent;"
+        "border: none;"
         "color:red;"
         "font-size:16px;"
         "font-weight:600;");
@@ -256,19 +296,28 @@ void RegisterPage::setPasswordNormalStyle()
 {
     ui->passwordLineEdit->setStyleSheet(
         "QLineEdit {"
-        "background-color:#404040;"
-        "border:1px solid #666666;"
+        "background-color: rgba(48,72,112,230);"
+        "border:1px solid #6EA8E8;"
         "border-radius:10px;"
-        "padding:13px;"
+        "padding:15px;"
         "color:white;"
         "min-height:28px;"
+        "selection-background-color:#8FD3FF;"
+        "selection-color:white;"
         "}"
-        "QLineEdit:focus{"
-        "border:2px solid #8c8c8c;"
+        "QLineEdit:hover {"
+        "background-color: rgba(48,72,112,230);"
+        "}"
+        "QLineEdit:focus {"
+        "background-color: rgba(58,84,128,240);"
+        "border:2px solid #8FD3FF;"
+        "color:white;"
         "}"
         );
 
     ui->passwordLabel->setStyleSheet(
+        "background: transparent;"
+        "border: none;"
         "color:white;"
         "font-size:16px;"
         "font-weight:600;");
@@ -278,19 +327,28 @@ void RegisterPage::setPasswordErrorStyle()
 {
     ui->passwordLineEdit->setStyleSheet(
         "QLineEdit {"
-        "background-color:#404040;"
+        "background-color: rgba(48,72,112,230);"
         "border:2px solid red;"
         "border-radius:10px;"
-        "padding:13px;"
+        "padding:15px;"
         "color:white;"
         "min-height:28px;"
+        "selection-background-color:#8FD3FF;"
+        "selection-color:white;"
         "}"
-        "QLineEdit:focus{"
+        "QLineEdit:hover {"
+        "background-color: rgba(48,72,112,230);"
+        "}"
+        "QLineEdit:focus {"
+        "background-color: rgba(58,84,128,240);"
         "border:2px solid red;"
+        "color:white;"
         "}"
         );
 
     ui->passwordLabel->setStyleSheet(
+        "background: transparent;"
+        "border: none;"
         "color:red;"
         "font-size:16px;"
         "font-weight:600;");
@@ -300,19 +358,28 @@ void RegisterPage::setConfirmPasswordNormalStyle()
 {
     ui->confirmPasswordLineEdit->setStyleSheet(
         "QLineEdit {"
-        "background-color:#404040;"
-        "border:1px solid #666666;"
+        "background-color: rgba(48,72,112,230);"
+        "border:1px solid #6EA8E8;"
         "border-radius:10px;"
-        "padding:13px;"
+        "padding:15px;"
         "color:white;"
         "min-height:28px;"
+        "selection-background-color:#8FD3FF;"
+        "selection-color:white;"
         "}"
-        "QLineEdit:focus{"
-        "border:2px solid #8c8c8c;"
+        "QLineEdit:hover {"
+        "background-color: rgba(48,72,112,230);"
+        "}"
+        "QLineEdit:focus {"
+        "background-color: rgba(58,84,128,240);"
+        "border:2px solid #8FD3FF;"
+        "color:white;"
         "}"
         );
 
     ui->confirmPasswordLabel->setStyleSheet(
+        "background: transparent;"
+        "border: none;"
         "color:white;"
         "font-size:16px;"
         "font-weight:600;");
@@ -322,19 +389,28 @@ void RegisterPage::setConfirmPasswordErrorStyle()
 {
     ui->confirmPasswordLineEdit->setStyleSheet(
         "QLineEdit {"
-        "background-color:#404040;"
+        "background-color: rgba(48,72,112,230);"
         "border:2px solid red;"
         "border-radius:10px;"
-        "padding:13px;"
+        "padding:15px;"
         "color:white;"
         "min-height:28px;"
+        "selection-background-color:#8FD3FF;"
+        "selection-color:white;"
         "}"
-        "QLineEdit:focus{"
+        "QLineEdit:hover {"
+        "background-color: rgba(48,72,112,230);"
+        "}"
+        "QLineEdit:focus {"
+        "background-color: rgba(58,84,128,240);"
         "border:2px solid red;"
+        "color:white;"
         "}"
         );
 
     ui->confirmPasswordLabel->setStyleSheet(
+        "background: transparent;"
+        "border: none;"
         "color:red;"
         "font-size:16px;"
         "font-weight:600;");

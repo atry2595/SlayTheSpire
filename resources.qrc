@@ -297,6 +297,7 @@
         <file alias="map2_normal.jpg">assests/image/scene/map2_normal.jpg</file>
         <file alias="rest.png">assests/image/scene/rest.png</file>
         <file alias="shop">assests/image/scene/shop.PNG</file>
+        <file alias="back_login">assests/image/scene/IMG_6908.png</file>
     </qresource>
     <qresource prefix="/image/events">
         <file alias="Ominous_Forge.jpg">assests/image/events/photo_2026-07-12_19-35-32.jpg</file>
@@ -314,9 +315,13 @@
     <qresource prefix="/icon/login">
         <file alias="eye.svg">assests/image/icon/login/eye.svg</file>
         <file alias="eye_off.svg">assests/image/icon/login/eye_off.svg</file>
+        <file alias="eye.svg">assests/image/icon/login/eye.svg</file>
+        <file alias="eye_off.svg">assests/image/icon/login/eye_off.svg</file>
     </qresource>
     <qresource prefix="/image/back">
         <file alias="back1">assests/image/back/IMG_6654.jpg</file>
+        <file alias="back1">assests/image/back/IMG_6654.jpg</file>
+        <file alias="logo">assests/image/back/Slay_the_Spire_Logo.png</file>
     </qresource>
     <qresource prefix="/image/card/frame">
         <file alias="frame_black.png">assests/image/cards/frame/frame_black.png</file>
@@ -356,14 +361,6 @@
         <file alias="right_button.png">assests/image/icon/right_button.png</file>
         <file alias="error.png">assests/image/icon/error.png</file>
         <file alias="back_icon">assests/image/icon/back_icon.PNG</file>
-    </qresource>
-    <qresource prefix="/icon/login">
-        <file alias="eye.svg">assests/image/icon/login/eye.svg</file>
-        <file alias="eye_off.svg">assests/image/icon/login/eye_off.svg</file>
-    </qresource>
-    <qresource prefix="/image/back">
-        <file alias="back1">assests/image/back/IMG_6654.jpg</file>
-        <file alias="logo">assests/image/back/Slay_the_Spire_Logo.png</file>
     </qresource>
     <qresource prefix="/image/chest">
         <file alias="oathchest.png">assests/image/oath_chest.png</file>
