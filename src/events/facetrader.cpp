@@ -34,8 +34,7 @@ FaceTrader::FaceTrader(game_action& actions, ironclad* player)
 
     UnknownNode touch_node;
     int dmg = (int) player->get_max_hp() / 10;
-    touch_node.title = tr("[Touch] Lose %1  HP\n"
-                          "        gain 75 Gold.").arg(dmg);
+    touch_node.title = tr("[Touch] Lose %1 HP, gain 75 Gold.").arg(dmg);
 
     touch_node.description = tr(
         "\"Compensation? Compensation.\"\n\n"
