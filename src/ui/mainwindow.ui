@@ -14,15 +14,24 @@
    <string>Slay The Spire</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="backgroundLabel">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>1600</width>
-      <height>900</height>
-     </rect>
+   <layout class="QGridLayout" name="gridLayout">
+    <property name="leftMargin">
+     <number>0</number>
     </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <item row="0" column="0">
+     <widget class="QLabel" name="backgroundLabel">
     <property name="styleSheet">
      <string notr="true">border-image: url(:/image/back/back1) 0 0 0 0 stretch stretch;</string>
     </property>
@@ -33,15 +42,9 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QFrame" name="menuFrame">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>1600</width>
-      <height>900</height>
-     </rect>
-    </property>
+    </item>
+    <item row="0" column="0">
+     <widget class="QFrame" name="menuFrame">
     <property name="frameShape">
      <enum>QFrame::Shape::NoFrame</enum>
     </property>
@@ -192,38 +195,68 @@ QPushButton:pressed {
      </property>
     </widget>
    </widget>
-   <widget class="QFrame" name="darkOverlay">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>1600</width>
-      <height>900</height>
-     </rect>
-    </property>
+    </item>
+    <item row="0" column="0">
+     <widget class="QFrame" name="darkOverlay">
     <property name="styleSheet">
      <string notr="true">background-color: rgba(0, 0, 0, 90);</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::Shape::NoFrame</enum>
     </property>
-    <widget class="QFrame" name="leaderboardFrame">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>1600</width>
-       <height>900</height>
-      </rect>
+    <layout class="QGridLayout" name="darkOverlayLayout">
+     <property name="leftMargin">
+      <number>0</number>
      </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item row="0" column="0">
+      <widget class="QFrame" name="leaderboardFrame">
      <property name="frameShape">
       <enum>QFrame::Shape::NoFrame</enum>
      </property>
+     <layout class="QGridLayout" name="leaderboardFrameLayout">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item row="0" column="0" alignment="Qt::AlignCenter">
+       <widget class="QWidget" name="leaderboardContent">
+        <property name="minimumSize">
+         <size>
+          <width>1000</width>
+          <height>780</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>1000</width>
+          <height>780</height>
+         </size>
+        </property>
      <widget class="QLabel" name="leaderboardTitleLabel">
       <property name="geometry">
        <rect>
-        <x>600</x>
-        <y>40</y>
+        <x>300</x>
+        <y>0</y>
         <width>400</width>
         <height>50</height>
        </rect>
@@ -245,8 +278,8 @@ border: none;</string>
      <widget class="QTableWidget" name="leaderboardTable">
       <property name="geometry">
        <rect>
-        <x>300</x>
-        <y>110</y>
+        <x>0</x>
+        <y>70</y>
         <width>1000</width>
         <height>630</height>
        </rect>
@@ -277,8 +310,8 @@ QHeaderView::section {
      <widget class="QPushButton" name="backButton_3">
       <property name="geometry">
        <rect>
-        <x>300</x>
-        <y>765</y>
+        <x>0</x>
+        <y>725</y>
         <width>220</width>
         <height>55</height>
        </rect>
@@ -310,15 +343,24 @@ QPushButton:pressed {
        <string>Back</string>
       </property>
      </widget>
-    </widget>
-    <widget class="QFrame" name="personalStatsFrame">
-     <property name="geometry">
-      <rect>
-       <x>400</x>
-       <y>100</y>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     </item>
+     <item row="0" column="0" alignment="Qt::AlignCenter">
+      <widget class="QFrame" name="personalStatsFrame">
+     <property name="minimumSize">
+      <size>
        <width>800</width>
        <height>700</height>
-      </rect>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>800</width>
+       <height>700</height>
+      </size>
      </property>
      <property name="styleSheet">
       <string notr="true">QFrame#personalStatsFrame {
@@ -446,16 +488,12 @@ QPushButton:hover {
       </item>
      </layout>
     </widget>
-   </widget>
-   <widget class="QFrame" name="playFrame">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>1600</width>
-      <height>900</height>
-     </rect>
-    </property>
+      </item>
+     </layout>
+    </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QFrame" name="playFrame">
     <property name="frameShape">
      <enum>QFrame::Shape::NoFrame</enum>
     </property>
@@ -568,15 +606,9 @@ QPushButton:pressed {
      </property>
     </widget>
    </widget>
-   <widget class="QFrame" name="statisticsFrame">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>1600</width>
-      <height>900</height>
-     </rect>
-    </property>
+    </item>
+    <item row="0" column="0">
+     <widget class="QFrame" name="statisticsFrame">
     <property name="frameShape">
      <enum>QFrame::Shape::NoFrame</enum>
     </property>
@@ -727,26 +759,55 @@ QPushButton:pressed {
      </property>
     </widget>
    </widget>
-   <widget class="QLabel" name="logoLabel">
-    <property name="geometry">
-     <rect>
-      <x>550</x>
-      <y>100</y>
-      <width>500</width>
-      <height>404</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">border-image: url(:/image/back/logo) 0 0 0 0 stretch stretch;
+    </item>
+    <item row="0" column="0" alignment="Qt::AlignHCenter|Qt::AlignTop">
+     <widget class="QWidget" name="logoContainer">
+      <property name="styleSheet">
+       <string notr="true">background: transparent;</string>
+      </property>
+      <layout class="QVBoxLayout" name="logoContainerLayout">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>100</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item alignment="Qt::AlignHCenter|Qt::AlignTop">
+        <widget class="QLabel" name="logoLabel">
+         <property name="minimumSize">
+          <size>
+           <width>500</width>
+           <height>404</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>500</width>
+           <height>404</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border-image: url(:/image/back/logo) 0 0 0 0 stretch stretch;
 background: transparent;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="scaledContents">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -756,6 +817,9 @@ background: transparent;</string>
      <width>1600</width>
      <height>26</height>
     </rect>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
    </property>
   </widget>
  </widget>
