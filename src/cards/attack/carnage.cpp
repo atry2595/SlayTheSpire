@@ -30,7 +30,7 @@ void carnage::upgrade(){
 
 void carnage::base_upgrade(){
     base_damage = damage =28;
-    is_upgraded = true;
+    base_is_upgraded = true;
     base_description = generate_description();
 
     combat_reset();

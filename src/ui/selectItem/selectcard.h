@@ -16,6 +16,9 @@ class selectCard : public QObject
     Q_OBJECT
 
 private:
+
+    bool selected = false;
+
     int current_min = 0;
     int current_max = 4;
 

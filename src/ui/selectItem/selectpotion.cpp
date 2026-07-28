@@ -79,6 +79,9 @@ void selectPotion::execute() {
 
 void selectPotion::potionSelected(abstractPotion* pt) {
 
+    if (selected) return;
+    selected = true;
+
     soundManager::instance().playSoundEffect(SoundEffect::menuSelect);
 
     emit event->potionSelected(pt);

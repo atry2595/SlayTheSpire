@@ -24,7 +24,7 @@ void bludgeon::upgrade(){
 
 void bludgeon::base_upgrade(){
     base_damage = damage =42;
-    is_upgraded = true;
+    base_is_upgraded = true;
     base_description = generate_description();
 
     combat_reset();

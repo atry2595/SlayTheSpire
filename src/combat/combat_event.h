@@ -64,6 +64,8 @@ signals:
     void potion_removed(abstractPotion*);
 
     void lift(abstractEntity*);
+    void campRest(abstractEntity*);
+    void campSmith(abstractEntity*);
 
     //=============ui=========================
     void cardPressed(CardParent*);
@@ -97,6 +99,8 @@ signals:
 
     void selectPotion(std::vector<abstractPotion*>);
     void potionSelected(abstractPotion*);
+
+    void chestOpened();
 
 };
 
