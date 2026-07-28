@@ -37,6 +37,8 @@ class imageManager
 
     QHash<ChestType, QPixmap> chest_table;
     QHash<ChestType, QPixmap> dialogbox_table;
+    QHash<QString, QPixmap> other_table;
+    QHash<RoomType, QPixmap> legend_table;
 
 public:
     static imageManager& instance();
@@ -61,6 +63,10 @@ public:
 
     QPixmap& getChestImage(ChestType type);
     QPixmap& getDialogImage(ChestType type);
+
+    QPixmap& getMapImage(QString name);
+    QPixmap& getMapImage(RoomType room);
+
 };
 
 #endif // IMAGEMANAGER_H
