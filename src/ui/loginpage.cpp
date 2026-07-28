@@ -10,6 +10,10 @@ LoginPage::LoginPage(QWidget *parent)
     , ui(new Ui::LoginPage)
 {
     ui->setupUi(this);
+
+    menuBar()->setVisible(false);
+    statusBar()->setVisible(false);
+
     ui->usernameErrorLabel->hide();
     ui->passwordErrorLabel->hide();
     ui->successLabel->hide();
@@ -102,18 +106,28 @@ void LoginPage::setUsernameNormalStyle()
 {
     ui->usernameLineEdit->setStyleSheet(
         "QLineEdit {"
-        "background-color:#404040;"
-        "border:1px solid #666666;"
+        "background-color: rgba(48,72,112,230);"
+        "border:1px solid #6EA8E8;"
         "border-radius:10px;"
-        "padding:13px;"
+        "padding:15px;"
         "color:white;"
         "min-height:28px;"
+        "selection-background-color:#8FD3FF;"
+        "selection-color:white;"
+        "}"
+        "QLineEdit:hover {"
+        "background-color: rgba(48,72,112,230);"
         "}"
         "QLineEdit:focus {"
-        "border:2px solid #8c8c8c;"
+        "background-color: rgba(58,84,128,240);"
+        "border:2px solid #8FD3FF;"
+        "color:white;"
         "}"
         );
+
     ui->username->setStyleSheet(
+        "background: transparent;"
+        "border: none;"
         "color:white;"
         "font-size:16px;"
         "font-weight:600;");
@@ -123,18 +137,28 @@ void LoginPage::setUsernameErrorStyle()
 {
     ui->usernameLineEdit->setStyleSheet(
         "QLineEdit {"
-        "background-color:#404040;"
+        "background-color: rgba(48,72,112,230);"
         "border:2px solid red;"
         "border-radius:10px;"
-        "padding:13px;"
+        "padding:15px;"
         "color:white;"
         "min-height:28px;"
+        "selection-background-color:#8FD3FF;"
+        "selection-color:white;"
+        "}"
+        "QLineEdit:hover {"
+        "background-color: rgba(48,72,112,230);"
         "}"
         "QLineEdit:focus {"
+        "background-color: rgba(58,84,128,240);"
         "border:2px solid red;"
+        "color:white;"
         "}"
         );
+
     ui->username->setStyleSheet(
+        "background: transparent;"
+        "border: none;"
         "color:red;"
         "font-size:16px;"
         "font-weight:600;");
@@ -144,18 +168,28 @@ void LoginPage::setPasswordNormalStyle()
 {
     ui->passwordLineEdit->setStyleSheet(
         "QLineEdit {"
-        "background-color:#404040;"
-        "border:1px solid #666666;"
+        "background-color: rgba(48,72,112,230);"
+        "border:1px solid #6EA8E8;"
         "border-radius:10px;"
-        "padding:13px;"
+        "padding:15px;"
         "color:white;"
         "min-height:28px;"
+        "selection-background-color:#8FD3FF;"
+        "selection-color:white;"
+        "}"
+        "QLineEdit:hover {"
+        "background-color: rgba(48,72,112,230);"
         "}"
         "QLineEdit:focus {"
-        "border:2px solid #8c8c8c;"
+        "background-color: rgba(58,84,128,240);"
+        "border:2px solid #8FD3FF;"
+        "color:white;"
         "}"
         );
+
     ui->Password->setStyleSheet(
+        "background: transparent;"
+        "border: none;"
         "color:white;"
         "font-size:16px;"
         "font-weight:600;");
@@ -165,18 +199,28 @@ void LoginPage::setPasswordErrorStyle()
 {
     ui->passwordLineEdit->setStyleSheet(
         "QLineEdit {"
-        "background-color:#404040;"
+        "background-color: rgba(48,72,112,230);"
         "border:2px solid red;"
         "border-radius:10px;"
-        "padding:13px;"
+        "padding:15px;"
         "color:white;"
         "min-height:28px;"
+        "selection-background-color:#8FD3FF;"
+        "selection-color:white;"
+        "}"
+        "QLineEdit:hover {"
+        "background-color: rgba(48,72,112,230);"
         "}"
         "QLineEdit:focus {"
+        "background-color: rgba(58,84,128,240);"
         "border:2px solid red;"
+        "color:white;"
         "}"
         );
+
     ui->Password->setStyleSheet(
+        "background: transparent;"
+        "border: none;"
         "color:red;"
         "font-size:16px;"
         "font-weight:600;");
