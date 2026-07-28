@@ -37,9 +37,10 @@ Lab::Lab(game_action& actions, ironclad* player)
 
         pool.insert(pool.end(),rare_potions.begin(),rare_potions.end());
 
-        RNG::instance().shuffle(pool);
-
-        //complete
+        for (auto item : RNG::instance().sample(pool, 3)){
+            auto pt = PotionFactory::createPotion(item, player);
+            player->potion_list_add(pt);
+        }
     };
 
     search.canUse = [](){ return true; };

@@ -1,4 +1,5 @@
 #include "shininglight.h"
+#include "assetsManager/soundmanager.h"
 
 #include "utils/RNG.h"
 
@@ -28,9 +29,10 @@ ShiningLight::ShiningLight(game_action& actions, ironclad* player)
         "It's scorching hot! However, the pain quickly recedes.\n\n"
         "You feel invigorated, as though you received a well deserved slap.");
 
-    enter.actions = [player, &actions, dmg]()
+    enter.actions = [player, eve = actions.get_event(), dmg]()
     {
-
+        soundManager::instance().playSoundEffect(SoundEffect::smith);
+        game_action actions(eve);
         damageInfo inf;
         inf.damage = dmg;
         inf.attacker = nullptr;

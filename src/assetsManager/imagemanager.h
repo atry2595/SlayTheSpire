@@ -12,6 +12,7 @@
 #include "categories/relics.h"
 #include "categories/general.h"
 #include "items/enemyIntent.h"
+#include "categories/unknowns.h"
 
 class imageManager
 {
@@ -40,6 +41,8 @@ class imageManager
     QHash<QString, QPixmap> other_table;
     QHash<RoomType, QPixmap> legend_table;
 
+    QHash<unknownID, QPixmap> unknown_table;
+
 public:
     static imageManager& instance();
 
@@ -66,6 +69,8 @@ public:
 
     QPixmap& getMapImage(QString name);
     QPixmap& getMapImage(RoomType room);
+
+    QPixmap& getUnknownImage(unknownID id);
 
 };
 

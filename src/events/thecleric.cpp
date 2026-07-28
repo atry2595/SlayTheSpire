@@ -18,15 +18,16 @@ TheCleric::TheCleric(game_action& actions, ironclad* player)
 
     UnknownNode heal;
     int hhp = (int) player->get_max_hp() / 4;
-    heal.title =tr("[Heal] 35 Gold: Heal %1 Max HP.").arg(hhp);
+    heal.title =tr("[Heal] 35 Gold: Heal %1 HP.").arg(hhp);
 
     heal.description =tr(
         "A warm golden light envelops your body and dissipates.\n\n"
         "The creature grins.\n\n"
         "\"Cleric best healer. Have a good day!\"");
 
-    heal.actions = [player, &actions, hhp]()
+    heal.actions = [player, eve = actions.get_event(), hhp]()
     {
+        game_action actions(eve);
         player->lose_gold(35);
 
         healInfo info;
@@ -52,8 +53,9 @@ TheCleric::TheCleric(game_action& actions, ironclad* player)
            "The creature grins.\n\n"
            "\"Cleric talented. Have a good day!\"");
 
-    purify.actions = [player, &actions, this]()
+    purify.actions = [player, eve = actions.get_event()]()
     {
+        game_action actions(eve);
         player->lose_gold(50);
 
         std::vector<abstractCard*> pool;
@@ -65,12 +67,14 @@ TheCleric::TheCleric(game_action& actions, ironclad* player)
 
         if (pool.empty()) return;
         emit actions.get_event()->selectCard(pool);
-        connect(actions.get_event(), &combatEvent::cardSelected, this, [=](abstractCard* card){
+        auto conn = std::make_shared<QMetaObject::Connection>();
+        *conn = connect(actions.get_event(), &combatEvent::cardSelected, eve, [=](abstractCard* card){
 
             if (card){
                 player->deck_remove(card);
-                delete card;
             }
+
+            disconnect(*conn);
 
         });
 

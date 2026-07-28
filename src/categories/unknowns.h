@@ -6,7 +6,6 @@ enum class unknownID{
     golden_idol,
     augmenter,
     face_trader,
-    the_colosseum,
     bonfire_spirits,
     golden_shrine,
     lab,

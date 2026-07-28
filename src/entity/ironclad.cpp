@@ -5,9 +5,10 @@
 #include "items/potions/abstractpotion.h"
 #include "categories/general.h"
 #include "items/relics/relicfactory.h"
+#include <QTimer>
 
 const std::vector<cardID> ironclad::starting_deck =
-    {cardID::dual_wield, cardID::bludgeon, cardID::rage, cardID::disarm, cardID::uppercut,
+    {cardID::dual_wield, cardID::bludgeon, cardID::rage, cardID::doubt, cardID::curse_of_the_bell,
      cardID::clash, cardID::hemokinesis, cardID::spot_weakness, cardID::twin_strike, cardID::bash,
     cardID::strike, cardID::strike, cardID::strike, cardID::strike, cardID::strike,
     cardID::defend, cardID::defend, cardID::defend, cardID::defend, cardID::shrug_it_off,
@@ -106,6 +107,7 @@ void ironclad::combat_deck_add(abstractCard* card){
     }
 
     combat_deck.push_back(card);
+    emit event->card_added(card);
 }
 void ironclad::combat_deck_remove(abstractCard* card){
     auto it = std::find(combat_deck.begin(), combat_deck.end(), card);
@@ -436,9 +438,29 @@ void ironclad::damage_applied(game_action& info) {
 }
 
 void ironclad::potion_list_add(abstractPotion* pot){
-    if (potion_list.size() < max_potion_number) {
+    if (potion_list.size() <= max_potion_number){
         potion_list.push_back(pot);
-        // emit event->potion_added(pot);
+        if (potion_list.size() > max_potion_number) {
+            emit event->selectPotion(potion_list);
+
+            auto conn = std::make_shared<QMetaObject::Connection>();
+            *conn = connect(event, &combatEvent::potionSelected, this, [=](abstractPotion* selected){
+
+                for (int i = 0; i < potion_list.size(); i++) {
+                    if (potion_list[i] == selected && selected) {
+                        delete potion_list[i];
+                        potion_list.erase(potion_list.begin() + i);
+                    }
+                }
+
+                disconnect(*conn);
+            });
+        }
+    }
+    else {
+        QTimer::singleShot(500, [=](){
+            potion_list_add(pot);
+        });
     }
 }
 void ironclad::potion_list_remove(abstractPotion* pot){

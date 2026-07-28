@@ -34,7 +34,7 @@ FaceTrader::FaceTrader(game_action& actions, ironclad* player)
 
     UnknownNode touch_node;
     int dmg = (int) player->get_max_hp() / 10;
-    touch_node.title = tr("[Touch] Lose %1 HP, gain 75 (50)Ascension.png 15 Gold.").arg(dmg);
+    touch_node.title = tr("[Touch] Lose %1 HP, gain 75 Gold.").arg(dmg);
 
     touch_node.description = tr(
         "\"Compensation? Compensation.\"\n\n"
@@ -46,7 +46,7 @@ FaceTrader::FaceTrader(game_action& actions, ironclad* player)
         );
 
 
-    touch_node.actions =[player, &actions, dmg]()
+    touch_node.actions =[player, eve = actions.get_event(), dmg]()
     {
 
         damageInfo inf;
@@ -55,6 +55,7 @@ FaceTrader::FaceTrader(game_action& actions, ironclad* player)
         inf.target = player;
         inf.attacker = nullptr;
 
+        game_action actions(eve);
         actions.apply_damage(inf);
 
         player->earn_coin(75);
@@ -74,7 +75,7 @@ FaceTrader::FaceTrader(game_action& actions, ironclad* player)
         "\"Nice face. Nice face.\""
         );
 
-    trade_node.actions =[player, &actions]()
+    trade_node.actions =[player, eve = actions.get_event()]()
     {
         relicID relic;
 
@@ -97,6 +98,7 @@ FaceTrader::FaceTrader(game_action& actions, ironclad* player)
 
         abstractRelic* reward =RelicFactory::createRelic(relic, player);
 
+        game_action actions(eve);
         player->add_relic(actions, reward);
     };
 

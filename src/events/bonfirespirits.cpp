@@ -16,25 +16,34 @@ BonfireSpirits::BonfireSpirits(game_action& actions, ironclad* player) {
     root.title = "";
 
     UnknownNode offer_node;
-    offer_node.title = tr("[Offer] Receive a reward based on the rarity of the card you give.");
+    offer_node.title = tr("[Offer] Receive  a  reward   based   on\n"
+                          "        the rarity of the card you give.");
     offer_node.canUse = [](){ return true; };
-    offer_node.actions = [player, &actions, &offer_node, this] () {
+    offer_node.description = tr("The flames come alive with your offering, and the spirits, amidst the smoke and dance of fire, give a mysterious answer.");
+    offer_node.actions = [player, eve = actions.get_event(), &offer_node] () {
 
         std::vector<abstractCard*> deck = player->get_deck();
         if (deck.empty()) return;
 
 
 
-        emit actions.get_event()->selectCard(deck);
-        connect(actions.get_event(), &combatEvent::cardSelected, this, [=, &actions, &offer_node](abstractCard* selected){
+        std::vector<abstractCard*> sc;
+        for (auto item : deck) {
+            if (item->can_remove_from_deck()) sc.push_back(item);
+        }
+
+        emit eve->selectCard(sc);
+        auto conn = std::make_shared<QMetaObject::Connection>();
+        *conn = connect(eve, &combatEvent::cardSelected, eve, [=](abstractCard* selected){
 
             if (selected){
+                game_action actions(eve);
 
                 if (selected->get_card_type() == CardType::curse) {
                     auto rlc = RelicFactory::createRelic(relicID::spirit_poop, player);
                     player->add_relic(actions, rlc);
-                    offer_node.description = tr("However, the spirits aren't happy you offered a Curse.../nThe card fizzles a meek black smoke. You receive a... something in return.");
                 }
+
                 else if (selected->is_rare()) {
                     player->set_max_hp(player->get_max_hp() + 10);
                     healInfo inf;
@@ -42,23 +51,23 @@ BonfireSpirits::BonfireSpirits(game_action& actions, ironclad* player) {
                     inf.owner = player;
                     actions.heal(inf);
 
-                    offer_node.description = tr("The flames burst, nearly knocking you off your feet, as the fire doubles in strength./nThe spirits dance around you excitedly before merging into your form, filling you with warmth and strength./nYour Max HP increases by 10 and you are healed to full HP.");
                 }
-                else if (selected->get_card_id() == cardID::strike || selected->get_card_id() == cardID::defend){
-                    offer_node.description = tr("Nothing happens...\nThe spirits seem to be ignoring you now. Disappointing...");
-                }
+
+                else if (selected->get_card_id() == cardID::strike || selected->get_card_id() == cardID::defend) {}
+
                 else {
                     healInfo inf;
                     inf.value = 5;
                     inf.owner = player;
                     actions.heal(inf);
 
-                    offer_node.description = tr("The flames grow slightly brighter./nThe spirits continue dancing. You feel slightly warmer from their presence../nYou heal 5 HP.");
-
                 }
 
                 player->deck_remove(selected);
+                emit eve->barUpdate();
             }
+
+            disconnect(*conn);
 
         });
 

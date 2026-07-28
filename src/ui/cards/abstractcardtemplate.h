@@ -38,6 +38,7 @@ protected:
 
 public:
     abstractCardTemplate(combatEvent* eve, abstractCard* source, QPointF pos, QSizeF size, qreal zValue);
+    ~abstractCardTemplate();
 
     // Card pos
     void setCardpos(QPointF value);

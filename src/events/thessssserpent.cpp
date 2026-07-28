@@ -63,4 +63,5 @@ TheSsssserpent::TheSsssserpent(game_action& actions, ironclad* player) {
 
     manager.nodes[rootIdx].next_nodes = {agreeIdx, disagreeIdx, -1};
     manager.nodes[agreeIdx].next_nodes = {continueIdx};
+    manager.nodes[continueIdx].next_nodes = {-1};
 }

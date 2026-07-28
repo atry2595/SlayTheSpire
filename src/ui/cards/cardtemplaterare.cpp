@@ -97,6 +97,8 @@ CardTemplateRare::CardTemplateRare(combatEvent* eve, abstractCard* source, QPoin
     card_description->setColor(Qt::white);
     card_description->setZValue(zValue + 3);
 
+
+    updateCard();
 }
 
 

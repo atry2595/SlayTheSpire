@@ -11,6 +11,9 @@ abstractCardTemplate::abstractCardTemplate(combatEvent* eve, abstractCard* sourc
     card_parent->setSource(source);
 }
 
+abstractCardTemplate::~abstractCardTemplate() {
+    card_parent->deleteLater();
+}
 
 
 void abstractCardTemplate::setCardpos(QPointF value) {

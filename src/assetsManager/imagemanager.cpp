@@ -264,9 +264,22 @@ imageManager::imageManager() {
     legend_table[RoomType::ELITE] = QPixmap(":/icon/map/elite.ico");
     legend_table[RoomType::UNKNOWN] = QPixmap(":/icon/map/event.ico");
     legend_table[RoomType::MERCHANT] = QPixmap(":/icon/map/merch.ico");
-    legend_table[RoomType::REST] = QPixmap(":/icon/map/rest.ico");
+    legend_table[RoomType::REST] = QPixmap(":/icon/map/rest.png");
     legend_table[RoomType::TREASURE] = QPixmap(":/icon/map/treasure.ico");
     legend_table[RoomType::BOSS] = QPixmap(":/icon/map/boss.ico");
+    unknown_table[unknownID::ancient_writing] = QPixmap(":/image/events/ancient.jpg");
+    unknown_table[unknownID::augmenter] = QPixmap(":/image/events/augmenter.jpg");
+    unknown_table[unknownID::bonfire_spirits] = QPixmap(":/image/events/bonefire.jpg");
+    unknown_table[unknownID::the_cleric] = QPixmap(":/image/events/cleric.jpg");
+    unknown_table[unknownID::face_trader] = QPixmap(":/image/events/facetrader.jpg");
+    unknown_table[unknownID::golden_idol] = QPixmap(":/image/events/goldenidol.jpg");
+    unknown_table[unknownID::golden_shrine] = QPixmap(":/image/events/goldenshirine.jpg");
+    unknown_table[unknownID::lab] = QPixmap(":/image/events/lab.jpg");
+    unknown_table[unknownID::the_joust] = QPixmap(":/image/events/joust.jpg");
+    unknown_table[unknownID::ominous_forge] = QPixmap(":/image/events/ominous.jpg");
+    unknown_table[unknownID::pleading_vagrant] = QPixmap(":/image/events/pleading.jpg");
+    unknown_table[unknownID::the_ssssssserpant] = QPixmap(":/image/events/serpent.jpg");
+    unknown_table[unknownID::shining_light] = QPixmap(":/image/events/shininglight.jpg");
 }
 
 QPixmap& imageManager::getIcon(QString name) {
@@ -441,6 +454,13 @@ QPixmap& imageManager::getMapImage(QString name){
 QPixmap& imageManager::getMapImage(RoomType room){
     if (legend_table.contains(room)){
         return legend_table[room];
+    }
+    return icon_table["error"];
+}
+
+QPixmap& imageManager::getUnknownImage(unknownID id) {
+    if (unknown_table.contains(id)){
+        return unknown_table[id];
     }
     return icon_table["error"];
 }

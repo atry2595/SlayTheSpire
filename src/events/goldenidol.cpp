@@ -27,8 +27,9 @@ GoldenIdol::GoldenIdol(game_action& actions, ironclad* player)
         "You realize that the floor is slanted downwards as the boulder starts to roll towards you."
         );
 
-    take_node.actions = [player, &actions]()
+    take_node.actions = [player, eve = actions.get_event()]()
     {
+        game_action actions(eve);
         player->add_relic(actions, RelicFactory::createRelic(relicID::golden_idol, player));
     };
 
@@ -58,7 +59,7 @@ GoldenIdol::GoldenIdol(game_action& actions, ironclad* player)
         "You throw yourself at the boulder with everything you have. When the dust clears, you can make a safe way out."
         );
 
-    smash_node.actions = [player, &actions, dmg]()
+    smash_node.actions = [player, eve = actions.get_event(), dmg]()
     {
         damageInfo inf;
         inf.damage = dmg;
@@ -66,6 +67,7 @@ GoldenIdol::GoldenIdol(game_action& actions, ironclad* player)
         inf.block_active = false;
         inf.target = player;
 
+        game_action actions(eve);
         actions.apply_damage(inf);
     };
 

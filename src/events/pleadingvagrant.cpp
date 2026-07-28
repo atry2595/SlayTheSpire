@@ -30,8 +30,10 @@ PleadingVagrant::PleadingVagrant(game_action& actions, ironclad* player)
 
     offer.description =tr("\"Oh yes, yes! Here here, a fair trade!\"");
 
-    offer.actions = [player, &actions]()
+    offer.actions = [player, eve = actions.get_event()]()
     {
+        game_action actions(eve);
+
         player->lose_gold(85);
 
         std::vector<relicID> relicPool = common_relic;
@@ -64,8 +66,10 @@ PleadingVagrant::PleadingVagrant(game_action& actions, ironclad* player)
         "\"Have you no shame? HAVE YOU NO SHAAAAAME?!\"\n\n"
         "You have some shame.");
 
-    rob.actions = [player, &actions]()
+    rob.actions = [player, eve = actions.get_event()]()
     {
+        game_action actions(eve);
+
         std::vector<relicID> relicPool = common_relic;
 
         relicPool.insert(relicPool.end(),uncommon_relic.begin(),uncommon_relic.end());

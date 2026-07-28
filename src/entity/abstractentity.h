@@ -49,7 +49,7 @@ public:
     virtual entityType get_type() = 0;
     virtual entityID get_ID() = 0;
 
-    void set_max_hp(int i_init) { max_hp = i_init; }
+    inline void set_max_hp(int i_init) { max_hp = i_init; hp = std::min(max_hp, hp); }
     void set_hp(int i_init) { hp = i_init; }
     void set_block(int i_init) { block = i_init; }
     void set_reset_block(bool b_init) { block_reset_in_combat = b_init; }

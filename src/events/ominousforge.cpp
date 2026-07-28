@@ -1,5 +1,6 @@
 #include "ominousforge.h"
 #include "cards/cardfactory.h"
+#include "assetsManager/soundmanager.h"
 #include "items/relics/relicfactory.h"
 
 OminousForge::OminousForge(game_action& actions, ironclad* player) {
@@ -18,7 +19,7 @@ OminousForge::OminousForge(game_action& actions, ironclad* player) {
     UnknownNode forge_node;
     forge_node.title = tr("[Forge] Upgrade a card in your deck.");
     forge_node.description = tr("You decide to put the forge to use and...\nCLANG CLAAANG CLANG!\n...improve your arsenal!");
-    forge_node.actions = [player, &actions, this] () {
+    forge_node.actions = [player, eve = actions.get_event()] () {
 
         std::vector<abstractCard*> unupgraded_card;
         for (auto item : player->get_deck()){
@@ -28,10 +29,11 @@ OminousForge::OminousForge(game_action& actions, ironclad* player) {
         }
 
         if (unupgraded_card.empty()) return;
-        emit actions.get_event()->selectCard(unupgraded_card);
-        connect(actions.get_event(), &combatEvent::cardSelected, this, [=](abstractCard* card){
+        emit eve->selectCard(unupgraded_card);
+        connect(eve, &combatEvent::cardSelected, eve, [](abstractCard* card){
 
             if (card){
+                soundManager::instance().playSoundEffect(SoundEffect::smith);
                 card->base_upgrade();
             }
 
@@ -42,11 +44,13 @@ OminousForge::OminousForge(game_action& actions, ironclad* player) {
     forge_node.next_nodes = {-1};
 
     UnknownNode rummage_node;
-    rummage_node.title = tr("[Rummage] Obtain a special relic. Become Cursed - Pain.");
+    rummage_node.title = tr("[Rummage] Obtain a special relic.\n"
+                            "          Become Cursed  -  Pain.");
     rummage_node.description = tr("You decide to see if you can find anything of use. After uncovering tarps, looking through boxes, and checking nooks and crannies, you find a dust covered relic!\n\nTaking the relic, you can't shake a sudden feeling of sharp pain as you exit the hut. Maybe you disturbed some sort of spirit?");
-    rummage_node.actions = [player, &actions] () {
+    rummage_node.actions = [player, eve = actions.get_event()] () {
 
         abstractRelic* relic = RelicFactory::createRelic(relicID::warped_tongs, player);
+        game_action actions(eve);
         player->add_relic(actions, relic);
 
         abstractCard* card = CardFactory::createCard(cardID::pain);

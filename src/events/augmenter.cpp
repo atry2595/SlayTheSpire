@@ -53,34 +53,47 @@ Augmenter::Augmenter(game_action& actions, ironclad* player)
             "You quaff the mysterious substance. Immediately, you are invigorated and feel your muscle fibers twitch."
             );
 
-    transform.actions = [this, &actions, player]()
+    transform.actions = [eve = actions.get_event(), player]()
     {
 
         if (player->get_deck().empty()) return;
-        emit actions.get_event()->selectCard(player->get_deck());
-        connect(actions.get_event(), &combatEvent::cardSelected, this, [=, &actions](abstractCard* card){
+
+        std::vector<abstractCard*> pool;
+        for (auto item : player->get_deck()){
+            if (item->can_remove_from_deck()) pool.push_back(item);
+        }
+
+        emit eve->selectCard(pool);
+        auto conn = std::make_shared<QMetaObject::Connection>();
+        *conn = connect(eve, &combatEvent::cardSelected, eve, [=](abstractCard* card){
 
             if (card){
                 abstractCard* rand1 = ironclad::transformCard(card);
 
                 player->deck_remove(card);
-                delete card;
                 player->deck_add(rand1);
             }
 
             if (player->get_deck().empty()) return;
-            emit actions.get_event()->selectCard(player->get_deck());
-            connect(actions.get_event(), &combatEvent::cardSelected, this, [=](abstractCard* card){
+
+            std::vector<abstractCard*> pool2;
+            for (auto item : player->get_deck()){
+                if (item->can_remove_from_deck()) pool2.push_back(item);
+            }
+            emit eve->selectCard(pool2);
+            auto conn2 = std::make_shared<QMetaObject::Connection>();
+            *conn2 = connect(eve, &combatEvent::cardSelected, eve, [=](abstractCard* card){
 
                 if (card){
-                    abstractCard* rand1 = ironclad::transformCard(card);
+                    abstractCard* rand2 = ironclad::transformCard(card);
 
                     player->deck_remove(card);
-                    delete card;
-                    player->deck_add(rand1);
+                    player->deck_add(rand2);
                 }
+                disconnect(*conn2);
 
             });
+            disconnect(*conn);
         });
 
     };
@@ -101,13 +114,14 @@ Augmenter::Augmenter(game_action& actions, ironclad* player)
             "Losing track of time completely, by the time you regain your senses, the shady character has disappeared."
             );
 
-    mutagen.actions = [player, &actions]()
+    mutagen.actions = [player, eve = actions.get_event()]()
     {
         abstractRelic* relic =
             RelicFactory::createRelic(
                 relicID::mutagenic_strength,
                 player);
 
+        game_action actions(eve);
         player->add_relic(actions, relic);
     };
 
