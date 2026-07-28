@@ -12,6 +12,7 @@
 #include "core/login/filemanager.h"
 #include "core/login/stats.h"
 #include <QEvent>
+#include "core/gameflowcontroller.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -48,7 +49,11 @@ private slots:
 
     void onButtonHovered();
 
+    void on_singlePlayerButton_clicked();
+
 private:
+
+    GameFlowController* gameFlowController;
 
     Ui::MainWindow *ui;
 

@@ -8,6 +8,7 @@
 #include <QPushButton>
 #include <QTimer>
 #include "assetsManager/soundmanager.h"
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -104,6 +105,14 @@ MainWindow::MainWindow(QWidget *parent)
     ui->statisticsButton->setFont(fnt);
 
     showFullScreen();
+
+    gameFlowController = new GameFlowController(fileManager->getLoggedInPlayer(), this);
+    mainStack->addWidget(gameFlowController);
+
+    connect(gameFlowController, &GameFlowController::exitToMainMenu, this, [this]() {
+        mainStack->setCurrentWidget(ui->centralwidget);
+        showMainMenu();
+    });
 }
 
 MainWindow::~MainWindow()
@@ -477,3 +486,9 @@ void MainWindow::on_exitButton_clicked()
     soundManager::instance().playSoundEffect(SoundEffect::skinSelect);
     QTimer::singleShot(500, [=](){close();});
 }
+void MainWindow::on_singlePlayerButton_clicked()
+{
+    gameFlowController->start();
+    mainStack->setCurrentWidget(gameFlowController);
+}
+

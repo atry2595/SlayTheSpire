@@ -224,10 +224,10 @@ imageManager::imageManager() {
     entity1x1_table[entityID::the_champ] =  QPixmap(":/image/characters/1x1/the_champ.png");
     entity1x1_table[entityID::ironclad] =  QPixmap(":/image/characters/1x1/ironclad1.png");
     ironclad_table[skins::ironclad] = QPixmap(":/image/characters/ironclad1.png");
-    ironclad_table[skins::ironclad] = QPixmap(":/image/characters/ironclad1.png");
-    ironclad_table[skins::ironclad] = QPixmap(":/image/characters/ironclad1.png");
-    ironclad_table[skins::ironclad] = QPixmap(":/image/characters/ironclad1.png");
-    ironclad_table[skins::ironclad] = QPixmap(":/image/characters/ironclad1.png");
+    ironclad_table[skins::armoured_ironclad] = QPixmap(":/image/characters/ironclad2.png");
+    ironclad_table[skins::neon_ironclad] = QPixmap(":/image/characters/ironclad3.png");
+    ironclad_table[skins::ancient_ironclad] = QPixmap(":/image/characters/ironclad4.png");
+    ironclad_table[skins::cyberpunk_ironclad] = QPixmap(":/image/characters/ironclad5.png");
     effect_table["bite"] = QPixmap(":/image/effect/bite.png");
     effect_table["dmg"] = QPixmap(":/image/effect/dmg.png");
     effect_table["dmg2"] = QPixmap(":/image/effect/dmg2.png");
