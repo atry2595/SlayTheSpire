@@ -298,9 +298,8 @@ add_executable(SlayTheSpire
     src/Events/ancientwriting.h src/Events/ancientwriting.cpp
     src/Events/pleadingvagrant.h src/Events/pleadingvagrant.cpp
     src/items/relics/golden_idol_relic.cpp src/items/relics/golden_idol_relic.h
-    "src/cards/curse/injury.cpp" "src/cards/curse/injury.h"
+    src/cards/curse/injury.cpp src/cards/curse/injury.h
     src/cards/curse/shame.cpp src/cards/curse/shame.h
-    src/Events/colosseum.h src/Events/colosseum.cpp
     src/Events/bonfirespirits.h src/Events/bonfirespirits.cpp
     src/Events/thessssserpent.h src/Events/thessssserpent.cpp
     src/Events/joust.h src/Events/joust.cpp
@@ -607,6 +606,7 @@ add_executable(SlayTheSpire
     src/ui/mappage/mapItems.h
     src/ui/mappage/sketchline.h src/ui/mappage/sketchline.cpp
     src/ui/unknownpage/unknownpage.cpp src/ui/unknownpage/unknownpage.h
+    src/ui/selectItem/selectpotion.cpp src/ui/selectItem/selectpotion.h
 
 )
 

@@ -15,6 +15,7 @@
 #include "ui/selectItem/selectcard.h"
 #include "ui/selectItem/collectreward.h"
 #include "ui/topbar/combatsetting.h"
+#include "ui/selectItem/selectpotion.h"
 
 //=================================================================================
 //=====================contructur and intializer functions=========================
@@ -136,6 +137,7 @@ CombatPage::CombatPage(QWidget *parent, combat_manager* m, ironclad* plyr)
     connect(eve, &combatEvent::combat_ended, this, &CombatPage::createCollectReward);
     connect(eve, &combatEvent::settingOpen, this, &CombatPage::open_setting);
     connect(eve, &combatEvent::card_added, this, &CombatPage::add_card);
+    connect(eve, &combatEvent::selectPotion, this, &CombatPage::createSelectPotion);
     //----------------------------------------------------
 }
 
@@ -1186,4 +1188,10 @@ void CombatPage::add_card(abstractCard* card) {
     combatScene->addItem(item->getParent());
     QTimer::singleShot(1000, [=](){item->getParent()->moveTo({650, 1000}, 500, QEasingCurve::OutSine);});
     QTimer::singleShot(2000, [=](){ item->deleteLater();});
+}
+
+
+void CombatPage::createSelectPotion(std::vector<abstractPotion*> pots) {
+    auto sr = new selectPotion(eve, pots);
+    combatScene->addItem((sr->getParent()));
 }

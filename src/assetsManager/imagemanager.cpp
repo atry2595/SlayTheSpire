@@ -271,7 +271,6 @@ imageManager::imageManager() {
     unknown_table[unknownID::augmenter] = QPixmap(":/image/events/augmenter.jpg");
     unknown_table[unknownID::bonfire_spirits] = QPixmap(":/image/events/bonefire.jpg");
     unknown_table[unknownID::the_cleric] = QPixmap(":/image/events/cleric.jpg");
-    unknown_table[unknownID::the_colosseum] = QPixmap(":/image/events/colosseum.jpg");
     unknown_table[unknownID::face_trader] = QPixmap(":/image/events/facetrader.jpg");
     unknown_table[unknownID::golden_idol] = QPixmap(":/image/events/goldenidol.jpg");
     unknown_table[unknownID::golden_shrine] = QPixmap(":/image/events/goldenshirine.jpg");

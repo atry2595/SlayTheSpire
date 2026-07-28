@@ -63,6 +63,7 @@ private slots:
     void createSelectCard(std::vector<abstractCard*> cards);
     void update_bars();
     void add_card(abstractCard*);
+    void createSelectPotion(std::vector<abstractPotion*> pots);
 };
 
 #endif // UNKNOWNPage_H

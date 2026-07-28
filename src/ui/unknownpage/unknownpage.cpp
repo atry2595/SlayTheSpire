@@ -7,6 +7,7 @@
 #include <QResizeEvent>
 #include "ui/topbar/combatsetting.h"
 #include "ui/selectItem/selectcard.h"
+#include "ui/selectItem/selectpotion.h"
 
 UnknownPage::UnknownPage(UnknownManager manag, QWidget *parent, ironclad* plyr, combatEvent* eve)
     : QWidget{parent}
@@ -58,6 +59,8 @@ UnknownPage::UnknownPage(UnknownManager manag, QWidget *parent, ironclad* plyr, 
     connect(eve, &combatEvent::barUpdate, this, &UnknownPage::update_bars);
 
     connect(eve, &combatEvent::card_added, this, &UnknownPage::add_card);
+
+    connect(eve, &combatEvent::selectPotion, this, &UnknownPage::createSelectPotion);
 
     initialSet();
 }
@@ -320,4 +323,9 @@ void UnknownPage::add_card(abstractCard* card) {
     combatScene->addItem(item->getParent());
     QTimer::singleShot(1000, [=](){item->getParent()->moveTo({650, 1000}, 500, QEasingCurve::OutSine);});
     QTimer::singleShot(2000, [=](){ item->deleteLater();});
+}
+
+void UnknownPage::createSelectPotion(std::vector<abstractPotion*> pots) {
+    auto sr = new selectPotion(eve, pots);
+    combatScene->addItem((sr->getParent()));
 }

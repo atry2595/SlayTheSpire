@@ -95,6 +95,9 @@ signals:
 
     void relicSelected(abstractRelic*);
 
+    void selectPotion(std::vector<abstractPotion*>);
+    void potionSelected(abstractPotion*);
+
 };
 
 #endif // COMBAT_EVENT_H
