@@ -9,12 +9,7 @@
 #include <QDebug>
 
 const std::vector<cardID> ironclad::starting_deck =
-    {cardID::dual_wield, cardID::bludgeon, cardID::rage, cardID::doubt, cardID::curse_of_the_bell,
-     cardID::clash, cardID::hemokinesis, cardID::spot_weakness, cardID::twin_strike, cardID::bash,
-    cardID::strike, cardID::strike, cardID::strike, cardID::strike, cardID::strike,
-    cardID::defend, cardID::defend, cardID::defend, cardID::defend, cardID::shrug_it_off,
-    cardID::inflame, cardID::metallicize, cardID::defend, cardID::defend, cardID::shrug_it_off
-
+    {cardID::strike, cardID::strike, cardID::strike, cardID::strike, cardID::strike,
 };
 
 

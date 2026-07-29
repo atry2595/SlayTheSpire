@@ -66,7 +66,7 @@ selectRelic::selectRelic(combatEvent* eve, std::vector<abstractRelic*> relic_sou
 
 void selectRelic::execute() {
 
-    for (int i = 0; i < 3; i++){
+    for (int i = 0; i < relic_parent.size(); i++){
 
         qreal x = 400 + 302 * i;
 

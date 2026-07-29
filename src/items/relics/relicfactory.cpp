@@ -38,6 +38,8 @@
 #include "golden_idol_relic.h"
 #include "spirit_poop_relic.h"
 #include "cultist_headpiece_relic.h"
+#include "lively_plant_relic.h"
+#include "cursed_key_relic.h"
 
 abstractRelic* RelicFactory::createRelic(relicID id, abstractEntity* owner)
 {
@@ -96,13 +98,13 @@ abstractRelic* RelicFactory::createRelic(relicID id, abstractEntity* owner)
         return new black_star_relic(owner);
 
     case relicID::lively_plant:
-        return nullptr;
+        return new lively_plant_relic(owner);
 
     case relicID::philosophers_stone:
         return new philosophers_stone_relic(owner);
 
     case relicID::cursed_key:
-        return nullptr;
+        return new cursed_key_relic(owner);
 
     case relicID::sozu:
         return new sozu_relic(owner);

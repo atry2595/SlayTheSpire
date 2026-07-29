@@ -143,13 +143,15 @@ void collectReward::execute() {
         emit event->selectCard(rew->get_cards()[0]);
 
         connect(event, &combatEvent::cardSelected, this, [=](abstractCard* card){
-            for (auto item : rew->get_cards()[0]) {
-                if (item != card) delete item;
-            }
-            player->deck_add(card);
-            emit event->nextAction();
-            delete parent;
-            this->deleteLater();
+            QTimer::singleShot(0, [=](){
+                for (auto item : rew->get_cards()[0]) {
+                    if (item != card) delete item;
+                }
+                player->deck_add(card);
+                emit event->nextAction();
+                delete parent;
+                this->deleteLater();
+            });
         });
     }
     else {
