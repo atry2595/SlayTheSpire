@@ -5,6 +5,7 @@
 #include "items/relics/relicfactory.h"
 #include "cards/cardfactory.h"
 #include <QTimer>
+#include <QDebug>
 
 combat_manager::combat_manager(std::vector<ironclad*> players_init,
                                std::vector<abstractEnemy*> enemies_init,
@@ -19,21 +20,6 @@ combat_manager::combat_manager(std::vector<ironclad*> players_init,
         player_is_alive.push_back(players[i]->get_hp() > 0);
     }
     for (int i = 0; i < enemies.size(); i++) enemy_is_alive.push_back(true);
-
-    remove_connection = connect(event, &combatEvent::entity_removed, this,
-                                [this](abstractEntity* entity){
-                                    for (int i = 0; i < players.size(); i++){
-                                        if (players[i] == entity){
-                                            player_is_alive[i] = false;
-                                        }
-                                    }
-
-                                    for (int i = 0; i < enemies.size(); i++){
-                                        if (enemies[i] == entity){
-                                            enemy_is_alive[i] = false;
-                                        }
-                                    }
-                                });
 
     add_after_connection = connect(event, &combatEvent::entity_add_after, this,
                                    [this](abstractEntity* entity, abstractEntity* after){
@@ -68,6 +54,11 @@ combat_manager::combat_manager(std::vector<ironclad*> players_init,
     connect(event, &combatEvent::entity_removed, this, &combat_manager::check_end);
     connect(event, &combatEvent::entity_escape, this, &combat_manager::check_end);
 
+}
+
+combat_manager::~combat_manager() {
+    // قطع کردن تمام connection هایی که این آبجکت به عنوان receiver/context براشون ثبت شده
+    disconnect(event, nullptr, this, nullptr);
 }
 
 void combat_manager::combat_start() {
@@ -195,6 +186,8 @@ void combat_manager::combat_end() {
 
     calculate_rewards();
 
+
+    qDebug() << "komamaofmkasnfjaubhfuisf";
     emit event->combat_ended(this, victory);
 
 }
@@ -226,6 +219,9 @@ void combat_manager::next_turn() {
 
 
 bool combat_manager::combat_finished() {
+    if (f_flag) return false;
+    f_flag = true;
+
     bool all_players = false;
     bool all_enemy = false;
 
@@ -234,11 +230,16 @@ bool combat_manager::combat_finished() {
         all_players |= player_is_alive[i];
     }
 
+    qDebug() << ">>>>>>>>>>";
     for (int i = 0 ; i<enemies.size(); i++){
         enemy_is_alive[i] = (enemies[i]->get_hp() > 0);
         all_enemy |= enemy_is_alive[i];
+        qDebug() << enemy_is_alive[i];
     }
 
+    qDebug() << "<<<<<<<";
+
+    f_flag = false;
     return !(all_players && all_enemy);
 }
 

@@ -253,7 +253,7 @@ imageManager::imageManager() {
     background_table["2e"] = QPixmap(":/image/scene/map2_dark.jpg");
     background_table["2b"] = QPixmap(":/image/scene/map2_epic.jpg");
     background_table["mr"] = QPixmap(":/image/scene/shop");
-    background_table["r"] = QPixmap(":/image/scene/rest.png");
+    background_table["r"] = QPixmap(":/image/scene/rest.jpg");
     chest_table[ChestType::regular] = QPixmap(":/image/chest/veilchest.png");
     chest_table[ChestType::boss] = QPixmap(":/image/chest/oathchest.png");
     dialogbox_table[ChestType::regular] = QPixmap(":/image/chest/veil_dialogbox.png");

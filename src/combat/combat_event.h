@@ -25,6 +25,7 @@ class combatEvent : public QObject{
 
 signals:
     void game_lose();
+    void game_win();
 
     void combat_started(combat_manager*);
     void combat_ended(combat_manager*, bool victory);

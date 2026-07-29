@@ -196,7 +196,7 @@
         <file alias="event.ico">assests/image/icon/map/event.ico</file>
         <file alias="merch.ico">assests/image/icon/map/merch.ico</file>
         <file alias="mons.ico">assests/image/icon/map/mons.ico</file>
-        <file alias="rest.ico">assests/image/icon/map/rest.ico</file>
+        <file alias="rest.png">assests/image/icon/map/rest.png</file>
         <file alias="treasure.ico">assests/image/icon/map/treasure.ico</file>
         <file alias="boss.ico">assests/image/icon/map/boss.png</file>
     </qresource>

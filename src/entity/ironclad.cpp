@@ -6,6 +6,7 @@
 #include "categories/general.h"
 #include "items/relics/relicfactory.h"
 #include <QTimer>
+#include <QDebug>
 
 const std::vector<cardID> ironclad::starting_deck =
     {cardID::dual_wield, cardID::bludgeon, cardID::rage, cardID::doubt, cardID::curse_of_the_bell,
@@ -329,6 +330,7 @@ void ironclad::consume_all_energy() {
 
 
 void ironclad::at_turn_start(game_action& info) {
+    qDebug() << "man injam";
     energy += base_energy;
     abstractEntity::at_turn_start(info);
 

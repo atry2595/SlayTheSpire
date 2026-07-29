@@ -126,5 +126,5 @@ CombatInfoBar::CombatInfoBar(abstractEntity* ent) {
 
 
 CombatInfoBar::~CombatInfoBar() {
-    delete parent;
+    if (parent) parent->deleteLater();
 }

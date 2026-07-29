@@ -119,6 +119,7 @@ private slots:
     void open_setting();
     void potion_right_click(abstractPotion* potion);
     void relic_right_click(abstractRelic* relic);
+    void createSelectPotion(std::vector<abstractPotion*> pots);
 };
 
 #endif // STOREPAGE_H

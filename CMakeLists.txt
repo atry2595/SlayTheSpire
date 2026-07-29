@@ -611,6 +611,8 @@ add_executable(SlayTheSpire
     src/items/relics/cursed_key_relic.cpp src/items/relics/cursed_key_relic.h src/items/relics/lively_plant_relic.cpp src/items/relics/lively_plant_relic.h
     src/core/gameflowcontroller.h src/core/gameflowcontroller.cpp
     src/ui/selectItem/startingselect.h src/ui/selectItem/startingselect.cpp
+    src/entity/enemyfactory.h src/entity/enemyfactory.cpp
+    src/events/unknownfactory.h src/events/unknownfactory.cpp
 
 )
 

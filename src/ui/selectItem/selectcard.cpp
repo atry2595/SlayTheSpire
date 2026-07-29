@@ -158,7 +158,9 @@ void selectCard::cardSelected(CardParent* card) {
     emit event->cardSelected(card->getSource());
     for (auto item : cards){
         item->getParent()->fadeTo(0, 500, QEasingCurve::OutSine);
-        QTimer::singleShot(500, [=](){delete item->getParent();});
+        QTimer::singleShot(500, [=](){
+            if (item->getParent()) delete item->getParent();
+        });
     }
     parent->fadeTo(0, 500, QEasingCurve::OutSine);
     QTimer::singleShot(500, [=](){delete parent;});

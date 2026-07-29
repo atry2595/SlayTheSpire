@@ -20,7 +20,7 @@ class combat_manager : public QObject
     Q_OBJECT
 
 private:
-
+    bool f_flag = false;
     combatEvent* event;
     game_action actions;
 
@@ -44,6 +44,8 @@ protected:
     CombatType combat_type;
 
 public:
+    ~combat_manager();
+
     inline static int reward_card_count = 3;
     inline static int reward_elite_relic_count = 1;
 

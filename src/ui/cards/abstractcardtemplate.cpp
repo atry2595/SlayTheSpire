@@ -12,7 +12,7 @@ abstractCardTemplate::abstractCardTemplate(combatEvent* eve, abstractCard* sourc
 }
 
 abstractCardTemplate::~abstractCardTemplate() {
-    card_parent->deleteLater();
+    // card_parent->deleteLater();
 }
 
 

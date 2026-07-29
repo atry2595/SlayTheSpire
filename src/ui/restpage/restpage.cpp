@@ -166,9 +166,9 @@ void RestPage::initialSet() {
         y += 125;
 
         connect(rest_button, &QPushButton::clicked, this, [=](){
-            lift_button->setDisabled(true);
-            smith_button->setDisabled(true);
-            rest_button->setDisabled(true);
+            if (can_lift) lift_button->setDisabled(true);
+            if (can_smith) smith_button->setDisabled(true);
+            if (can_rest) rest_button->setDisabled(true);
             soundManager::instance().playSoundEffect(SoundEffect::drinkPotion);
             healInfo h;
             h.owner = player;
@@ -192,9 +192,9 @@ void RestPage::initialSet() {
         y += 125;
 
         connect(smith_button, &QPushButton::clicked, this, [=](){
-            lift_button->setDisabled(true);
-            smith_button->setDisabled(true);
-            rest_button->setDisabled(true);
+            if (can_lift) lift_button->setDisabled(true);
+            if (can_smith) smith_button->setDisabled(true);
+            if (can_rest) rest_button->setDisabled(true);
             soundManager::instance().playSoundEffect(SoundEffect::drinkPotion);
 
             std::vector<abstractCard*> pool;
@@ -227,10 +227,9 @@ void RestPage::initialSet() {
         lift_proxy->setPos({200, y});
 
         connect(lift_button, &QPushButton::clicked, this, [=](){
-            lift_button->setDisabled(true);
-            smith_button->setDisabled(true);
-            rest_button->setDisabled(true);
-
+            if (can_lift) lift_button->setDisabled(true);
+            if (can_smith) smith_button->setDisabled(true);
+            if (can_rest) rest_button->setDisabled(true);
 
             soundManager::instance().playSoundEffect(SoundEffect::drinkPotion);
             emit eve->lift(player);

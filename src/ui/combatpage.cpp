@@ -139,6 +139,7 @@ CombatPage::CombatPage(QWidget *parent, combat_manager* m, ironclad* plyr)
     connect(eve, &combatEvent::card_added, this, &CombatPage::add_card);
     connect(eve, &combatEvent::selectPotion, this, &CombatPage::createSelectPotion);
     //----------------------------------------------------
+    QTimer::singleShot(250, [=](){emit manager->combat_start();});
 }
 
 
@@ -172,10 +173,10 @@ CombatPage::~CombatPage() {
     enemies.clear();
 
     // Clean up player items
-    for (auto player : players) {
-        if (player) {
-            delete player;
-            player = nullptr;
+    for (auto pl : players) {
+        if (pl) {
+            delete pl;
+            pl = nullptr;
         }
     }
     players.clear();
@@ -221,7 +222,7 @@ CombatPage::~CombatPage() {
 
     // Note: manager, player, and eve are likely owned elsewhere
     // and should NOT be deleted here to avoid double deletion
-    manager = nullptr;
+    delete manager;
     player = nullptr;
     eve = nullptr;
 
@@ -1102,7 +1103,9 @@ void CombatPage::after_attack(attackResult& res) {
 
 
 void CombatPage::turn_start(abstractEntity*) {
-    for (auto item : created_cards) item.second->updateCard();
+    for (auto item : created_cards) {
+        if (item.second) item.second->updateCard();
+    }
     bar->updateBar();
     for (auto item : players) item->updateEntity();
     for (auto item : enemies) item->updateEntity();

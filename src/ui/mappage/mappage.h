@@ -57,7 +57,7 @@ private:
     RelicBar* relic_bar;
     CombatInfoBar* info_bar = nullptr;
 
-private slots:
+public slots:
     void relic_right_click(abstractRelic*);
     void open_setting();
 };

@@ -370,7 +370,12 @@ void MapPage::onRoomClicked(QPushButton* btn) {
     cm.currentFloor = cm.map->getCurrentFloor();
     cm.currentCol = cm.map->getCurrentColumn();
 
-    refreshMapVisuals();
+    combat_data::floor = cm.currentFloor;
+    combat_data::room_type = clickedRoom.type;
+
+    emit eve->nextAction();
+
+    QTimer::singleShot(500, [=](){refreshMapVisuals();});
 }
 
 void MapPage::relic_right_click(abstractRelic* ent) {

@@ -21,6 +21,7 @@
 #include "ui/selectItem/selectcard.h"
 #include <QGraphicsPixmapItem>
 #include <QDebug>
+#include "ui/selectItem/selectpotion.h"
 
 StorePage::StorePage(QWidget *parent, ironclad* plyr, combatEvent* eve)
     : QWidget{parent}
@@ -110,6 +111,8 @@ StorePage::StorePage(QWidget *parent, ironclad* plyr, combatEvent* eve)
     });
 
     connect(eve, &combatEvent::settingOpen, this, &StorePage::open_setting);
+
+    connect(eve, &combatEvent::selectPotion, this, &StorePage::createSelectPotion);
 
 
     black_screen = new BaseItem(nullptr, {1700, 1000}, {-50, -50});
@@ -852,4 +855,10 @@ void StorePage::initialSet()
 void StorePage::open_setting() {
     auto sc = new combatSetting(eve);
     combatScene->addItem(sc->getParent());
+}
+
+
+void StorePage::createSelectPotion(std::vector<abstractPotion*> pots) {
+    auto sr = new selectPotion(eve, pots);
+    combatScene->addItem((sr->getParent()));
 }

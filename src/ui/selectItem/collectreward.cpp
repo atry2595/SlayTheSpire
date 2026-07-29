@@ -152,4 +152,12 @@ void collectReward::execute() {
             this->deleteLater();
         });
     }
+    else {
+        emit event->nextAction();
+        QTimer::singleShot(750, [=](){
+            parent->deleteLater();
+            this->deleteLater();
+        });
+
+    }
 }
