@@ -10,6 +10,7 @@
 
 const std::vector<cardID> ironclad::starting_deck =
     {cardID::strike, cardID::strike, cardID::strike, cardID::strike, cardID::strike,
+    cardID::defend, cardID::defend, cardID::defend, cardID::defend, cardID::bash
 };
 
 

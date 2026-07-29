@@ -3,7 +3,7 @@
 #include "items/powers/abstractpower.h"
 
 heavy_blade::heavy_blade()
-    :abstractAttackCard(tr("Heavy Blade"), "", 0, 14, false, false, false, false)
+    :abstractAttackCard(tr("Heavy Blade"), "", 2, 14, false, false, false, false)
 {
     QString s;
     s += tr("Deal %1 damage. Strength affects this card %2 times.").arg(damage).arg(effect);
